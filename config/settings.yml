@@ -1,4 +1,12 @@
 plugins:
-  knowledge_base_enabled:
+  knowledge_explorer_enabled:
     default: false
+    client: true
+  knowledge_explorer_categories:
+    type: list
+    default: ""
+    client: true
+  knowledge_explorer_tags:
+    type: list
+    default: ""
     client: true
