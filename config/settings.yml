@@ -1,0 +1,4 @@
+plugins:
+  knowledge_base_enabled:
+    default: false
+    client: true
