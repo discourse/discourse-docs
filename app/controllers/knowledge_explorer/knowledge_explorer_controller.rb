@@ -1,6 +1,6 @@
 module KnowledgeExplorer
-  class KnowledgeExplorerController< ApplicationController
-    skip_before_action :check_xhr
+  class KnowledgeExplorerController < ApplicationController
+    requires_plugin 'knowledge-explorer'
     before_action :init_guardian
 
     def index
