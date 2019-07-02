@@ -1,0 +1,26 @@
+<table class="topic-list">
+  <thead>
+    <th>Topic</th>
+    <th>Activity</th>
+  </thead>
+  <tbody>
+    {{#each model.knowledge_explorer as |topic|}}
+    <tr>
+      <td class="main-link">
+        <span class="link-top-line">
+          <a href="/t/{{topic.id}}">{{topic.title}}</a>
+        </span>
+        <span class="link-bottom-line">
+          {{#each topic.tags as |tag|}}
+            <span class="discourse-tag">{{tag}}</span>
+          {{/each}}
+        </span>
+      </td>
+      <td>
+        {{format-date topic.bumped_at format="tiny" noTitle="true"}}
+      </td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+
