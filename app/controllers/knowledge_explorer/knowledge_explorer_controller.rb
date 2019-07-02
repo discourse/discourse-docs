@@ -23,7 +23,7 @@ module KnowledgeExplorer
 
       category_topic_lists.each do |list|
         list[:topic_list][:topics].each do |t| 
-          if !topics.any?{|item| item[:id] == t[:id]}
+          if topics.none?{|item| item[:id] == t[:id]}
             if t[:id] != Category.find(t[:category_id]).topic_id
               topics << t
             end
@@ -32,13 +32,32 @@ module KnowledgeExplorer
       end
       tag_topic_lists.each do |list|
         list[:topic_list][:topics].each do |t| 
-          if !topics.any?{|item| item[:id] == t[:id]}
+          if topics.none?{|item| item[:id] == t[:id]}
             topics << t
           end
         end
       end
 
+      topics = count_tags(topics)
+
       render json: topics
+    end
+
+    def count_tags(topics)
+      tags = []
+
+      topics.each do |topic|
+        topic[:tags].each do |tag| 
+          if tags.none? { |item| item[:id].to_s == tag }
+            tags << { id: tag, count: 1 }
+          else
+            tag_index = tags.index(tags.find { |item| item[:id].to_s == tag })
+            tags[tag_index][:count] += 1
+          end
+        end
+      end
+
+      { tags: tags, topics: topics }
     end
 
     private
@@ -58,7 +77,7 @@ module KnowledgeExplorer
     def knowledge_explorer_tags
       selected_tags = SiteSetting.knowledge_explorer_tags.split("|")
 
-      tags = Tag.where('name IN (?)', selected_tags)
+      Tag.where('name IN (?)', selected_tags)
     end
   end
 end
