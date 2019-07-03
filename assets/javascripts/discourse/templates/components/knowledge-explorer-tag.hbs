@@ -1,0 +1,9 @@
+<div class="knowledge-explorer-tag {{if tag.active 'selected'}} {{if subtag 'subtag'}}">
+  {{#unless tag.active}}
+    {{d-icon "plus"}}
+  {{/unless}}
+  {{tag.id}} <span class="tag-count">({{tag.count}})</span>
+  {{#if tag.active}}
+    {{d-icon "times-circle"}}
+  {{/if}}
+</div>

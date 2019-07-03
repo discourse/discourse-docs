@@ -1,0 +1,11 @@
+{{#each model.tags as |tag|}}
+    {{knowledge-explorer-tag tag=tag}}
+{{/each}}
+
+{{#if subtags}}
+   {{#each subtags as |tag|}}
+     {{knowledge-explorer-tag
+       tag=tag
+       subtag=true}}
+   {{/each}}
+{{/if}}
