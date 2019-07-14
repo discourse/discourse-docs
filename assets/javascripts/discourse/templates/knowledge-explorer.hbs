@@ -1,6 +1,8 @@
 <div class="knowledge-explorer">
-  {{knowledge-explorer-tags
-      tags=model.tags
-      searchResults=searchResults}}
-  {{knowledge-explorer-topic-list topics=model.topics}}
+  <div class="knowledge-explorer-browse">
+    {{knowledge-explorer-tags
+        tags=tags
+        searchResults=searchResults}}
+    {{knowledge-explorer-topic-list topics=topics}}
+  </div>
 </div>

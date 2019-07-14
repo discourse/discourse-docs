@@ -1,0 +1,46 @@
+.knowledge-explorer {
+ .knowledge-explorer-browse {
+   display: flex;
+   .knowledge-explorer-tags {
+     flex-basis: 25%;
+      padding: 10px 10px 10px 0;
+      a {
+        color: $primary;
+      }
+      .knowledge-explorer-tag {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        height: 30px;
+        padding-left: 10px;
+        .d-icon {
+          height: 1em;
+          &.d-icon-plus {
+            height: 0.75em;
+            margin-right: 0.25em;
+          }
+          &.d-icon-times-circle {
+            margin-left: 0.25em;
+          }
+        }
+        &:hover {
+          background: $highlight-medium;
+        }
+        &.selected:hover {
+          background: $danger-low;
+
+          .d-icon {
+            color: $danger;
+          }
+        }
+      }
+
+      .selected {
+        font-weight: bold;
+      }
+    }
+    .knowledge-explorer-topic-list {
+      flex-basis: 75%;
+    }
+ } 
+}

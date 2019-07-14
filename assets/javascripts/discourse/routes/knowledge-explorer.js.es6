@@ -7,7 +7,8 @@ export default Ember.Route.extend({
 
   setupController(controller, model) {
     controller.setProperties({
-      model: model
+      tags: model.tags,
+      topics: model.topics
     });
   }
 });
