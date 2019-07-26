@@ -1,9 +1,16 @@
 <div class="knowledge-explorer">
   <div class="knowledge-explorer-browse">
-    {{knowledge-explorer-tag-list
-        tags=tags
-        filterTags=filterTags
-        searchResults=searchResults}}
+    {{#if filteredTags}}
+      {{knowledge-explorer-tag-list
+          tags=filteredTags
+          filterTags=filterTags
+      }}
+    {{else}}
+      {{knowledge-explorer-tag-list
+          tags=tags
+          filterTags=filterTags
+      }}
+    {{/if}}
     {{#if filtered}}
       {{#if filteredTopics}}
         {{knowledge-explorer-topic-list topics=filteredTopics}}
