@@ -4,20 +4,25 @@ module KnowledgeExplorer
     before_action :init_guardian
 
     def index
-      category_topic_lists = []
-      tag_topic_lists = []
 
-      knowledge_explorer_categories.each do |c|
-        if topic_list = TopicQuery.new(current_user, category: c.id).list_latest
-          category_topic_lists << TopicListSerializer.new(topic_list, scope: @guardian).as_json
-        end
+      filters = {
+        tags: params[:tags],
+        category: params[:category]
+      }
+
+      if filters[:category]
+       category_topic_lists = get_topics_from_categories(category_by_filter(filters[:category]))
+      else
+       category_topic_lists = get_topics_from_categories(knowledge_explorer_categories)
       end
 
-      knowledge_explorer_tags.each do |t|
-        if topic_list = TopicQuery.new(current_user, tags: t.name).list_latest
-          tag_topic_lists << TopicListSerializer.new(topic_list, scope: @guardian).as_json
-        end
+      if filters[:tags]
+        tag_topic_lists = get_topics_from_tags(tags_by_filter(filters[:tags]))
+      else
+        tag_topic_lists = get_topics_from_tags(knowledge_explorer_tags)
       end
+
+      # Deduplicate results
 
       topics = []
 
@@ -41,6 +46,30 @@ module KnowledgeExplorer
       topics = count_tags(topics)
 
       render json: topics
+    end
+
+    def get_topics_from_categories(categories)
+      category_topic_lists = []
+
+      categories.each do |c|
+        if topic_list = TopicQuery.new(current_user, category: c.id).list_latest
+          category_topic_lists << TopicListSerializer.new(topic_list, scope: @guardian).as_json
+        end
+      end
+
+      category_topic_lists
+    end
+
+    def get_topics_from_tags(tags)
+      tag_topic_lists = []
+
+      tags.each do |t|
+        if topic_list = TopicQuery.new(current_user, tags: t.name).list_latest
+          tag_topic_lists << TopicListSerializer.new(topic_list, scope: @guardian).as_json
+        end
+      end
+
+      tag_topic_lists
     end
 
     def count_tags(topics)
@@ -77,6 +106,19 @@ module KnowledgeExplorer
     def knowledge_explorer_tags
       selected_tags = SiteSetting.knowledge_explorer_tags.split("|")
 
+      Tag.where('name IN (?)', selected_tags)
+    end
+
+    def category_by_filter(category_filter)
+      selected_category = category_filter
+
+      category = Category.where('slug IN (?)', selected_category)
+
+      category.select { |c| @guardian.can_see_category?(c) }
+    end
+
+    def tags_by_filter(tags)
+      selected_tags = tags.split(' ')
       Tag.where('name IN (?)', selected_tags)
     end
   end

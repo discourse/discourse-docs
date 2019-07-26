@@ -13,6 +13,5 @@ export default Ember.Component.extend({
     }
 
     this.set("filterTags", filter);
-    this.send("refreshRoute");
   }
 });

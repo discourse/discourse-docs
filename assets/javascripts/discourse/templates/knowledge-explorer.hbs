@@ -4,6 +4,14 @@
         tags=tags
         filterTags=filterTags
         searchResults=searchResults}}
-    {{knowledge-explorer-topic-list topics=topics}}
+    {{#if filtered}}
+      {{#if filteredTopics}}
+        {{knowledge-explorer-topic-list topics=filteredTopics}}
+      {{else}}
+        <div class="no-result">No results match the current filter</div>
+      {{/if}}
+    {{else}}
+      {{knowledge-explorer-topic-list topics=topics}}
+    {{/if}}
   </div>
 </div>

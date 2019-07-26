@@ -10,5 +10,6 @@ export default Ember.Route.extend({
       tags: model.tags,
       topics: model.topics
     });
-  }
+  },
+
 });
