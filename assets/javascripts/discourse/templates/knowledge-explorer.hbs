@@ -1,4 +1,7 @@
 <div class="knowledge-explorer">
+  <div class="knowledge-explorer-filter">
+    {{knowledge-explorer-search searchResults=searchResults searchTerm=searchTerm}}
+  </div>
   <div class="knowledge-explorer-browse">
     {{#if filteredTags}}
       {{knowledge-explorer-tag-list
