@@ -1,4 +1,7 @@
-import { observes } from "ember-addons/ember-computed-decorators";
+import {
+  default as computed,
+  observes
+} from "ember-addons/ember-computed-decorators";
 
 function arrayContainsArray(superset, subset) {
   if (0 === subset.length) {
@@ -19,6 +22,19 @@ export default Ember.Controller.extend({
 
   filteredTags: null,
   filteredTopics: null,
+
+  searchTerm: null,
+  searchResults: null,
+
+  @computed("searchResults")
+  hasSearchResults(results) {
+    return !!results;
+  },
+
+  @computed("searchResults")
+  emptySearchResults(results) {
+    return results.length === 0;
+  },
 
   @observes("filterTags")
   filterByTags() {

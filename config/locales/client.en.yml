@@ -1,0 +1,7 @@
+en:
+  js:
+    knowledge_explorer:
+      search:
+        results: 
+          one: "%{count} result found"
+          other: "%{count} results found"

@@ -1,6 +1,6 @@
 <div class="knowledge-explorer">
   <div class="knowledge-explorer-filter">
-    {{knowledge-explorer-search searchResults=searchResults searchTerm=searchTerm}}
+    {{knowledge-explorer-search searchResults=searchResults searchTerm=searchTerm filteredTags=filteredTags}}
   </div>
   <div class="knowledge-explorer-browse">
     {{#if filteredTags}}
@@ -19,6 +19,13 @@
         {{knowledge-explorer-topic-list topics=filteredTopics}}
       {{else}}
         <div class="no-result">No results match the current filter</div>
+      {{/if}}
+    {{else if hasSearchResults}}
+      {{#if emptySearchResults}}
+        {<div class="no-result">{i18n 'search.no_results'}}</div>
+      {{else}}
+        <div>{{i18n "knowledge_explorer.search.results" count=count}}</div>
+        {{knowledge-explorer-topic-list topics=searchResults}}
       {{/if}}
     {{else}}
       {{knowledge-explorer-topic-list topics=topics}}
