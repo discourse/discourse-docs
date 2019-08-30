@@ -52,7 +52,7 @@ module KnowledgeExplorer
       category_topic_lists = []
 
       categories.each do |c|
-        if topic_list = TopicQuery.new(current_user, category: c.id).list_latest
+        if topic_list = TopicQuery.new(current_user, category: c.id, no_subcategories: true).list_latest
           category_topic_lists << TopicListSerializer.new(topic_list, scope: @guardian).as_json
         end
       end
@@ -98,7 +98,7 @@ module KnowledgeExplorer
     def knowledge_explorer_categories
       selected_categories = SiteSetting.knowledge_explorer_categories.split("|")
 
-      categories = Category.where('slug IN (?)', selected_categories)
+      categories = Category.where('id IN (?)', selected_categories)
 
       categories.select { |c| @guardian.can_see_category?(c) }
     end

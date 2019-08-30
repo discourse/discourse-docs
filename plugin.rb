@@ -16,7 +16,7 @@ after_initialize do
     if Search.respond_to? :advanced_filter
       Search.advanced_filter(/in:kb/) do |posts|
         selected_categories = SiteSetting.knowledge_explorer_categories.split("|")
-        categories = Category.where('slug IN (?)', selected_categories).pluck(:id)
+        categories = Category.where('id IN (?)', selected_categories).pluck(:id)
 
         selected_tags = SiteSetting.knowledge_explorer_tags.split("|")
         tags = Tag.where('name IN (?)', selected_tags).pluck(:id)

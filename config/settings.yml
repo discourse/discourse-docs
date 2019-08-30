@@ -3,7 +3,7 @@ plugins:
     default: false
     client: true
   knowledge_explorer_categories:
-    type: list
+    type: category_list
     default: ""
     client: true
   knowledge_explorer_tags:
