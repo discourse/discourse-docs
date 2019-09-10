@@ -98,15 +98,19 @@ module KnowledgeExplorer
     def knowledge_explorer_categories
       selected_categories = SiteSetting.knowledge_explorer_categories.split("|")
 
-      categories = Category.where('id IN (?)', selected_categories)
+      if selected_categories
+        categories = Category.where('id IN (?)', selected_categories)
 
-      categories.select { |c| @guardian.can_see_category?(c) }
+        return categories.select { |c| @guardian.can_see_category?(c) }
+      end
     end
 
     def knowledge_explorer_tags
       selected_tags = SiteSetting.knowledge_explorer_tags.split("|")
 
-      Tag.where('name IN (?)', selected_tags)
+      if selected_tags
+        return Tag.where('name IN (?)', selected_tags)
+      end
     end
 
     def category_by_filter(category_filter)

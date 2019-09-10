@@ -36,6 +36,11 @@ export default Ember.Controller.extend({
     return results.length === 0;
   },
 
+  @computed("searchResults")
+  searchCount(results) {
+    return results.length;
+  },
+
   @observes("filterTags")
   filterByTags() {
     const filterTags = this.get("filterTags");
@@ -49,7 +54,6 @@ export default Ember.Controller.extend({
           arrayContainsArray(topic.tags, filter)
         );
 
-        debugger;
         const filteredTags = [];
 
         // add active tags

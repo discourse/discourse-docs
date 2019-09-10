@@ -22,9 +22,9 @@
       {{/if}}
     {{else if hasSearchResults}}
       {{#if emptySearchResults}}
-        {<div class="no-result">{i18n 'search.no_results'}}</div>
+        <div class="no-result">{{i18n 'search.no_results'}}</div>
       {{else}}
-        <div>{{i18n "knowledge_explorer.search.results" count=count}}</div>
+        <div>{{i18n 'knowledge_explorer.search.results' count=searchCount}}</div>
         {{knowledge-explorer-topic-list topics=searchResults}}
       {{/if}}
     {{else}}
