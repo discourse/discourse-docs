@@ -1,26 +1,13 @@
 <div class="knowledge-explorer">
   <div class="knowledge-explorer-filter">
-    {{knowledge-explorer-search searchResults=searchResults searchTerm=searchTerm filteredTags=filteredTags}}
+    {{knowledge-explorer-search searchResults=searchResults searchTerm=searchTerm filterTags=filterTags}}
   </div>
   <div class="knowledge-explorer-browse">
-    {{#if filteredTags}}
-      {{knowledge-explorer-tag-list
-          tags=filteredTags
-          filterTags=filterTags
-      }}
-    {{else}}
-      {{knowledge-explorer-tag-list
-          tags=tags
-          filterTags=filterTags
-      }}
-    {{/if}}
-    {{#if filtered}}
-      {{#if filteredTopics}}
-        {{knowledge-explorer-topic-list topics=filteredTopics}}
-      {{else}}
-        <div class="no-result">No results match the current filter</div>
-      {{/if}}
-    {{else if hasSearchResults}}
+    {{knowledge-explorer-tag-list
+        tags=tags
+        filterTags=filterTags
+    }}
+    {{#if hasSearchResults}}
       {{#if emptySearchResults}}
         <div class="no-result">{{i18n 'search.no_results'}}</div>
       {{else}}

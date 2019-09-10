@@ -10,7 +10,11 @@ export default Ember.Component.extend({
     }
 
     // query the search api
-    knowledgeExplorer.search(this.get("filteredTags"), term).then(result => {
+    const tags = this.get("filterTags") || null;
+    if (tags && tags.includes(" ")) {
+      tags.join(" ");
+    }
+    knowledgeExplorer.search(tags, term).then(result => {
       this.set("searchResults", result.topics || []);
     });
   },

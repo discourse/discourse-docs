@@ -1,8 +1,18 @@
 import { ajax } from "discourse/lib/ajax";
 
 export default Ember.Route.extend({
-  model() {
-    return ajax("/knowledge-explorer.json");
+  queryParams: {
+    filterTags: {
+      refreshModel: true
+    }
+  },
+  model(params) {
+    if (params.filterTags) {
+      const tags = params.filterTags;
+      return ajax(`/knowledge-explorer.json?tags=${tags}`);
+    } else {
+      return ajax("/knowledge-explorer.json");
+    }
   },
 
   setupController(controller, model) {
@@ -10,6 +20,5 @@ export default Ember.Route.extend({
       tags: model.tags,
       topics: model.topics
     });
-  },
-
+  }
 });

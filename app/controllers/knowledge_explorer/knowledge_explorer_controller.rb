@@ -16,11 +16,7 @@ module KnowledgeExplorer
        category_topic_lists = get_topics_from_categories(knowledge_explorer_categories)
       end
 
-      if filters[:tags]
-        tag_topic_lists = get_topics_from_tags(tags_by_filter(filters[:tags]))
-      else
-        tag_topic_lists = get_topics_from_tags(knowledge_explorer_tags)
-      end
+      tag_topic_lists = get_topics_from_tags(knowledge_explorer_tags)
 
       # Deduplicate results
 
@@ -41,6 +37,11 @@ module KnowledgeExplorer
             topics << t
           end
         end
+      end
+
+      if filters[:tags]
+        tag_filter = filters[:tags].split(' ')
+        topics = topics.select { |topic| (topic[:tags] & tag_filter).size >= 1}
       end
 
       topics = count_tags(topics)
@@ -77,8 +78,11 @@ module KnowledgeExplorer
 
       topics.each do |topic|
         topic[:tags].each do |tag| 
+          if params[:tags]
+            active = params[:tags].include?(tag)
+          end
           if tags.none? { |item| item[:id].to_s == tag }
-            tags << { id: tag, count: 1 }
+            tags << { id: tag, count: 1 , active: active || false }
           else
             tag_index = tags.index(tags.find { |item| item[:id].to_s == tag })
             tags[tag_index][:count] += 1
@@ -123,7 +127,9 @@ module KnowledgeExplorer
 
     def tags_by_filter(tags)
       selected_tags = tags.split(' ')
-      Tag.where('name IN (?)', selected_tags)
+      if (selected_tags)
+        return Tag.where('name IN (?)', selected_tags)
+      end
     end
   end
 end
