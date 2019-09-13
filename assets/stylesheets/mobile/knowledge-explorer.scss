@@ -1,0 +1,25 @@
+.mobile-view {
+  .knowledge-explorer {
+    .knowledge-explorer-search {
+      font-size: $font-up-2;
+      padding: .5em 0;
+
+      .knowledge-explorer-search-bar {
+        width: calc(100vw - 2em);
+      }
+    }
+    .knowledge-explorer-browse {
+      flex-direction: column;
+      .knowledge-explorer-results .result-count {
+        padding-left: 0px;
+      }
+      .knowledge-explorer-tags {
+        flex-basis: 100%;
+        padding: 1em 0;
+      }
+      .knowledge-explorer-topic-list {
+        flex-basis: 100%;
+      }
+    }
+  }
+}

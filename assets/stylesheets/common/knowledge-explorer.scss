@@ -1,6 +1,27 @@
 .knowledge-explorer {
+ .knowledge-explorer-search {
+  align-items: center;
+  background-color: $primary-very-low;
+  display: flex;
+  justify-content: center;
+  padding: 1.5em 1em;
+  .knowledge-explorer-search-bar {
+      height: 50px;
+      margin-bottom: 0px;
+      width: 500px;
+  }
+ }
  .knowledge-explorer-browse {
    display: flex;
+   .knowledge-explorer-results {
+     display: flex;
+     flex-direction: column;
+     flex-basis: 100%;
+     .result-count {
+       padding-top: 15px;
+       padding-left: 10px;
+     }
+   }
    .knowledge-explorer-tags {
      flex-basis: 25%;
       padding: 10px 10px 10px 0;
@@ -43,7 +64,10 @@
       }
     }
     .knowledge-explorer-topic-list {
-      flex-basis: 75%;
+      flex-basis: 100%;
+      .discourse-tag {
+        padding-right: 5px;
+      }
     }
  } 
 }

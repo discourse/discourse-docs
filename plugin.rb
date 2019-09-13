@@ -6,6 +6,7 @@
 enabled_site_setting :knowledge_explorer_enabled
 
 register_asset 'stylesheets/common/knowledge-explorer.scss'
+register_asset 'stylesheets/mobile/knowledge-explorer.scss'
 
 load File.expand_path('../lib/knowledge_explorer/engine.rb', __FILE__)
 
