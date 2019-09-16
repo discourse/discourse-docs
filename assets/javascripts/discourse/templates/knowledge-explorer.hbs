@@ -3,12 +3,16 @@
     {{knowledge-explorer-topic topic=topic}}
   {{else}}
     <div class="knowledge-explorer-search">
-      {{knowledge-explorer-search searchResults=searchResults searchTerm=searchTerm filterTags=filterTags}}
+      {{knowledge-explorer-search 
+        searchResults=searchResults 
+        searchTerm=searchTerm 
+        filterTags=filterTags
+      }}
     </div>
     <div class="knowledge-explorer-browse">
       {{knowledge-explorer-tag-list
-          tags=tags
-          filterTags=filterTags
+        tags=tags
+        filterTags=filterTags
       }}
       <div class="knowledge-explorer-results">
       {{#if hasSearchResults}}
@@ -16,10 +20,16 @@
           <div class="result-count no-result">{{i18n 'search.no_results'}}</div>
         {{else}}
           <div class="result-count">{{i18n 'knowledge_explorer.search.results' count=searchCount}}</div>
-          {{knowledge-explorer-topic-list topics=searchResults selectedTopic=selectedTopic}}
+          {{knowledge-explorer-topic-list 
+            topics=searchResults 
+            selectedTopic=selectedTopic
+          }}
         {{/if}}
       {{else}}
-        {{knowledge-explorer-topic-list topics=topics selectedTopic=selectedTopic}}
+        {{knowledge-explorer-topic-list 
+          topics=topics 
+          selectedTopic=selectedTopic
+        }}
       {{/if}}
       </div>
     </div>

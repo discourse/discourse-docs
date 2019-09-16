@@ -3,21 +3,21 @@
     width: 80%;
     margin: 0 auto;
     .knowledge-explorer-nav-link {
-      font-weight: bold;
+      font-weight: 700;
       &.return {
-        font-size: .8em;
+        font-size: $font-down-1;
         &::before {
           content: "«";
-          margin-right: 3px;
+          margin-right: 5px;
         }
       }
       &.more {
         float: right;
-        font-size: 1.2em;
+        font-size: $font-up-1;
         padding: 10px 0;
         &::after {
           content: "»";
-          margin-left: 3px;
+          margin-left: 5px;
         }
       }
     }
