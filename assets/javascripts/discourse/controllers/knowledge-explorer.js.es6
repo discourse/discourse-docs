@@ -7,13 +7,16 @@ export default Ember.Controller.extend({
   application: Ember.inject.controller(),
   queryParams: {
     filterCategory: "category",
-    filterTags: "tags"
+    filterTags: "tags",
+    selectedTopic: "topic"
   },
   filterTags: null,
   filterCategory: null,
 
   searchTerm: null,
   searchResults: null,
+
+  selectedTopic: null,
 
   @computed("searchResults")
   hasSearchResults(results) {

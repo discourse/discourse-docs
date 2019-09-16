@@ -1,4 +1,27 @@
 .knowledge-explorer {
+  .knowledge-explorer-topic {
+    width: 80%;
+    margin: 0 auto;
+    .knowledge-explorer-nav-link {
+      font-weight: bold;
+      &.return {
+        font-size: .8em;
+        &::before {
+          content: "«";
+          margin-right: 3px;
+        }
+      }
+      &.more {
+        float: right;
+        font-size: 1.2em;
+        padding: 10px 0;
+        &::after {
+          content: "»";
+          margin-left: 3px;
+        }
+      }
+    }
+  }
  .knowledge-explorer-search {
   align-items: center;
   background-color: $primary-very-low;
@@ -65,6 +88,10 @@
     }
     .knowledge-explorer-topic-list {
       flex-basis: 100%;
+      .knowledge-explorer-topic-link {
+        color: $tertiary;
+        cursor: pointer;
+      }
       .discourse-tag {
         padding-right: 5px;
       }

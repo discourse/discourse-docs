@@ -8,7 +8,7 @@
     <tr>
       <td class="main-link">
         <span class="link-top-line">
-          <a href="/t/{{topic.id}}">{{topic.title}}</a>
+          {{knowledge-explorer-topic-link topic=topic selectedTopic=selectedTopic}}
         </span>
         <span class="link-bottom-line">
           {{#each topic.tags as |tag|}}

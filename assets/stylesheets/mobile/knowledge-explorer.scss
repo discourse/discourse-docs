@@ -1,5 +1,9 @@
 .mobile-view {
   .knowledge-explorer {
+    .knowledge-explorer-topic {
+      width: calc(100vw - 35px);
+      margin: 10px 0;
+    }
     .knowledge-explorer-search {
       font-size: $font-up-2;
       padding: .5em 0;
