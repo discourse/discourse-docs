@@ -4,16 +4,18 @@
   {{else}}
     <div class="knowledge-explorer-search">
       {{knowledge-explorer-search 
-        searchResults=searchResults 
-        searchTerm=searchTerm 
-        filterTags=filterTags
+        onSearch=(action "performSearch")
       }}
     </div>
     <div class="knowledge-explorer-browse">
-      {{knowledge-explorer-tag-list
-        tags=tags
-        filterTags=filterTags
-      }}
+      <div class="knowledge-explorer-tags">
+        {{#each tags as |tag|}}
+            {{knowledge-explorer-tag 
+              tag=tag
+              selectTag=(action "updateSelectedTags")
+            }}
+        {{/each}}
+      </div>
       <div class="knowledge-explorer-results">
       {{#if hasSearchResults}}
         {{#if emptySearchResults}}
@@ -22,13 +24,13 @@
           <div class="result-count">{{i18n 'knowledge_explorer.search.results' count=searchCount}}</div>
           {{knowledge-explorer-topic-list 
             topics=searchResults 
-            selectedTopic=selectedTopic
+            selectTopic=(action "setSelectedTopic")
           }}
         {{/if}}
       {{else}}
         {{knowledge-explorer-topic-list 
           topics=topics 
-          selectedTopic=selectedTopic
+          selectTopic=(action "setSelectedTopic")
         }}
       {{/if}}
       </div>

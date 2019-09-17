@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_dependency "knowledge_explorer_constraint"
 
 KnowledgeExplorer::Engine.routes.draw do

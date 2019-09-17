@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module KnowledgeExplorer
   class KnowledgeExplorerController < ApplicationController
     requires_plugin 'knowledge-explorer'

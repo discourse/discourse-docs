@@ -1,13 +1,12 @@
 import { ajax } from "discourse/lib/ajax";
 
 export default {
-  search(tags, filter) {
-    if (tags) {
-      return ajax(
-        `/search.json?q=in:kb tags:${tags.replace(/ /g, "+")} ${filter}`
-      );
-    } else {
-      return ajax(`/search.json?q=in:kb ${filter}`);
-    }
+  //write as one liner
+  //use + instead of space for query param
+  search(filter, tags) {
+    let params = [filter];
+    if (tags) params.push(`tags:${tags}`);
+    const endpoint = `/search.json?q=in:kb ${params.join(" ")}`;
+    return ajax(endpoint);
   }
 };

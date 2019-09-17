@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # name: discourse-knowledge-explorer
 # about: A plugin to make it easy to explore and find knowledge base-type articles in Discourse
 # version: 0.1
