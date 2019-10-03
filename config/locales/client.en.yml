@@ -1,6 +1,7 @@
 en:
   js:
     knowledge_explorer:
+      title: "Knowledge Explorer"
       search:
         results: 
           one: "%{count} result found"
