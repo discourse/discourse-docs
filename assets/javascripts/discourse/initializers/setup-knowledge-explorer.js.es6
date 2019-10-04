@@ -5,10 +5,13 @@ export default {
   initialize() {
     withPluginApi("0.8", api => {
       api.decorateWidget("hamburger-menu:generalLinks", () => {
-        return {
-          route: "knowledgeExplorer",
-          label: "knowledge_explorer.title"
-        };
+        const siteSettings = api.container.lookup("site-settings:main");
+        if (siteSettings.knowledge_explorer_enabled) {
+          return {
+            route: "knowledgeExplorer",
+            label: "knowledge_explorer.title"
+          };
+        }
       });
     });
   }
