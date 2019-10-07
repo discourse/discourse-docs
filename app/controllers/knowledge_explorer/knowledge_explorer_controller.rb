@@ -12,7 +12,7 @@ module KnowledgeExplorer
         search_term: params[:search]
       }
 
-      query = KnowledgeExplorer::KnowledgeExplorerQuery.new(filters).get
+      query = KnowledgeExplorer::Query.new(current_user, filters).get
 
       render json: query
     end
