@@ -11,6 +11,7 @@ register_asset 'stylesheets/common/knowledge-explorer.scss'
 register_asset 'stylesheets/mobile/knowledge-explorer.scss'
 
 load File.expand_path('../lib/knowledge_explorer/engine.rb', __FILE__)
+load File.expand_path('../lib/knowledge_explorer/query.rb', __FILE__)
 
 after_initialize do
   require_dependency 'search'
