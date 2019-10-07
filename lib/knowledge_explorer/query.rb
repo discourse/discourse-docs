@@ -20,7 +20,8 @@ module KnowledgeExplorer
 
       tq = TopicQuery.new(@user)
       results = tq.latest_results({:no_definitions => true})
-      results = results.where("category_id IN (?)", categories)
+      results = results.left_outer_joins(:tags)
+      results = results.where('category_id IN (?)', categories).or(results.where('tags.name IN (?)', tags))
       topic_query = tq.create_list(:knowledge_base, {}, results)
     end
   end
