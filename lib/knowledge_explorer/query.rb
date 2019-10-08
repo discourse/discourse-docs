@@ -25,7 +25,9 @@ module KnowledgeExplorer
       results = results.where('category_id IN (?)', categories).or(results.where('tags.name IN (?)', tags))
 
       # filter results by selected tags
-      results = results.where('tags.name IN (?)', @filters[:tags])
+      if !@filters[:tags].nil?
+        results = results.where('tags.name IN (?)', @filters[:tags])
+      end
 
       # get tag count
       tags = []
@@ -49,7 +51,9 @@ module KnowledgeExplorer
       # assemble the object
       topic_query = tq.create_list(:knowledge_explorer, {}, results)
 
-      { tags: tags, query_results: topic_query }
+      topic_list = TopicListSerializer.new(topic_query, scope: Guardian.new(@user)).as_json
+
+      { tags: tags, topics: topic_list }
     end
   end
 end
