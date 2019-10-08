@@ -29,6 +29,11 @@ module KnowledgeExplorer
         results = results.where('tags.name IN (?)', @filters[:tags])
       end
 
+      # filter results by search term
+      if !@filters[:search_term].nil?
+        results = results.where('title LIKE ?', "%#{@filters[:search_term]}%")
+      end
+
       # get tag count
       tags = []
 
