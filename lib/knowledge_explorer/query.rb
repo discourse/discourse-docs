@@ -24,6 +24,9 @@ module KnowledgeExplorer
       results = results.left_outer_joins(:tags)
       results = results.where('category_id IN (?)', categories).or(results.where('tags.name IN (?)', tags))
 
+      # filter results by selected tags
+      results = results.where('tags.name IN (?)', @filters[:tags])
+
       # get tag count
       tags = []
 
