@@ -47,7 +47,7 @@ module KnowledgeExplorer
 
       # filter results by search term
       if @filters[:search_term].present?
-        results = results.where('title LIKE ?', "%#{@filters[:search_term]}%")
+        results = results.where('lower(title) LIKE ?', "%#{@filters[:search_term].downcase}%")
       end
 
       tags = tag_count(results)
