@@ -25,20 +25,28 @@ module KnowledgeExplorer
       results = results.where('category_id IN (?)', categories).or(results.where('tags.name IN (?)', tags))
 
       # filter results by selected category
-      unless @filters[:category].nil?
+      if @filters[:category].present?
         results = results.where('category_id IN (?)', @filters[:category])
       end
 
       # filter results by selected tags
-      unless @filters[:tags].nil?
+      if @filters[:tags].present?
         tag_filters = @filters[:tags].split('|')
-        results = results.where('tags.name IN (?)', tag_filters)
-          .group('id')
-          .having('count(distinct tags.name) = ?', tag_filters.count)
+        tags_count = tag_filters.length
+        tag_filters = Tag.where_name(tag_filters).pluck(:id) unless Integer === tag_filters[0]
+
+        if tags_count == tag_filters.length
+          tag_filters.each_with_index do |tag, index|
+            sql_alias = ['t', index].join
+            results = results.joins("INNER JOIN topic_tags #{sql_alias} ON #{sql_alias}.topic_id = topics.id AND #{sql_alias}.tag_id = #{tag}")
+          end
+        else
+          results = results.none # don't return any results unless all tags exist in the database
+        end
       end
 
       # filter results by search term
-      unless @filters[:search_term].nil?
+      if @filters[:search_term].present?
         results = results.where('title LIKE ?', "%#{@filters[:search_term]}%")
       end
 
