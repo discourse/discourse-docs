@@ -2,30 +2,33 @@ import {
   default as computed,
   observes
 } from "ember-addons/ember-computed-decorators";
-import knowledgeExplorer from "discourse/plugins/discourse-knowledge-explorer/discourse/models/knowledge-explorer";
 
 export default Ember.Controller.extend({
   application: Ember.inject.controller(),
   queryParams: {
     filterCategory: "category",
     filterTags: "tags",
+    searchTerm: "search",
     selectedTopic: "topic"
   },
+  topics: Ember.computed.readOnly("model.topics.topic_list.topics"),
+  tags: Ember.computed.readOnly("model.tags"),
   filterTags: null,
   filterCategory: null,
-
   searchTerm: null,
-  searchResults: null,
 
   selectedTopic: null,
 
-  searchCount: Ember.computed.readOnly("searchResults.length"),
-  emptySearchResults: Ember.computed.equal("searchCount", 0),
-
-  @computed("searchResults")
-  hasSearchResults(results) {
-    return !!results;
+  @computed("searchTerm")
+  isSearching(searchTerm) {
+    return !!searchTerm;
   },
+
+  @computed("isSearching", "topics")
+  searchCount(isSearching, topics) {
+    if (isSearching) return topics.length;
+  },
+  emptySearchResults: Ember.computed.equal("searchCount", 0),
 
   @computed("filterTags")
   filtered(filterTags) {
@@ -40,10 +43,10 @@ export default Ember.Controller.extend({
       let filter = this.filterTags;
       if (filter && filter.includes(tag.id)) {
         filter = filter.replace(tag.id, "");
-        filter = filter.replace("++", "+");
-        filter = filter.replace(/^\++|\++$/g, "");
+        filter = filter.replace("|", "|");
+        filter = filter.replace(/^\|+|\|+$/g, "");
       } else if (filter) {
-        filter = `${filter}+${tag.id}`;
+        filter = `${filter}|${tag.id}`;
       } else {
         filter = tag.id;
       }
@@ -52,15 +55,11 @@ export default Ember.Controller.extend({
     },
     performSearch(term) {
       if (term.length < this.siteSettings.min_search_term_length) {
-        this.set("searchResults", null);
         return false;
       }
 
-      const tags = this.get("filterTags") || null;
-
-      knowledgeExplorer.search(term, tags).then(result => {
-        this.set("searchResults", result.topics || []);
-      });
+      this.set("searchTerm", term);
+      this.send("refreshRoute");
     }
   }
 });

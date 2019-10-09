@@ -5,33 +5,24 @@ export default Ember.Route.extend({
     filterTags: {
       refreshModel: true
     },
+    searchTerm: {
+      replace: true
+    },
     selectedTopic: {
       refreshModel: true
     }
   },
   model(params) {
-    if (params.filterTags) {
-      const tags = params.filterTags;
-      return ajax(`/knowledge-explorer.json?tags=${tags}`);
-    } else if (params.selectedTopic) {
-      return ajax(`/t/${params.selectedTopic}.json`);
-    } else {
-      return ajax("/knowledge-explorer.json");
-    }
+    let filters = [];
+    if (params.filterTags) filters.push(`tags=${params.filterTags}`);
+    if (params.searchTerm) filters.push(`search=${params.searchTerm}`);
+
+    return ajax(`/knowledge-explorer.json?${filters.join("&")}`);
   },
 
-  setupController(controller, model) {
-    if (model.tags && model.topics) {
-      controller.setProperties({
-        tags: model.tags,
-        topics: model.topics
-      });
-    } else {
-      controller.setProperties({
-        tags: [],
-        topics: [],
-        topic: model
-      });
+  actions: {
+    refreshRoute() {
+      this.refresh();
     }
   }
 });
