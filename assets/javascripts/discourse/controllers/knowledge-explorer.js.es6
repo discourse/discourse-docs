@@ -2,6 +2,7 @@ import {
   default as computed,
   observes
 } from "ember-addons/ember-computed-decorators";
+import knowledgeExplorer from "discourse/plugins/discourse-knowledge-explorer/discourse/models/knowledge-explorer";
 
 export default Ember.Controller.extend({
   application: Ember.inject.controller(),
@@ -11,6 +12,7 @@ export default Ember.Controller.extend({
     searchTerm: "search",
     selectedTopic: "topic"
   },
+  isLoading: false,
   topics: Ember.computed.readOnly("model.topics.topic_list.topics"),
   tags: Ember.computed.readOnly("model.tags"),
   filterTags: null,
@@ -52,14 +54,33 @@ export default Ember.Controller.extend({
       }
 
       this.set("filterTags", filter);
+      this.send("refreshModel");
     },
     performSearch(term) {
+      if (term === "") {
+        this.set("searchTerm", null);
+        this.send("refreshModel");
+        return false;
+      }
+
       if (term.length < this.siteSettings.min_search_term_length) {
         return false;
       }
 
       this.set("searchTerm", term);
-      this.send("refreshRoute");
+      this.send("refreshModel");
+    },
+    refreshModel() {
+      this.set("isLoading", true);
+      const params = {
+        filterCategory: this.filterCategory,
+        filterTags: this.filterTags,
+        searchTerm: this.searchTerm
+      };
+      knowledgeExplorer.get(params).then((result) => {
+        this.set("model", result);
+        this.set("isLoading", false);
+      });
     }
   }
 });

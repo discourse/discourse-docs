@@ -7,30 +7,32 @@
         onSearch=(action "performSearch")
       }}
     </div>
-    <div class="knowledge-explorer-browse">
-      <div class="knowledge-explorer-tags">
-        {{#each tags as |tag|}}
-            {{knowledge-explorer-tag 
-              tag=tag
-              selectTag=(action "updateSelectedTags")
-            }}
-        {{/each}}
-      </div>
-      <div class="knowledge-explorer-results">
-      {{#if isSearching}}
-        {{#if emptySearchResults}}
-          <div class="result-count no-result">{{i18n 'search.no_results'}}</div>
-        {{else}}
-          <div class="result-count">{{i18n 'knowledge_explorer.search.results' count=searchCount}}</div>
+    {{#conditional-loading-spinner condition=isLoading}}
+      <div class="knowledge-explorer-browse">
+        <div class="knowledge-explorer-tags">
+          {{#each tags as |tag|}}
+              {{knowledge-explorer-tag 
+                tag=tag
+                selectTag=(action "updateSelectedTags")
+              }}
+          {{/each}}
+        </div>
+        <div class="knowledge-explorer-results">
+        {{#if isSearching}}
+          {{#if emptySearchResults}}
+            <div class="result-count no-result">{{i18n 'search.no_results'}}</div>
+          {{else}}
+            <div class="result-count">{{i18n 'knowledge_explorer.search.results' count=searchCount}}</div>
+          {{/if}}
         {{/if}}
-      {{/if}}
-      {{#unless emptySearchResults}}
-        {{knowledge-explorer-topic-list 
-          topics=topics 
-          selectTopic=(action "setSelectedTopic")
-        }}
-      {{/unless}}
+        {{#unless emptySearchResults}}
+          {{knowledge-explorer-topic-list 
+            topics=topics 
+            selectTopic=(action "setSelectedTopic")
+          }}
+        {{/unless}}
+        </div>
       </div>
-    </div>
+    {{/conditional-loading-spinner}}
   {{/if}}
 </div>

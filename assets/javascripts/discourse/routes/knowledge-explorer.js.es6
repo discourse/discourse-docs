@@ -1,28 +1,8 @@
 import { ajax } from "discourse/lib/ajax";
+import knowledgeExplorer from "discourse/plugins/discourse-knowledge-explorer/discourse/models/knowledge-explorer";
 
 export default Ember.Route.extend({
-  queryParams: {
-    filterTags: {
-      refreshModel: true
-    },
-    searchTerm: {
-      replace: true
-    },
-    selectedTopic: {
-      refreshModel: true
-    }
-  },
   model(params) {
-    let filters = [];
-    if (params.filterTags) filters.push(`tags=${params.filterTags}`);
-    if (params.searchTerm) filters.push(`search=${params.searchTerm}`);
-
-    return ajax(`/knowledge-explorer.json?${filters.join("&")}`);
+    return knowledgeExplorer.get(params);
   },
-
-  actions: {
-    refreshRoute() {
-      this.refresh();
-    }
-  }
 });
