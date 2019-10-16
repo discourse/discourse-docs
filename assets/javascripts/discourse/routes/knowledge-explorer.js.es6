@@ -4,5 +4,5 @@ import knowledgeExplorer from "discourse/plugins/discourse-knowledge-explorer/di
 export default Ember.Route.extend({
   model(params) {
     return knowledgeExplorer.get(params);
-  },
+  }
 });

@@ -1,26 +1,4 @@
 .knowledge-explorer {
-  .knowledge-explorer-topic {
-    width: 80%;
-    margin: 0 auto;
-    .knowledge-explorer-nav-link {
-      font-weight: 700;
-      &.return {
-        font-size: $font-down-1;
-        &::before {
-          content: "«";
-          margin-right: 5px;
-        }
-      }
-      &.more {
-        float: right;
-        font-size: $font-up-1;
-        padding: 10px 0;
-        &::after {
-          content: "»";
-          margin-left: 5px;
-        }
-      }
-    }
   }
  .knowledge-explorer-search {
   align-items: center;
@@ -36,6 +14,11 @@
  }
  .knowledge-explorer-browse {
    display: flex;
+   .loading-container {
+     display: flex;
+     flex-basis: 75%;
+     padding: 10px 0 10px 10px;
+   }
    .knowledge-explorer-results {
      display: flex;
      flex-direction: column;
@@ -95,6 +78,31 @@
       .discourse-tag {
         padding-right: 5px;
       }
+    }
+  .knowledge-explorer-topic {
+    display: flex;
+    flex-direction: column;
+    .knowledge-explorer-nav-link {
+      font-weight: 700;
+      &.return {
+        font-size: $font-down-1;
+        &::before {
+          content: "«";
+          margin-right: 5px;
+        }
+      }
+      &.more {
+        margin-left: auto;
+        font-size: $font-up-1;
+        padding: 10px 0;
+        &::after {
+          content: "»";
+          margin-left: 5px;
+        }
+      }
+    }
+    .topic-content {
+      padding-top: 10px;
     }
  } 
 }

@@ -13,6 +13,7 @@ export default Ember.Controller.extend({
     selectedTopic: "topic"
   },
   isLoading: false,
+  isTopicLoading: false,
   topics: Ember.computed.readOnly("model.topics.topic_list.topics"),
   tags: Ember.computed.readOnly("model.tags"),
   filterTags: null,
@@ -20,6 +21,7 @@ export default Ember.Controller.extend({
   searchTerm: null,
 
   selectedTopic: null,
+  topic: null,
 
   @computed("searchTerm")
   isSearching(searchTerm) {
@@ -39,7 +41,12 @@ export default Ember.Controller.extend({
 
   actions: {
     setSelectedTopic(topicID) {
+      this.set("isTopicLoading", true);
       this.set("selectedTopic", topicID);
+      knowledgeExplorer.getTopic(topicID).then(result => {
+        this.set("topic", result);
+        this.set("isTopicLoading", false);
+      });
     },
     updateSelectedTags(tag) {
       let filter = this.filterTags;
@@ -54,6 +61,7 @@ export default Ember.Controller.extend({
       }
 
       this.set("filterTags", filter);
+      this.set("selectedTopic", null);
       this.send("refreshModel");
     },
     performSearch(term) {
@@ -68,6 +76,7 @@ export default Ember.Controller.extend({
       }
 
       this.set("searchTerm", term);
+      this.set("selectedTopic", null);
       this.send("refreshModel");
     },
     refreshModel() {
@@ -77,7 +86,7 @@ export default Ember.Controller.extend({
         filterTags: this.filterTags,
         searchTerm: this.searchTerm
       };
-      knowledgeExplorer.get(params).then((result) => {
+      knowledgeExplorer.get(params).then(result => {
         this.set("model", result);
         this.set("isLoading", false);
       });

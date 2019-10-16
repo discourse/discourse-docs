@@ -1,22 +1,24 @@
 <div class="knowledge-explorer">
-  {{#if selectedTopic}}
-    {{knowledge-explorer-topic topic=topic}}
-  {{else}}
-    <div class="knowledge-explorer-search">
-      {{knowledge-explorer-search 
-        onSearch=(action "performSearch")
-      }}
-    </div>
-    {{#conditional-loading-spinner condition=isLoading}}
-      <div class="knowledge-explorer-browse">
-        <div class="knowledge-explorer-tags">
-          {{#each tags as |tag|}}
-              {{knowledge-explorer-tag 
-                tag=tag
-                selectTag=(action "updateSelectedTags")
-              }}
-          {{/each}}
-        </div>
+  <div class="knowledge-explorer-search">
+    {{knowledge-explorer-search 
+      onSearch=(action "performSearch")
+    }}
+  </div>
+  {{#conditional-loading-spinner condition=isLoading}}
+    <div class="knowledge-explorer-browse">
+      <div class="knowledge-explorer-tags">
+        {{#each tags as |tag|}}
+            {{knowledge-explorer-tag 
+              tag=tag
+              selectTag=(action "updateSelectedTags")
+            }}
+        {{/each}}
+      </div>
+      {{#if selectedTopic}}
+        {{#conditional-loading-spinner condition=isTopicLoading}}
+          {{knowledge-explorer-topic topic=topic}}
+        {{/conditional-loading-spinner}}
+      {{else}}
         <div class="knowledge-explorer-results">
         {{#if isSearching}}
           {{#if emptySearchResults}}
@@ -32,7 +34,7 @@
           }}
         {{/unless}}
         </div>
-      </div>
-    {{/conditional-loading-spinner}}
-  {{/if}}
+      {{/if}}
+    </div>
+  {{/conditional-loading-spinner}}
 </div>

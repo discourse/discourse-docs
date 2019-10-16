@@ -7,5 +7,8 @@ export default {
     if (params.searchTerm) filters.push(`search=${params.searchTerm}`);
 
     return ajax(`/knowledge-explorer.json?${filters.join("&")}`);
+  },
+  getTopic(id) {
+    return ajax(`/t/${id}.json`);
   }
 };
