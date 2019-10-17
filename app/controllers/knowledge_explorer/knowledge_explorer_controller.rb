@@ -5,14 +5,13 @@ module KnowledgeExplorer
     requires_plugin 'knowledge-explorer'
 
     def index
-
       filters = {
         tags: params[:tags],
         category: params[:category],
         search_term: params[:search]
       }
 
-      query = KnowledgeExplorer::Query.new(current_user, filters).get
+      query = KnowledgeExplorer::Query.new(current_user, filters).list
 
       render json: query
     end

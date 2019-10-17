@@ -6,3 +6,6 @@ en:
         results: 
           one: "%{count} result found"
           other: "%{count} results found"
+      topic:
+        back: "Go back"
+        navigate_to_topic: "View the discussion on this topic"

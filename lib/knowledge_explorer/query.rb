@@ -2,27 +2,25 @@
 
 module KnowledgeExplorer
   class Query
-
     def initialize(user = nil, filters = {})
       @user = user
       @filters = filters
     end
 
-    def categories
+    def self.categories
       SiteSetting.knowledge_explorer_categories.split('|')
     end
 
-    def tags
+    def self.tags
       SiteSetting.knowledge_explorer_tags.split('|')
     end
 
-    def get
-
+    def list
       # query for topics matching selected categories & tags
       tq = TopicQuery.new(@user)
-      results = tq.latest_results({ :no_definitions => true })
+      results = tq.latest_results(no_definitions: true)
       results = results.left_outer_joins(:tags)
-      results = results.where('category_id IN (?)', categories).or(results.where('tags.name IN (?)', tags))
+      results = results.where('category_id IN (?)', Query.categories).or(results.where('tags.name IN (?)', Query.tags))
 
       # filter results by selected category
       if @filters[:category].present?
@@ -65,11 +63,9 @@ module KnowledgeExplorer
 
       results.each do |topic|
         topic.tags.each do |tag|
-          if @filters[:tags]
-            active = @filters[:tags].include?(tag.name)
-          end
+          active = @filters[:tags].include?(tag.name) if @filters[:tags]
           if tags.none? { |item| item[:id].to_s == tag.name }
-            tags << { id: tag.name, count: 1 , active: active || false }
+            tags << { id: tag.name, count: 1, active: active || false }
           else
             tag_index = tags.index(tags.find { |item| item[:id].to_s == tag.name })
             tags[tag_index][:count] += 1

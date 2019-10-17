@@ -31,7 +31,7 @@ describe KnowledgeExplorer::KnowledgeExplorerController do
       end
     end
 
-    context "when some knowledge explorer topics are private" do
+    context 'when some knowledge explorer topics are private' do
       let!(:group) { Fabricate(:group) }
       let!(:private_category) { Fabricate(:private_category, group: group) }
       let!(:private_topic) { Fabricate(:topic, category: private_category) }

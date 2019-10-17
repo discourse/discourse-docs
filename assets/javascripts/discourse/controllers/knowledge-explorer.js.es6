@@ -2,7 +2,7 @@ import {
   default as computed,
   observes
 } from "ember-addons/ember-computed-decorators";
-import knowledgeExplorer from "discourse/plugins/discourse-knowledge-explorer/discourse/models/knowledge-explorer";
+import KnowledgeExplorer from "discourse/plugins/discourse-knowledge-explorer/discourse/models/knowledge-explorer";
 
 export default Ember.Controller.extend({
   application: Ember.inject.controller(),
@@ -40,10 +40,10 @@ export default Ember.Controller.extend({
   },
 
   actions: {
-    setSelectedTopic(topicID) {
+    setSelectedTopic(topicId) {
       this.set("isTopicLoading", true);
-      this.set("selectedTopic", topicID);
-      knowledgeExplorer.getTopic(topicID).then(result => {
+      this.set("selectedTopic", topicId);
+      KnowledgeExplorer.getTopic(topicId).then(result => {
         this.set("topic", result);
         this.set("isTopicLoading", false);
       });
@@ -81,12 +81,12 @@ export default Ember.Controller.extend({
     },
     refreshModel() {
       this.set("isLoading", true);
-      const params = {
-        filterCategory: this.filterCategory,
-        filterTags: this.filterTags,
-        searchTerm: this.searchTerm
-      };
-      knowledgeExplorer.get(params).then(result => {
+      const params = this.getProperties(
+        "filterCategory",
+        "filterTags",
+        "searchTerm"
+      );
+      KnowledgeExplorer.list(params).then(result => {
         this.set("model", result);
         this.set("isLoading", false);
       });
