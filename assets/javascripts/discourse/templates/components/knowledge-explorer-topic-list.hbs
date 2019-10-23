@@ -1,3 +1,4 @@
+{{#load-more selector=".topic-list tr" action=loadMore}}
 <table class="topic-list">
   <thead>
     <th>Topic</th>
@@ -23,4 +24,5 @@
     {{/each}}
   </tbody>
 </table>
-
+{{/load-more}}
+{{conditional-loading-spinner condition=loading}}

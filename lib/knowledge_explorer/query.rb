@@ -18,8 +18,8 @@ module KnowledgeExplorer
     def list
       # query for topics matching selected categories & tags
       tq = TopicQuery.new(@user)
-      results = tq.latest_results(no_definitions: true)
-      results = results.left_outer_joins(:tags)
+      list_results = tq.latest_results(no_definitions: true, page: @filters[:page])
+      results = list_results.left_outer_joins(:tags)
       results = results.where('category_id IN (?)', Query.categories).or(results.where('tags.name IN (?)', Query.tags))
 
       # filter results by selected category
@@ -55,6 +55,10 @@ module KnowledgeExplorer
 
       topic_list = TopicListSerializer.new(topic_query, scope: Guardian.new(@user)).as_json
 
+      if list_results.count == 30
+        topic_list['load_more_url'] = load_more_url
+      end
+
       { tags: tags, topics: topic_list }
     end
 
@@ -74,6 +78,22 @@ module KnowledgeExplorer
       end
 
       tags.sort_by { |tag| [tag[:active] ? 0 : 1, -tag[:count]] }
+    end
+
+    def load_more_url
+      filters = []
+
+      filters.push("tags=#{@filters[:tags]}") if @filters[:tags].present?
+      filters.push("category=#{@filters[:category]}") if @filters[:category].present?
+      filters.push("search=#{@filters[:search_term]}") if @filters[:search_term].present?
+
+      if @filters[:page].present?
+        filters.push("page=#{@filters[:page].to_i + 1}")
+      else
+        filters.push('page=1')
+      end
+
+      "/knowledge-explorer.json?#{filters.join('&')}"
     end
   end
 end

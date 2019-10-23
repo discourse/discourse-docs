@@ -8,7 +8,8 @@ module KnowledgeExplorer
       filters = {
         tags: params[:tags],
         category: params[:category],
-        search_term: params[:search]
+        search_term: params[:search],
+        page: params[:page]
       }
 
       query = KnowledgeExplorer::Query.new(current_user, filters).list

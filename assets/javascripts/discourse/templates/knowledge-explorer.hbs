@@ -31,6 +31,8 @@
           {{knowledge-explorer-topic-list 
             topics=topics 
             selectTopic=(action "setSelectedTopic")
+            loadMore=(action "loadMore")
+            loading=isLoadingMore
           }}
         {{/unless}}
         </div>

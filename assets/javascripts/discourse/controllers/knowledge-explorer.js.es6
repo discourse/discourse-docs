@@ -13,8 +13,17 @@ export default Ember.Controller.extend({
     selectedTopic: "topic"
   },
   isLoading: false,
+  isLoadingMore: false,
+  loadMoreUrl: Ember.computed.alias("model.topics.load_more_url"),
+  @computed("loadMoreUrl")
+  canLoadMore(loadMoreUrl) {
+    if (loadMoreUrl === null) {
+      return false;
+    }
+    return true;
+  },
   isTopicLoading: false,
-  topics: Ember.computed.readOnly("model.topics.topic_list.topics"),
+  topics: Ember.computed.alias("model.topics.topic_list.topics"),
   tags: Ember.computed.readOnly("model.tags"),
   filterTags: null,
   filterCategory: null,
@@ -78,6 +87,21 @@ export default Ember.Controller.extend({
       this.set("searchTerm", term);
       this.set("selectedTopic", null);
       this.send("refreshModel");
+    },
+    loadMore() {
+      if (this.canLoadMore) {
+        this.set("isLoadingMore", true);
+
+        KnowledgeExplorer.loadMore(this.loadMoreUrl).then(result => {
+          let topics = this.topics;
+
+          topics = topics.concat(result.topics.topic_list.topics);
+
+          this.set("topics", topics);
+          this.set("loadMoreUrl", result.topics.load_more_url || null);
+          this.set("isLoadingMore", false);
+        });
+      }
     },
     refreshModel() {
       this.set("isLoading", true);
