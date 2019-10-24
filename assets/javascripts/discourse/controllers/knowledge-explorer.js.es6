@@ -17,7 +17,7 @@ export default Ember.Controller.extend({
   loadMoreUrl: Ember.computed.alias("model.topics.load_more_url"),
   @computed("loadMoreUrl")
   canLoadMore(loadMoreUrl) {
-    if (loadMoreUrl === null) {
+    if (loadMoreUrl === null || this.isLoadingMore) {
       return false;
     }
     return true;
