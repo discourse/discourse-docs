@@ -5,6 +5,7 @@ module KnowledgeExplorer
     def initialize(user = nil, filters = {})
       @user = user
       @filters = filters
+      @limit = 30
     end
 
     def self.categories
@@ -18,8 +19,8 @@ module KnowledgeExplorer
     def list
       # query for topics matching selected categories & tags
       tq = TopicQuery.new(@user)
-      list_results = tq.latest_results(no_definitions: true, limit: false)
-      results = list_results.left_outer_joins(:tags)
+      results = tq.latest_results(no_definitions: true, limit: false)
+      results = results.left_outer_joins(:tags)
       results = results.where('category_id IN (?)', Query.categories).or(results.where('tags.name IN (?)', Query.tags))
 
       # filter results by selected category
@@ -50,19 +51,25 @@ module KnowledgeExplorer
 
       tags = tag_count(results)
 
-      results = results.limit(30)
+      results_length = results.length
 
       if @filters[:page]
-        offset = @filters[:page].to_i * 30
-        results = results.offset(offset) if offset > 0
+        offset = @filters[:page].to_i * @limit
+        page_range = offset + @limit
+        end_of_list = true if page_range > results_length
+      else
+        offset = 0
+        page_range = @limit
       end
 
+      results = results[offset...page_range]
+
       # assemble the object
-      topic_query = tq.create_list(:knowledge_explorer, {}, results)
+      topic_query = tq.create_list(:knowledge_explorer, {unordered: true}, results)
 
       topic_list = TopicListSerializer.new(topic_query, scope: Guardian.new(@user)).as_json
 
-      if results.count == 30
+      if end_of_list.nil? 
         topic_list['load_more_url'] = load_more_url
       else
         topic_list['load_more_url'] = nil
