@@ -65,7 +65,7 @@ module KnowledgeExplorer
       results = results[offset...page_range]
 
       # assemble the object
-      topic_query = tq.create_list(:knowledge_explorer, {}, results)
+      topic_query = tq.create_list(:knowledge_explorer, { unordered: true }, results)
 
       topic_list = TopicListSerializer.new(topic_query, scope: Guardian.new(@user)).as_json
 
