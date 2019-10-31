@@ -6,7 +6,7 @@ module ::KnowledgeExplorer
 
     config.after_initialize do
       Discourse::Application.routes.append do
-        mount ::KnowledgeExplorer::Engine, at: "/knowledge-explorer"
+        mount ::KnowledgeExplorer::Engine, at: '/knowledge-explorer'
       end
     end
   end

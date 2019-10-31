@@ -23,13 +23,15 @@ describe KnowledgeExplorer::KnowledgeExplorerController do
         expect(response.status).to eq(200)
 
         json = JSON.parse(response.body)
+        tags = json['tags']
+        topics = json['topics']['topic_list']['topics']
 
-        expect(json['tags'].size).to eq(1)
-        expect(json['topics'].size).to eq(2)
+        expect(tags.size).to eq(1)
+        expect(topics.size).to eq(2)
       end
     end
 
-    context "when some knowledge explorer topics are private" do
+    context 'when some knowledge explorer topics are private' do
       let!(:group) { Fabricate(:group) }
       let!(:private_category) { Fabricate(:private_category, group: group) }
       let!(:private_topic) { Fabricate(:topic, category: private_category) }
@@ -42,8 +44,9 @@ describe KnowledgeExplorer::KnowledgeExplorerController do
         get '/knowledge-explorer.json'
 
         json = JSON.parse(response.body)
+        topics = json['topics']['topic_list']['topics']
 
-        expect(json['topics'].size).to eq(2)
+        expect(topics.size).to eq(2)
       end
 
       it 'should show topics when users have permissions' do
@@ -53,8 +56,9 @@ describe KnowledgeExplorer::KnowledgeExplorerController do
         get '/knowledge-explorer.json'
 
         json = JSON.parse(response.body)
+        topics = json['topics']['topic_list']['topics']
 
-        expect(json['topics'].size).to eq(3)
+        expect(topics.size).to eq(3)
       end
     end
 
@@ -65,9 +69,11 @@ describe KnowledgeExplorer::KnowledgeExplorerController do
         expect(response.status).to eq(200)
 
         json = JSON.parse(response.body)
+        tags = json['tags']
+        topics = json['topics']['topic_list']['topics']
 
-        expect(json['tags'].size).to eq(1)
-        expect(json['topics'].size).to eq(1)
+        expect(tags.size).to eq(1)
+        expect(topics.size).to eq(1)
       end
     end
   end

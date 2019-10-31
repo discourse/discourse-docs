@@ -1,12 +1,10 @@
 <div class="knowledge-explorer">
-  {{#if selectedTopic}}
-    {{knowledge-explorer-topic topic=topic}}
-  {{else}}
-    <div class="knowledge-explorer-search">
-      {{knowledge-explorer-search 
-        onSearch=(action "performSearch")
-      }}
-    </div>
+  <div class="knowledge-explorer-search">
+    {{knowledge-explorer-search 
+      onSearch=(action "performSearch")
+    }}
+  </div>
+  {{#conditional-loading-spinner condition=isLoading}}
     <div class="knowledge-explorer-browse">
       <div class="knowledge-explorer-tags">
         {{#each tags as |tag|}}
@@ -16,24 +14,29 @@
             }}
         {{/each}}
       </div>
-      <div class="knowledge-explorer-results">
-      {{#if hasSearchResults}}
-        {{#if emptySearchResults}}
-          <div class="result-count no-result">{{i18n 'search.no_results'}}</div>
-        {{else}}
-          <div class="result-count">{{i18n 'knowledge_explorer.search.results' count=searchCount}}</div>
-          {{knowledge-explorer-topic-list 
-            topics=searchResults 
-            selectTopic=(action "setSelectedTopic")
-          }}
-        {{/if}}
+      {{#if selectedTopic}}
+        {{#conditional-loading-spinner condition=isTopicLoading}}
+          {{knowledge-explorer-topic topic=topic}}
+        {{/conditional-loading-spinner}}
       {{else}}
-        {{knowledge-explorer-topic-list 
-          topics=topics 
-          selectTopic=(action "setSelectedTopic")
-        }}
+        <div class="knowledge-explorer-results">
+        {{#if isSearching}}
+          {{#if emptySearchResults}}
+            <div class="result-count no-result">{{i18n 'search.no_results'}}</div>
+          {{else}}
+            <div class="result-count">{{i18n 'knowledge_explorer.search.results' count=searchCount}}</div>
+          {{/if}}
+        {{/if}}
+        {{#unless emptySearchResults}}
+          {{knowledge-explorer-topic-list 
+            topics=topics 
+            selectTopic=(action "setSelectedTopic")
+            loadMore=(action "loadMore")
+            loading=isLoadingMore
+          }}
+        {{/unless}}
+        </div>
       {{/if}}
-      </div>
     </div>
-  {{/if}}
+  {{/conditional-loading-spinner}}
 </div>
