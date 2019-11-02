@@ -1,7 +1,8 @@
-<input
+{{input
   type="text"
-  value={{searchTerm}}
-  oninput={{action "onSearchTermChange"}}
+  value=(readonly searchTerm)
+  input=(action "onSearchTermChange" value="target.value")
   class="knowledge-explorer-search-bar"
   autocorrect="off"
-  autocapitalize="off">
+  autocapitalize="off"
+}}
