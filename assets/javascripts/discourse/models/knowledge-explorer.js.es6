@@ -9,9 +9,11 @@ export default {
 
     return ajax(`/knowledge-explorer.json?${filters.join("&")}`);
   },
+
   loadMore(loadMoreUrl) {
     return ajax(loadMoreUrl);
   },
+
   getTopic(id) {
     return ajax(`/t/${id}.json`);
   }

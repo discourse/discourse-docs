@@ -1,8 +1,12 @@
 {{#link-to 'knowledgeExplorer' (query-params topic=null) class='knowledge-explorer-nav-link return'}}
   {{i18n 'knowledge_explorer.topic.back'}}
 {{/link-to}}
+
 <div class="topic-content">
   <h1>{{topic.title}}</h1>
   {{{originalPostContent}}}
 </div>
-<a class="knowledge-explorer-nav-link more" href="/t/{{topic.id}}">{{i18n 'knowledge_explorer.topic.navigate_to_topic'}}</a>
+
+<a class="knowledge-explorer-nav-link more" href="/t/{{topic.id}}">
+  {{i18n 'knowledge_explorer.topic.navigate_to_topic'}}
+</a>
