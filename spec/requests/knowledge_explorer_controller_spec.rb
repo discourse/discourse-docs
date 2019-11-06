@@ -63,7 +63,7 @@ describe KnowledgeExplorer::KnowledgeExplorerController do
     end
 
     context 'when filtering by tag' do
-      it 'should return a filtered list' do
+      it 'should return a list filtered by tag' do
         get '/knowledge-explorer.json?tags=test'
 
         expect(response.status).to eq(200)
@@ -73,6 +73,41 @@ describe KnowledgeExplorer::KnowledgeExplorerController do
         topics = json['topics']['topic_list']['topics']
 
         expect(tags.size).to eq(1)
+        expect(topics.size).to eq(1)
+      end
+    end
+
+    context 'when filtering by category' do
+      let!(:category2) { Fabricate(:category) }
+      let!(:topic3) { Fabricate(:topic, category: category2) }
+
+      before do
+        SiteSetting.knowledge_explorer_categories = "#{category.id}|#{category2.id}"
+      end
+
+      it 'should return a list filtered by category' do
+        get "/knowledge-explorer.json?category=#{category2.id}"
+
+        expect(response.status).to eq(200)
+
+        json = JSON.parse(response.body)
+        categories = json['categories']
+        topics = json['topics']['topic_list']['topics']
+
+        expect(categories.size).to eq(1)
+        expect(topics.size).to eq(1)
+      end
+    end
+
+    context 'when searching' do
+      it 'should return a list filtered by search term in title' do
+        get "/knowledge-explorer.json?search=topic 1"
+
+        expect(response.status).to eq(200)
+
+        json = JSON.parse(response.body)
+        topics = json['topics']['topic_list']['topics']
+
         expect(topics.size).to eq(1)
       end
     end

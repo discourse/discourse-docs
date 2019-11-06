@@ -16,7 +16,7 @@ function mergeCategories(results) {
 export default Ember.Controller.extend({
   application: Ember.inject.controller(),
   queryParams: {
-    filterCategory: "category",
+    filterCategories: "category",
     filterTags: "tags",
     searchTerm: "search",
     selectedTopic: "topic"
@@ -25,10 +25,11 @@ export default Ember.Controller.extend({
   isLoadingMore: false,
   loadMoreUrl: Ember.computed.alias("model.topics.load_more_url"),
   isTopicLoading: false,
+  categories: Ember.computed.readOnly("model.categories"),
   topics: Ember.computed.alias("model.topics.topic_list.topics"),
   tags: Ember.computed.readOnly("model.tags"),
   filterTags: null,
-  filterCategory: null,
+  filterCategories: null,
   searchTerm: null,
   selectedTopic: null,
   topic: null,
@@ -93,6 +94,26 @@ export default Ember.Controller.extend({
 
       this.send("refreshModel");
     },
+    updateSelectedCategories(category) {
+      let filter = this.filterCategories;
+      if (filter && filter.includes(category.id)) {
+        filter = filter
+          .replace(category.id, "")
+          .replace("|", "|")
+          .replace(/^\|+|\|+$/g, "");
+      } else if (filter) {
+        filter = `${filter}|${category.id}`;
+      } else {
+        filter = category.id;
+      }
+
+      this.setProperties({
+        filterCategories: filter,
+        selectedTopic: null
+      });
+
+      this.send("refreshModel");
+    },
 
     performSearch(term) {
       if (term === "") {
@@ -134,7 +155,7 @@ export default Ember.Controller.extend({
       this.set("isLoading", true);
 
       const params = this.getProperties(
-        "filterCategory",
+        "filterCategories",
         "filterTags",
         "searchTerm"
       );

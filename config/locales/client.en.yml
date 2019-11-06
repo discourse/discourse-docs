@@ -2,6 +2,8 @@ en:
   js:
     knowledge_explorer:
       title: "Knowledge Explorer"
+      categories: "Categories"
+      tags: "Tags"
       search:
         results: 
           one: "%{count} result found"

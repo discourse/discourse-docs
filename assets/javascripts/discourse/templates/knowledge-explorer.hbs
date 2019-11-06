@@ -5,13 +5,25 @@
   }}
   {{#conditional-loading-spinner condition=isLoading}}
     <div class="knowledge-explorer-browse">
-      <div class="knowledge-explorer-tags">
-        {{#each tags as |tag|}}
-          {{knowledge-explorer-tag
-            tag=tag
-            selectTag=(action "updateSelectedTags")
-          }}
-        {{/each}}
+      <div class="knowledge-explorer-filters">
+        <div class="knowledge-explorer-categories">
+          <h3>{{i18n 'knowledge_explorer.categories'}}</h3>
+          {{#each categories as |category|}}
+            {{knowledge-explorer-category
+              category=category
+              selectCategory=(action "updateSelectedCategories")
+            }}
+          {{/each}}
+        </div>
+        <div class="knowledge-explorer-tags">
+          <h3>{{i18n 'knowledge_explorer.tags'}}</h3>
+          {{#each tags as |tag|}}
+            {{knowledge-explorer-tag
+              tag=tag
+              selectTag=(action "updateSelectedTags")
+            }}
+          {{/each}}
+        </div>
       </div>
       {{#if selectedTopic}}
         {{#conditional-loading-spinner condition=isTopicLoading}}

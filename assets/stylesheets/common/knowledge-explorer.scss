@@ -28,13 +28,15 @@
        padding-left: 10px;
      }
    }
-   .knowledge-explorer-tags {
+   .knowledge-explorer-filters {
      flex-basis: 25%;
+   }
+   .knowledge-explorer-tags, .knowledge-explorer-categories {
       padding: 10px 10px 10px 0;
       a {
         color: $primary;
       }
-      .knowledge-explorer-tag {
+      .knowledge-explorer-tag, .knowledge-explorer-category {
         display: flex;
         align-items: center;
         cursor: pointer;

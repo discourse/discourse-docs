@@ -25,7 +25,7 @@ module KnowledgeExplorer
 
       # filter results by selected category
       if @filters[:category].present?
-        results = results.where('category_id IN (?)', @filters[:category])
+        results = results.where('category_id IN (?)', @filters[:category].split('|'))
       end
 
       # filter results by selected tags
@@ -50,6 +50,7 @@ module KnowledgeExplorer
       end
 
       tags = tag_count(results)
+      categories = categories_count(results)
 
       results_length = results.length
 
@@ -75,7 +76,7 @@ module KnowledgeExplorer
         topic_list['load_more_url'] = nil
       end
 
-      { tags: tags, topics: topic_list }
+      { tags: tags, categories: categories, topics: topic_list }
     end
 
     def tag_count(results)
@@ -94,6 +95,22 @@ module KnowledgeExplorer
       end
 
       tags.sort_by { |tag| [tag[:active] ? 0 : 1, -tag[:count]] }
+    end
+
+    def categories_count(results)
+      categories = []
+
+      results.each do |topic|
+        active = @filters[:category].include?(topic.category_id.to_s) if @filters[:category]
+        if categories.none? { |item| item[:id] == topic.category_id }
+          categories << { id: topic.category_id, count: 1, active: active || false }
+        else
+          category_index = categories.index(categories.find { |item| item[:id] == topic.category_id })
+          categories[category_index][:count] += 1
+        end
+      end
+
+      categories.sort_by { |category| [category[:active] ? 0 : 1, -category[:count]] }
     end
 
     def load_more_url
