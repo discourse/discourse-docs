@@ -1,25 +1,24 @@
 .mobile-view {
   .knowledge-explorer {
     .knowledge-explorer-topic {
-      width: calc(100vw - .75em);
-      margin: 10px 0;
+      width: calc(100vw - 0.75em);
+      margin: 0.625em 0;
     }
     .knowledge-explorer-search {
       font-size: $font-up-2;
-      padding: .5em 0;
+      padding: 0.5em 0;
 
       .knowledge-explorer-search-bar {
         width: calc(100vw - 2em);
       }
     }
     .knowledge-explorer-browse {
+      .knowledge-explorer-items {
+        padding-right: 0;
+      }
       flex-direction: column;
       .knowledge-explorer-results .result-count {
-        padding-left: 0px;
-      }
-      .knowledge-explorer-tags {
-        flex-basis: 100%;
-        padding: 1em 0;
+        padding-left: 0;
       }
       .knowledge-explorer-topic-list {
         flex-basis: 100%;
