@@ -1,6 +1,9 @@
 export default Ember.Component.extend({
-  click() {
-    this.selectTag(this.tag);
-    return false;
+  tagName: "",
+  actions: {
+    selectTag() {
+      this.selectTag(this.tag);
+      return false;
+    }
   }
 });

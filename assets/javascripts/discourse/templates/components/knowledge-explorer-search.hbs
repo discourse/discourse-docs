@@ -1,8 +1,12 @@
-{{input
-  type="text"
-  value=(readonly searchTerm)
-  input=(action "onSearchTermChange" value="target.value")
-  class="knowledge-explorer-search-bar"
-  autocorrect="off"
-  autocapitalize="off"
-}}
+<span class="knowledge-base-search-wrapper">
+  {{input
+    type="text"
+    value=(readonly searchTerm)
+    input=(action "onSearchTermChange" value="target.value")
+    class="knowledge-explorer-search-bar"
+    autocorrect="off"
+    placeholder=(i18n "knowledge_explorer.search.placeholder")
+    autocapitalize="off"
+  }}
+  {{d-icon "search"}}
+</span>

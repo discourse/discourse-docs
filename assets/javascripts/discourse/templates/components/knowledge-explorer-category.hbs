@@ -1,10 +1,10 @@
-<div class="knowledge-explorer-category {{if category.active 'selected'}}">
+<a  {{action "selectCategory"}} class="knowledge-explorer-item knowledge-explorer-category {{if category.active 'selected'}}">
   {{#unless category.active}}
     {{d-icon "plus"}}
   {{/unless}}
-  <span class="category-id">{{categoryName}}</span>
-  <span class="category-count">({{category.count}})</span>
   {{#if category.active}}
     {{d-icon "times-circle"}}
   {{/if}}
-</div>
+  <span class="knowledge-explorer-item-id category-id">{{categoryName}}</span>
+  <span class="knowledge-explorer-item-count category-count">{{category.count}}</span>
+</a>
