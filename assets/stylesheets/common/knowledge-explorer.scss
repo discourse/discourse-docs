@@ -146,10 +146,19 @@
       }
     }
     .topic-content {
+      padding-top: 10px;
       h1 {
         line-height: $line-height-medium;
       }
-      padding-top: 10px;
+      .lightbox-wrapper img {
+        max-width: 100%;
+      }
+      code,
+      pre {
+        // Prevent pre from being wider than viewport
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
     }
   }
 }
