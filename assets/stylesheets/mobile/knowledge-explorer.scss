@@ -4,6 +4,12 @@
       width: calc(100vw - 0.75em);
       margin: 0.625em 0;
     }
+
+    .knowledge-explorer-search-wrapper {
+      display: flex;
+      justify-content: center;
+    }
+
     .knowledge-explorer-search {
       font-size: $font-up-2;
       padding: 0.5em 0;
@@ -24,5 +30,28 @@
         flex-basis: 100%;
       }
     }
+  }
+
+  .knowledge-explorer-filters {
+    margin-top: 0;
+    background: $primary-very-low;
+    padding: 0 0.5em;
+    .knowledge-explorer-items:first-of-type {
+      margin-top: 1em;
+    }
+    + .knowledge-explorer-results {
+      margin-top: 2em;
+    }
+  }
+
+  .archetype-knowledge-explorer-topic {
+    .knowledge-explorer-filters {
+      display: none;
+    }
+  }
+
+  .knowledge-explorer-expander {
+    margin: 1em 0 0 0;
+    width: 100%;
   }
 }

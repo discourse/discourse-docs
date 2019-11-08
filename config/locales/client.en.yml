@@ -12,3 +12,4 @@ en:
       topic:
         back: "Go back"
         navigate_to_topic: "View the discussion on this topic"
+      filter_button: "Filters"

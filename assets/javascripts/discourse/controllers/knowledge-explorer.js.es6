@@ -1,4 +1,5 @@
 import { default as computed } from "ember-addons/ember-computed-decorators";
+import { on } from "discourse-common/utils/decorators";
 import KnowledgeExplorer from "discourse/plugins/discourse-knowledge-explorer/discourse/models/knowledge-explorer";
 
 function mergeCategories(results) {
@@ -33,6 +34,14 @@ export default Ember.Controller.extend({
   searchTerm: null,
   selectedTopic: null,
   topic: null,
+  expandedFilters: false,
+
+  @on("init")
+  _setupFilters() {
+    if (!this.site.mobileView) {
+      this.set("expandedFilters", true);
+    }
+  },
 
   @computed("loadMoreUrl")
   canLoadMore(loadMoreUrl) {
@@ -167,6 +176,14 @@ export default Ember.Controller.extend({
           isLoading: false
         });
       });
+    },
+
+    toggleFilters() {
+      if (!this.expandedFilters) {
+        this.set("expandedFilters", true);
+      } else {
+        this.set("expandedFilters", false);
+      }
     }
   }
 });
