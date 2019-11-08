@@ -61,6 +61,7 @@ module KnowledgeExplorer
       else
         offset = 0
         page_range = @limit
+        end_of_list = true if results_length < @limit
       end
 
       results = results[offset...page_range]
