@@ -1,9 +1,10 @@
-import { default as computed } from "ember-addons/ember-computed-decorators";
+import discourseComputed from "discourse-common/utils/decorators";
+import Category from "discourse/models/category";
 import { on } from "discourse-common/utils/decorators";
 import KnowledgeExplorer from "discourse/plugins/discourse-knowledge-explorer/discourse/models/knowledge-explorer";
 
 function mergeCategories(results) {
-  const categories = Discourse.Category.list();
+  const categories = Category.list();
   const topics = results.topics.topic_list.topics.map(t => {
     t.category = categories.findBy("id", t.category_id);
     return t;
@@ -43,7 +44,7 @@ export default Ember.Controller.extend({
     }
   },
 
-  @computed("loadMoreUrl")
+  @discourseComputed("loadMoreUrl")
   canLoadMore(loadMoreUrl) {
     if (loadMoreUrl === null || this.isLoadingMore) {
       return false;
@@ -51,19 +52,19 @@ export default Ember.Controller.extend({
     return true;
   },
 
-  @computed("searchTerm")
+  @discourseComputed("searchTerm")
   isSearching(searchTerm) {
     return !!searchTerm;
   },
 
-  @computed("isSearching", "topics")
+  @discourseComputed("isSearching", "topics")
   searchCount(isSearching, topics) {
     if (isSearching) return topics.length;
   },
 
   emptySearchResults: Ember.computed.equal("searchCount", 0),
 
-  @computed("filterTags")
+  @discourseComputed("filterTags")
   filtered(filterTags) {
     return !!filterTags;
   },

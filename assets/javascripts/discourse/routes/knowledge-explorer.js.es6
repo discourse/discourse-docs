@@ -1,3 +1,4 @@
+import Category from "discourse/models/category";
 import KnowledgeExplorer from "discourse/plugins/discourse-knowledge-explorer/discourse/models/knowledge-explorer";
 
 export default Ember.Route.extend({
@@ -12,7 +13,7 @@ export default Ember.Route.extend({
   },
 
   setupController(controller, model) {
-    const categories = Discourse.Category.list();
+    const categories = Category.list();
 
     let topics = model.topics.topic_list.topics;
 
