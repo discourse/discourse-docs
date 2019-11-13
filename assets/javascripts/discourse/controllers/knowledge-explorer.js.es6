@@ -44,6 +44,11 @@ export default Ember.Controller.extend({
     }
   },
 
+  @discourseComputed("topics")
+  emptyTopics(topics) {
+    return topics.length > 0 ? false : true;
+  },
+
   @discourseComputed("loadMoreUrl")
   canLoadMore(loadMoreUrl) {
     if (loadMoreUrl === null || this.isLoadingMore) {
