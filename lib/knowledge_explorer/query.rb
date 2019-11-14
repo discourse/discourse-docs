@@ -21,11 +21,11 @@ module KnowledgeExplorer
       tq = TopicQuery.new(@user)
       results = tq.latest_results(no_definitions: true, limit: false)
       results = results.left_outer_joins(:tags)
-      results = results.where('category_id IN (?)', Query.categories).or(results.where('tags.name IN (?)', Query.tags))
+      results = results.where('topics.category_id IN (?)', Query.categories).or(results.where('tags.name IN (?)', Query.tags))
 
       # filter results by selected category
       if @filters[:category].present?
-        results = results.where('category_id IN (?)', @filters[:category].split('|'))
+        results = results.where('topics.category_id IN (?)', @filters[:category].split('|'))
       end
 
       # filter results by selected tags
