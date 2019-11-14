@@ -24,6 +24,7 @@ export default Ember.Route.extend({
 
     model.topics.topic_list.topics = topics;
 
+    controller.set("topic", model.topic);
     controller.set("model", model);
   }
 });

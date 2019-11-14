@@ -1,5 +1,9 @@
 import { ajax } from "discourse/lib/ajax";
 
+function getTopic(id) {
+  return ajax(`/t/${id}.json`);
+}
+
 export default {
   list(params) {
     let filters = [];
@@ -9,14 +13,23 @@ export default {
     if (params.searchTerm) filters.push(`search=${params.searchTerm}`);
     if (params.page) filters.push(`page=${params.page}`);
 
-    return ajax(`/knowledge-explorer.json?${filters.join("&")}`);
+    let promise = ajax(`/knowledge-explorer.json?${filters.join("&")}`);
+
+    if (params.selectedTopic) {
+      promise = promise.then(data => {
+        return getTopic(params.selectedTopic).then(topic => {
+          data.topic = topic;
+          return data;
+        });
+      });
+    }
+
+    return promise;
   },
 
   loadMore(loadMoreUrl) {
     return ajax(loadMoreUrl);
   },
 
-  getTopic(id) {
-    return ajax(`/t/${id}.json`);
-  }
+  getTopic
 };
