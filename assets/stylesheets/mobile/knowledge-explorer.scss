@@ -1,10 +1,5 @@
 .mobile-view {
   .knowledge-explorer {
-    .knowledge-explorer-topic {
-      width: calc(100vw - 0.75em);
-      margin: 0.625em 0;
-    }
-
     .knowledge-explorer-search-wrapper {
       display: flex;
       justify-content: center;
@@ -28,6 +23,15 @@
       }
       .knowledge-explorer-topic-list {
         flex-basis: 100%;
+      }
+      .knowledge-explorer-topic-link {
+        padding-right: 0.25em;
+      }
+      .loading-container {
+        padding: .625em 0;
+      }
+      .knowledge-explorer-topic {
+        width: calc(100vw - 20px);
       }
     }
   }
