@@ -2,7 +2,7 @@
   <table class="topic-list">
     <thead>
       <th {{action "sortListTitle"}}>
-        Topic
+        {{i18n 'knowledge_explorer.column_titles.topic'}}
         {{#if sortTitle}}
           {{#if ascending}}
             {{d-icon 'angle-up'}}
@@ -12,7 +12,7 @@
         {{/if}}
       </th>
       <th {{action "sortListActivity"}}>
-        Activity
+        {{i18n 'knowledge_explorer.column_titles.activity'}}
         {{#if sortActivity}}
           {{#if ascending}}
             {{d-icon 'angle-up'}}

@@ -2,6 +2,9 @@ en:
   js:
     knowledge_explorer:
       title: "Knowledge Explorer"
+      column_titles:
+        topic: "Topic"
+        activity: "Activity"
       no_topics: "No topics in Knowledge Explorer."
       categories: "Categories"
       tags: "Tags"
