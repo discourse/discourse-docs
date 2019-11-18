@@ -48,9 +48,9 @@ export default Ember.Controller.extend({
     }
   },
 
-  @discourseComputed("topics")
-  emptyTopics(topics) {
-    return topics.length > 0 ? false : true;
+  @discourseComputed("topics", "isSearching")
+  emptyTopics(topics, isSearching) {
+    return topics.length === 0 && !isSearching ? true : false;
   },
 
   @discourseComputed("loadMoreUrl")
