@@ -18,8 +18,10 @@ function mergeCategories(results) {
 export default Ember.Controller.extend({
   application: Ember.inject.controller(),
   queryParams: {
+    ascending: "ascending",
     filterCategories: "category",
     filterTags: "tags",
+    orderColumn: "order",
     searchTerm: "search",
     selectedTopic: "topic"
   },
@@ -36,6 +38,8 @@ export default Ember.Controller.extend({
   selectedTopic: null,
   topic: null,
   expandedFilters: false,
+  ascending: null,
+  orderColumn: null,
 
   @on("init")
   _setupFilters() {
@@ -149,6 +153,21 @@ export default Ember.Controller.extend({
       this.send("refreshModel");
     },
 
+    sortBy(column) {
+      const order = this.orderColumn;
+      const ascending = this.ascending;
+      if (column === "title") {
+        this.set("orderColumn", "title");
+      } else if (column === "activity") {
+        this.set("orderColumn", "activity");
+      }
+
+      if (!ascending && order) this.set("ascending", true);
+      else this.set("ascending", "");
+
+      this.send("refreshModel");
+    },
+
     loadMore() {
       if (this.canLoadMore) {
         this.set("isLoadingMore", true);
@@ -172,7 +191,9 @@ export default Ember.Controller.extend({
       const params = this.getProperties(
         "filterCategories",
         "filterTags",
-        "searchTerm"
+        "searchTerm",
+        "ascending",
+        "orderColumn"
       );
 
       KnowledgeExplorer.list(params).then(result => {

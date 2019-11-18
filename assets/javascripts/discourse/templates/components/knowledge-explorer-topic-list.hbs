@@ -1,8 +1,26 @@
 {{#load-more selector=".topic-list tr" action=loadMore}}
   <table class="topic-list">
     <thead>
-      <th>Topic</th>
-      <th>Activity</th>
+      <th {{action "sortListTitle"}}>
+        Topic
+        {{#if sortTitle}}
+          {{#if ascending}}
+            {{d-icon 'angle-up'}}
+          {{else}}
+            {{d-icon 'angle-down'}}
+          {{/if}}
+        {{/if}}
+      </th>
+      <th {{action "sortListActivity"}}>
+        Activity
+        {{#if sortActivity}}
+          {{#if ascending}}
+            {{d-icon 'angle-up'}}
+          {{else}}
+            {{d-icon 'angle-down'}}
+          {{/if}}
+        {{/if}}
+      </th>
     </thead>
     <tbody>
       {{#each topics as |topic|}}

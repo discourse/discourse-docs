@@ -49,6 +49,20 @@ module KnowledgeExplorer
         results = results.where('lower(title) LIKE ?', "%#{@filters[:search_term].downcase}%")
       end
 
+      if @filters[:order] == "title"
+        if @filters[:ascending].present?
+          results = results.reorder('title')
+        else
+          results = results.reorder('title DESC')
+        end
+      elsif @filters[:order] == "activity"
+        if @filters[:ascending].present?
+          results = results.reorder('last_posted_at')
+        else
+          results = results.reorder('last_posted_at DESC')
+        end
+      end
+
       tags = tag_count(results)
       categories = categories_count(results)
 
@@ -120,6 +134,7 @@ module KnowledgeExplorer
       filters.push("tags=#{@filters[:tags]}") if @filters[:tags].present?
       filters.push("category=#{@filters[:category]}") if @filters[:category].present?
       filters.push("search=#{@filters[:search_term]}") if @filters[:search_term].present?
+      filters.push("sort=#{@filters[:sort]}") if @filters[:sort].present?
 
       if @filters[:page].present?
         filters.push("page=#{@filters[:page].to_i + 1}")

@@ -115,6 +115,18 @@
   .knowledge-explorer-topic-list {
     flex-basis: 100%;
 
+    th {
+      min-width: 5em;
+
+      &:hover {
+        background-color: $primary-low;
+      }
+
+      .d-icon {
+        vertical-align: middle;
+      }
+    }
+
     .badge-wrapper .badge-category .category-name {
       // extra protection for ultra-long category names
       max-width: 30vw;

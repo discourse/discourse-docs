@@ -62,6 +62,9 @@
             {{#unless emptySearchResults}}
               {{knowledge-explorer-topic-list
                 topics=topics
+                ascending=ascending
+                order=orderColumn
+                sortBy=(action "sortBy")
                 selectTopic=(action "setSelectedTopic")
                 loadMore=(action "loadMore")
                 loading=isLoadingMore

@@ -9,6 +9,8 @@ module KnowledgeExplorer
         tags: params[:tags],
         category: params[:category],
         search_term: params[:search],
+        ascending: params[:ascending],
+        order: params[:order],
         page: params[:page]
       }
 

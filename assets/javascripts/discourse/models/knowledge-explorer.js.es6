@@ -11,6 +11,8 @@ export default {
       filters.push(`category=${params.filterCategories}`);
     if (params.filterTags) filters.push(`tags=${params.filterTags}`);
     if (params.searchTerm) filters.push(`search=${params.searchTerm}`);
+    if (params.ascending) filters.push("ascending=true");
+    if (params.orderColumn) filters.push(`order=${params.orderColumn}`);
     if (params.page) filters.push(`page=${params.page}`);
 
     let promise = ajax(`/knowledge-explorer.json?${filters.join("&")}`);
