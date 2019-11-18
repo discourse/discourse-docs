@@ -1,11 +1,11 @@
 <div class="knowledge-explorer">
+  {{knowledge-explorer-search
+    searchTerm=(readonly searchTerm)
+    onSearch=(action "performSearch")
+  }}
   {{#if emptyTopics}}
     <span class="no-topics-found">{{i18n 'knowledge_explorer.no_topics'}}</span>
   {{else}}
-    {{knowledge-explorer-search
-      searchTerm=(readonly searchTerm)
-      onSearch=(action "performSearch")
-    }}
     {{#conditional-loading-spinner condition=isLoading}}
       <div class="knowledge-explorer-browse">
         {{#if site.mobileView}}
