@@ -10,7 +10,8 @@ export default {
         if (siteSettings.knowledge_explorer_enabled) {
           return {
             route: "knowledgeExplorer",
-            label: "knowledge_explorer.title"
+            label: "knowledge_explorer.title",
+            className: "knowledge-explorer-link"
           };
         }
       });
