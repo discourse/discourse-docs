@@ -13,7 +13,7 @@ export default Ember.Component.extend({
 
   debouncedSearch: debounce(function(term) {
     this.onSearch(term);
-  }, 250),
+  }, 500),
 
   actions: {
     onSearchTermChange(term) {
