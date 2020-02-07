@@ -36,7 +36,8 @@ module KnowledgeExplorer
 
         if tags_count == tag_filters.length
           tag_filters.each_with_index do |tag, index|
-            sql_alias = ['t', index].join
+            # to_i to make it clear this is not an injection
+            sql_alias = "t#{index.to_i}"
             results = results.joins("INNER JOIN topic_tags #{sql_alias} ON #{sql_alias}.topic_id = topics.id AND #{sql_alias}.tag_id = #{tag}")
           end
         else
@@ -46,7 +47,22 @@ module KnowledgeExplorer
 
       # filter results by search term
       if @filters[:search_term].present?
-        results = results.where('lower(title) LIKE ?', "%#{@filters[:search_term].downcase}%")
+        term = Search.prepare_data(@filters[:search_term])
+        escaped_ts_query = Search.ts_query(term: term)
+
+        results = results.where(<<~SQL)
+          topics.id IN (
+            SELECT pp.topic_id FROM post_search_data pd
+            JOIN posts pp ON pp.id = pd.post_id AND pp.post_number = 1
+            JOIN topics tt ON pp.topic_id = tt.id
+            WHERE
+              tt.id = topics.id AND
+              pp.deleted_at IS NULL AND
+              tt.deleted_at IS NULL AND
+              pp.post_type <> #{Post.types[:whisper].to_i} AND
+              pd.search_data @@ #{escaped_ts_query}
+          )
+        SQL
       end
 
       if @filters[:order] == "title"

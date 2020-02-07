@@ -3,10 +3,10 @@
 require 'rails_helper'
 
 describe KnowledgeExplorer::KnowledgeExplorerController do
-  let!(:category) { Fabricate(:category) }
-  let!(:topic) { Fabricate(:topic, category: category) }
-  let!(:topic2) { Fabricate(:topic, category: category) }
-  let!(:tag) { Fabricate(:tag, topics: [topic], name: 'test') }
+  fab!(:category) { Fabricate(:category) }
+  fab!(:topic) { Fabricate(:topic, category: category) }
+  fab!(:topic2) { Fabricate(:topic, category: category) }
+  fab!(:tag) { Fabricate(:tag, topics: [topic], name: 'test') }
 
   before do
     SiteSetting.tagging_enabled = true
@@ -100,15 +100,43 @@ describe KnowledgeExplorer::KnowledgeExplorerController do
     end
 
     context 'when searching' do
-      it 'should return a list filtered by search term in title' do
-        get "/knowledge-explorer.json?search=topic 1"
+      before do
+        SearchIndexer.enable
+      end
+
+      # no fab here otherwise will be missing from search
+      let!(:post) do
+        topic = Fabricate(:topic, title: "I love banana today", category: category)
+        Fabricate(:post, topic: topic, raw: "walking and running is fun")
+      end
+
+      let!(:post2) do
+        topic = Fabricate(:topic, title: "I love the amazing tomorrow", category: category)
+        Fabricate(:post, topic: topic, raw: "I also eat bananas")
+      end
+
+      it 'should correctly filter topics' do
+        get "/knowledge-explorer.json?search=banana"
 
         expect(response.status).to eq(200)
 
         json = JSON.parse(response.body)
         topics = json['topics']['topic_list']['topics']
 
+        # ordered by latest for now
+
+        expect(topics[0]["id"]).to eq(post2.topic_id)
+        expect(topics[1]["id"]).to eq(post.topic_id)
+
+        expect(topics.size).to eq(2)
+
+        get "/knowledge-explorer.json?search=walk"
+
+        json = JSON.parse(response.body)
+        topics = json['topics']['topic_list']['topics']
+
         expect(topics.size).to eq(1)
+
       end
     end
   end
