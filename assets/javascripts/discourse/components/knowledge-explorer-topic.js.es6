@@ -6,11 +6,20 @@ export default Ember.Component.extend({
 
   originalPostContent: reads("post.cooked"),
 
-  post: reads("topic.post_stream.posts.firstObject"),
+  post: computed("topic", function() {
+    return this.store.createRecord(
+      "post",
+      this.topic.post_stream.posts.firstObject
+    );
+  }),
 
   model: computed("post", "topic", function() {
     const post = this.post;
-    post.topic = this.topic;
+
+    if (!post.topic) {
+      post.set("topic", this.topic);
+    }
+
     return post;
   }),
 

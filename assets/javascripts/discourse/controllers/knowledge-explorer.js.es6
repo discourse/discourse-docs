@@ -1,5 +1,6 @@
 import discourseComputed from "discourse-common/utils/decorators";
 import Category from "discourse/models/category";
+import Topic from "discourse/models/topic";
 import { on } from "discourse-common/utils/decorators";
 import KnowledgeExplorer from "discourse/plugins/discourse-knowledge-explorer/discourse/models/knowledge-explorer";
 
@@ -87,7 +88,7 @@ export default Ember.Controller.extend({
 
       KnowledgeExplorer.getTopic(topicId).then(result => {
         this.setProperties({
-          topic: result,
+          topic: Topic.create(result),
           isTopicLoading: false
         });
       });

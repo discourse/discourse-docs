@@ -1,4 +1,5 @@
 import { ajax } from "discourse/lib/ajax";
+import Topic from "discourse/models/topic";
 
 function getTopic(id) {
   return ajax(`/t/${id}.json`);
@@ -20,7 +21,7 @@ export default {
     if (params.selectedTopic) {
       promise = promise.then(data => {
         return getTopic(params.selectedTopic).then(topic => {
-          data.topic = topic;
+          data.topic = Topic.create(topic);
           return data;
         });
       });
