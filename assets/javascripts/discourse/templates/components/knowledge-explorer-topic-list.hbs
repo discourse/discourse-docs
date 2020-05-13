@@ -27,6 +27,14 @@
       <tr>
         <td class="main-link">
           <span class="link-top-line">
+            <div class="topic-statuses">
+              {{#if topic.closed}}
+                <span title={{i18n 'topic_statuses.locked.help'}} class="topic-status">{{d-icon 'lock'}}</span>
+              {{/if}}
+              {{#unless topic.visible}}
+                <span title={{i18n 'topic_statuses.unlisted.help'}} class="topic-status">{{d-icon 'far-eye-slash'}}</span>
+              {{/unless}}
+            </div>
             {{knowledge-explorer-topic-link
               topic=topic
               selectTopic=selectTopic
