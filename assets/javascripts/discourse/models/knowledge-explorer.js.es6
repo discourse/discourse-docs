@@ -26,6 +26,15 @@ export default {
         });
       });
     }
+    else {
+      promise = promise.then(data => {
+        data.topics.topic_list.topics = data.topics.topic_list.topics.map(topic => {
+           topic = Topic.create(topic);
+           return topic;
+        });
+        return data;     
+      });
+    }
 
     return promise;
   },
