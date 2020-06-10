@@ -24,26 +24,7 @@
     </thead>
     <tbody>
       {{#each topics as |topic|}}
-      <tr>
-        <td class="main-link">
-          <span class="link-top-line">
-            {{topic-status topic=topic}}
-            {{knowledge-explorer-topic-link
-              topic=topic
-              selectTopic=selectTopic
-            }}
-          </span>
-          <span class="link-bottom-line">
-            {{category-link topic.category}}
-            {{#each topic.tags as |tag|}}
-              <span class="discourse-tag">{{tag}}</span>
-            {{/each}}
-          </span>
-        </td>
-        <td>
-          {{format-date topic.bumped_at format="tiny" noTitle="true"}}
-        </td>
-      </tr>
+        {{raw "knowledge-explorer-topic-list-item" topic=topic}}
       {{/each}}
     </tbody>
   </table>
