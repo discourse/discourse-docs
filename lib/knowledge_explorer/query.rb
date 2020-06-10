@@ -125,6 +125,10 @@ module KnowledgeExplorer
         end
       end
 
+      allowed_tags = DiscourseTagging.filter_allowed_tags(Guardian.new(@user)).map(&:name)
+
+      tags = tags.select { |tag| allowed_tags.include?(tag[:id]) }
+
       tags.sort_by { |tag| [tag[:active] ? 0 : 1, -tag[:count]] }
     end
 
