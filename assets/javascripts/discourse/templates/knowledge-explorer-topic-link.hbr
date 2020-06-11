@@ -1,1 +1,1 @@
-<a href="/knowledge-explorer?topic={{topic.id}}" class="knowledge-explorer-topic-link">{{topic.title}}</a>
+<a data-topic-id="{{topic.id}}" class="knowledge-explorer-topic-link">{{topic.title}}</a>

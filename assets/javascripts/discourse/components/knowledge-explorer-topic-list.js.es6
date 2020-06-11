@@ -12,6 +12,15 @@ export default Ember.Component.extend({
     return order === "activity";
   },
 
+  didInsertElement() {
+    document
+      .querySelector(".knowledge-explorer-topic-link")
+      .addEventListener("click", e => {
+        const topicId = e.currentTarget.attributes["data-topic-id"].value;
+        this.selectTopic(topicId);
+      });
+  },
+
   actions: {
     sortListActivity() {
       this.sortBy("activity");
