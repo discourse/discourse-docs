@@ -132,12 +132,13 @@
       max-width: 30vw;
     }
 
+    .discourse-tags {
+      font-weight: normal;
+      font-size: $font-down-1;
+    }
     .knowledge-explorer-topic-link {
       color: $tertiary;
       cursor: pointer;
-    }
-    .discourse-tag {
-      padding-right: 5px;
     }
   }
   .knowledge-explorer-topic {
