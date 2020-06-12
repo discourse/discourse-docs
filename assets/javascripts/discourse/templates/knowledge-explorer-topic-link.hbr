@@ -1,0 +1,1 @@
+<a data-topic-id="{{topic.id}}" class="knowledge-explorer-topic-link">{{{topic.fancyTitle}}}</a>

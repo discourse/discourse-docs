@@ -12,6 +12,20 @@ export default Ember.Component.extend({
     return order === "activity";
   },
 
+  // need to handle clicks here since links are in a raw view
+  didInsertElement() {
+    const topicLinks = this.element.getElementsByClassName(
+      "knowledge-explorer-topic-link"
+    );
+
+    for (let i = 0, max = topicLinks.length; i < max; i++) {
+      topicLinks[i].addEventListener("click", e => {
+        const topicId = e.target.dataset.topicId;
+        this.selectTopic(topicId);
+      });
+    }
+  },
+
   actions: {
     sortListActivity() {
       this.sortBy("activity");
