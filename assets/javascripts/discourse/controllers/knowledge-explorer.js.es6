@@ -22,6 +22,7 @@ export default Ember.Controller.extend({
     ascending: "ascending",
     filterCategories: "category",
     filterTags: "tags",
+    filterSolved: "solved",
     orderColumn: "order",
     searchTerm: "search",
     selectedTopic: "topic"
@@ -35,6 +36,7 @@ export default Ember.Controller.extend({
   tags: Ember.computed.readOnly("model.tags"),
   filterTags: null,
   filterCategories: null,
+  filterSolved: false,
   searchTerm: null,
   selectedTopic: null,
   topic: null,
@@ -74,6 +76,11 @@ export default Ember.Controller.extend({
 
   emptySearchResults: Ember.computed.equal("searchCount", 0),
 
+  @discourseComputed
+  canFilterSolved() {
+    return this.siteSettings.solved_enabled;
+  },
+
   @discourseComputed("filterTags")
   filtered(filterTags) {
     return !!filterTags;
@@ -92,6 +99,11 @@ export default Ember.Controller.extend({
           isTopicLoading: false
         });
       });
+    },
+
+    onChangeFilterSolved(solvedFilter) {
+      this.set("filterSolved", solvedFilter);
+      this.send("refreshModel");
     },
 
     updateSelectedTags(tag) {
@@ -192,6 +204,7 @@ export default Ember.Controller.extend({
       const params = this.getProperties(
         "filterCategories",
         "filterTags",
+        "filterSolved",
         "searchTerm",
         "ascending",
         "orderColumn"

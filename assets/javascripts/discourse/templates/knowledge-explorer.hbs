@@ -15,6 +15,19 @@
       {{/if}}
       <div class="knowledge-explorer-filters">
         {{#if expandedFilters}}
+            {{#if canFilterSolved}}
+              <div class="knowledge-explorer-items knowledge-explorer-solved">
+                <label class="checkbox-label knowledge-explorer-item">
+                  {{input
+                    type="checkbox"
+                    checked=(readonly filterSolved)
+                    change=(action "onChangeFilterSolved" value="target.checked")
+                  }}
+                  {{i18n "knowledge_explorer.filter_solved"}} 
+                </label>
+              </div>
+
+            {{/if}}
             {{#if categories}}
               <div class="knowledge-explorer-items knowledge-explorer-categories">
                 <h3>{{i18n 'knowledge_explorer.categories'}}</h3>

@@ -8,6 +8,7 @@ module KnowledgeExplorer
       filters = {
         tags: params[:tags],
         category: params[:category],
+        solved: params[:solved],
         search_term: params[:search],
         ascending: params[:ascending],
         order: params[:order],

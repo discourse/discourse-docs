@@ -45,6 +45,15 @@ module KnowledgeExplorer
         end
       end
 
+      if @filters[:solved].present?
+        results = results.where("topics.id IN (
+          SELECT tc.topic_id
+          FROM topic_custom_fields tc
+          WHERE tc.name = 'accepted_answer_post_id' AND
+                          tc.value IS NOT NULL
+        )")
+      end
+
       # filter results by search term
       if @filters[:search_term].present?
         term = Search.prepare_data(@filters[:search_term])
@@ -153,6 +162,7 @@ module KnowledgeExplorer
 
       filters.push("tags=#{@filters[:tags]}") if @filters[:tags].present?
       filters.push("category=#{@filters[:category]}") if @filters[:category].present?
+      filters.push("solved=#{@filters[:solved]}") if @filters[:solved].present?
       filters.push("search=#{@filters[:search_term]}") if @filters[:search_term].present?
       filters.push("sort=#{@filters[:sort]}") if @filters[:sort].present?
 
