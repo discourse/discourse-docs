@@ -58,10 +58,7 @@ export default Ember.Controller.extend({
 
   @discourseComputed("loadMoreUrl")
   canLoadMore(loadMoreUrl) {
-    if (loadMoreUrl === null || this.isLoadingMore) {
-      return false;
-    }
-    return true;
+    return loadMoreUrl === null ? false : true;
   },
 
   @discourseComputed("searchTerm")
@@ -69,9 +66,9 @@ export default Ember.Controller.extend({
     return !!searchTerm;
   },
 
-  @discourseComputed("isSearching", "topics")
-  searchCount(isSearching, topics) {
-    if (isSearching) return topics.length;
+  @discourseComputed("isSearching", "model")
+  searchCount(isSearching, model) {
+    if (isSearching) return model.search_count;
   },
 
   emptySearchResults: Ember.computed.equal("searchCount", 0),
@@ -182,7 +179,7 @@ export default Ember.Controller.extend({
     },
 
     loadMore() {
-      if (this.canLoadMore) {
+      if (this.canLoadMore && !this.isLoadingMore) {
         this.set("isLoadingMore", true);
 
         KnowledgeExplorer.loadMore(this.loadMoreUrl).then(result => {
