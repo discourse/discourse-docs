@@ -72,7 +72,7 @@ module KnowledgeExplorer
               pd.search_data @@ #{escaped_ts_query}
           )
         SQL
-        search_count = results.count
+        search_count = results.size
       end
 
       if @filters[:order] == "title"
@@ -99,7 +99,7 @@ module KnowledgeExplorer
       categories = results.where('topics.category_id IS NOT NULL').group('topics.category_id').count
       categories = create_categories_object(categories)
 
-      results_length = results.length
+      results_length = results.size
 
       if @filters[:page]
         offset = @filters[:page].to_i * @limit
