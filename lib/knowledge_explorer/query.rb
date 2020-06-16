@@ -88,8 +88,10 @@ module KnowledgeExplorer
         end
       end
 
-      tags = tag_count(results)
-      categories = categories_count(results)
+      tags = results.where("tags.name IS NOT NULL").group("tags.name").count
+      tags = create_tags_object(tags)
+      categories = results.where('topics.category_id IS NOT NULL').group('topics.category_id').count
+      categories = create_categories_object(categories)
 
       results_length = results.length
 
@@ -103,7 +105,7 @@ module KnowledgeExplorer
         end_of_list = true if results_length < @limit
       end
 
-      results = results[offset...page_range]
+      results = results.offset(offset).limit(@limit) #results[offset...page_range]
 
       # assemble the object
       topic_query = tq.create_list(:knowledge_explorer, { unordered: true }, results)
@@ -119,42 +121,30 @@ module KnowledgeExplorer
       { tags: tags, categories: categories, topics: topic_list }
     end
 
-    def tag_count(results)
-      tags = []
+    def create_tags_object(tags)
+      tags_object = []
 
-      results.each do |topic|
-        topic.tags.each do |tag|
-          active = @filters[:tags].include?(tag.name) if @filters[:tags]
-          if tags.none? { |item| item[:id].to_s == tag.name }
-            tags << { id: tag.name, count: 1, active: active || false }
-          else
-            tag_index = tags.index(tags.find { |item| item[:id].to_s == tag.name })
-            tags[tag_index][:count] += 1
-          end
-        end
+      tags.each do |tag|
+        active = @filters[:tags].include?(tag[0]) if @filters[:tags]
+        tags_object << { id: tag[0], count: tag[1], active: active || false }
       end
 
       allowed_tags = DiscourseTagging.filter_allowed_tags(Guardian.new(@user)).map(&:name)
 
-      tags = tags.select { |tag| allowed_tags.include?(tag[:id]) }
+      tags_object = tags_object.select { |tag| allowed_tags.include?(tag[:id]) }
 
-      tags.sort_by { |tag| [tag[:active] ? 0 : 1, -tag[:count]] }
+      tags_object.sort_by { |tag| [tag[:active] ? 0 : 1, -tag[:count]] }
     end
 
-    def categories_count(results)
-      categories = []
+    def create_categories_object(categories)
+      categories_object = []
 
-      results.each do |topic|
-        active = @filters[:category].include?(topic.category_id.to_s) if @filters[:category]
-        if categories.none? { |item| item[:id] == topic.category_id }
-          categories << { id: topic.category_id, count: 1, active: active || false }
-        else
-          category_index = categories.index(categories.find { |item| item[:id] == topic.category_id })
-          categories[category_index][:count] += 1
-        end
+      categories.each do |category|
+        active = @filters[:category].include?(category[0].to_s) if @filters[:category]
+        categories_object << { id: category[0], count: category[1], active: active || false }
       end
 
-      categories.sort_by { |category| [category[:active] ? 0 : 1, -category[:count]] }
+      categories_object.sort_by { |category| [category[:active] ? 0 : 1, -category[:count]] }
     end
 
     def load_more_url
