@@ -66,9 +66,9 @@ export default Ember.Controller.extend({
     return !!searchTerm;
   },
 
-  @discourseComputed("isSearching", "topics")
-  searchCount(isSearching, topics) {
-    if (isSearching) return topics.length;
+  @discourseComputed("isSearching", "model")
+  searchCount(isSearching, model) {
+    if (isSearching) return model.search_count;
   },
 
   emptySearchResults: Ember.computed.equal("searchCount", 0),

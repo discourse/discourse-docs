@@ -72,6 +72,7 @@ module KnowledgeExplorer
               pd.search_data @@ #{escaped_ts_query}
           )
         SQL
+        search_count = results.count
       end
 
       if @filters[:order] == "title"
@@ -118,7 +119,7 @@ module KnowledgeExplorer
         topic_list['load_more_url'] = nil
       end
 
-      { tags: tags, categories: categories, topics: topic_list }
+      { tags: tags, categories: categories, topics: topic_list, search_count: search_count }
     end
 
     def create_tags_object(tags)
