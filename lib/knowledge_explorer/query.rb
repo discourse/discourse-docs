@@ -89,7 +89,12 @@ module KnowledgeExplorer
         end
       end
 
-      tags = results.where("tags.name IS NOT NULL").group("tags.name").count
+      # conduct a second set of joins so we don't mess up the count
+      count_query = results.joins <<~SQL
+        INNER JOIN topic_tags tt2 ON tt2.topic_id = topics.id
+        INNER JOIN tags t2 ON t2.id = tt2.tag_id
+      SQL
+      tags = count_query.group('t2.name').count
       tags = create_tags_object(tags)
       categories = results.where('topics.category_id IS NOT NULL').group('topics.category_id').count
       categories = create_categories_object(categories)
