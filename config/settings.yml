@@ -7,6 +7,6 @@ plugins:
     default: ""
     client: true
   knowledge_explorer_tags:
-    type: list
+    type: tag_list
     default: ""
     client: true
