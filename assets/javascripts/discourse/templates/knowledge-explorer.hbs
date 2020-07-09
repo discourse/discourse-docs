@@ -59,8 +59,8 @@
         {{/conditional-loading-spinner}}
       {{else}}
         <div class="knowledge-explorer-results">
-          {{#if isSearching}}
-            {{#if emptySearchResults}}
+          {{#if isSearchingOrFiltered}}
+            {{#if emptyResults}}
               <div class="result-count no-result">
                 {{i18n 'search.no_results'}}
               </div>
@@ -72,7 +72,7 @@
               </div>
             {{/if}}
           {{/if}}
-          {{#unless emptySearchResults}}
+          {{#unless emptyResults}}
             {{knowledge-explorer-topic-list
               topics=topics
               ascending=ascending
