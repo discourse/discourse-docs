@@ -10,3 +10,6 @@ plugins:
     type: tag_list
     default: ""
     client: true
+  knowledge_explorer_add_solved_filter:
+    default: false
+    client: true

@@ -3,3 +3,4 @@ en:
     knowledge_explorer_enabled: "Enable the Knowledge Explorer Plugin"
     knowledge_explorer_categories: "A list of category slugs to include in the knowledge explorer"
     knowledge_explorer_tags: "A list of tags to include in the knowledge explorer"
+    knowledge_explorer_add_solved_filter: "Adds a filter for solved topics -- requires Discourse Solved to be installed and enabled"
