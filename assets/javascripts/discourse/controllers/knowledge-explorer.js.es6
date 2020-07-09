@@ -75,7 +75,10 @@ export default Ember.Controller.extend({
 
   @discourseComputed
   canFilterSolved() {
-    return this.siteSettings.solved_enabled && this.siteSettings.knowledge_explorer_add_solved_filter;
+    return (
+      this.siteSettings.solved_enabled &&
+      this.siteSettings.knowledge_explorer_add_solved_filter
+    );
   },
 
   @discourseComputed("filterTags")
