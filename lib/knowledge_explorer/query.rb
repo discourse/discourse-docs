@@ -168,7 +168,7 @@ module KnowledgeExplorer
         filters.push('page=1')
       end
 
-      "/knowledge-explorer.json?#{filters.join('&')}"
+      "/e.json?#{filters.join('&')}"
     end
   end
 end

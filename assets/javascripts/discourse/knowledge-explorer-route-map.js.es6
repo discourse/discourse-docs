@@ -1,3 +1,3 @@
 export default function() {
-  this.route("knowledgeExplorer", { path: "/knowledge-explorer" });
+  this.route("knowledgeExplorer", { path: "/e" });
 }

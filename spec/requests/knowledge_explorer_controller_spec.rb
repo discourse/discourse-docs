@@ -18,7 +18,7 @@ describe KnowledgeExplorer::KnowledgeExplorerController do
   describe 'knowledge explorer data' do
     context 'when any user' do
       it 'should return the right response' do
-        get '/knowledge-explorer.json'
+        get '/e.json'
 
         expect(response.status).to eq(200)
 
@@ -41,7 +41,7 @@ describe KnowledgeExplorer::KnowledgeExplorerController do
       end
 
       it 'should not show topics in private categories without permissions' do
-        get '/knowledge-explorer.json'
+        get '/e.json'
 
         json = JSON.parse(response.body)
         topics = json['topics']['topic_list']['topics']
@@ -53,7 +53,7 @@ describe KnowledgeExplorer::KnowledgeExplorerController do
         admin = Fabricate(:admin)
         sign_in(admin)
 
-        get '/knowledge-explorer.json'
+        get '/e.json'
 
         json = JSON.parse(response.body)
         topics = json['topics']['topic_list']['topics']
@@ -64,7 +64,7 @@ describe KnowledgeExplorer::KnowledgeExplorerController do
 
     context 'when filtering by tag' do
       it 'should return a list filtered by tag' do
-        get '/knowledge-explorer.json?tags=test'
+        get '/e.json?tags=test'
 
         expect(response.status).to eq(200)
 
@@ -86,7 +86,7 @@ describe KnowledgeExplorer::KnowledgeExplorerController do
       end
 
       it 'should return a list filtered by category' do
-        get "/knowledge-explorer.json?category=#{category2.id}"
+        get "/e.json?category=#{category2.id}"
 
         expect(response.status).to eq(200)
 
@@ -116,7 +116,7 @@ describe KnowledgeExplorer::KnowledgeExplorerController do
       end
 
       it 'should correctly filter topics' do
-        get "/knowledge-explorer.json?search=banana"
+        get "/e.json?search=banana"
 
         expect(response.status).to eq(200)
 
@@ -130,7 +130,7 @@ describe KnowledgeExplorer::KnowledgeExplorerController do
 
         expect(topics.size).to eq(2)
 
-        get "/knowledge-explorer.json?search=walk"
+        get "/e.json?search=walk"
 
         json = JSON.parse(response.body)
         topics = json['topics']['topic_list']['topics']
