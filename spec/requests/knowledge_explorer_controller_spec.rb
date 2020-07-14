@@ -18,7 +18,7 @@ describe KnowledgeExplorer::KnowledgeExplorerController do
   describe 'knowledge explorer data' do
     context 'when any user' do
       it 'should return the right response' do
-        get '/e.json'
+        get '/docs.json'
 
         expect(response.status).to eq(200)
 
@@ -41,7 +41,7 @@ describe KnowledgeExplorer::KnowledgeExplorerController do
       end
 
       it 'should not show topics in private categories without permissions' do
-        get '/e.json'
+        get '/docs.json'
 
         json = JSON.parse(response.body)
         topics = json['topics']['topic_list']['topics']
@@ -53,7 +53,7 @@ describe KnowledgeExplorer::KnowledgeExplorerController do
         admin = Fabricate(:admin)
         sign_in(admin)
 
-        get '/e.json'
+        get '/docs.json'
 
         json = JSON.parse(response.body)
         topics = json['topics']['topic_list']['topics']
@@ -64,7 +64,7 @@ describe KnowledgeExplorer::KnowledgeExplorerController do
 
     context 'when filtering by tag' do
       it 'should return a list filtered by tag' do
-        get '/e.json?tags=test'
+        get '/docs.json?tags=test'
 
         expect(response.status).to eq(200)
 
@@ -86,7 +86,7 @@ describe KnowledgeExplorer::KnowledgeExplorerController do
       end
 
       it 'should return a list filtered by category' do
-        get "/e.json?category=#{category2.id}"
+        get "/docs.json?category=#{category2.id}"
 
         expect(response.status).to eq(200)
 
@@ -116,7 +116,7 @@ describe KnowledgeExplorer::KnowledgeExplorerController do
       end
 
       it 'should correctly filter topics' do
-        get "/e.json?search=banana"
+        get "/docs.json?search=banana"
 
         expect(response.status).to eq(200)
 
@@ -130,7 +130,7 @@ describe KnowledgeExplorer::KnowledgeExplorerController do
 
         expect(topics.size).to eq(2)
 
-        get "/e.json?search=walk"
+        get "/docs.json?search=walk"
 
         json = JSON.parse(response.body)
         topics = json['topics']['topic_list']['topics']

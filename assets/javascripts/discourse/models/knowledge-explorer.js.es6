@@ -17,7 +17,7 @@ export default {
     if (params.orderColumn) filters.push(`order=${params.orderColumn}`);
     if (params.page) filters.push(`page=${params.page}`);
 
-    let promise = ajax(`/e.json?${filters.join("&")}`);
+    let promise = ajax(`/docs.json?${filters.join("&")}`);
 
     if (params.selectedTopic) {
       promise = promise.then(data => {

@@ -6,8 +6,8 @@ module ::KnowledgeExplorer
 
     config.after_initialize do
       Discourse::Application.routes.append do
-        mount ::KnowledgeExplorer::Engine, at: '/e'
-        get '/knowledge-explorer', to: redirect("/e")
+        mount ::KnowledgeExplorer::Engine, at: '/docs'
+        get '/knowledge-explorer', to: redirect("/docs")
       end
     end
   end
