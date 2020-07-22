@@ -15,6 +15,8 @@ export default {
           };
         }
       });
+
+      api.addKeyboardShortcut("g e", "", { path: "/docs" });
     });
   }
 };
