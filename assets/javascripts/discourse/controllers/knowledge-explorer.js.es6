@@ -109,6 +109,8 @@ export default Ember.Controller.extend({
         selectedTopic: topicId
       });
 
+      window.scrollTo(0, 0);
+
       KnowledgeExplorer.getTopic(topicId).then(result => {
         this.setProperties({
           topic: Topic.create(result),

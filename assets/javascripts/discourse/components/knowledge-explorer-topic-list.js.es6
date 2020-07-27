@@ -13,7 +13,7 @@ export default Ember.Component.extend({
   },
 
   // need to handle clicks here since links are in a raw view
-  didInsertElement() {
+  didRender() {
     const topicLinks = this.element.getElementsByClassName(
       "knowledge-explorer-topic-link"
     );
