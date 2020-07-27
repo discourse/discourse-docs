@@ -1,0 +1,20 @@
+el:
+  js:
+    knowledge_explorer:
+      title: "Βάση Γνώσεων"
+      column_titles:
+        topic: "Νήμα"
+        activity: "Δραστηριότητα"
+      no_topics: "Δεν βρέθηκαν νήματα στην βάση γνώσεων."
+      categories: "Κατηγορίες"
+      tags: "Ετικέτες"
+      search:
+        results:
+          one: "Βρέθηκε %{count} νήμα"
+          other: "%{count} νήματα βρέθηκαν"
+        placeholder: "Αναζήτηση για νήματα"
+      topic:
+        back: "Πίσω"
+        navigate_to_topic: "Δες την συζήτηση για αυτό το νήμα"
+      filter_button: "Φίλτρα"
+      filter_solved: "Επιλύθηκε;"
