@@ -6,7 +6,7 @@
     right: 0.75em;
     top: 25%;
     font-size: 1.5em;
-    color: $primary-low-mid;
+    color: var(--primary-low-mid, $primary-low-mid);
     pointer-events: none;
     @media screen and (max-width: 400px) {
       // Just decoration, remove on small screens
@@ -17,7 +17,7 @@
 
 .knowledge-explorer-search {
   align-items: center;
-  background-color: $primary-very-low;
+  background-color: var(--primary-very-low, $primary-very-low);
   display: flex;
   justify-content: center;
   padding: 1.5em 1em;
@@ -61,7 +61,7 @@
     padding: 0.57em 1em 1em 0;
 
     a {
-      color: $primary;
+      color: var(--primary, $primary);
       white-space: nowrap;
     }
 
@@ -72,7 +72,7 @@
 
     .knowledge-explorer-item-count {
       margin-left: auto;
-      color: $primary-high;
+      color: var(--primary-high, $primary-high);
       font-size: $font-down-1;
     }
 
@@ -86,19 +86,19 @@
         height: 1em;
         padding-bottom: 0.15em;
         margin-right: 0.25em;
-        color: $primary-high;
+        color: var(--primary-high, $primary-high);
         &.d-icon-plus {
           height: 0.75em;
           margin-right: 0.25em;
         }
       }
       &:hover {
-        background: $highlight-medium;
+        background: var(--highlight-medium, $highlight-medium);
       }
       &.selected:hover {
-        background: $danger-low;
+        background: var(--danger-low, $danger-low);
         .d-icon {
-          color: $danger;
+          color: var(--danger, $danger);
         }
       }
       .tag-id,
@@ -119,7 +119,7 @@
       min-width: 5em;
 
       &:hover {
-        background-color: $primary-low;
+        background-color: var(--primary-low, $primary-low);
       }
 
       .d-icon {
@@ -137,7 +137,7 @@
       font-size: $font-down-1;
     }
     .knowledge-explorer-topic-link {
-      color: $tertiary;
+      color: var(--tertiary, $tertiary);
       cursor: pointer;
     }
   }

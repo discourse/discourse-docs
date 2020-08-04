@@ -38,7 +38,7 @@
 
   .knowledge-explorer-filters {
     margin-top: 0;
-    background: $primary-very-low;
+    background: var(--primary-very-low, $primary-very-low);
     padding: 0 0.5em;
     .knowledge-explorer-items:first-of-type {
       margin-top: 1em;
