@@ -1,4 +1,5 @@
 <div class="knowledge-explorer">
+  {{plugin-outlet name="before-knowledge-explorer-search"}}
   {{knowledge-explorer-search
     searchTerm=(readonly searchTerm)
     onSearch=(action "performSearch")
