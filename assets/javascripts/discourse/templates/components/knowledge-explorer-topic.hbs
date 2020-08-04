@@ -1,6 +1,8 @@
-{{#link-to 'knowledgeExplorer' (query-params topic=null) class='knowledge-explorer-nav-link return'}}
-  {{i18n 'knowledge_explorer.topic.back'}}
-{{/link-to}}
+{{d-button
+  label="knowledge_explorer.topic.back"
+  class="knowledge-explorer-nav-link return"
+  action=return
+}}
 
 <div class="topic-content">
   <h1>{{topic.title}}</h1>

@@ -147,7 +147,12 @@
     .knowledge-explorer-nav-link {
       font-weight: 700;
       &.return {
+        align-items: center;
+        background: none;
+        color: $tertiary;
+        display: inline-flex;
         font-size: $font-down-1;
+        padding: 0;
         &::before {
           content: "«";
           margin-right: 5px;

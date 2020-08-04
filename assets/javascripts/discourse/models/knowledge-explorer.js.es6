@@ -2,7 +2,7 @@ import { ajax } from "discourse/lib/ajax";
 import Topic from "discourse/models/topic";
 
 function getTopic(id) {
-  return ajax(`/t/${id}.json`);
+  return ajax(`/t/${id}.json?ke=true`);
 }
 
 export default {

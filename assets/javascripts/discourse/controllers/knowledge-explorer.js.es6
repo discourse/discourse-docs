@@ -3,6 +3,7 @@ import Category from "discourse/models/category";
 import Topic from "discourse/models/topic";
 import { on } from "discourse-common/utils/decorators";
 import KnowledgeExplorer from "discourse/plugins/discourse-knowledge-explorer/discourse/models/knowledge-explorer";
+import { getOwner } from "@ember/application";
 
 function mergeCategories(results) {
   const categories = Category.list();
@@ -243,6 +244,14 @@ export default Ember.Controller.extend({
       } else {
         this.set("expandedFilters", false);
       }
+    },
+
+    returnToList() {
+      this.set("selectedTopic", null);
+      getOwner(this)
+        .lookup("router:main")
+        .transitionTo("knowledgeExplorer");
+      this.send("refreshModel");
     }
   }
 });

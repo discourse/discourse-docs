@@ -55,7 +55,7 @@
       </div>
       {{#if selectedTopic}}
         {{#conditional-loading-spinner condition=isTopicLoading}}
-          {{knowledge-explorer-topic topic=topic}}
+          {{knowledge-explorer-topic topic=topic return=(action "returnToList")}}
         {{/conditional-loading-spinner}}
       {{else}}
         <div class="knowledge-explorer-results">
