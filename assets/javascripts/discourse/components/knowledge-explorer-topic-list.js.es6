@@ -14,9 +14,10 @@ export default Ember.Component.extend({
 
   // need to handle clicks here since links are in a raw view
   click(e) {
-    if (e.target.className === "knowledge-explorer-topic-link") {
+    if (e.target.classList.contains("knowledge-explorer-topic-link")) {
       const topicId = e.target.dataset.topicId;
       this.selectTopic(topicId);
+      return false;
     }
   },
 
