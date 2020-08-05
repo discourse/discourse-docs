@@ -139,6 +139,9 @@
     .knowledge-explorer-topic-link {
       color: var(--tertiary, $tertiary);
       cursor: pointer;
+      & > * {
+        pointer-events: none;
+      }
     }
   }
   .knowledge-explorer-topic {
