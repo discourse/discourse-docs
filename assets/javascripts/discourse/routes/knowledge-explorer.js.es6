@@ -4,8 +4,8 @@ import KnowledgeExplorer from "discourse/plugins/discourse-knowledge-explorer/di
 export default Ember.Route.extend({
   queryParams: {
     searchTerm: {
-      replace: true
-    }
+      replace: true,
+    },
   },
 
   model(params) {
@@ -17,7 +17,7 @@ export default Ember.Route.extend({
 
     let topics = model.topics.topic_list.topics;
 
-    topics = topics.map(t => {
+    topics = topics.map((t) => {
       t.category = categories.findBy("id", t.category_id);
       return t;
     });
@@ -26,5 +26,5 @@ export default Ember.Route.extend({
 
     controller.set("topic", model.topic);
     controller.set("model", model);
-  }
+  },
 });

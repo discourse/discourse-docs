@@ -29,6 +29,6 @@ export default Ember.Component.extend({
     sortListTitle() {
       this.sortBy("title");
       return false;
-    }
-  }
+    },
+  },
 });

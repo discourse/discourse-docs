@@ -7,7 +7,7 @@ import { getOwner } from "@ember/application";
 
 function mergeCategories(results) {
   const categories = Category.list();
-  const topics = results.topics.topic_list.topics.map(t => {
+  const topics = results.topics.topic_list.topics.map((t) => {
     t.category = categories.findBy("id", t.category_id);
     return t;
   });
@@ -26,7 +26,7 @@ export default Ember.Controller.extend({
     filterSolved: "solved",
     orderColumn: "order",
     searchTerm: "search",
-    selectedTopic: "topic"
+    selectedTopic: "topic",
   },
   isLoading: false,
   isLoadingMore: false,
@@ -107,15 +107,15 @@ export default Ember.Controller.extend({
     setSelectedTopic(topicId) {
       this.setProperties({
         isTopicLoading: true,
-        selectedTopic: topicId
+        selectedTopic: topicId,
       });
 
       window.scrollTo(0, 0);
 
-      KnowledgeExplorer.getTopic(topicId).then(result => {
+      KnowledgeExplorer.getTopic(topicId).then((result) => {
         this.setProperties({
           topic: Topic.create(result),
-          isTopicLoading: false
+          isTopicLoading: false,
         });
       });
     },
@@ -140,7 +140,7 @@ export default Ember.Controller.extend({
 
       this.setProperties({
         filterTags: filter,
-        selectedTopic: null
+        selectedTopic: null,
       });
 
       this.send("refreshModel");
@@ -160,7 +160,7 @@ export default Ember.Controller.extend({
 
       this.setProperties({
         filterCategories: filter,
-        selectedTopic: null
+        selectedTopic: null,
       });
 
       this.send("refreshModel");
@@ -179,7 +179,7 @@ export default Ember.Controller.extend({
 
       this.setProperties({
         searchTerm: term,
-        selectedTopic: null
+        selectedTopic: null,
       });
 
       this.send("refreshModel");
@@ -204,14 +204,14 @@ export default Ember.Controller.extend({
       if (this.canLoadMore && !this.isLoadingMore) {
         this.set("isLoadingMore", true);
 
-        KnowledgeExplorer.loadMore(this.loadMoreUrl).then(result => {
+        KnowledgeExplorer.loadMore(this.loadMoreUrl).then((result) => {
           result = mergeCategories(result);
           const topics = this.topics.concat(result.topics.topic_list.topics);
 
           this.setProperties({
             topics,
             loadMoreUrl: result.topics.load_more_url || null,
-            isLoadingMore: false
+            isLoadingMore: false,
           });
         });
       }
@@ -229,11 +229,11 @@ export default Ember.Controller.extend({
         "orderColumn"
       );
 
-      KnowledgeExplorer.list(params).then(result => {
+      KnowledgeExplorer.list(params).then((result) => {
         result = mergeCategories(result);
         this.setProperties({
           model: result,
-          isLoading: false
+          isLoading: false,
         });
       });
     },
@@ -248,10 +248,8 @@ export default Ember.Controller.extend({
 
     returnToList() {
       this.set("selectedTopic", null);
-      getOwner(this)
-        .lookup("router:main")
-        .transitionTo("knowledgeExplorer");
+      getOwner(this).lookup("router:main").transitionTo("knowledgeExplorer");
       this.send("refreshModel");
-    }
-  }
+    },
+  },
 });

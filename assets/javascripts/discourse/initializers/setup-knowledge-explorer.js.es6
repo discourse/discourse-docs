@@ -5,7 +5,7 @@ function initialize(api) {
     return {
       route: "knowledgeExplorer",
       label: "knowledge_explorer.title",
-      className: "knowledge-explorer-link"
+      className: "knowledge-explorer-link",
     };
   });
 
@@ -20,6 +20,6 @@ export default {
     if (!siteSettings.knowledge_explorer_enabled) {
       return;
     }
-    withPluginApi("0.8", api => initialize(api, container));
-  }
+    withPluginApi("0.8", (api) => initialize(api, container));
+  },
 };

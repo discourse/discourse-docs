@@ -10,6 +10,6 @@ export default Ember.Component.extend({
     selectCategory() {
       this.selectCategory(this.category);
       return false;
-    }
-  }
+    },
+  },
 });
