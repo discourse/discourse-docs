@@ -4,6 +4,6 @@ export default Ember.Component.extend({
     selectTag() {
       this.selectTag(this.tag);
       return false;
-    }
-  }
+    },
+  },
 });

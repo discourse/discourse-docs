@@ -20,16 +20,16 @@ export default {
     let promise = ajax(`/docs.json?${filters.join("&")}`);
 
     if (params.selectedTopic) {
-      promise = promise.then(data => {
-        return getTopic(params.selectedTopic).then(topic => {
+      promise = promise.then((data) => {
+        return getTopic(params.selectedTopic).then((topic) => {
           data.topic = Topic.create(topic);
           return data;
         });
       });
     } else {
-      promise = promise.then(data => {
+      promise = promise.then((data) => {
         data.topics.topic_list.topics = data.topics.topic_list.topics.map(
-          topic => {
+          (topic) => {
             topic = Topic.create(topic);
             return topic;
           }
@@ -44,9 +44,9 @@ export default {
   loadMore(loadMoreUrl) {
     let promise = ajax(loadMoreUrl);
 
-    promise = promise.then(data => {
+    promise = promise.then((data) => {
       data.topics.topic_list.topics = data.topics.topic_list.topics.map(
-        topic => {
+        (topic) => {
           topic = Topic.create(topic);
           return topic;
         }
@@ -57,5 +57,5 @@ export default {
     return promise;
   },
 
-  getTopic
+  getTopic,
 };

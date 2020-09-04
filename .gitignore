@@ -1,1 +1,4 @@
  .rubocop-https---raw-githubusercontent-com-discourse-discourse-master--rubocop-yml
+node_modules
+yarn-error.log
+.rubocop-https---raw-githubusercontent-com-discourse-*

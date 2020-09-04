@@ -6,14 +6,14 @@ export default Ember.Component.extend({
 
   originalPostContent: reads("post.cooked"),
 
-  post: computed("topic", function() {
+  post: computed("topic", function () {
     return this.store.createRecord(
       "post",
       this.topic.post_stream.posts.firstObject
     );
   }),
 
-  model: computed("post", "topic", function() {
+  model: computed("post", "topic", function () {
     const post = this.post;
 
     if (!post.topic) {
@@ -37,5 +37,5 @@ export default Ember.Component.extend({
     document
       .querySelector("body")
       .classList.remove("archetype-knowledge-explorer-topic");
-  }
+  },
 });
