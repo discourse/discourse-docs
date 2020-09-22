@@ -75,7 +75,9 @@ export default Ember.Controller.extend({
 
   @discourseComputed("isSearching", "model")
   searchCount(isSearching, model) {
-    if (isSearching) return model.search_count;
+    if (isSearching) {
+      return model.search_count;
+    }
   },
 
   emptySearchResults: Ember.computed.equal("searchCount", 0),
@@ -194,8 +196,11 @@ export default Ember.Controller.extend({
         this.set("orderColumn", "activity");
       }
 
-      if (!ascending && order) this.set("ascending", true);
-      else this.set("ascending", "");
+      if (!ascending && order) {
+        this.set("ascending", true);
+      } else {
+        this.set("ascending", "");
+      }
 
       this.send("refreshModel");
     },

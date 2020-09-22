@@ -8,14 +8,27 @@ function getTopic(id) {
 export default {
   list(params) {
     let filters = [];
-    if (params.filterCategories)
+    if (params.filterCategories) {
       filters.push(`category=${params.filterCategories}`);
-    if (params.filterTags) filters.push(`tags=${params.filterTags}`);
-    if (params.filterSolved) filters.push(`solved=${params.filterSolved}`);
-    if (params.searchTerm) filters.push(`search=${params.searchTerm}`);
-    if (params.ascending) filters.push("ascending=true");
-    if (params.orderColumn) filters.push(`order=${params.orderColumn}`);
-    if (params.page) filters.push(`page=${params.page}`);
+    }
+    if (params.filterTags) {
+      filters.push(`tags=${params.filterTags}`);
+    }
+    if (params.filterSolved) {
+      filters.push(`solved=${params.filterSolved}`);
+    }
+    if (params.searchTerm) {
+      filters.push(`search=${params.searchTerm}`);
+    }
+    if (params.ascending) {
+      filters.push("ascending=true");
+    }
+    if (params.orderColumn) {
+      filters.push(`order=${params.orderColumn}`);
+    }
+    if (params.page) {
+      filters.push(`page=${params.page}`);
+    }
 
     let promise = ajax(`/docs.json?${filters.join("&")}`);
 
