@@ -20,6 +20,6 @@ export default {
     if (!siteSettings.knowledge_explorer_enabled) {
       return;
     }
-    withPluginApi("0.8", (api) => initialize(api, container));
+    withPluginApi("0.8", (api) => initialize(api));
   },
 };
