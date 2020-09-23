@@ -130,10 +130,7 @@ export default Ember.Controller.extend({
     updateSelectedTags(tag) {
       let filter = this.filterTags;
       if (filter && filter.includes(tag.id)) {
-        filter = filter
-          .replace(tag.id, "")
-          .replace("|", "|")
-          .replace(/^\|+|\|+$/g, "");
+        filter = filter.replace(tag.id, "").replace(/^\|+|\|+$/g, "");
       } else if (filter) {
         filter = `${filter}|${tag.id}`;
       } else {
@@ -150,10 +147,7 @@ export default Ember.Controller.extend({
     updateSelectedCategories(category) {
       let filter = this.filterCategories;
       if (filter && filter.includes(category.id)) {
-        filter = filter
-          .replace(category.id, "")
-          .replace("|", "|")
-          .replace(/^\|+|\|+$/g, "");
+        filter = filter.replace(category.id, "").replace(/^\|+|\|+$/g, "");
       } else if (filter) {
         filter = `${filter}|${category.id}`;
       } else {
