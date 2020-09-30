@@ -107,19 +107,11 @@ export default Ember.Controller.extend({
 
   actions: {
     setSelectedTopic(topicId) {
-      this.setProperties({
-        isTopicLoading: true,
-        selectedTopic: topicId,
-      });
+      this.set("selectedTopic", topicId);
 
       window.scrollTo(0, 0);
 
-      KnowledgeExplorer.getTopic(topicId).then((result) => {
-        this.setProperties({
-          topic: Topic.create(result),
-          isTopicLoading: false,
-        });
-      });
+      this.send("refreshModel");
     },
 
     onChangeFilterSolved(solvedFilter) {
@@ -225,13 +217,15 @@ export default Ember.Controller.extend({
         "filterSolved",
         "searchTerm",
         "ascending",
-        "orderColumn"
+        "orderColumn",
+        "selectedTopic"
       );
 
       KnowledgeExplorer.list(params).then((result) => {
         result = mergeCategories(result);
         this.setProperties({
           model: result,
+          topic: result.topic,
           isLoading: false,
         });
       });
