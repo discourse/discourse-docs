@@ -139,5 +139,21 @@ describe KnowledgeExplorer::KnowledgeExplorerController do
 
       end
     end
+
+    context 'when getting topic first post contents' do
+      let!(:non_ke_topic) { Fabricate(:topic) }
+
+      it 'should correctly grab the topic' do
+        get "/docs.json?topic=#{topic.id}"
+
+        expect(response.parsed_body['topic']['id']).to eq(topic.id)
+      end
+
+      it 'should get topics matching a selected knowledge explorer tag or category' do
+        get "/docs.json?topic=#{non_ke_topic.id}"
+
+        expect(response.parsed_body['topic']).to be_blank
+      end
+    end
   end
 end
