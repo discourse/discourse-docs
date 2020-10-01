@@ -19,11 +19,20 @@ module KnowledgeExplorer
       }
 
       query = KnowledgeExplorer::Query.new(current_user, filters).list
-      query["topic"] = get_topic(filters[:topic], current_user) if filters[:topic].present?
+
+      if filters[:topic].present?
+        begin
+          @topic = Topic.find(filters[:topic])
+        rescue
+          raise Discourse::NotFound
+        end
+
+        query["topic"] = get_topic(@topic, current_user)
+      end
 
       respond_to do |format|
         format.html do
-          render :get_topic if filters[:topic].present?
+          render :get_topic
         end
 
         format.json do
@@ -32,13 +41,13 @@ module KnowledgeExplorer
       end
     end
 
-    def get_topic(topic_id, current_user)
-      @topic_view = TopicView.new(topic_id, current_user)
+    def get_topic(topic, current_user)
+      return nil unless topic_in_explorer(topic.category_id, topic.tags)
+
+      topic_view = TopicView.new(topic.id, current_user)
       guardian = Guardian.new(current_user)
 
-      return unless topic_in_explorer(@topic_view.topic.category_id, @topic_view.topic.tags)
-
-      TopicViewSerializer.new(@topic_view, scope: guardian, root: false)
+      TopicViewSerializer.new(topic_view, scope: guardian, root: false)
     end
 
     def topic_in_explorer(category, tags)
