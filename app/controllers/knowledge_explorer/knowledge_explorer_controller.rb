@@ -27,6 +27,9 @@ module KnowledgeExplorer
           raise Discourse::NotFound
         end
 
+        @excerpt = @topic.posts[0].excerpt(500, { strip_links: true, text_entities: true }) if @topic.posts[0].present?
+        @excerpt = (@excerpt || "").gsub(/\n/, ' ').strip
+
         query["topic"] = get_topic(@topic, current_user)
       end
 
