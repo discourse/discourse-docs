@@ -13,6 +13,7 @@ en:
           one: "%{count} result found"
           other: "%{count} results found"
         placeholder: "Search for topics"
+        clear: "Clear"
       topic:
         back: "Go back"
         navigate_to_topic: "View the discussion on this topic"

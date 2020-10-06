@@ -8,5 +8,10 @@
     placeholder=(i18n "knowledge_explorer.search.placeholder")
     autocapitalize="off"
   }}
-  {{d-icon "search"}}
+
+  {{#if searchTerm}}
+    {{d-button action=(action "clearSearch") class="clear-search" label="knowledge_explorer.search.clear"}}
+  {{else}}
+    {{d-icon "search"}}
+  {{/if}}
 </span>

@@ -13,6 +13,15 @@
       display: none;
     }
   }
+  .btn.clear-search {
+    background-color: var(--secondary);
+    color: var(--tertiary);
+    font-size: .75em;
+    position: absolute;
+    right: 0.80em;
+    text-transform: lowercase;
+    top: 20%;
+  }
 }
 
 .knowledge-explorer-search {

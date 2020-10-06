@@ -11,5 +11,10 @@ export default Ember.Component.extend({
     onSearchTermChange(term) {
       this.debouncedSearch(term);
     },
+
+    clearSearch() {
+      this.set("searchTerm", "");
+      this.onSearch("");
+    },
   },
 });
