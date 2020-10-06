@@ -24,7 +24,7 @@
                     checked=(readonly filterSolved)
                     change=(action "onChangeFilterSolved" value="target.checked")
                   }}
-                  {{i18n "knowledge_explorer.filter_solved"}} 
+                  {{i18n "knowledge_explorer.filter_solved"}}
                 </label>
               </div>
 
@@ -65,6 +65,7 @@
               <div class="result-count no-result">
                 {{i18n 'search.no_results'}}
               </div>
+              {{plugin-outlet name="after-knowledge-explorer-empty-results"}}
             {{else}}
               <div class="result-count">
                 {{i18n 'knowledge_explorer.search.results'
