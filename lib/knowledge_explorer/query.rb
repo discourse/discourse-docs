@@ -37,7 +37,7 @@ module KnowledgeExplorer
         if tags_count == tag_filters.length
           tag_filters.each_with_index do |tag, index|
             # to_i to make it clear this is not an injection
-            sql_alias = "t#{index.to_i}"
+            sql_alias = "tt#{index.to_i}"
             results = results.joins("INNER JOIN topic_tags #{sql_alias} ON #{sql_alias}.topic_id = topics.id AND #{sql_alias}.tag_id = #{tag}")
           end
         else
@@ -91,8 +91,8 @@ module KnowledgeExplorer
 
       # conduct a second set of joins so we don't mess up the count
       count_query = results.joins <<~SQL
-        INNER JOIN topic_tags tt2 ON tt2.topic_id = topics.id
-        INNER JOIN tags t2 ON t2.id = tt2.tag_id
+        INNER JOIN topic_tags ttx ON ttx.topic_id = topics.id
+        INNER JOIN tags t2 ON t2.id = ttx.tag_id
       SQL
       tags = count_query.group('t2.name').count
       tags = create_tags_object(tags)
