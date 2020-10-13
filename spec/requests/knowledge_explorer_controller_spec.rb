@@ -154,6 +154,22 @@ describe KnowledgeExplorer::KnowledgeExplorerController do
 
         expect(response.parsed_body['topic']).to be_blank
       end
+
+      it 'should return a KE topic when only tags are added to settings' do
+        SiteSetting.knowledge_explorer_categories = nil
+
+        get "/docs.json?topic=#{topic.id}"
+
+        expect(response.parsed_body['topic']['id']).to eq(topic.id)
+      end
+
+      it 'should return a KE topic when only categories are added to settings' do
+        SiteSetting.knowledge_explorer_tags = nil
+
+        get "/docs.json?topic=#{topic.id}"
+
+        expect(response.parsed_body['topic']['id']).to eq(topic.id)
+      end
     end
   end
 end
