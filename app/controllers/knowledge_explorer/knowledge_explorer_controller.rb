@@ -55,6 +55,7 @@ module KnowledgeExplorer
 
     def topic_in_explorer(category, tags)
       category_match = KnowledgeExplorer::Query.categories.include?(category.to_s)
+      tags = tags.pluck(:name)
       tag_match = KnowledgeExplorer::Query.tags.any? { |tag| tags.include?(tag) }
 
       category_match || tag_match
