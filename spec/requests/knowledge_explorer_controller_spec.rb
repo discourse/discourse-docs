@@ -63,16 +63,30 @@ describe KnowledgeExplorer::KnowledgeExplorerController do
     end
 
     context 'when filtering by tag' do
+      fab!(:tag2) { Fabricate(:tag, topics: [topic], name: 'test2') }
+      fab!(:tag3) { Fabricate(:tag, topics: [topic], name: 'test3') }
+
       it 'should return a list filtered by tag' do
         get '/docs.json?tags=test'
 
         expect(response.status).to eq(200)
 
         json = JSON.parse(response.body)
+        topics = json['topics']['topic_list']['topics']
+
+        expect(topics.size).to eq(1)
+      end
+
+      it 'should properly filter with more than two tags' do
+        get '/docs.json?tags=test%7ctest2%7ctest3'
+
+        expect(response.status).to eq(200)
+
+        json = response.parsed_body
         tags = json['tags']
         topics = json['topics']['topic_list']['topics']
 
-        expect(tags.size).to eq(1)
+        expect(tags.size).to eq(3)
         expect(topics.size).to eq(1)
       end
     end
