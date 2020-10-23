@@ -1,7 +1,8 @@
+import Route from "@ember/routing/route";
 import Category from "discourse/models/category";
 import KnowledgeExplorer from "discourse/plugins/discourse-knowledge-explorer/discourse/models/knowledge-explorer";
 
-export default Ember.Route.extend({
+export default Route.extend({
   queryParams: {
     searchTerm: {
       replace: true,

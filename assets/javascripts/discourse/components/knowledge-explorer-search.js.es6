@@ -1,6 +1,7 @@
+import Component from "@ember/component";
 import debounce from "discourse/lib/debounce";
 
-export default Ember.Component.extend({
+export default Component.extend({
   classNames: "knowledge-explorer-search",
 
   debouncedSearch: debounce(function (term) {
