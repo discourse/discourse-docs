@@ -1,7 +1,8 @@
+import Component from "@ember/component";
 import { reads } from "@ember/object/computed";
 import { computed } from "@ember/object";
 
-export default Ember.Component.extend({
+export default Component.extend({
   classNames: "knowledge-explorer-topic",
 
   originalPostContent: reads("post.cooked"),

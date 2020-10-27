@@ -1,3 +1,4 @@
+import Controller from "@ember/controller";
 import discourseComputed from "discourse-common/utils/decorators";
 import Category from "discourse/models/category";
 import { on } from "discourse-common/utils/decorators";
@@ -16,7 +17,7 @@ function mergeCategories(results) {
   return results;
 }
 
-export default Ember.Controller.extend({
+export default Controller.extend({
   application: Ember.inject.controller(),
   queryParams: {
     ascending: "ascending",

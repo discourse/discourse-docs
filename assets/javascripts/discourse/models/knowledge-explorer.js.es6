@@ -1,7 +1,10 @@
+import EmberObject from "@ember/object";
 import { ajax } from "discourse/lib/ajax";
 import Topic from "discourse/models/topic";
 
-export default {
+const KnowledgeExplorer = EmberObject.extend({});
+
+KnowledgeExplorer.reopenClass({
   list(params) {
     let filters = [];
     if (params.filterCategories) {
@@ -60,4 +63,6 @@ export default {
 
     return promise;
   },
-};
+});
+
+export default KnowledgeExplorer;
