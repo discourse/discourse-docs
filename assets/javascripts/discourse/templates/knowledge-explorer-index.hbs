@@ -1,0 +1,86 @@
+{{#conditional-loading-spinner condition=isLoading}}
+  {{#if emptyTopics}}
+    <span class="no-topics-found">{{i18n 'knowledge_explorer.no_topics'}}</span>
+  {{else}}
+  <div class="knowledge-explorer-browse">
+    {{#if site.mobileView}}
+      {{#unless selectedTopic}}
+        {{d-button class="knowledge-explorer-expander" icon=(if expandedFilters "angle-up" "angle-down") action=(action "toggleFilters") label="knowledge_explorer.filter_button"}}
+      {{/unless}}
+    {{/if}}
+    <div class="knowledge-explorer-filters">
+      {{#if expandedFilters}}
+          {{#if canFilterSolved}}
+            <div class="knowledge-explorer-items knowledge-explorer-solved">
+              <label class="checkbox-label knowledge-explorer-item">
+                {{input
+                  type="checkbox"
+                  checked=(readonly filterSolved)
+                  change=(action "onChangeFilterSolved" value="target.checked")
+                }}
+                {{i18n "knowledge_explorer.filter_solved"}}
+              </label>
+            </div>
+
+          {{/if}}
+          {{#if categories}}
+            <div class="knowledge-explorer-items knowledge-explorer-categories">
+              <h3>{{i18n 'knowledge_explorer.categories'}}</h3>
+              {{#each categories as |category|}}
+                {{knowledge-explorer-category
+                  category=category
+                  selectCategory=(action "updateSelectedCategories"
+                  tagName="")
+                }}
+              {{/each}}
+            </div>
+          {{/if}}
+          {{#if tags}}
+            <div class="knowledge-explorer-items knowledge-explorer-tags">
+              <h3>{{i18n 'knowledge_explorer.tags'}}</h3>
+              {{#each tags as |tag|}}
+                {{knowledge-explorer-tag
+                  tag=tag
+                  selectTag=(action "updateSelectedTags")
+                }}
+              {{/each}}
+            </div>
+          {{/if}}
+      {{/if}}
+    </div>
+    {{#if selectedTopic}}
+      {{#conditional-loading-spinner condition=isTopicLoading}}
+        {{knowledge-explorer-topic topic=topic return=(action "returnToList")}}
+      {{/conditional-loading-spinner}}
+    {{else}}
+      <div class="knowledge-explorer-results">
+        {{#if isSearchingOrFiltered}}
+          {{#if emptyResults}}
+            <div class="result-count no-result">
+              {{i18n 'search.no_results'}}
+            </div>
+            {{plugin-outlet name="after-knowledge-explorer-empty-results"}}
+          {{else}}
+            <div class="result-count">
+              {{i18n 'knowledge_explorer.search.results'
+                count=searchCount
+              }}
+            </div>
+          {{/if}}
+        {{/if}}
+        {{#unless emptyResults}}
+          {{knowledge-explorer-topic-list
+            topics=topics
+            ascending=ascending
+            order=orderColumn
+            sortBy=(action "sortBy")
+            selectTopic=(action "setSelectedTopic")
+            loadMore=(action "loadMore")
+            loading=isLoadingMore
+          }}
+        {{/unless}}
+      </div>
+    {{/if}}
+  </div>
+  {{/if}}
+{{/conditional-loading-spinner}}
