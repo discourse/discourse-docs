@@ -113,6 +113,64 @@ describe KnowledgeExplorer::KnowledgeExplorerController do
       end
     end
 
+    context 'when ordering results' do
+      context 'by title' do
+        it 'should return the list ordered descending' do
+          get "/docs.json?order=title"
+
+          expect(response.status).to eq(200)
+
+          json = response.parsed_body
+          topics = json['topics']['topic_list']['topics']
+
+          expect(topics[0]['id']).to eq(topic2.id)
+          expect(topics[1]['id']).to eq(topic.id)
+        end
+
+        it 'should return the list ordered ascending with an additional parameter' do
+          get "/docs.json?order=title&ascending=true"
+
+          expect(response.status).to eq(200)
+
+          json = response.parsed_body
+          topics = json['topics']['topic_list']['topics']
+
+          expect(topics[0]['id']).to eq(topic.id)
+          expect(topics[1]['id']).to eq(topic2.id)
+        end
+      end
+
+      context 'by date' do
+        before do
+          topic2.update(last_posted_at: Time.new + 100)
+        end
+
+        it 'should return the list ordered descending' do
+          get "/docs.json?order=activity"
+
+          expect(response.status).to eq(200)
+
+          json = response.parsed_body
+          topics = json['topics']['topic_list']['topics']
+
+          expect(topics[0]['id']).to eq(topic.id)
+          expect(topics[1]['id']).to eq(topic2.id)
+        end
+
+        it 'should return the list ordered ascending with an additional parameter' do
+          get "/docs.json?order=activity&ascending=true"
+
+          expect(response.status).to eq(200)
+
+          json = response.parsed_body
+          topics = json['topics']['topic_list']['topics']
+
+          expect(topics[0]['id']).to eq(topic2.id)
+          expect(topics[1]['id']).to eq(topic.id)
+        end
+      end
+    end
+
     context 'when searching' do
       before do
         SearchIndexer.enable
