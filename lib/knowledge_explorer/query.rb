@@ -77,9 +77,9 @@ module KnowledgeExplorer
 
       if @filters[:order] == "title"
         if @filters[:ascending].present?
-          results = results.reorder('title')
+          results = results.reorder('topics.title')
         else
-          results = results.reorder('title DESC')
+          results = results.reorder('topics.title DESC')
         end
       elsif @filters[:order] == "activity"
         if @filters[:ascending].present?
