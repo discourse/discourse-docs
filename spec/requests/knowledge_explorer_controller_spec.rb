@@ -142,7 +142,7 @@ describe KnowledgeExplorer::KnowledgeExplorerController do
 
       context 'by date' do
         before do
-          topic2.update(last_posted_at: Time.new + 100)
+          topic2.update(last_posted_at: Time.zone.now + 100)
         end
 
         it 'should return the list ordered descending' do
