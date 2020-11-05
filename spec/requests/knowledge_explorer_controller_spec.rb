@@ -4,8 +4,8 @@ require 'rails_helper'
 
 describe KnowledgeExplorer::KnowledgeExplorerController do
   fab!(:category) { Fabricate(:category) }
-  fab!(:topic) { Fabricate(:topic, category: category) }
-  fab!(:topic2) { Fabricate(:topic, category: category) }
+  fab!(:topic) { Fabricate(:topic, title: "I love carrot today", category: category) }
+  fab!(:topic2) { Fabricate(:topic, title: "I love pineapple today", category: category) }
   fab!(:tag) { Fabricate(:tag, topics: [topic], name: 'test') }
 
   before do
