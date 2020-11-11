@@ -5,18 +5,6 @@ import { on } from "discourse-common/utils/decorators";
 import KnowledgeExplorer from "discourse/plugins/discourse-knowledge-explorer/discourse/models/knowledge-explorer";
 import { getOwner } from "@ember/application";
 
-function mergeCategories(results) {
-  const categories = Category.list();
-  const topics = results.topics.topic_list.topics.map((t) => {
-    t.category = categories.findBy("id", t.category_id);
-    return t;
-  });
-
-  results.topics.topic_list.topics = topics;
-
-  return results;
-}
-
 export default Controller.extend({
   queryParams: {
     ascending: "ascending",
@@ -184,7 +172,6 @@ export default Controller.extend({
         this.set("isLoadingMore", true);
 
         KnowledgeExplorer.loadMore(this.loadMoreUrl).then((result) => {
-          result = mergeCategories(result);
           const topics = this.topics.concat(result.topics.topic_list.topics);
 
           this.setProperties({
