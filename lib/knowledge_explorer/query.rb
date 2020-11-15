@@ -18,9 +18,11 @@ module KnowledgeExplorer
 
     def list
       # query for topics matching selected categories & tags
-      tq = TopicQuery.new(@user)
-      results = tq.latest_results(no_definitions: true, limit: false)
+      opts = { no_definitions: true, limit: false }
+      tq = TopicQuery.new(@user, opts)
+      results = tq.list_knowledge_explorer_topics
       results = results.left_outer_joins(:tags)
+      results = results.references(:categories)
       results = results.where('topics.category_id IN (?)', Query.categories).or(results.where('tags.name IN (?)', Query.tags))
 
       # filter results by selected category
