@@ -34,4 +34,7 @@ after_initialize do
       end
     end
   end
+  add_to_class(:topic_query, :list_knowledge_explorer_topics) do
+    default_results(@options)
+  end
 end
