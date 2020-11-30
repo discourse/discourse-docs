@@ -1,7 +1,8 @@
 import Controller from "@ember/controller";
+import { inject } from "@ember/controller";
 
 export default Controller.extend({
-  indexController: Ember.inject.controller("knowledgeExplorer.index"),
+  indexController: inject("knowledgeExplorer.index"),
   actions: {
     updateSelectedCategories(category) {
       this.indexController.send("updateSelectedCategories", category);
