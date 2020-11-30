@@ -31,6 +31,7 @@ export default Controller.extend({
   expandedFilters: false,
   ascending: null,
   orderColumn: null,
+  topicCount: Ember.computed.alias("model.topic_count"),
 
   @on("init")
   _setupFilters() {
@@ -42,7 +43,7 @@ export default Controller.extend({
   @discourseComputed("topics", "isSearching", "filterSolved")
   emptyTopics(topics, isSearching, filterSolved) {
     const filtered = isSearching || filterSolved;
-    return topics.length === 0 && !filtered;
+    return this.topicCount === 0 && !filtered;
   },
 
   @discourseComputed("loadMoreUrl")
@@ -60,24 +61,7 @@ export default Controller.extend({
     return isSearching || filterSolved;
   },
 
-  @discourseComputed("isSearching", "model")
-  searchCount(isSearching, model) {
-    if (isSearching) {
-      return model.search_count;
-    }
-  },
-
-  emptySearchResults: Ember.computed.equal("searchCount", 0),
-
-  @discourseComputed("topics")
-  emptyFilteredResults(topics) {
-    return topics.length === 0;
-  },
-
-  @discourseComputed("emptySearchResults", "emptyFilteredResults")
-  emptyResults(emptySearch, emptyFiltered) {
-    return emptySearch || emptyFiltered;
-  },
+  emptyResults: Ember.computed.equal("topicCount", 0),
 
   @discourseComputed
   canFilterSolved() {
@@ -134,6 +118,7 @@ export default Controller.extend({
         selectedTopic: null,
       });
     },
+
     performSearch(term) {
       if (term === "") {
         this.set("searchTerm", null);
