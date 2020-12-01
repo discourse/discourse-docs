@@ -29,6 +29,15 @@ describe KnowledgeExplorer::KnowledgeExplorerController do
         expect(tags.size).to eq(1)
         expect(topics.size).to eq(2)
       end
+
+      it 'should return a topic count' do
+        get '/docs.json'
+
+        json = response.parsed_body
+        topic_count = json['topic_count']
+
+        expect(topic_count).to eq(2)
+      end
     end
 
     context 'when some knowledge explorer topics are private' do

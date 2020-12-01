@@ -1,5 +1,7 @@
 import Controller from "@ember/controller";
+import { inject } from "@ember/controller";
 import discourseComputed from "discourse-common/utils/decorators";
+import { alias, readOnly, equal } from "@ember/object/computed";
 import { on } from "discourse-common/utils/decorators";
 import KnowledgeExplorer from "discourse/plugins/discourse-knowledge-explorer/discourse/models/knowledge-explorer";
 import { getOwner } from "@ember/application";
@@ -14,14 +16,14 @@ export default Controller.extend({
     searchTerm: "search",
     selectedTopic: "topic",
   },
-  application: Ember.inject.controller(),
+  application: inject(),
   isLoading: false,
   isLoadingMore: false,
-  loadMoreUrl: Ember.computed.alias("model.topics.load_more_url"),
+  loadMoreUrl: alias("model.topics.load_more_url"),
   isTopicLoading: false,
-  categories: Ember.computed.readOnly("model.categories"),
-  topics: Ember.computed.alias("model.topics.topic_list.topics"),
-  tags: Ember.computed.readOnly("model.tags"),
+  categories: readOnly("model.categories"),
+  topics: alias("model.topics.topic_list.topics"),
+  tags: readOnly("model.tags"),
   filterTags: null,
   filterCategories: null,
   filterSolved: false,
@@ -31,6 +33,7 @@ export default Controller.extend({
   expandedFilters: false,
   ascending: null,
   orderColumn: null,
+  topicCount: alias("model.topic_count"),
 
   @on("init")
   _setupFilters() {
@@ -42,7 +45,7 @@ export default Controller.extend({
   @discourseComputed("topics", "isSearching", "filterSolved")
   emptyTopics(topics, isSearching, filterSolved) {
     const filtered = isSearching || filterSolved;
-    return topics.length === 0 && !filtered;
+    return this.topicCount === 0 && !filtered;
   },
 
   @discourseComputed("loadMoreUrl")
@@ -60,24 +63,7 @@ export default Controller.extend({
     return isSearching || filterSolved;
   },
 
-  @discourseComputed("isSearching", "model")
-  searchCount(isSearching, model) {
-    if (isSearching) {
-      return model.search_count;
-    }
-  },
-
-  emptySearchResults: Ember.computed.equal("searchCount", 0),
-
-  @discourseComputed("topics")
-  emptyFilteredResults(topics) {
-    return topics.length === 0;
-  },
-
-  @discourseComputed("emptySearchResults", "emptyFilteredResults")
-  emptyResults(emptySearch, emptyFiltered) {
-    return emptySearch || emptyFiltered;
-  },
+  emptyResults: equal("topicCount", 0),
 
   @discourseComputed
   canFilterSolved() {
@@ -134,6 +120,7 @@ export default Controller.extend({
         selectedTopic: null,
       });
     },
+
     performSearch(term) {
       if (term === "") {
         this.set("searchTerm", null);
