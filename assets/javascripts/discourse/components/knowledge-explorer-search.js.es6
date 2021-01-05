@@ -9,13 +9,7 @@ export default Component.extend({
     // TODO: Use discouseDebounce when discourse 2.7 gets released.
     const debounceFunc = discourseDebounce || debounce;
 
-    debounceFunc(
-      this,
-      function () {
-        this.onSearch(term);
-      },
-      500
-    );
+    debounceFunc(this, "onSearch", term, 500);
   },
 
   actions: {
