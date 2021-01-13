@@ -1,3 +1,3 @@
-import Route from "@ember/routing/route";
+import DiscourseRoute from "discourse/routes/discourse";
 
-export default Route.extend({});
+export default DiscourseRoute.extend({});
