@@ -1,15 +1,15 @@
 plugins:
-  knowledge_explorer_enabled:
+  docs_enabled:
     default: false
     client: true
-  knowledge_explorer_categories:
+  docs_categories:
     type: category_list
     default: ""
     client: true
-  knowledge_explorer_tags:
+  docs_tags:
     type: tag_list
     default: ""
     client: true
-  knowledge_explorer_add_solved_filter:
+  docs_add_solved_filter:
     default: false
     client: true

@@ -1,4 +1,4 @@
-.knowledge-explorer-search-wrapper {
+.docs-search-wrapper {
   position: relative;
   width: 500px;
   .d-icon {
@@ -24,7 +24,7 @@
   }
 }
 
-.knowledge-explorer-search {
+.docs-search {
   align-items: center;
   background-color: var(--primary-very-low, $primary-very-low);
   display: flex;
@@ -34,20 +34,20 @@
     // More breathing room on larger screens
     margin-bottom: 2em;
   }
-  .knowledge-explorer-search-bar {
+  .docs-search-bar {
     height: 50px;
     margin-bottom: 0px;
     width: 100%;
   }
 }
-.knowledge-explorer-browse {
+.docs-browse {
   display: flex;
   .loading-container {
     display: flex;
     flex-basis: 100%;
     padding: 0.625em 0 0.625em 0.625em;
   }
-  .knowledge-explorer-results {
+  .docs-results {
     display: flex;
     flex-direction: column;
     flex-basis: 100%;
@@ -56,7 +56,7 @@
       padding-left: 0.625em;
     }
   }
-  .knowledge-explorer-filters {
+  .docs-filters {
     margin-top: 0.15em;
     flex: 0 1 20%;
     @include breakpoint(tablet, min-width) {
@@ -66,7 +66,7 @@
     // be more narrow than content if needed
     min-width: 175px;
   }
-  .knowledge-explorer-items {
+  .docs-items {
     padding: 0.57em 1em 1em 0;
 
     a {
@@ -79,13 +79,13 @@
       font-size: $font-up-1;
     }
 
-    .knowledge-explorer-item-count {
+    .docs-item-count {
       margin-left: auto;
       color: var(--primary-high, $primary-high);
       font-size: $font-down-1;
     }
 
-    .knowledge-explorer-item {
+    .docs-item {
       display: flex;
       align-items: center;
       cursor: pointer;
@@ -121,7 +121,7 @@
       font-weight: bold;
     }
   }
-  .knowledge-explorer-topic-list {
+  .docs-topic-list {
     flex-basis: 100%;
 
     th {
@@ -145,7 +145,7 @@
       font-weight: normal;
       font-size: $font-down-1;
     }
-    .knowledge-explorer-topic-link {
+    .docs-topic-link {
       color: var(--tertiary, $tertiary);
       cursor: pointer;
       display: inline-block;
@@ -154,10 +154,10 @@
       }
     }
   }
-  .knowledge-explorer-topic {
+  .docs-topic {
     display: flex;
     flex-direction: column;
-    .knowledge-explorer-nav-link {
+    .docs-nav-link {
       font-weight: 700;
       &.return {
         align-items: center;

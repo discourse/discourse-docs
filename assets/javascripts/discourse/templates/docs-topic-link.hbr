@@ -1,0 +1,1 @@
+<a data-topic-id="{{topic.id}}" class="docs-topic-link">{{{topic.fancyTitle}}}</a>

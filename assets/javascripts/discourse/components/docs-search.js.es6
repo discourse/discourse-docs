@@ -3,7 +3,7 @@ import { debounce } from "@ember/runloop";
 import discourseDebounce from "discourse-common/lib/debounce";
 
 export default Component.extend({
-  classNames: "knowledge-explorer-search",
+  classNames: "docs-search",
 
   debouncedSearch(term) {
     // TODO: Use discouseDebounce when discourse 2.7 gets released.

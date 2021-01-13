@@ -2,7 +2,7 @@ import Component from "@ember/component";
 import discourseComputed from "discourse-common/utils/decorators";
 
 export default Component.extend({
-  classNames: "knowledge-explorer-topic-list",
+  classNames: "docs-topic-list",
   @discourseComputed("order")
   sortTitle(order) {
     return order === "title";
@@ -15,7 +15,7 @@ export default Component.extend({
 
   // need to handle clicks here since links are in a raw view
   click(e) {
-    if (e.target.classList.contains("knowledge-explorer-topic-link")) {
+    if (e.target.classList.contains("docs-topic-link")) {
       const topicId = e.target.dataset.topicId;
       this.selectTopic(topicId);
       return false;

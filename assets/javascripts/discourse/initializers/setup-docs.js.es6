@@ -3,9 +3,9 @@ import { withPluginApi } from "discourse/lib/plugin-api";
 function initialize(api) {
   api.decorateWidget("hamburger-menu:generalLinks", () => {
     return {
-      route: "knowledgeExplorer",
-      label: "knowledge_explorer.title",
-      className: "knowledge-explorer-link",
+      route: "docs",
+      label: "docs.title",
+      className: "docs-link",
     };
   });
 
@@ -13,11 +13,11 @@ function initialize(api) {
 }
 
 export default {
-  name: "setup-knowledge-explorer",
+  name: "setup-docs",
 
   initialize(container) {
     const siteSettings = container.lookup("site-settings:main");
-    if (!siteSettings.knowledge_explorer_enabled) {
+    if (!siteSettings.docs_enabled) {
       return;
     }
     withPluginApi("0.8", (api) => initialize(api));

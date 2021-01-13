@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module KnowledgeExplorer
+module Docs
   class Query
     def initialize(user = nil, filters = {})
       @user = user
@@ -9,18 +9,18 @@ module KnowledgeExplorer
     end
 
     def self.categories
-      SiteSetting.knowledge_explorer_categories.split('|')
+      SiteSetting.docs_categories.split('|')
     end
 
     def self.tags
-      SiteSetting.knowledge_explorer_tags.split('|')
+      SiteSetting.docs_tags.split('|')
     end
 
     def list
       # query for topics matching selected categories & tags
       opts = { no_definitions: true, limit: false }
       tq = TopicQuery.new(@user, opts)
-      results = tq.list_knowledge_explorer_topics
+      results = tq.list_docs_topics
       results = results.left_outer_joins(:tags)
       results = results.references(:categories)
       results = results.where('topics.category_id IN (?)', Query.categories).or(results.where('tags.name IN (?)', Query.tags))
@@ -115,7 +115,7 @@ module KnowledgeExplorer
       results = results.offset(offset).limit(@limit) #results[offset...page_range]
 
       # assemble the object
-      topic_query = tq.create_list(:knowledge_explorer, { unordered: true }, results)
+      topic_query = tq.create_list(:docs, { unordered: true }, results)
 
       topic_list = TopicListSerializer.new(topic_query, scope: Guardian.new(@user)).as_json
 

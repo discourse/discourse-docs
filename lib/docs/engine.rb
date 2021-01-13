@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-module ::KnowledgeExplorer
+module ::Docs
   class Engine < ::Rails::Engine
-    isolate_namespace KnowledgeExplorer
+    isolate_namespace Docs
 
     config.after_initialize do
       Discourse::Application.routes.append do
-        mount ::KnowledgeExplorer::Engine, at: '/docs'
+        mount ::Docs::Engine, at: '/docs'
         get '/knowledge-explorer', to: redirect("/docs")
       end
     end

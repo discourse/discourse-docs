@@ -1,9 +1,0 @@
-<div class="knowledge-explorer">
-  {{plugin-outlet name="before-knowledge-explorer-search" args=(hash selectCategory=(action "updateSelectedCategories"))}}
-  {{knowledge-explorer-search
-    searchTerm=(readonly indexController.searchTerm)
-    onSearch=(action "performSearch")
-  }}
-
-  {{outlet}}
-</div>

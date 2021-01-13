@@ -1,11 +1,11 @@
 en:
   js:
-    knowledge_explorer:
-      title: "Knowledge Explorer"
+    docs:
+      title: "Docs"
       column_titles:
         topic: "Topic"
         activity: "Activity"
-      no_topics: "No topics in Knowledge Explorer."
+      no_topics: "No topics in Docs."
       categories: "Categories"
       tags: "Tags"
       search:

@@ -2,7 +2,7 @@
   <table class="topic-list">
     <thead>
       <th {{action "sortListTitle"}}>
-        {{i18n 'knowledge_explorer.column_titles.topic'}}
+        {{i18n 'docs.column_titles.topic'}}
         {{#if sortTitle}}
           {{#if ascending}}
             {{d-icon 'angle-up'}}
@@ -12,7 +12,7 @@
         {{/if}}
       </th>
       <th {{action "sortListActivity"}}>
-        {{i18n 'knowledge_explorer.column_titles.activity'}}
+        {{i18n 'docs.column_titles.activity'}}
         {{#if sortActivity}}
           {{#if ascending}}
             {{d-icon 'angle-up'}}
@@ -24,7 +24,7 @@
     </thead>
     <tbody>
       {{#each topics as |topic|}}
-        {{raw "knowledge-explorer-topic-list-item" topic=topic}}
+        {{raw "docs-topic-list-item" topic=topic}}
       {{/each}}
     </tbody>
   </table>

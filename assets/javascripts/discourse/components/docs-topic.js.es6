@@ -3,7 +3,7 @@ import { reads } from "@ember/object/computed";
 import { computed } from "@ember/object";
 
 export default Component.extend({
-  classNames: "knowledge-explorer-topic",
+  classNames: "docs-topic",
 
   originalPostContent: reads("post.cooked"),
 
@@ -27,16 +27,12 @@ export default Component.extend({
   didInsertElement() {
     this._super(...arguments);
 
-    document
-      .querySelector("body")
-      .classList.add("archetype-knowledge-explorer-topic");
+    document.querySelector("body").classList.add("archetype-docs-topic");
   },
 
   willDestroyElement() {
     this._super(...arguments);
 
-    document
-      .querySelector("body")
-      .classList.remove("archetype-knowledge-explorer-topic");
+    document.querySelector("body").classList.remove("archetype-docs-topic");
   },
 });
