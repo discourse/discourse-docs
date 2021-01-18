@@ -3,7 +3,7 @@ import { inject } from "@ember/controller";
 import discourseComputed from "discourse-common/utils/decorators";
 import { alias, readOnly, equal } from "@ember/object/computed";
 import { on } from "discourse-common/utils/decorators";
-import KnowledgeExplorer from "discourse/plugins/discourse-knowledge-explorer/discourse/models/knowledge-explorer";
+import Docs from "discourse/plugins/discourse-docs/discourse/models/docs";
 import { getOwner } from "@ember/application";
 
 export default Controller.extend({
@@ -69,7 +69,7 @@ export default Controller.extend({
   canFilterSolved() {
     return (
       this.siteSettings.solved_enabled &&
-      this.siteSettings.knowledge_explorer_add_solved_filter
+      this.siteSettings.docs_add_solved_filter
     );
   },
 
@@ -157,7 +157,7 @@ export default Controller.extend({
       if (this.canLoadMore && !this.isLoadingMore) {
         this.set("isLoadingMore", true);
 
-        KnowledgeExplorer.loadMore(this.loadMoreUrl).then((result) => {
+        Docs.loadMore(this.loadMoreUrl).then((result) => {
           const topics = this.topics.concat(result.topics.topic_list.topics);
 
           this.setProperties({
@@ -179,7 +179,7 @@ export default Controller.extend({
 
     returnToList() {
       this.set("selectedTopic", null);
-      getOwner(this).lookup("router:main").transitionTo("knowledgeExplorer");
+      getOwner(this).lookup("router:main").transitionTo("docs");
     },
   },
 });

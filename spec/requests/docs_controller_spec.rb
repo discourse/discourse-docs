@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe KnowledgeExplorer::KnowledgeExplorerController do
+describe Docs::DocsController do
   fab!(:category) { Fabricate(:category) }
   fab!(:topic) { Fabricate(:topic, title: "I love carrot today", category: category) }
   fab!(:topic2) { Fabricate(:topic, title: "I love pineapple today", category: category) }
@@ -10,12 +10,12 @@ describe KnowledgeExplorer::KnowledgeExplorerController do
 
   before do
     SiteSetting.tagging_enabled = true
-    SiteSetting.knowledge_explorer_enabled = true
-    SiteSetting.knowledge_explorer_categories = category.id.to_s
-    SiteSetting.knowledge_explorer_tags = 'test'
+    SiteSetting.docs_enabled = true
+    SiteSetting.docs_categories = category.id.to_s
+    SiteSetting.docs_tags = 'test'
   end
 
-  describe 'knowledge explorer data' do
+  describe 'docs data' do
     context 'when any user' do
       it 'should return the right response' do
         get '/docs.json'
@@ -40,13 +40,13 @@ describe KnowledgeExplorer::KnowledgeExplorerController do
       end
     end
 
-    context 'when some knowledge explorer topics are private' do
+    context 'when some docs topics are private' do
       let!(:group) { Fabricate(:group) }
       let!(:private_category) { Fabricate(:private_category, group: group) }
       let!(:private_topic) { Fabricate(:topic, category: private_category) }
 
       before do
-        SiteSetting.knowledge_explorer_categories = "#{category.id}|#{private_category.id}"
+        SiteSetting.docs_categories = "#{category.id}|#{private_category.id}"
       end
 
       it 'should not show topics in private categories without permissions' do
@@ -105,7 +105,7 @@ describe KnowledgeExplorer::KnowledgeExplorerController do
       let!(:topic3) { Fabricate(:topic, category: category2) }
 
       before do
-        SiteSetting.knowledge_explorer_categories = "#{category.id}|#{category2.id}"
+        SiteSetting.docs_categories = "#{category.id}|#{category2.id}"
       end
 
       it 'should return a list filtered by category' do
@@ -230,22 +230,22 @@ describe KnowledgeExplorer::KnowledgeExplorerController do
         expect(response.parsed_body['topic']['id']).to eq(topic.id)
       end
 
-      it 'should get topics matching a selected knowledge explorer tag or category' do
+      it 'should get topics matching a selected docs tag or category' do
         get "/docs.json?topic=#{non_ke_topic.id}"
 
         expect(response.parsed_body['topic']).to be_blank
       end
 
-      it 'should return a KE topic when only tags are added to settings' do
-        SiteSetting.knowledge_explorer_categories = nil
+      it 'should return a docs topic when only tags are added to settings' do
+        SiteSetting.docs_categories = nil
 
         get "/docs.json?topic=#{topic.id}"
 
         expect(response.parsed_body['topic']['id']).to eq(topic.id)
       end
 
-      it 'should return a KE topic when only categories are added to settings' do
-        SiteSetting.knowledge_explorer_tags = nil
+      it 'should return a docs topic when only categories are added to settings' do
+        SiteSetting.docs_tags = nil
 
         get "/docs.json?topic=#{topic.id}"
 

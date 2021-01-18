@@ -1,0 +1,10 @@
+<a {{action "selectTag"}} class="docs-item docs-tag {{if tag.active 'selected'}} {{if subtag 'subtag'}}">
+  {{#unless tag.active}}
+    {{d-icon "plus"}}
+  {{/unless}}
+  {{#if tag.active}}
+    {{d-icon "times-circle"}}
+  {{/if}}
+  <span class="docs-item-id tag-id">{{tag.id}}</span>
+  <span class="docs-item-count tag-count">{{tag.count}}</span>
+</a>

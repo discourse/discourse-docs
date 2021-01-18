@@ -1,0 +1,10 @@
+<a  {{action "selectCategory"}} class="docs-item docs-category {{if category.active 'selected'}}">
+  {{#unless category.active}}
+    {{d-icon "plus"}}
+  {{/unless}}
+  {{#if category.active}}
+    {{d-icon "times-circle"}}
+  {{/if}}
+  <span class="docs-item-id category-id">{{categoryName}}</span>
+  <span class="docs-item-count category-count">{{category.count}}</span>
+</a>

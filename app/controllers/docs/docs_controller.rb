@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-module KnowledgeExplorer
-  class KnowledgeExplorerController < ApplicationController
-    requires_plugin 'knowledge-explorer'
+module Docs
+  class DocsController < ApplicationController
+    requires_plugin 'docs'
 
     skip_before_action :check_xhr, only: [:index]
 
@@ -18,7 +18,7 @@ module KnowledgeExplorer
         page: params[:page]
       }
 
-      query = KnowledgeExplorer::Query.new(current_user, filters).list
+      query = Docs::Query.new(current_user, filters).list
 
       if filters[:topic].present?
         begin
@@ -45,7 +45,7 @@ module KnowledgeExplorer
     end
 
     def get_topic(topic, current_user)
-      return nil unless topic_in_explorer(topic.category_id, topic.tags)
+      return nil unless topic_in_docs(topic.category_id, topic.tags)
 
       topic_view = TopicView.new(topic.id, current_user)
       guardian = Guardian.new(current_user)
@@ -53,13 +53,12 @@ module KnowledgeExplorer
       TopicViewSerializer.new(topic_view, scope: guardian, root: false)
     end
 
-    def topic_in_explorer(category, tags)
-      category_match = KnowledgeExplorer::Query.categories.include?(category.to_s)
+    def topic_in_docs(category, tags)
+      category_match = Docs::Query.categories.include?(category.to_s)
       tags = tags.pluck(:name)
-      tag_match = KnowledgeExplorer::Query.tags.any? { |tag| tags.include?(tag) }
+      tag_match = Docs::Query.tags.any? { |tag| tags.include?(tag) }
 
       category_match || tag_match
     end
-
   end
 end

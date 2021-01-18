@@ -2,7 +2,7 @@
   <td class="main-link">
     <span class="link-top-line">
       {{~raw "topic-status" topic=topic}}
-      {{~raw "knowledge-explorer-topic-link" topic=topic}}
+      {{~raw "docs-topic-link" topic=topic}}
     </span>
     <span class="link-bottom-line">
       {{category-link topic.category}}

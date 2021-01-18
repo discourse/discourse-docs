@@ -1,10 +1,10 @@
 import { acceptance, queryAll } from "helpers/qunit-helpers";
 import docsFixtures from "../fixtures/docs";
 
-acceptance("Knowledge Explorer", function (needs) {
+acceptance("Docs", function (needs) {
   needs.user();
   needs.settings({
-    knowledge_explorer_enabled: true,
+    docs_enabled: true,
   });
 
   needs.pretender((server, helper) => {
@@ -14,18 +14,12 @@ acceptance("Knowledge Explorer", function (needs) {
   test("index page", async function (assert) {
     await visit("/");
     await click("#toggle-hamburger-menu");
-    await click(".knowledge-explorer-link");
+    await click(".docs-link");
 
+    assert.equal(queryAll(".docs-category")[0].innerText.trim(), "bug 119");
+    assert.equal(queryAll(".docs-tag")[0].innerText.trim(), "something 74");
     assert.equal(
-      queryAll(".knowledge-explorer-category")[0].innerText.trim(),
-      "bug 119"
-    );
-    assert.equal(
-      queryAll(".knowledge-explorer-tag")[0].innerText.trim(),
-      "something 74"
-    );
-    assert.equal(
-      queryAll(".knowledge-explorer-topic-link")[0].innerText.trim(),
+      queryAll(".docs-topic-link")[0].innerText.trim(),
       "Importing from Software X"
     );
   });

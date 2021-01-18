@@ -1,6 +1,6 @@
 import DiscourseRoute from "discourse/routes/discourse";
 import I18n from "I18n";
-import KnowledgeExplorer from "discourse/plugins/discourse-knowledge-explorer/discourse/models/knowledge-explorer";
+import Docs from "discourse/plugins/discourse-docs/discourse/models/docs";
 
 export default DiscourseRoute.extend({
   queryParams: {
@@ -16,16 +16,16 @@ export default DiscourseRoute.extend({
     },
   },
   model(params) {
-    this.controllerFor("knowledgeExplorer.index").set("isLoading", true);
-    return KnowledgeExplorer.list(params).then((result) => {
-      this.controllerFor("knowledgeExplorer.index").set("isLoading", false);
+    this.controllerFor("docs.index").set("isLoading", true);
+    return Docs.list(params).then((result) => {
+      this.controllerFor("docs.index").set("isLoading", false);
       return result;
     });
   },
 
   titleToken() {
     const model = this.currentModel;
-    const pageTitle = I18n.t("knowledge_explorer.title");
+    const pageTitle = I18n.t("docs.title");
     if (model.topic.title && model.topic.category_id) {
       const categoryName = this.site.categories.findBy(
         "id",

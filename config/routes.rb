@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require_dependency 'knowledge_explorer_constraint'
+require_dependency 'docs_constraint'
 
-KnowledgeExplorer::Engine.routes.draw do
-  get '/' => 'knowledge_explorer#index', constraints: KnowledgeExplorerConstraint.new
-  get '.json' => 'knowledge_explorer#index', constraints: KnowledgeExplorerConstraint.new
+Docs::Engine.routes.draw do
+  get '/' => 'docs#index', constraints: DocsConstraint.new
+  get '.json' => 'docs#index', constraints: DocsConstraint.new
 end
