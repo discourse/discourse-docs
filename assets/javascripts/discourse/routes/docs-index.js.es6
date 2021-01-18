@@ -27,11 +27,12 @@ export default DiscourseRoute.extend({
     const model = this.currentModel;
     const pageTitle = I18n.t("docs.title");
     if (model.topic.title && model.topic.category_id) {
+      const title = model.topic.unicode_title || model.topic.title;
       const categoryName = this.site.categories.findBy(
         "id",
         model.topic.category_id
       ).name;
-      return `${model.topic.unicode_title} - ${categoryName} - ${pageTitle}`;
+      return `${title} - ${categoryName} - ${pageTitle}`;
     } else {
       return pageTitle;
     }
