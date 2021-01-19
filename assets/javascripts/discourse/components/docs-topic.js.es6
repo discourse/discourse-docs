@@ -7,7 +7,7 @@ export default Component.extend({
 
   originalPostContent: reads("post.cooked"),
 
-  title: computed("topic", function() {
+  title: computed("topic", function () {
     const topic = this.topic;
     if (topic) {
       return topic.unicode_title || topic.title;
