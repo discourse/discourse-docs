@@ -7,13 +7,6 @@ export default Component.extend({
 
   originalPostContent: reads("post.cooked"),
 
-  title: computed("topic", function () {
-    const topic = this.topic;
-    if (topic) {
-      return topic.unicode_title || topic.title;
-    }
-  }),
-
   post: computed("topic", function () {
     return this.store.createRecord(
       "post",
