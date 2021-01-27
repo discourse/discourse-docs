@@ -1,5 +1,4 @@
-import Controller from "@ember/controller";
-import { inject } from "@ember/controller";
+import Controller, { inject } from "@ember/controller";
 
 export default Controller.extend({
   indexController: inject("docs.index"),

@@ -1,8 +1,6 @@
-import Controller from "@ember/controller";
-import { inject } from "@ember/controller";
-import discourseComputed from "discourse-common/utils/decorators";
-import { alias, readOnly, equal } from "@ember/object/computed";
-import { on } from "discourse-common/utils/decorators";
+import Controller, { inject } from "@ember/controller";
+import discourseComputed, { on } from "discourse-common/utils/decorators";
+import { alias, equal, readOnly } from "@ember/object/computed";
 import Docs from "discourse/plugins/discourse-docs/discourse/models/docs";
 import { getOwner } from "@ember/application";
 
