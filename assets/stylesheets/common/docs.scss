@@ -165,6 +165,7 @@
         color: $tertiary;
         display: inline-flex;
         font-size: $font-down-1;
+        justify-content: normal;
         padding: 0;
         &::before {
           content: "«";
