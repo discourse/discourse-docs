@@ -35,6 +35,7 @@ module Docs
 
       respond_to do |format|
         format.html do
+          @title = set_title
           render :get_topic
         end
 
@@ -51,6 +52,15 @@ module Docs
       guardian = Guardian.new(current_user)
 
       TopicViewSerializer.new(topic_view, scope: guardian, root: false)
+    end
+
+    def set_title
+      title = "#{I18n.t('js.docs.title')} - #{SiteSetting.title}"
+      if @topic
+        topic_title = @topic['unicode_title'] || @topic['title']
+        title = "#{topic_title} - #{title}"
+      end
+      title
     end
 
     def topic_in_docs(category, tags)
