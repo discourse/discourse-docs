@@ -1,4 +1,5 @@
 import { withPluginApi } from "discourse/lib/plugin-api";
+import I18n from "I18n";
 
 function initialize(api, container) {
   const siteSettings = container.lookup("site-settings:main");
@@ -21,7 +22,7 @@ function initialize(api, container) {
     api.addNavigationBarItem({
       name: "docs",
       displayName: I18n.t("docs.title"),
-      href: "/docs"
+      href: "/docs",
     });
   }
 }
