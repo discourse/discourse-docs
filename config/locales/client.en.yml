@@ -1,5 +1,8 @@
 en:
   js:
+    filters:
+      docs:
+        help: "browse docs topics"
     docs:
       title: "Docs"
       column_titles:

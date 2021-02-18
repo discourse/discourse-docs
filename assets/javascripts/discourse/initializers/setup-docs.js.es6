@@ -1,6 +1,12 @@
 import { withPluginApi } from "discourse/lib/plugin-api";
 
-function initialize(api) {
+function initialize(api, container) {
+  const siteSettings = container.lookup("site-settings:main");
+
+  if (!siteSettings.docs_enabled) {
+    return;
+  }
+
   api.decorateWidget("hamburger-menu:generalLinks", () => {
     return {
       route: "docs",
@@ -10,16 +16,20 @@ function initialize(api) {
   });
 
   api.addKeyboardShortcut("g e", "", { path: "/docs" });
+
+  if (siteSettings.docs_add_to_top_menu) {
+    api.addNavigationBarItem({
+      name: "docs",
+      displayName: I18n.t("docs.title"),
+      href: "/docs"
+    });
+  }
 }
 
 export default {
   name: "setup-docs",
 
   initialize(container) {
-    const siteSettings = container.lookup("site-settings:main");
-    if (!siteSettings.docs_enabled) {
-      return;
-    }
-    withPluginApi("0.8", (api) => initialize(api));
+    withPluginApi("0.8", (api) => initialize(api, container));
   },
 };
