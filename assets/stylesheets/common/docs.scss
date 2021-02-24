@@ -149,6 +149,7 @@
       color: var(--tertiary, $tertiary);
       cursor: pointer;
       display: inline-block;
+      word-break: break-word;
       & > * {
         pointer-events: none;
       }
