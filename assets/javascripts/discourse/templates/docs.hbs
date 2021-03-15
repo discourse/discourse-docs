@@ -1,5 +1,5 @@
 <div class="docs">
-  {{plugin-outlet name="before-docs-search" args=(hash selectCategory=(action "updateSelectedCategories"))}}
+  {{plugin-outlet name="before-docs-search" args=(hash selectCategory=(action "updateSelectedCategories") tags=indexController.tags )}}
   {{docs-search
     searchTerm=(readonly indexController.searchTerm)
     onSearch=(action "performSearch")
