@@ -7,6 +7,10 @@ export default Controller.extend({
       this.indexController.send("updateSelectedCategories", category);
       return false;
     },
+    updateSelectedTags(tag) {
+      this.indexController.send("updateSelectedTags", tag);
+      return false;
+    },
     performSearch(term) {
       this.indexController.send("performSearch", term);
       return false;
