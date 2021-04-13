@@ -1,0 +1,24 @@
+es:
+  js:
+    filters:
+      docs:
+        help: "navegar temas en docs"
+    docs:
+      title: "Docs"
+      column_titles:
+        topic: "Tema"
+        activity: "Actividad"
+      no_topics: "No hay temas en Docs."
+      categories: "Categorías"
+      tags: "Etiquetas"
+      search:
+        results:
+          one: "%{count} resultado encontrado"
+          other: "%{count} resultados encontrados"
+        placeholder: "Buscar temas"
+        clear: "Limpiar"
+      topic:
+        back: "Atrás"
+        navigate_to_topic: "Ver la discusión sobre este tema"
+      filter_button: "Filtros"
+      filter_solved: "¿Tema solucionado?"
