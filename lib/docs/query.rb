@@ -95,9 +95,9 @@ module Docs
         INNER JOIN topic_tags ttx ON ttx.topic_id = topics.id
         INNER JOIN tags t2 ON t2.id = ttx.tag_id
       SQL
-      tags = count_query.group('t2.name').count
+      tags = count_query.group('t2.name').reorder('').count
       tags = create_tags_object(tags)
-      categories = results.where('topics.category_id IS NOT NULL').group('topics.category_id').count
+      categories = results.where('topics.category_id IS NOT NULL').group('topics.category_id').reorder('').count
       categories = create_categories_object(categories)
 
       results_length = results.size
