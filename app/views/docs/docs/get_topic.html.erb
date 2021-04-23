@@ -1,3 +1,5 @@
 <% content_for :head do %>
   <%= raw crawlable_meta_data(title: @topic["title"], description: @excerpt, ignore_canonical: true) if @topic %>
 <% end %>
+
+<% content_for(:title) { @title } %>

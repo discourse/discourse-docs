@@ -11,6 +11,12 @@ export default Controller.extend({
   },
 
   @action
+  updateSelectedTags(tag) {
+    this.indexController.send("updateSelectedTags", tag);
+    return false;
+  },
+
+  @action
   performSearch(term) {
     this.indexController.send("performSearch", term);
     return false;

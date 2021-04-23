@@ -13,3 +13,6 @@ plugins:
   docs_add_solved_filter:
     default: false
     client: true
+  docs_add_to_top_menu:
+    default: false
+    client: true
