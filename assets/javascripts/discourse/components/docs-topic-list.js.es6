@@ -3,6 +3,7 @@ import discourseComputed from "discourse-common/utils/decorators";
 
 export default Component.extend({
   classNames: "docs-topic-list",
+
   @discourseComputed("order")
   sortTitle(order) {
     return order === "title";
@@ -27,6 +28,7 @@ export default Component.extend({
       this.sortBy("activity");
       return false;
     },
+
     sortListTitle() {
       this.sortBy("title");
       return false;

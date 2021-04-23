@@ -14,14 +14,12 @@ export default Controller.extend({
     searchTerm: "search",
     selectedTopic: "topic",
   },
+
   application: inject(),
+
   isLoading: false,
   isLoadingMore: false,
-  loadMoreUrl: alias("model.topics.load_more_url"),
   isTopicLoading: false,
-  categories: readOnly("model.categories"),
-  topics: alias("model.topics.topic_list.topics"),
-  tags: readOnly("model.tags"),
   filterTags: null,
   filterCategories: null,
   filterSolved: false,
@@ -31,7 +29,13 @@ export default Controller.extend({
   expandedFilters: false,
   ascending: null,
   orderColumn: null,
+
+  loadMoreUrl: alias("model.topics.load_more_url"),
+  categories: readOnly("model.categories"),
+  topics: alias("model.topics.topic_list.topics"),
+  tags: readOnly("model.tags"),
   topicCount: alias("model.topic_count"),
+  emptyResults: equal("topicCount", 0),
 
   @on("init")
   _setupFilters() {
@@ -60,8 +64,6 @@ export default Controller.extend({
   isSearchingOrFiltered(isSearching, filterSolved) {
     return isSearching || filterSolved;
   },
-
-  emptyResults: equal("topicCount", 0),
 
   @discourseComputed
   canFilterSolved() {
