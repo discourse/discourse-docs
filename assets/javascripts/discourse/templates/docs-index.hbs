@@ -1,15 +1,16 @@
 {{#conditional-loading-spinner condition=isLoading}}
   {{#if emptyTopics}}
-    <span class="no-topics-found">{{html-safe (i18n 'docs.no_topics')}}</span>
+    <span class="no-topics-found">{{html-safe (i18n "docs.no_topics")}}</span>
   {{else}}
-  <div class="docs-browse">
-    {{#if site.mobileView}}
-      {{#unless selectedTopic}}
-        {{d-button class="docs-expander" icon=(if expandedFilters "angle-up" "angle-down") action=(action "toggleFilters") label="docs.filter_button"}}
-      {{/unless}}
-    {{/if}}
-    <div class="docs-filters">
-      {{#if expandedFilters}}
+    <div class="docs-browse">
+      {{#if site.mobileView}}
+        {{#unless selectedTopic}}
+          {{d-button class="docs-expander" icon=(if expandedFilters "angle-up" "angle-down") action=(action "toggleFilters") label="docs.filter_button"}}
+        {{/unless}}
+      {{/if}}
+
+      <div class="docs-filters">
+        {{#if expandedFilters}}
           {{#if canFilterSolved}}
             <div class="docs-items docs-solved">
               <label class="checkbox-label docs-item">
@@ -21,11 +22,11 @@
                 {{i18n "docs.filter_solved"}}
               </label>
             </div>
-
           {{/if}}
+
           {{#if categories}}
             <div class="docs-items docs-categories">
-              <h3>{{i18n 'docs.categories'}}</h3>
+              <h3>{{i18n "docs.categories"}}</h3>
               {{#each categories as |category|}}
                 {{docs-category
                   category=category
@@ -35,9 +36,10 @@
               {{/each}}
             </div>
           {{/if}}
+
           {{#if tags}}
             <div class="docs-items docs-tags">
-              <h3>{{i18n 'docs.tags'}}</h3>
+              <h3>{{i18n "docs.tags"}}</h3>
               {{#each tags as |tag|}}
                 {{docs-tag
                   tag=tag
@@ -46,41 +48,43 @@
               {{/each}}
             </div>
           {{/if}}
+        {{/if}}
+      </div>
+
+      {{#if selectedTopic}}
+        {{#conditional-loading-spinner condition=isTopicLoading}}
+          {{docs-topic topic=topic return=(action "returnToList")}}
+        {{/conditional-loading-spinner}}
+      {{else}}
+        <div class="docs-results">
+          {{#if isSearchingOrFiltered}}
+            {{#if emptyResults}}
+              <div class="result-count no-result">
+                {{i18n "search.no_results"}}
+              </div>
+              {{plugin-outlet name="after-docs-empty-results"}}
+            {{else}}
+              <div class="result-count">
+                {{i18n "docs.search.results"
+                  count=topicCount
+                }}
+              </div>
+            {{/if}}
+          {{/if}}
+
+          {{#unless emptyResults}}
+            {{docs-topic-list
+              topics=topics
+              ascending=ascending
+              order=orderColumn
+              sortBy=(action "sortBy")
+              selectTopic=(action "setSelectedTopic")
+              loadMore=(action "loadMore")
+              loading=isLoadingMore
+            }}
+          {{/unless}}
+        </div>
       {{/if}}
     </div>
-    {{#if selectedTopic}}
-      {{#conditional-loading-spinner condition=isTopicLoading}}
-        {{docs-topic topic=topic return=(action "returnToList")}}
-      {{/conditional-loading-spinner}}
-    {{else}}
-      <div class="docs-results">
-        {{#if isSearchingOrFiltered}}
-          {{#if emptyResults}}
-            <div class="result-count no-result">
-              {{i18n 'search.no_results'}}
-            </div>
-            {{plugin-outlet name="after-docs-empty-results"}}
-          {{else}}
-            <div class="result-count">
-              {{i18n 'docs.search.results'
-                count=topicCount
-              }}
-            </div>
-          {{/if}}
-        {{/if}}
-        {{#unless emptyResults}}
-          {{docs-topic-list
-            topics=topics
-            ascending=ascending
-            order=orderColumn
-            sortBy=(action "sortBy")
-            selectTopic=(action "setSelectedTopic")
-            loadMore=(action "loadMore")
-            loading=isLoadingMore
-          }}
-        {{/unless}}
-      </div>
-    {{/if}}
-  </div>
   {{/if}}
 {{/conditional-loading-spinner}}
