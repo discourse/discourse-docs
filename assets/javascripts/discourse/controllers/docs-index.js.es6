@@ -123,6 +123,8 @@ export default Controller.extend({
       filterCategories: filter,
       selectedTopic: null,
     });
+
+    return false;
   },
 
   @action
