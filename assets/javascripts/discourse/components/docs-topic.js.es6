@@ -7,14 +7,16 @@ export default Component.extend({
 
   originalPostContent: reads("post.cooked"),
 
-  post: computed("topic", function () {
+  @computed("topic")
+  post() {
     return this.store.createRecord(
       "post",
       this.topic.post_stream.posts.firstObject
     );
-  }),
+  },
 
-  model: computed("post", "topic", function () {
+  @computed("post", "topic")
+  model() {
     const post = this.post;
 
     if (!post.topic) {
@@ -22,7 +24,7 @@ export default Component.extend({
     }
 
     return post;
-  }),
+  },
 
   didInsertElement() {
     this._super(...arguments);
