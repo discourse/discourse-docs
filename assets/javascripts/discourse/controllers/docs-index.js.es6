@@ -1,4 +1,4 @@
-import Controller, { inject } from "@ember/controller";
+import Controller, { inject as controller } from "@ember/controller";
 import discourseComputed, { on } from "discourse-common/utils/decorators";
 import { action } from "@ember/object";
 import { alias, equal, readOnly } from "@ember/object/computed";
@@ -16,7 +16,7 @@ export default Controller.extend({
     selectedTopic: "topic",
   },
 
-  application: inject(),
+  application: controller(),
 
   isLoading: false,
   isLoadingMore: false,

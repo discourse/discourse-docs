@@ -1,8 +1,8 @@
-import Controller, { inject } from "@ember/controller";
+import Controller, { inject as controller } from "@ember/controller";
 import { action } from "@ember/object";
 
 export default Controller.extend({
-  indexController: inject("docs.index"),
+  indexController: controller("docs.index"),
 
   @action
   updateSelectedCategories(category) {
