@@ -1,12 +1,12 @@
 import Component from "@ember/component";
+import { action } from "@ember/object";
 
 export default Component.extend({
   tagName: "",
 
-  actions: {
-    selectTag() {
-      this.selectTag(this.tag);
-      return false;
-    },
+  @action
+  selectTag() {
+    this.selectTag(this.tag);
+    return false;
   },
 });

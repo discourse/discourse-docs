@@ -1,4 +1,5 @@
 import Component from "@ember/component";
+import { action } from "@ember/object";
 import discourseComputed from "discourse-common/utils/decorators";
 
 export default Component.extend({
@@ -23,15 +24,15 @@ export default Component.extend({
     }
   },
 
-  actions: {
-    sortListActivity() {
-      this.sortBy("activity");
-      return false;
-    },
+  @action
+  sortListActivity() {
+    this.sortBy("activity");
+    return false;
+  },
 
-    sortListTitle() {
-      this.sortBy("title");
-      return false;
-    },
+  @action
+  sortListTitle() {
+    this.sortBy("title");
+    return false;
   },
 });

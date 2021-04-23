@@ -1,4 +1,5 @@
 import Component from "@ember/component";
+import { action } from "@ember/object";
 import discourseComputed from "discourse-common/utils/decorators";
 
 export default Component.extend({
@@ -9,10 +10,9 @@ export default Component.extend({
     return this.site.categories.findBy("id", category.id).name;
   },
 
-  actions: {
-    selectCategory() {
-      this.selectCategory(this.category);
-      return false;
-    },
+  @action
+  selectCategory() {
+    this.selectCategory(this.category);
+    return false;
   },
 });
