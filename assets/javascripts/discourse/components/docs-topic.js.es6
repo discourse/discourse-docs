@@ -1,6 +1,6 @@
 import Component from "@ember/component";
 import { reads } from "@ember/object/computed";
-import { computed } from "@ember/object";
+import computed from "discourse-common/utils/decorators";
 
 export default Component.extend({
   classNames: "docs-topic",
