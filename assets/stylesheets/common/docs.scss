@@ -127,6 +127,10 @@
     th {
       min-width: 5em;
 
+      &[role="button"] {
+        cursor: pointer;
+      }
+
       &:hover {
         background-color: var(--primary-low, $primary-low);
       }

@@ -1,31 +1,28 @@
 {{#load-more selector=".topic-list tr" action=loadMore}}
   <table class="topic-list">
     <thead>
-      <th>
-        <a href {{action "sortListTitle"}}>
-          {{i18n "docs.column_titles.topic"}}
+      <th role="button" {{action "sortListTitle"}}>
+        {{i18n "docs.column_titles.topic"}}
 
-          {{#if sortTitle}}
-            {{#if ascending}}
-              {{d-icon "angle-up"}}
-            {{else}}
-              {{d-icon "angle-down"}}
-            {{/if}}
+        {{#if sortTitle}}
+          {{#if ascending}}
+            {{d-icon "angle-up"}}
+          {{else}}
+            {{d-icon "angle-down"}}
           {{/if}}
-        </a>
+        {{/if}}
       </th>
-      <th>
-        <a href {{action "sortListActivity"}}>
-          {{i18n "docs.column_titles.activity"}}
 
-          {{#if sortActivity}}
-            {{#if ascending}}
-              {{d-icon "angle-up"}}
-            {{else}}
-              {{d-icon "angle-down"}}
-            {{/if}}
+      <th role="button" {{action "sortListActivity"}}>
+        {{i18n "docs.column_titles.activity"}}
+
+        {{#if sortActivity}}
+          {{#if ascending}}
+            {{d-icon "angle-up"}}
+          {{else}}
+            {{d-icon "angle-down"}}
           {{/if}}
-        </a>
+        {{/if}}
       </th>
     </thead>
 
