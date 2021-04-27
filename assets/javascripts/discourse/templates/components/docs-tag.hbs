@@ -1,4 +1,4 @@
-<a {{action "selectTag"}} class="docs-item docs-tag {{if tag.active 'selected'}} {{if subtag 'subtag'}}">
+<a href {{action "selectTag"}} class="docs-item docs-tag {{if tag.active "selected"}} {{if subtag "subtag"}}">
   {{#unless tag.active}}
     {{d-icon "plus"}}
   {{/unless}}
