@@ -1,5 +1,6 @@
 import Component from "@ember/component";
 import { debounce } from "@ember/runloop";
+import { action } from "@ember/object";
 import discourseDebounce from "discourse-common/lib/debounce";
 
 export default Component.extend({
@@ -12,14 +13,14 @@ export default Component.extend({
     debounceFunc(this, "onSearch", term, 500);
   },
 
-  actions: {
-    onSearchTermChange(term) {
-      this.debouncedSearch(term);
-    },
+  @action
+  onSearchTermChange(term) {
+    this.debouncedSearch(term);
+  },
 
-    clearSearch() {
-      this.set("searchTerm", "");
-      this.onSearch("");
-    },
+  @action
+  clearSearch() {
+    this.set("searchTerm", "");
+    this.onSearch("");
   },
 });

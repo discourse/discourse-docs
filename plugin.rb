@@ -4,7 +4,7 @@
 # about: A plugin to make it easy to explore and find knowledge base documents in Discourse
 # version: 0.1
 # author: Justin DiRose
-# url: https://github.com/discourse/discourse-knowledge-explorer
+# url: https://github.com/discourse/discourse-docs
 
 enabled_site_setting :docs_enabled
 
@@ -34,6 +34,7 @@ after_initialize do
       end
     end
   end
+
   add_to_class(:topic_query, :list_docs_topics) do
     default_results(@options)
   end

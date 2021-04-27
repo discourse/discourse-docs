@@ -1,5 +1,6 @@
-import Controller, { inject } from "@ember/controller";
+import Controller, { inject as controller } from "@ember/controller";
 import discourseComputed, { on } from "discourse-common/utils/decorators";
+import { action } from "@ember/object";
 import { alias, equal, readOnly } from "@ember/object/computed";
 import Docs from "discourse/plugins/discourse-docs/discourse/models/docs";
 import { getOwner } from "@ember/application";
@@ -14,14 +15,12 @@ export default Controller.extend({
     searchTerm: "search",
     selectedTopic: "topic",
   },
-  application: inject(),
+
+  application: controller(),
+
   isLoading: false,
   isLoadingMore: false,
-  loadMoreUrl: alias("model.topics.load_more_url"),
   isTopicLoading: false,
-  categories: readOnly("model.categories"),
-  topics: alias("model.topics.topic_list.topics"),
-  tags: readOnly("model.tags"),
   filterTags: null,
   filterCategories: null,
   filterSolved: false,
@@ -31,7 +30,13 @@ export default Controller.extend({
   expandedFilters: false,
   ascending: null,
   orderColumn: null,
+
+  loadMoreUrl: alias("model.topics.load_more_url"),
+  categories: readOnly("model.categories"),
+  topics: alias("model.topics.topic_list.topics"),
+  tags: readOnly("model.tags"),
   topicCount: alias("model.topic_count"),
+  emptyResults: equal("topicCount", 0),
 
   @on("init")
   _setupFilters() {
@@ -61,8 +66,6 @@ export default Controller.extend({
     return isSearching || filterSolved;
   },
 
-  emptyResults: equal("topicCount", 0),
-
   @discourseComputed
   canFilterSolved() {
     return (
@@ -76,108 +79,117 @@ export default Controller.extend({
     return !!filterTags;
   },
 
-  actions: {
-    setSelectedTopic(topicId) {
-      this.set("selectedTopic", topicId);
+  @action
+  setSelectedTopic(topicId) {
+    this.set("selectedTopic", topicId);
 
-      window.scrollTo(0, 0);
-    },
+    window.scrollTo(0, 0);
+  },
 
-    onChangeFilterSolved(solvedFilter) {
-      this.set("filterSolved", solvedFilter);
-    },
+  @action
+  onChangeFilterSolved(solvedFilter) {
+    this.set("filterSolved", solvedFilter);
+  },
 
-    updateSelectedTags(tag) {
-      let filter = this.filterTags;
-      if (filter && filter.includes(tag.id)) {
-        filter = filter.replace(tag.id, "").replace(/^\|+|\|+$/g, "");
-      } else if (filter) {
-        filter = `${filter}|${tag.id}`;
-      } else {
-        filter = tag.id;
-      }
+  @action
+  updateSelectedTags(tag) {
+    let filter = this.filterTags;
+    if (filter && filter.includes(tag.id)) {
+      filter = filter.replace(tag.id, "").replace(/^\|+|\|+$/g, "");
+    } else if (filter) {
+      filter = `${filter}|${tag.id}`;
+    } else {
+      filter = tag.id;
+    }
 
-      this.setProperties({
-        filterTags: filter,
-        selectedTopic: null,
-      });
-    },
+    this.setProperties({
+      filterTags: filter,
+      selectedTopic: null,
+    });
+  },
 
-    updateSelectedCategories(category) {
-      let filter = this.filterCategories;
-      if (filter && filter.includes(category.id)) {
-        filter = filter.replace(category.id, "").replace(/^\|+|\|+$/g, "");
-      } else if (filter) {
-        filter = `${filter}|${category.id}`;
-      } else {
-        filter = category.id;
-      }
+  @action
+  updateSelectedCategories(category) {
+    let filter = this.filterCategories;
+    if (filter && filter.includes(category.id)) {
+      filter = filter.replace(category.id, "").replace(/^\|+|\|+$/g, "");
+    } else if (filter) {
+      filter = `${filter}|${category.id}`;
+    } else {
+      filter = category.id;
+    }
 
-      this.setProperties({
-        filterCategories: filter,
-        selectedTopic: null,
-      });
-    },
+    this.setProperties({
+      filterCategories: filter,
+      selectedTopic: null,
+    });
 
-    performSearch(term) {
-      if (term === "") {
-        this.set("searchTerm", null);
-        return false;
-      }
+    return false;
+  },
 
-      if (term.length < this.siteSettings.min_search_term_length) {
-        return false;
-      }
+  @action
+  performSearch(term) {
+    if (term === "") {
+      this.set("searchTerm", null);
+      return false;
+    }
 
-      this.setProperties({
-        searchTerm: term,
-        selectedTopic: null,
-      });
-    },
+    if (term.length < this.siteSettings.min_search_term_length) {
+      return false;
+    }
 
-    sortBy(column) {
-      const order = this.orderColumn;
-      const ascending = this.ascending;
-      if (column === "title") {
-        this.set("orderColumn", "title");
-      } else if (column === "activity") {
-        this.set("orderColumn", "activity");
-      }
+    this.setProperties({
+      searchTerm: term,
+      selectedTopic: null,
+    });
+  },
 
-      if (!ascending && order) {
-        this.set("ascending", true);
-      } else {
-        this.set("ascending", "");
-      }
-    },
+  @action
+  sortBy(column) {
+    const order = this.orderColumn;
+    const ascending = this.ascending;
+    if (column === "title") {
+      this.set("orderColumn", "title");
+    } else if (column === "activity") {
+      this.set("orderColumn", "activity");
+    }
 
-    loadMore() {
-      if (this.canLoadMore && !this.isLoadingMore) {
-        this.set("isLoadingMore", true);
+    if (!ascending && order) {
+      this.set("ascending", true);
+    } else {
+      this.set("ascending", "");
+    }
+  },
 
-        Docs.loadMore(this.loadMoreUrl).then((result) => {
-          const topics = this.topics.concat(result.topics.topic_list.topics);
+  @action
+  loadMore() {
+    if (this.canLoadMore && !this.isLoadingMore) {
+      this.set("isLoadingMore", true);
 
-          this.setProperties({
-            topics,
-            loadMoreUrl: result.topics.load_more_url || null,
-            isLoadingMore: false,
-          });
+      Docs.loadMore(this.loadMoreUrl).then((result) => {
+        const topics = this.topics.concat(result.topics.topic_list.topics);
+
+        this.setProperties({
+          topics,
+          loadMoreUrl: result.topics.load_more_url || null,
+          isLoadingMore: false,
         });
-      }
-    },
+      });
+    }
+  },
 
-    toggleFilters() {
-      if (!this.expandedFilters) {
-        this.set("expandedFilters", true);
-      } else {
-        this.set("expandedFilters", false);
-      }
-    },
+  @action
+  toggleFilters() {
+    if (!this.expandedFilters) {
+      this.set("expandedFilters", true);
+    } else {
+      this.set("expandedFilters", false);
+    }
+  },
 
-    returnToList() {
-      this.set("selectedTopic", null);
-      getOwner(this).lookup("router:main").transitionTo("docs");
-    },
+  @action
+  returnToList() {
+    this.set("selectedTopic", null);
+    getOwner(this).lookup("router:main").transitionTo("docs");
   },
 });

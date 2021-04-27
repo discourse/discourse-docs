@@ -7,6 +7,7 @@ const Docs = EmberObject.extend({});
 Docs.reopenClass({
   list(params) {
     let filters = [];
+
     if (params.filterCategories) {
       filters.push(`category=${params.filterCategories}`);
     }
@@ -53,10 +54,7 @@ Docs.reopenClass({
 
     promise = promise.then((data) => {
       data.topics.topic_list.topics = data.topics.topic_list.topics.map(
-        (topic) => {
-          topic = Topic.create(topic);
-          return topic;
-        }
+        (topic) => Topic.create(topic)
       );
       return data;
     });

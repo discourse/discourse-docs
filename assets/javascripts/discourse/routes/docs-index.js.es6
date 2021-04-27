@@ -15,6 +15,7 @@ export default DiscourseRoute.extend({
       refreshModel: true,
     },
   },
+
   model(params) {
     this.controllerFor("docs.index").set("isLoading", true);
     return Docs.list(params).then((result) => {
