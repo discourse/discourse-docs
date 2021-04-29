@@ -33,33 +33,22 @@ Docs.reopenClass({
       filters.push(`topic=${params.selectedTopic}`);
     }
 
-    let promise = ajax(`/docs.json?${filters.join("&")}`);
-
-    promise = promise.then((data) => {
+    return ajax(`/docs.json?${filters.join("&")}`).then((data) => {
       data.topics.topic_list.topics = data.topics.topic_list.topics.map(
-        (topic) => {
-          topic = Topic.create(topic);
-          return topic;
-        }
+        (topic) => Topic.create(topic)
       );
       data.topic = Topic.create(data.topic);
       return data;
     });
-
-    return promise;
   },
 
   loadMore(loadMoreUrl) {
-    let promise = ajax(loadMoreUrl);
-
-    promise = promise.then((data) => {
+    return ajax(loadMoreUrl).then((data) => {
       data.topics.topic_list.topics = data.topics.topic_list.topics.map(
         (topic) => Topic.create(topic)
       );
       return data;
     });
-
-    return promise;
   },
 });
 
