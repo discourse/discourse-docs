@@ -1,4 +1,4 @@
-import { acceptance, query, queryAll } from "helpers/qunit-helpers";
+import { acceptance, count, query } from "helpers/qunit-helpers";
 import docsFixtures from "../fixtures/docs";
 
 acceptance("Docs", function (needs) {
@@ -44,9 +44,9 @@ acceptance("Docs", function (needs) {
 
   test("selecting a category", async function (assert) {
     await visit("/docs");
-    assert.equal(queryAll(".docs-category.selected").length, 0);
+    assert.equal(count(".docs-category.selected"), 0);
 
     await click(".docs-item.docs-category");
-    assert.equal(queryAll(".docs-category.selected").length, 1);
+    assert.equal(count(".docs-category.selected"), 1);
   });
 });
