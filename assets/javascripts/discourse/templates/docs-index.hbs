@@ -30,8 +30,7 @@
               {{#each categories as |category|}}
                 {{docs-category
                   category=category
-                  selectCategory=(action "updateSelectedCategories"
-                  tagName="")
+                  selectCategory=(action "updateSelectedCategories" category)
                 }}
               {{/each}}
             </div>
@@ -43,7 +42,7 @@
               {{#each tags as |tag|}}
                 {{docs-tag
                   tag=tag
-                  selectTag=(action "updateSelectedTags")
+                  selectTag=(action "updateSelectedTags" tag)
                 }}
               {{/each}}
             </div>

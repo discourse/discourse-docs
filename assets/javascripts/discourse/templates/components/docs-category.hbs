@@ -1,4 +1,4 @@
-<a href {{action "selectCategory"}} class="docs-item docs-category {{if category.active "selected"}}">
+<a href {{action this.selectCategory}} class="docs-item docs-category {{if category.active "selected"}}">
   {{#unless category.active}}
     {{d-icon "plus"}}
   {{/unless}}
