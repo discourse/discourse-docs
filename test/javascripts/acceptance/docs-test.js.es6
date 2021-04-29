@@ -1,4 +1,4 @@
-import { acceptance, query } from "helpers/qunit-helpers";
+import { acceptance, query, queryAll } from "helpers/qunit-helpers";
 import docsFixtures from "../fixtures/docs";
 
 acceptance("Docs", function (needs) {
@@ -8,7 +8,25 @@ acceptance("Docs", function (needs) {
   });
 
   needs.pretender((server, helper) => {
-    server.get("/docs.json", () => helper.response(docsFixtures));
+    server.get("/docs.json", (request) => {
+      if (request.queryParams.category === "1") {
+        const fixture = JSON.parse(JSON.stringify(docsFixtures));
+
+        return helper.response(
+          Object.assign(fixture, {
+            categories: [
+              {
+                id: 1,
+                count: 119,
+                active: true,
+              },
+            ],
+          })
+        );
+      } else {
+        return helper.response(docsFixtures);
+      }
+    });
   });
 
   test("index page", async function (assert) {
@@ -22,5 +40,13 @@ acceptance("Docs", function (needs) {
       query(".docs-topic-link").innerText.trim(),
       "Importing from Software X"
     );
+  });
+
+  test("selecting a category", async function (assert) {
+    await visit("/docs");
+    assert.equal(queryAll(".docs-category.selected").length, 0);
+
+    await click(".docs-item.docs-category");
+    assert.equal(queryAll(".docs-category.selected").length, 1);
   });
 });
