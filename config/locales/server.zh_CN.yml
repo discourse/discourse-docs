@@ -5,3 +5,9 @@
 # https://translate.discourse.org/
 
 zh_CN:
+  site_settings:
+    docs_enabled: "启用文档插件"
+    docs_categories: "要包含在文档中的分类的简称列表"
+    docs_tags: "要包含在文档中的标签列表"
+    docs_add_solved_filter: "筛选出已解决的话题，需要安装并启用 Discourse Solved 插件"
+    docs_add_to_top_menu: "在顶端菜单添加链接以跳转到文档视图"
