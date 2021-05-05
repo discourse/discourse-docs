@@ -5,3 +5,25 @@
 # https://translate.discourse.org/
 
 zh_CN:
+  js:
+    filters:
+      docs:
+        help: "浏览文档话题"
+    docs:
+      title: "文档"
+      column_titles:
+        topic: "话题"
+        activity: "活动"
+      no_topics: "文档中没有话题。"
+      categories: "分类"
+      tags: "标签"
+      search:
+        results:
+          other: "找到 %{count} 条结果"
+        placeholder: "搜索话题"
+        clear: "清空"
+      topic:
+        back: "返回"
+        navigate_to_topic: "查看关于此话题的讨论"
+      filter_button: "筛选"
+      filter_solved: "已解决话题"
