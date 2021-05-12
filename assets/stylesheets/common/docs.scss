@@ -6,7 +6,7 @@
     right: 0.75em;
     top: 25%;
     font-size: 1.5em;
-    color: var(--primary-low-mid, $primary-low-mid);
+    color: var(--primary-low-mid);
     pointer-events: none;
     @media screen and (max-width: 400px) {
       // Just decoration, remove on small screens
@@ -26,7 +26,7 @@
 
 .docs-search {
   align-items: center;
-  background-color: var(--primary-very-low, $primary-very-low);
+  background-color: var(--primary-very-low);
   display: flex;
   justify-content: center;
   padding: 1.5em 1em;
@@ -70,7 +70,7 @@
     padding: 0.57em 1em 1em 0;
 
     a {
-      color: var(--primary, $primary);
+      color: var(--primary);
       white-space: nowrap;
     }
 
@@ -81,7 +81,7 @@
 
     .docs-item-count {
       margin-left: auto;
-      color: var(--primary-high, $primary-high);
+      color: var(--primary-high);
       font-size: $font-down-1;
     }
 
@@ -95,19 +95,19 @@
         height: 1em;
         padding-bottom: 0.15em;
         margin-right: 0.25em;
-        color: var(--primary-high, $primary-high);
+        color: var(--primary-high);
         &.d-icon-plus {
           height: 0.75em;
           margin-right: 0.25em;
         }
       }
       &:hover {
-        background: var(--highlight-medium, $highlight-medium);
+        background: var(--highlight-medium);
       }
       &.selected:hover {
-        background: var(--danger-low, $danger-low);
+        background: var(--danger-low);
         .d-icon {
-          color: var(--danger, $danger);
+          color: var(--danger);
         }
       }
       .tag-id,
@@ -132,7 +132,7 @@
       }
 
       &:hover {
-        background-color: var(--primary-low, $primary-low);
+        background-color: var(--primary-low);
       }
 
       .d-icon {
@@ -150,7 +150,7 @@
       font-size: $font-down-1;
     }
     .docs-topic-link {
-      color: var(--tertiary, $tertiary);
+      color: var(--tertiary);
       cursor: pointer;
       display: inline-block;
       word-break: break-word;
