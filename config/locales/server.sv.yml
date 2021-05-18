@@ -5,3 +5,9 @@
 # https://translate.discourse.org/
 
 sv:
+  site_settings:
+    docs_enabled: "Aktivera Docs-tillägget"
+    docs_categories: "En lista över kategorietiketter som ska vara med i Docs"
+    docs_tags: "En lista över taggar som ska vara med i Docs"
+    docs_add_solved_filter: "Lägger till ett filter för lösta ämnen – kräver att Discourse Solved har installerats och aktiverats"
+    docs_add_to_top_menu: "Lägger till en länk i toppmenyn som leder till Docs-vyn"
