@@ -5,3 +5,26 @@
 # https://translate.discourse.org/
 
 pt_BR:
+  js:
+    filters:
+      docs:
+        help: "navegar nos tópicos dos documentos"
+    docs:
+      title: "Documentos"
+      column_titles:
+        topic: "Tópico"
+        activity: "Atividade"
+      no_topics: "Nenhum tópico no Documentos."
+      categories: "Categorias"
+      tags: "Etiquetas"
+      search:
+        results:
+          one: "%{count} resultado encontrado"
+          other: "%{count} resultados encontrados"
+        placeholder: "Pesquisar por tópicos"
+        clear: "Limpar"
+      topic:
+        back: "Voltar"
+        navigate_to_topic: "Veja a discussão neste tópico"
+      filter_button: "Filtros"
+      filter_solved: "Tópico resolvido?"
