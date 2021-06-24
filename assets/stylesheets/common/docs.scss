@@ -167,7 +167,7 @@
       &.return {
         align-items: center;
         background: none;
-        color: $tertiary;
+        color: var(--tertiary);
         display: inline-flex;
         font-size: $font-down-1;
         justify-content: normal;
