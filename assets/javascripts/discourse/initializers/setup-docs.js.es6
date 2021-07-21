@@ -32,5 +32,13 @@ export default {
 
   initialize(container) {
     withPluginApi("0.8", (api) => initialize(api, container));
+    withPluginApi("0.11.7", (api) => {
+      const siteSettings = container.lookup("site-settings:main");
+      if (!siteSettings.docs_enabled) {
+        return;
+      }
+
+      api.addSearchSuggestion("in:docs");
+    });
   },
 };

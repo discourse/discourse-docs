@@ -19,7 +19,7 @@ after_initialize do
 
   if SiteSetting.docs_enabled
     if Search.respond_to? :advanced_filter
-      Search.advanced_filter(/in:kb/) do |posts|
+      Search.advanced_filter(/in:(kb|docs)/) do |posts|
         selected_categories = SiteSetting.docs_categories.split('|')
         if selected_categories
           categories = Category.where('id IN (?)', selected_categories).pluck(:id)
