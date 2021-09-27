@@ -120,6 +120,20 @@ describe Docs::DocsController do
         expect(categories.size).to eq(1)
         expect(topics.size).to eq(1)
       end
+
+      it 'ignores category filter when incorrect argument' do
+        get "/docs.json?category=hack"
+
+        expect(response.status).to eq(200)
+
+        json = JSON.parse(response.body)
+        categories = json['categories']
+        topics = json['topics']['topic_list']['topics']
+
+        expect(categories.size).to eq(2)
+        expect(topics.size).to eq(3)
+
+      end
     end
 
     context 'when ordering results' do
