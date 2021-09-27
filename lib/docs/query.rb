@@ -27,7 +27,8 @@ module Docs
 
       # filter results by selected category
       if @filters[:category].present?
-        results = results.where('topics.category_id IN (?)', @filters[:category].split('|'))
+        category_ids = @filters[:category].split('|')
+        results = results.where('topics.category_id IN (?)', category_ids) if category_ids.all? { |id| id =~ /\A\d+\z/ }
       end
 
       # filter results by selected tags
