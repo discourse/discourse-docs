@@ -1,3 +1,5 @@
-# Discourse Docs
+# Discourse Docs Plugin
 
-https://meta.discourse.org/t/discourse-docs-documentation-management-plugin/130172/
+Find and filter knowledge base topics.
+
+For more information, please see: https://meta.discourse.org/t/discourse-docs-documentation-management-plugin/130172/
