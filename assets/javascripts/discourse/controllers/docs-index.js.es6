@@ -30,6 +30,10 @@ export default Controller.extend({
   expandedFilters: false,
   ascending: null,
   orderColumn: null,
+  sortAlpha: 0,
+  sortNumeric: 1,
+  categorySort: "numeric",
+  categoryFilter: "",
 
   loadMoreUrl: alias("model.topics.load_more_url"),
   categories: readOnly("model.categories"),
@@ -43,6 +47,51 @@ export default Controller.extend({
     if (!this.site.mobileView) {
       this.set("expandedFilters", true);
     }
+  },
+  @discourseComputed("categories", "sortAlpha", "sortNumeric", "categorySort", "categoryFilter")
+  sortedCategories(categories, sortAlpha, sortNumeric, sortBy, filter) {
+    if (sortBy === "numeric") {
+      if (sortNumeric === 1) {
+        categories = categories.sort((a, b) => {
+          return b.count > a.count;
+        });
+      } else {
+        categories = categories.sort((a, b) => {
+          return a.count > b.count;
+        });
+      }
+    } else {
+      if (sortAlpha === 1) {
+        categories = categories.sort((a, b) => {
+          return (
+            this.site.categories.findBy("id", a.id).name.toLowerCase() <
+            this.site.categories.findBy("id", b.id).name.toLowerCase()
+          );
+        });
+      } else {
+        categories = categories.sort((a, b) => {
+          return (
+            this.site.categories.findBy("id", a.id).name.toLowerCase() >
+            this.site.categories.findBy("id", b.id).name.toLowerCase()
+          );
+        });
+      }
+    }
+
+    categories = categories.filter((category) => {
+      let categoryData = this.site.categories.findBy("id", category.id)
+      return (
+        categoryData.name
+          .toLowerCase()
+          .indexOf(filter.toLowerCase()) > -1 ||
+        (categoryData.description_excerpt &&
+          categoryData.description_excerpt
+            .toLowerCase()
+            .indexOf(filter.toLowerCase()) > -1)
+      );
+    });
+
+    return categories;
   },
 
   @discourseComputed("topics", "isSearching", "filterSolved")
@@ -77,6 +126,26 @@ export default Controller.extend({
   @discourseComputed("filterTags")
   filtered(filterTags) {
     return !!filterTags;
+  },
+
+  @action
+  toggleAlphaSort() {
+    this.set("categorySort", "alpha")
+    if (this.sortAlpha === -1 || this.sortAlpha === 0) {
+      this.set("sortAlpha", 1);
+    } else {
+      this.set("sortAlpha", -1);
+    }
+  },
+
+  @action
+  toggleNumericSort() {
+    this.set("categorySort", "numeric")
+    if (this.sortNumeric === -1 || this.sortNumeric === 0) {
+      this.set("sortNumeric", 1);
+    } else {
+      this.set("sortNumeric", -1);
+    }
   },
 
   @action

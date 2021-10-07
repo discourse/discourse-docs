@@ -10,6 +10,7 @@ en:
         activity: "Activity"
       no_topics: "No topics in Docs."
       categories: "Categories"
+      categories_filter_placeholder: "Filter categories"
       tags: "Tags"
       search:
         results:

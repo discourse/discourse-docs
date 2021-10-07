@@ -26,13 +26,32 @@
 
           {{#if categories}}
             <div class="docs-items docs-categories">
-              <h3>{{i18n "docs.categories"}}</h3>
-              {{#each categories as |category|}}
-                {{docs-category
-                  category=category
-                  selectCategory=(action "updateSelectedCategories" category)
+              <section class="item-controls">
+                <h3>{{i18n "docs.categories"}}</h3> {{d-button class="categories-alphabet" icon=(if (gt sortAlpha 0) "sort-alpha-up" "sort-alpha-down") action=toggleAlphaSort}} {{d-button class="categories-amount" icon=(if (gt sortNumeric 0) "sort-numeric-down" "sort-numeric-up") action=toggleNumericSort}}
+              </section>
+                {{input
+                  value=categoryFilter
+                  class="filter"
+                  placeholderKey="docs.categories_filter_placeholder"
                 }}
-              {{/each}}
+                <ul>
+                  {{#each selectedCategories as |category|}}
+                    <li>
+                      {{docs-category
+                        category=category
+                        selectCategory=(action "updateSelectedCategories" category)
+                      }}
+                    </li>
+                  {{/each}}
+                   {{#each sortedCategories as |category|}}
+                    <li>
+                      {{docs-category
+                        category=category
+                        selectCategory=(action "updateSelectedCategories" category)
+                      }}
+                    </li>
+                  {{/each}}
+                </ul>
             </div>
           {{/if}}
 

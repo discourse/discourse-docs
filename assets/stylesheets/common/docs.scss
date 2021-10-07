@@ -75,7 +75,6 @@
     }
 
     h3 {
-      padding-left: 0.35em;
       font-size: $font-up-1;
     }
 
@@ -201,5 +200,36 @@
     #share-link .reply-as-new-topic {
       display: none;
     }
+  }
+}
+
+.docs-items {
+  .item-controls {
+    display: flex;
+    justify-content: space-between;
+    .btn {
+      background-color: var(--secondary);
+      padding: 0.25em;
+      svg {
+        color: var(--primary-high);
+      }
+      &:hover {
+        background-color: var(--secondary-very-high);
+        svg {
+          color: var(--primary-high);
+        }
+      }
+      height: 28px;
+    }
+  }  
+}
+
+.docs-items {
+  input {
+    width: 100%;
+  }
+  ul {
+    margin: 0;
+    list-style: none;
   }
 }
