@@ -11,7 +11,7 @@ en:
       no_topics: "No topics in Docs."
       categories: "Categories"
       categories_filter_placeholder: "Filter categories"
-      tags_filter_placeholder: "Filter categories"
+      tags_filter_placeholder: "Filter tags"
       tags: "Tags"
       search:
         results:
