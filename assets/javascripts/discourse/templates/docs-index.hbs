@@ -33,11 +33,13 @@
                   {{d-button class="categories-amount" icon=(if (gt categorySortNumeric 0) "sort-numeric-down" "sort-numeric-up") action=toggleCategoryNumericSort}}
                 </div>
               </section>
-              {{input
-                value=categoryFilter
-                class="filter"
-                placeholderKey="docs.categories_filter_placeholder"
-              }}
+              {{#if showCategoryFilter}}
+                {{input
+                  value=categoryFilter
+                  class="filter"
+                  placeholderKey="docs.categories_filter_placeholder"
+                }}
+              {{/if}}
               <ul>
                 {{#each sortedCategories as |category|}}
                   <li>
@@ -60,11 +62,13 @@
                   {{d-button class="tags-amount" icon=(if (gt tagSoryNumeric 0) "sort-numeric-down" "sort-numeric-up") action=toggleTagNumericSort}}
                 </div>
               </section>
-              {{input
-                value=tagFilter
-                class="filter"
-                placeholderKey="docs.tags_filter_placeholder"
-              }}
+              {{#if showTagFilter}}
+                {{input
+                  value=tagFilter
+                  class="filter"
+                  placeholderKey="docs.tags_filter_placeholder"
+                }}
+              {{/if}}
               <ul>
                 {{#each sortedTags as |tag|}}
                   <li>

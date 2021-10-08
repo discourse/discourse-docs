@@ -1,9 +1,11 @@
 import Controller, { inject as controller } from "@ember/controller";
 import discourseComputed, { on } from "discourse-common/utils/decorators";
 import { action } from "@ember/object";
-import { alias, equal, readOnly } from "@ember/object/computed";
+import { alias, equal, gt, readOnly } from "@ember/object/computed";
 import Docs from "discourse/plugins/discourse-docs/discourse/models/docs";
 import { getOwner } from "@ember/application";
+
+const SHOW_FILTER_AT = 10
 
 export default Controller.extend({
   queryParams: {
@@ -35,11 +37,13 @@ export default Controller.extend({
   categorySortNumeric: 1,
   categorySort: "numeric",
   categoryFilter: "",
+  showCategoryFilter: gt("categories.length", SHOW_FILTER_AT),
 
   tagSortAlpha: 1,
   tagSortNumeric: 1,
   tagSort: "numeric",
   tagFilter: "",
+  showTagFilter: gt("tags.length", SHOW_FILTER_AT),
 
   loadMoreUrl: alias("model.topics.load_more_url"),
   categories: readOnly("model.categories"),
