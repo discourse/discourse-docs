@@ -5,7 +5,7 @@ import { alias, equal, gt, readOnly } from "@ember/object/computed";
 import Docs from "discourse/plugins/discourse-docs/discourse/models/docs";
 import { getOwner } from "@ember/application";
 
-const SHOW_FILTER_AT = 10
+const SHOW_FILTER_AT = 10;
 
 export default Controller.extend({
   queryParams: {
@@ -33,17 +33,13 @@ export default Controller.extend({
   ascending: null,
   orderColumn: null,
 
-  categorySortAlpha: 1,
-  categorySortNumeric: 1,
-  categorySort: "numeric",
-  categoryFilter: "",
   showCategoryFilter: gt("categories.length", SHOW_FILTER_AT),
+  categoryFilter: "",
+  categorySort: {},
 
-  tagSortAlpha: 1,
-  tagSortNumeric: 1,
-  tagSort: "numeric",
-  tagFilter: "",
   showTagFilter: gt("tags.length", SHOW_FILTER_AT),
+  tagFilter: "",
+  tagSort: {},
 
   loadMoreUrl: alias("model.topics.load_more_url"),
   categories: readOnly("model.categories"),
@@ -58,89 +54,71 @@ export default Controller.extend({
       this.set("expandedFilters", true);
     }
   },
-  @discourseComputed(
-    "categories",
-    "categorySortAlpha",
-    "categorySortNumeric",
-    "categorySort",
-    "categoryFilter"
-  )
-  sortedCategories(categories, sortAlpha, sortNumeric, sortBy, filter) {
-    if (sortBy === "numeric") {
-      if (sortNumeric === 1) {
-        categories = categories.sort((a, b) => {
-          return b.count > a.count;
-        });
-      } else {
-        categories = categories.sort((a, b) => {
-          return a.count > b.count;
-        });
-      }
+  _setupSorting() {
+    this.setProperties({
+      categorySort: {
+        type: "numeric", // or alpha
+        direction: "asc", // or desc
+      },
+      tagSort: {
+        type: "numeric", // or alpha
+        direction: "asc", // or desc
+      },
+    });
+  },
+  @discourseComputed("categories", "categorySort", "categoryFilter")
+  sortedCategories(categories, categorySort, filter) {
+    let { type, direction } = categorySort;
+    if (type === "numeric") {
+      categories = categories.sort((a, b) => {
+        return direction === "asc" ? a.count < b.count : a.count > b.count;
+      });
     } else {
-      if (sortAlpha === 1) {
-        categories = categories.sort((a, b) => {
-          return (
-            this.site.categories.findBy("id", a.id).name.toLowerCase() <
-            this.site.categories.findBy("id", b.id).name.toLowerCase()
-          );
-        });
-      } else {
-        categories = categories.sort((a, b) => {
-          return (
-            this.site.categories.findBy("id", a.id).name.toLowerCase() >
-            this.site.categories.findBy("id", b.id).name.toLowerCase()
-          );
-        });
-      }
+      categories = categories.sort((a, b) => {
+        return direction === "asc"
+          ? this.site.categories.findBy("id", a.id).name.toLowerCase() <
+              this.site.categories.findBy("id", b.id).name.toLowerCase()
+          : this.site.categories.findBy("id", a.id).name.toLowerCase() >
+              this.site.categories.findBy("id", b.id).name.toLowerCase();
+      });
     }
 
-    categories = categories.filter((category) => {
-      let categoryData = this.site.categories.findBy("id", category.id);
-      return (
-        categoryData.name.toLowerCase().indexOf(filter.toLowerCase()) > -1 ||
-        (categoryData.description_excerpt &&
-          categoryData.description_excerpt
-            .toLowerCase()
-            .indexOf(filter.toLowerCase()) > -1)
-      );
-    });
+    if (this.showCategoryFilter) {
+      return categories.filter((category) => {
+        let categoryData = this.site.categories.findBy("id", category.id);
+        return (
+          categoryData.name.toLowerCase().indexOf(filter.toLowerCase()) > -1 ||
+          (categoryData.description_excerpt &&
+            categoryData.description_excerpt
+              .toLowerCase()
+              .indexOf(filter.toLowerCase()) > -1)
+        );
+      });
+    }
 
     return categories;
   },
 
-  @discourseComputed(
-    "tags",
-    "tagSortAlpha",
-    "tagSortNumeric",
-    "tagSort",
-    "tagFilter"
-  )
-  sortedTags(tags, sortAlpha, sortNumeric, sortBy, filter) {
-    if (sortBy === "numeric") {
-      if (sortNumeric === 1) {
-        tags = tags.sort((a, b) => {
-          return b.count > a.count;
-        });
-      } else {
-        tags = tags.sort((a, b) => {
-          return a.count > b.count;
-        });
-      }
+  @discourseComputed("tags", "tagSort", "tagFilter")
+  sortedTags(tags, tagSort, filter) {
+    let { type, direction } = tagSort;
+    if (type === "numeric") {
+      tags = tags.sort((a, b) => {
+        return direction === "asc" ? a.count < b.count : a.count > b.count;
+      });
     } else {
-      if (sortAlpha === 1) {
-        tags = tags.sort((a, b) => {
-          return a.id.toLowerCase() < b.id.toLowerCase();
-        });
-      } else {
-        tags = tags.sort((a, b) => {
-          return a.id.toLowerCase() > b.id.toLowerCase();
-        });
-      }
+      tags = tags.sort((a, b) => {
+        return direction === "asc"
+          ? a.id.toLowerCase() < b.id.toLowerCase()
+          : a.id.toLowerCase() > b.id.toLowerCase();
+      });
     }
 
-    tags = tags.filter((tag) => {
-      return tag.id.toLowerCase().indexOf(filter.toLowerCase()) > -1;
-    });
+    if (this.showTagFilter) {
+      return tags.filter((tag) => {
+        return tag.id.toLowerCase().indexOf(filter.toLowerCase()) > -1;
+      });
+    }
 
     return tags;
   },
@@ -181,42 +159,42 @@ export default Controller.extend({
 
   @action
   toggleCategoryAlphaSort() {
-    this.set("categorySort", "alpha");
-    if (this.categorySortAlpha === -1) {
-      this.set("categorySortAlpha", 1);
-    } else {
-      this.set("categorySortAlpha", -1);
-    }
+    let { type, direction } = this.categorySort;
+    this.set("categorySort", {
+      type: "alpha",
+      direction:
+        type === "alpha" ? (direction === "asc" ? "desc" : "asc") : "asc",
+    });
   },
 
   @action
   toggleCategoryNumericSort() {
-    this.set("categorySort", "numeric");
-    if (this.categorySortNumeric === -1) {
-      this.set("categorySortNumeric", 1);
-    } else {
-      this.set("categorySortNumeric", -1);
-    }
+    let { type, direction } = this.categorySort;
+    this.set("categorySort", {
+      type: "numeric",
+      direction:
+        type === "numeric" ? (direction === "asc" ? "desc" : "asc") : "asc",
+    });
   },
 
   @action
   toggleTagAlphaSort() {
-    this.set("tagSort", "alpha");
-    if (this.tagSortAlpha === -1) {
-      this.set("tagSortAlpha", 1);
-    } else {
-      this.set("tagSortAlpha", -1);
-    }
+    let { type, direction } = this.tagSort;
+    this.set("tagSort", {
+      type: "alpha",
+      direction:
+        type === "alpha" ? (direction === "asc" ? "desc" : "asc") : "asc",
+    });
   },
 
   @action
   toggleTagNumericSort() {
-    this.set("tagSort", "numeric");
-    if (this.tagSortNumeric === -1) {
-      this.set("tagSortNumeric", 1);
-    } else {
-      this.set("tagSortNumeric", -1);
-    }
+    let { type, direction } = this.tagSort;
+    this.set("tagSort", {
+      type: "numeric",
+      direction:
+        type === "numeric" ? (direction === "asc" ? "desc" : "asc") : "asc",
+    });
   },
 
   @action
