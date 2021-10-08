@@ -31,12 +31,12 @@ export default Controller.extend({
   ascending: null,
   orderColumn: null,
 
-  categorySortAlpha: 0,
+  categorySortAlpha: 1,
   categorySortNumeric: 1,
   categorySort: "numeric",
   categoryFilter: "",
 
-  tagSortAlpha: 0,
+  tagSortAlpha: 1,
   tagSortNumeric: 1,
   tagSort: "numeric",
   tagFilter: "",
@@ -178,7 +178,7 @@ export default Controller.extend({
   @action
   toggleCategoryAlphaSort() {
     this.set("categorySort", "alpha");
-    if (this.categorySortAlpha === -1 || this.categorySortAlpha === 0) {
+    if (this.categorySortAlpha === -1) {
       this.set("categorySortAlpha", 1);
     } else {
       this.set("categorySortAlpha", -1);
@@ -188,7 +188,7 @@ export default Controller.extend({
   @action
   toggleCategoryNumericSort() {
     this.set("categorySort", "numeric");
-    if (this.categorySortNumeric === -1 || this.categorySortNumeric === 0) {
+    if (this.categorySortNumeric === -1) {
       this.set("categorySortNumeric", 1);
     } else {
       this.set("categorySortNumeric", -1);
@@ -198,7 +198,7 @@ export default Controller.extend({
   @action
   toggleTagAlphaSort() {
     this.set("tagSort", "alpha");
-    if (this.tagSortAlpha === -1 || this.tagSortAlpha === 0) {
+    if (this.tagSortAlpha === -1) {
       this.set("tagSortAlpha", 1);
     } else {
       this.set("tagSortAlpha", -1);
@@ -208,7 +208,7 @@ export default Controller.extend({
   @action
   toggleTagNumericSort() {
     this.set("tagSort", "numeric");
-    if (this.tagSortNumeric === -1 || this.tagSortNumeric === 0) {
+    if (this.tagSortNumeric === -1) {
       this.set("tagSortNumeric", 1);
     } else {
       this.set("tagSortNumeric", -1);
