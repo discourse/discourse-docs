@@ -30,10 +30,16 @@ export default Controller.extend({
   expandedFilters: false,
   ascending: null,
   orderColumn: null,
-  sortAlpha: 0,
-  sortNumeric: 1,
+
+  categorySortAlpha: 0,
+  categorySortNumeric: 1,
   categorySort: "numeric",
   categoryFilter: "",
+
+  tagSortAlpha: 0,
+  tagSortNumeric: 1,
+  tagSort: "numeric",
+  tagFilter: "",
 
   loadMoreUrl: alias("model.topics.load_more_url"),
   categories: readOnly("model.categories"),
@@ -48,7 +54,13 @@ export default Controller.extend({
       this.set("expandedFilters", true);
     }
   },
-  @discourseComputed("categories", "sortAlpha", "sortNumeric", "categorySort", "categoryFilter")
+  @discourseComputed(
+    "categories",
+    "categorySortAlpha",
+    "categorySortNumeric",
+    "categorySort",
+    "categoryFilter"
+  )
   sortedCategories(categories, sortAlpha, sortNumeric, sortBy, filter) {
     if (sortBy === "numeric") {
       if (sortNumeric === 1) {
@@ -79,11 +91,9 @@ export default Controller.extend({
     }
 
     categories = categories.filter((category) => {
-      let categoryData = this.site.categories.findBy("id", category.id)
+      let categoryData = this.site.categories.findBy("id", category.id);
       return (
-        categoryData.name
-          .toLowerCase()
-          .indexOf(filter.toLowerCase()) > -1 ||
+        categoryData.name.toLowerCase().indexOf(filter.toLowerCase()) > -1 ||
         (categoryData.description_excerpt &&
           categoryData.description_excerpt
             .toLowerCase()
@@ -92,6 +102,43 @@ export default Controller.extend({
     });
 
     return categories;
+  },
+
+  @discourseComputed(
+    "tags",
+    "tagSortAlpha",
+    "tagSortNumeric",
+    "tagSort",
+    "tagFilter"
+  )
+  sortedTags(tags, sortAlpha, sortNumeric, sortBy, filter) {
+    if (sortBy === "numeric") {
+      if (sortNumeric === 1) {
+        tags = tags.sort((a, b) => {
+          return b.count > a.count;
+        });
+      } else {
+        tags = tags.sort((a, b) => {
+          return a.count > b.count;
+        });
+      }
+    } else {
+      if (sortAlpha === 1) {
+        tags = tags.sort((a, b) => {
+          return a.id.toLowerCase() < b.id.toLowerCase();
+        });
+      } else {
+        tags = tags.sort((a, b) => {
+          return a.id.toLowerCase() > b.id.toLowerCase();
+        });
+      }
+    }
+
+    tags = tags.filter((tag) => {
+      return tag.id.toLowerCase().indexOf(filter.toLowerCase()) > -1;
+    });
+
+    return tags;
   },
 
   @discourseComputed("topics", "isSearching", "filterSolved")
@@ -129,22 +176,42 @@ export default Controller.extend({
   },
 
   @action
-  toggleAlphaSort() {
-    this.set("categorySort", "alpha")
-    if (this.sortAlpha === -1 || this.sortAlpha === 0) {
-      this.set("sortAlpha", 1);
+  toggleCategoryAlphaSort() {
+    this.set("categorySort", "alpha");
+    if (this.categorySortAlpha === -1 || this.categorySortAlpha === 0) {
+      this.set("categorySortAlpha", 1);
     } else {
-      this.set("sortAlpha", -1);
+      this.set("categorySortAlpha", -1);
     }
   },
 
   @action
-  toggleNumericSort() {
-    this.set("categorySort", "numeric")
-    if (this.sortNumeric === -1 || this.sortNumeric === 0) {
-      this.set("sortNumeric", 1);
+  toggleCategoryNumericSort() {
+    this.set("categorySort", "numeric");
+    if (this.categorySortNumeric === -1 || this.categorySortNumeric === 0) {
+      this.set("categorySortNumeric", 1);
     } else {
-      this.set("sortNumeric", -1);
+      this.set("categorySortNumeric", -1);
+    }
+  },
+
+  @action
+  toggleTagAlphaSort() {
+    this.set("tagSort", "alpha");
+    if (this.tagSortAlpha === -1 || this.tagSortAlpha === 0) {
+      this.set("tagSortAlpha", 1);
+    } else {
+      this.set("tagSortAlpha", -1);
+    }
+  },
+
+  @action
+  toggleTagNumericSort() {
+    this.set("tagSort", "numeric");
+    if (this.tagSortNumeric === -1 || this.tagSortNumeric === 0) {
+      this.set("tagSortNumeric", 1);
+    } else {
+      this.set("tagSortNumeric", -1);
     }
   },
 

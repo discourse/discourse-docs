@@ -27,43 +27,54 @@
           {{#if categories}}
             <div class="docs-items docs-categories">
               <section class="item-controls">
-                <h3>{{i18n "docs.categories"}}</h3> {{d-button class="categories-alphabet" icon=(if (gt sortAlpha 0) "sort-alpha-up" "sort-alpha-down") action=toggleAlphaSort}} {{d-button class="categories-amount" icon=(if (gt sortNumeric 0) "sort-numeric-down" "sort-numeric-up") action=toggleNumericSort}}
+                <h3>{{i18n "docs.categories"}}</h3>
+                <div class="item-controls-buttons">
+                  {{d-button class="categories-alphabet" icon=(if (gt sortAlpha 0) "sort-alpha-up" "sort-alpha-down") action=toggleCategoryAlphaSort}}
+                  {{d-button class="categories-amount" icon=(if (gt sortNumeric 0) "sort-numeric-down" "sort-numeric-up") action=toggleCategoryNumericSort}}
+                </div>
               </section>
-                {{input
-                  value=categoryFilter
-                  class="filter"
-                  placeholderKey="docs.categories_filter_placeholder"
-                }}
-                <ul>
-                  {{#each selectedCategories as |category|}}
-                    <li>
-                      {{docs-category
-                        category=category
-                        selectCategory=(action "updateSelectedCategories" category)
-                      }}
-                    </li>
-                  {{/each}}
-                   {{#each sortedCategories as |category|}}
-                    <li>
-                      {{docs-category
-                        category=category
-                        selectCategory=(action "updateSelectedCategories" category)
-                      }}
-                    </li>
-                  {{/each}}
-                </ul>
+              {{input
+                value=categoryFilter
+                class="filter"
+                placeholderKey="docs.categories_filter_placeholder"
+              }}
+              <ul>
+                  {{#each sortedCategories as |category|}}
+                  <li>
+                    {{docs-category
+                      category=category
+                      selectCategory=(action "updateSelectedCategories" category)
+                    }}
+                  </li>
+                {{/each}}
+              </ul>
             </div>
           {{/if}}
 
           {{#if tags}}
             <div class="docs-items docs-tags">
-              <h3>{{i18n "docs.tags"}}</h3>
-              {{#each tags as |tag|}}
-                {{docs-tag
-                  tag=tag
-                  selectTag=(action "updateSelectedTags" tag)
-                }}
-              {{/each}}
+              <section class="item-controls">
+                <h3>{{i18n "docs.tags"}}</h3>
+                <div class="item-controls-buttons">
+                  {{d-button class="tags-alphabet" icon=(if (gt sortAlpha 0) "sort-alpha-up" "sort-alpha-down") action=toggleTagAlphaSort}}
+                  {{d-button class="tags-amount" icon=(if (gt sortNumeric 0) "sort-numeric-down" "sort-numeric-up") action=toggleTagNumericSort}}
+                </div>
+              </section>
+              {{input
+                value=tagFilter
+                class="filter"
+                placeholderKey="docs.tags_filter_placeholder"
+              }}
+              <ul>
+                {{#each sortedTags as |tag|}}
+                  <li>
+                    {{docs-tag
+                      tag=tag
+                      selectTag=(action "updateSelectedTags" tag)
+                    }}
+                  </li>
+                {{/each}}
+              </ul>
             </div>
           {{/if}}
         {{/if}}
