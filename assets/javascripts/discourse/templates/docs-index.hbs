@@ -29,8 +29,8 @@
               <section class="item-controls">
                 <h3>{{i18n "docs.categories"}}</h3>
                 <div class="item-controls-buttons">
-                  {{d-button class="categories-alphabet" icon=(if (gt categorySortAlpha 0) "sort-alpha-up" "sort-alpha-down") action=toggleCategoryAlphaSort}}
-                  {{d-button class="categories-amount" icon=(if (gt categorySortNumeric 0) "sort-numeric-down" "sort-numeric-up") action=toggleCategoryNumericSort}}
+                  {{d-button class="categories-alphabet" icon=(if (gt categorySortAlpha 0) "sort-alpha-up" "sort-alpha-down") action=toggleCategorySort actionParam="alpha"}}
+                  {{d-button class="categories-amount" icon=(if (gt categorySortNumeric 0) "sort-numeric-down" "sort-numeric-up") action=toggleCategorySort actionParam="numeric"}}
                 </div>
               </section>
               {{#if showCategoryFilter}}
@@ -58,8 +58,8 @@
               <section class="item-controls">
                 <h3>{{i18n "docs.tags"}}</h3>
                 <div class="item-controls-buttons">
-                  {{d-button class="tags-alphabet" icon=(if (gt tagSortAlpha 0) "sort-alpha-up" "sort-alpha-down") action=toggleTagAlphaSort}}
-                  {{d-button class="tags-amount" icon=(if (gt tagSoryNumeric 0) "sort-numeric-down" "sort-numeric-up") action=toggleTagNumericSort}}
+                  {{d-button class="tags-alphabet" icon=(if (gt tagSortAlpha 0) "sort-alpha-up" "sort-alpha-down") action=toggleTagSort actionParam="alpha"}}
+                  {{d-button class="tags-amount" icon=(if (gt tagSoryNumeric 0) "sort-numeric-down" "sort-numeric-up") action=toggleTagSort actionParam="numeric"}}
                 </div>
               </section>
               {{#if showTagFilter}}

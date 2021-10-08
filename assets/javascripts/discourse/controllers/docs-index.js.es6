@@ -158,42 +158,22 @@ export default Controller.extend({
   },
 
   @action
-  toggleCategoryAlphaSort() {
+  toggleCategorySort(newType) {
     let { type, direction } = this.categorySort;
     this.set("categorySort", {
-      type: "alpha",
+      type: newType,
       direction:
-        type === "alpha" ? (direction === "asc" ? "desc" : "asc") : "asc",
+        type === newType ? (direction === "asc" ? "desc" : "asc") : "asc",
     });
   },
 
   @action
-  toggleCategoryNumericSort() {
-    let { type, direction } = this.categorySort;
-    this.set("categorySort", {
-      type: "numeric",
-      direction:
-        type === "numeric" ? (direction === "asc" ? "desc" : "asc") : "asc",
-    });
-  },
-
-  @action
-  toggleTagAlphaSort() {
+  toggleTagSort(newType) {
     let { type, direction } = this.tagSort;
     this.set("tagSort", {
-      type: "alpha",
+      type: newType,
       direction:
-        type === "alpha" ? (direction === "asc" ? "desc" : "asc") : "asc",
-    });
-  },
-
-  @action
-  toggleTagNumericSort() {
-    let { type, direction } = this.tagSort;
-    this.set("tagSort", {
-      type: "numeric",
-      direction:
-        type === "numeric" ? (direction === "asc" ? "desc" : "asc") : "asc",
+        type === newType ? (direction === "asc" ? "desc" : "asc") : "asc",
     });
   },
 
