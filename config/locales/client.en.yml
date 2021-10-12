@@ -17,6 +17,7 @@ en:
           other: "%{count} results found"
         placeholder: "Search for topics"
         clear: "Clear"
+        tip_description: "Search in docs"
       topic:
         back: "Go back"
         navigate_to_topic: "View the discussion on this topic"
