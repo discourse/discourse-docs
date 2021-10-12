@@ -32,7 +32,7 @@ export default {
 
   initialize(container) {
     withPluginApi("0.8", (api) => initialize(api, container));
-    withPluginApi("0.12.4", (api) => {
+    withPluginApi("0.12.6", (api) => {
       const siteSettings = container.lookup("site-settings:main");
       if (!siteSettings.docs_enabled) {
         return;
