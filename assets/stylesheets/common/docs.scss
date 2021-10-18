@@ -213,7 +213,7 @@
       svg {
         color: var(--primary-high);
       }
-      &:hover {
+      &:hover, &.active {
         background-color: var(--secondary-very-high);
         svg {
           color: var(--primary-high);
