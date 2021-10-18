@@ -53,16 +53,14 @@ export default Controller.extend({
     if (!this.site.mobileView) {
       this.set("expandedFilters", true);
     }
-  },
-  _setupSorting() {
     this.setProperties({
       categorySort: {
         type: "numeric", // or alpha
-        direction: "asc", // or desc
+        direction: "desc", // or asc
       },
       tagSort: {
         type: "numeric", // or alpha
-        direction: "asc", // or desc
+        direction: "desc", // or asc
       },
     });
   },
@@ -70,17 +68,19 @@ export default Controller.extend({
   sortedCategories(categories, categorySort, filter) {
     let { type, direction } = categorySort;
     if (type === "numeric") {
-      categories = categories.sort((a, b) => {
-        return direction === "asc" ? a.count < b.count : a.count > b.count;
-      });
+      categories = categories.sort((a, b) => a.count - b.count);
     } else {
       categories = categories.sort((a, b) => {
-        return direction === "asc"
-          ? this.site.categories.findBy("id", a.id).name.toLowerCase() <
-              this.site.categories.findBy("id", b.id).name.toLowerCase()
-          : this.site.categories.findBy("id", a.id).name.toLowerCase() >
-              this.site.categories.findBy("id", b.id).name.toLowerCase();
+        const first = this.site.categories
+            .findBy("id", a.id)
+            .name.toLowerCase(),
+          second = this.site.categories.findBy("id", b.id).name.toLowerCase();
+        return first.localeCompare(second);
       });
+    }
+
+    if (direction === "desc") {
+      categories = categories.reverse();
     }
 
     if (this.showCategoryFilter) {
@@ -99,19 +99,35 @@ export default Controller.extend({
     return categories;
   },
 
+  @discourseComputed("categorySort")
+  categorySortNumericIcon(catSort) {
+    if (catSort.type === "numeric" && catSort.direction === "asc") {
+      return "sort-numeric-down";
+    }
+    return "sort-numeric-up";
+  },
+
+  @discourseComputed("categorySort")
+  categorySortAlphaIcon(catSort) {
+    if (catSort.type === "alpha" && catSort.direction === "asc") {
+      return "sort-alpha-down";
+    }
+    return "sort-alpha-up";
+  },
+
   @discourseComputed("tags", "tagSort", "tagFilter")
   sortedTags(tags, tagSort, filter) {
     let { type, direction } = tagSort;
     if (type === "numeric") {
-      tags = tags.sort((a, b) => {
-        return direction === "asc" ? a.count < b.count : a.count > b.count;
-      });
+      tags = tags.sort((a, b) => a.count - b.count);
     } else {
       tags = tags.sort((a, b) => {
-        return direction === "asc"
-          ? a.id.toLowerCase() < b.id.toLowerCase()
-          : a.id.toLowerCase() > b.id.toLowerCase();
+        return a.id.toLowerCase().localeCompare(b.id.toLowerCase());
       });
+    }
+
+    if (direction === "desc") {
+      tags = tags.reverse();
     }
 
     if (this.showTagFilter) {
@@ -121,6 +137,22 @@ export default Controller.extend({
     }
 
     return tags;
+  },
+
+  @discourseComputed("tagSort")
+  tagSortNumericIcon(tagSort) {
+    if (tagSort.type === "numeric" && tagSort.direction === "asc") {
+      return "sort-numeric-down";
+    }
+    return "sort-numeric-up";
+  },
+
+  @discourseComputed("tagSort")
+  tagSortAlphaIcon(tagSort) {
+    if (tagSort.type === "alpha" && tagSort.direction === "asc") {
+      return "sort-alpha-down";
+    }
+    return "sort-alpha-up";
   },
 
   @discourseComputed("topics", "isSearching", "filterSolved")
