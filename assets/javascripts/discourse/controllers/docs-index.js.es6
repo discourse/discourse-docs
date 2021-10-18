@@ -188,7 +188,7 @@ export default Controller.extend({
   filtered(filterTags) {
     return !!filterTags;
   },
-  
+
   @discourseComputed()
   shouldShowTags() {
     return this.siteSettings.tagging_enabled;
