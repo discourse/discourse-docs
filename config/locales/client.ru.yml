@@ -8,25 +8,26 @@ ru:
   js:
     filters:
       docs:
-        help: "просмотреть темы в документации"
+        help: "Просмотр тем, относящихся к документации"
     docs:
       title: "Документация"
       column_titles:
         topic: "Тема"
         activity: "Активность"
-      no_topics: "Нет тем в Документации."
+      no_topics: "Нет тем в документации."
       categories: "Разделы"
       tags: "Теги"
       search:
         results:
-          one: "%{count} результат найден"
-          few: "%{count} результатов найдено"
-          many: "%{count} результатов найдено"
-          other: "Найдено %{count}"
-        placeholder: "Искать темы"
+          one: "Найден %{count} результат"
+          few: "Найдено %{count} результата"
+          many: "Найдено %{count} результатов"
+          other: "Найдено %{count} результатов"
+        placeholder: "Введите искомое название темы"
         clear: "Очистить"
+        tip_description: "Поиск в документации"
       topic:
         back: "Вернуться"
-        navigate_to_topic: "Посмотреть обсуждение этой темы"
+        navigate_to_topic: "Просмотреть обсуждение этой темы"
       filter_button: "Фильтры"
-      filter_solved: "Тема решена?"
+      filter_solved: "Вопрос решён?"
