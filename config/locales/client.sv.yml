@@ -23,6 +23,7 @@ sv:
           other: "%{count} resultat hittades"
         placeholder: "Sök efter ämnen"
         clear: "Rensa"
+        tip_description: "Sök i dokument"
       topic:
         back: "Gå tillbaka"
         navigate_to_topic: "Se diskussionen om detta ämne"

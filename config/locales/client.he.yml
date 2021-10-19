@@ -5,3 +5,7 @@
 # https://translate.discourse.org/
 
 he:
+  js:
+    docs:
+      search:
+        tip_description: "חיפוש במסמכים"
