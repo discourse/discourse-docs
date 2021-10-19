@@ -30,6 +30,8 @@ acceptance("Docs", function (needs) {
   });
 
   test("index page", async function (assert) {
+    this.siteSettings.tagging_enabled = true;
+
     await visit("/");
     await click("#toggle-hamburger-menu");
     await click(".docs-link");

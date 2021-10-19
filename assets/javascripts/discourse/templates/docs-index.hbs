@@ -26,25 +26,59 @@
 
           {{#if categories}}
             <div class="docs-items docs-categories">
-              <h3>{{i18n "docs.categories"}}</h3>
-              {{#each categories as |category|}}
-                {{docs-category
-                  category=category
-                  selectCategory=(action "updateSelectedCategories" category)
+              <section class="item-controls">
+                <h3>{{i18n "docs.categories"}}</h3>
+                <div class="item-controls-buttons">
+                  {{d-button class=(if (eq categorySort.type "alpha") "categories-alphabet active" "categories-alphabet") icon=categorySortAlphaIcon action=toggleCategorySort actionParam="alpha"}}
+                  {{d-button class=(if (eq categorySort.type "numeric") "categories-amount active" "categories-amount") icon=categorySortNumericIcon action=toggleCategorySort actionParam="numeric"}}
+                </div>
+              </section>
+              {{#if showCategoryFilter}}
+                {{input
+                  value=categoryFilter
+                  class="filter"
+                  placeholderKey="docs.categories_filter_placeholder"
                 }}
-              {{/each}}
+              {{/if}}
+              <ul>
+                {{#each sortedCategories as |category|}}
+                  <li>
+                    {{docs-category
+                      category=category
+                      selectCategory=(action "updateSelectedCategories" category)
+                    }}
+                  </li>
+                {{/each}}
+              </ul>
             </div>
           {{/if}}
 
-          {{#if tags}}
+          {{#if (and tags shouldShowTags)}}
             <div class="docs-items docs-tags">
-              <h3>{{i18n "docs.tags"}}</h3>
-              {{#each tags as |tag|}}
-                {{docs-tag
-                  tag=tag
-                  selectTag=(action "updateSelectedTags" tag)
+              <section class="item-controls">
+                <h3>{{i18n "docs.tags"}}</h3>
+                <div class="item-controls-buttons">
+                  {{d-button class=(if (eq tagSort.type "alpha") "tags-alphabet active" "tags-alphabet") icon=tagSortAlphaIcon action=toggleTagSort actionParam="alpha"}}
+                  {{d-button class=(if (eq tagSort.type "numeric") "tags-amount active" "tags-amount") icon=tagSortNumericIcon action=toggleTagSort actionParam="numeric"}}
+                </div>
+              </section>
+              {{#if showTagFilter}}
+                {{input
+                  value=tagFilter
+                  class="filter"
+                  placeholderKey="docs.tags_filter_placeholder"
                 }}
-              {{/each}}
+              {{/if}}
+              <ul>
+                {{#each sortedTags as |tag|}}
+                  <li>
+                    {{docs-tag
+                      tag=tag
+                      selectTag=(action "updateSelectedTags" tag)
+                    }}
+                  </li>
+                {{/each}}
+              </ul>
             </div>
           {{/if}}
         {{/if}}

@@ -11,6 +11,11 @@ enabled_site_setting :docs_enabled
 register_asset 'stylesheets/common/docs.scss'
 register_asset 'stylesheets/mobile/docs.scss'
 
+register_svg_icon 'sort-alpha-down'
+register_svg_icon 'sort-alpha-up'
+register_svg_icon 'sort-numeric-up'
+register_svg_icon 'sort-numeric-down'
+
 load File.expand_path('lib/docs/engine.rb', __dir__)
 load File.expand_path('lib/docs/query.rb', __dir__)
 

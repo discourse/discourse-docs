@@ -1,9 +1,11 @@
 import Controller, { inject as controller } from "@ember/controller";
 import discourseComputed, { on } from "discourse-common/utils/decorators";
 import { action } from "@ember/object";
-import { alias, equal, readOnly } from "@ember/object/computed";
+import { alias, equal, gt, readOnly } from "@ember/object/computed";
 import Docs from "discourse/plugins/discourse-docs/discourse/models/docs";
 import { getOwner } from "@ember/application";
+
+const SHOW_FILTER_AT = 10;
 
 export default Controller.extend({
   queryParams: {
@@ -31,6 +33,14 @@ export default Controller.extend({
   ascending: null,
   orderColumn: null,
 
+  showCategoryFilter: gt("categories.length", SHOW_FILTER_AT),
+  categoryFilter: "",
+  categorySort: {},
+
+  showTagFilter: gt("tags.length", SHOW_FILTER_AT),
+  tagFilter: "",
+  tagSort: {},
+
   loadMoreUrl: alias("model.topics.load_more_url"),
   categories: readOnly("model.categories"),
   topics: alias("model.topics.topic_list.topics"),
@@ -43,6 +53,106 @@ export default Controller.extend({
     if (!this.site.mobileView) {
       this.set("expandedFilters", true);
     }
+    this.setProperties({
+      categorySort: {
+        type: "numeric", // or alpha
+        direction: "desc", // or asc
+      },
+      tagSort: {
+        type: "numeric", // or alpha
+        direction: "desc", // or asc
+      },
+    });
+  },
+  @discourseComputed("categories", "categorySort", "categoryFilter")
+  sortedCategories(categories, categorySort, filter) {
+    let { type, direction } = categorySort;
+    if (type === "numeric") {
+      categories = categories.sort((a, b) => a.count - b.count);
+    } else {
+      categories = categories.sort((a, b) => {
+        const first = this.site.categories
+            .findBy("id", a.id)
+            .name.toLowerCase(),
+          second = this.site.categories.findBy("id", b.id).name.toLowerCase();
+        return first.localeCompare(second);
+      });
+    }
+
+    if (direction === "desc") {
+      categories = categories.reverse();
+    }
+
+    if (this.showCategoryFilter) {
+      return categories.filter((category) => {
+        let categoryData = this.site.categories.findBy("id", category.id);
+        return (
+          categoryData.name.toLowerCase().indexOf(filter.toLowerCase()) > -1 ||
+          (categoryData.description_excerpt &&
+            categoryData.description_excerpt
+              .toLowerCase()
+              .indexOf(filter.toLowerCase()) > -1)
+        );
+      });
+    }
+
+    return categories;
+  },
+
+  @discourseComputed("categorySort")
+  categorySortNumericIcon(catSort) {
+    if (catSort.type === "numeric" && catSort.direction === "asc") {
+      return "sort-numeric-down";
+    }
+    return "sort-numeric-up";
+  },
+
+  @discourseComputed("categorySort")
+  categorySortAlphaIcon(catSort) {
+    if (catSort.type === "alpha" && catSort.direction === "asc") {
+      return "sort-alpha-down";
+    }
+    return "sort-alpha-up";
+  },
+
+  @discourseComputed("tags", "tagSort", "tagFilter")
+  sortedTags(tags, tagSort, filter) {
+    let { type, direction } = tagSort;
+    if (type === "numeric") {
+      tags = tags.sort((a, b) => a.count - b.count);
+    } else {
+      tags = tags.sort((a, b) => {
+        return a.id.toLowerCase().localeCompare(b.id.toLowerCase());
+      });
+    }
+
+    if (direction === "desc") {
+      tags = tags.reverse();
+    }
+
+    if (this.showTagFilter) {
+      return tags.filter((tag) => {
+        return tag.id.toLowerCase().indexOf(filter.toLowerCase()) > -1;
+      });
+    }
+
+    return tags;
+  },
+
+  @discourseComputed("tagSort")
+  tagSortNumericIcon(tagSort) {
+    if (tagSort.type === "numeric" && tagSort.direction === "asc") {
+      return "sort-numeric-down";
+    }
+    return "sort-numeric-up";
+  },
+
+  @discourseComputed("tagSort")
+  tagSortAlphaIcon(tagSort) {
+    if (tagSort.type === "alpha" && tagSort.direction === "asc") {
+      return "sort-alpha-down";
+    }
+    return "sort-alpha-up";
   },
 
   @discourseComputed("topics", "isSearching", "filterSolved")
@@ -77,6 +187,31 @@ export default Controller.extend({
   @discourseComputed("filterTags")
   filtered(filterTags) {
     return !!filterTags;
+  },
+
+  @discourseComputed()
+  shouldShowTags() {
+    return this.siteSettings.tagging_enabled;
+  },
+
+  @action
+  toggleCategorySort(newType) {
+    let { type, direction } = this.categorySort;
+    this.set("categorySort", {
+      type: newType,
+      direction:
+        type === newType ? (direction === "asc" ? "desc" : "asc") : "asc",
+    });
+  },
+
+  @action
+  toggleTagSort(newType) {
+    let { type, direction } = this.tagSort;
+    this.set("tagSort", {
+      type: newType,
+      direction:
+        type === newType ? (direction === "asc" ? "desc" : "asc") : "asc",
+    });
   },
 
   @action
