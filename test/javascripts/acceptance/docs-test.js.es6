@@ -1,4 +1,9 @@
-import { acceptance, count, query } from "helpers/qunit-helpers";
+import {
+  acceptance,
+  count,
+  query,
+} from "discourse/tests/helpers/qunit-helpers";
+import { test } from "qunit";
 import docsFixtures from "../fixtures/docs";
 
 acceptance("Docs", function (needs) {
