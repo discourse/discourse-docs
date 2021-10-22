@@ -234,3 +234,24 @@
     list-style: none;
   }
 }
+
+@media print {
+  .archetype-docs-topic {
+    #main > div {
+      grid-template-columns: 0 1fr;
+    }
+    .has-sidebar,
+    .docs-search,
+    .alert,
+    .docs-filters,
+    #skip-link {
+      display: none;
+    }
+    .docs-topic {
+      .docs-nav-link.return,
+      .docs-nav-link.more {
+        display: none;
+      }
+    }
+  }
+}
