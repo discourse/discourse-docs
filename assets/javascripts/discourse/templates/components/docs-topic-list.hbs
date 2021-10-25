@@ -1,7 +1,7 @@
 {{#load-more selector=".topic-list tr" action=loadMore}}
-  <table class="topic-list">
-    <thead>
-      <th role="button" {{action "sortListTitle"}}>
+  <div class="topic-list">
+    <div class="topic-list-header">
+      <div role="button" class="topic-list-data" {{action "sortListTitle"}}>
         {{i18n "docs.column_titles.topic"}}
 
         {{#if sortTitle}}
@@ -11,9 +11,9 @@
             {{d-icon "angle-down"}}
           {{/if}}
         {{/if}}
-      </th>
+      </div>
 
-      <th role="button" {{action "sortListActivity"}}>
+      <div role="button" class="topic-list-data" {{action "sortListActivity"}}>
         {{i18n "docs.column_titles.activity"}}
 
         {{#if sortActivity}}
@@ -23,15 +23,15 @@
             {{d-icon "angle-down"}}
           {{/if}}
         {{/if}}
-      </th>
-    </thead>
+      </div>
+    </div>
 
-    <tbody>
+    <div class="topic-list-body">
       {{#each topics as |topic|}}
         {{raw "docs-topic-list-item" topic=topic}}
       {{/each}}
-    </tbody>
-  </table>
+    </div>
+  </div>
 {{/load-more}}
 
 {{conditional-loading-spinner condition=loading}}
