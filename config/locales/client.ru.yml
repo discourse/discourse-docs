@@ -16,6 +16,8 @@ ru:
         activity: "Активность"
       no_topics: "Нет тем в документации."
       categories: "Разделы"
+      categories_filter_placeholder: "Фильтр по разделам"
+      tags_filter_placeholder: "Фильтр по тегам"
       tags: "Теги"
       search:
         results:
