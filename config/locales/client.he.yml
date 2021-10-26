@@ -7,5 +7,7 @@
 he:
   js:
     docs:
+      categories_filter_placeholder: "סינון קטגוריות"
+      tags_filter_placeholder: "סינון תגיות"
       search:
         tip_description: "חיפוש במסמכים"

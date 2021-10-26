@@ -5,3 +5,7 @@
 # https://translate.discourse.org/
 
 ko:
+  js:
+    docs:
+      categories_filter_placeholder: "필터 카테고리"
+      tags_filter_placeholder: "필터 태그"

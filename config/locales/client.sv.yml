@@ -16,6 +16,8 @@ sv:
         activity: "Aktivitet"
       no_topics: "Inga ämnen i Docs."
       categories: "Kategorier"
+      categories_filter_placeholder: "Filtrera kategorier"
+      tags_filter_placeholder: "Filtrera taggar"
       tags: "Taggar"
       search:
         results:
