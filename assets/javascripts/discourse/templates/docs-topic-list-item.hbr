@@ -1,5 +1,5 @@
-<tr>
-  <td class="main-link">
+<tr class="topic-list-item">
+  <td class="main-link topic-list-data">
     <span class="link-top-line">
       {{~raw "topic-status" topic=topic}}
       {{~raw "docs-topic-link" topic=topic}}
@@ -9,7 +9,7 @@
       {{discourse-tags topic mode="list"}}
     </span>
   </td>
-  <td>
+  <td class="topic-list-data">
     {{format-date topic.bumped_at format="tiny" noTitle="true"}}
   </td>
 </tr>
