@@ -1,4 +1,4 @@
-<div class="topic-list-item topic-list-row">
+<div class="topic-list-item">
   <div class="main-link topic-list-data">
     <span class="link-top-line">
       {{~raw "topic-status" topic=topic}}
