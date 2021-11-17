@@ -123,7 +123,7 @@
   .docs-topic-list {
     flex-basis: 100%;
 
-    th {
+    .topic-list-header .topic-list-data {
       min-width: 5em;
 
       &[role="button"] {
@@ -137,6 +137,10 @@
       .d-icon {
         vertical-align: middle;
       }
+    }
+
+    .topic-list-data:last-of-type {
+      text-align: center;
     }
 
     .badge-wrapper .badge-category .category-name {
