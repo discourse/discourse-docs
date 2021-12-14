@@ -5,3 +5,5 @@
 # https://translate.discourse.org/
 
 de:
+  site_settings:
+    docs_enabled: "Docs Plugin aktivieren"

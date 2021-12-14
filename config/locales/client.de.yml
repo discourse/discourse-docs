@@ -5,3 +5,24 @@
 # https://translate.discourse.org/
 
 de:
+  js:
+    docs:
+      column_titles:
+        topic: "Thema"
+        activity: "Aktivität"
+      no_topics: "Keine Themen in Docs."
+      categories: "Kategorien"
+      categories_filter_placeholder: "Nach Kategorie filtern"
+      tags_filter_placeholder: "Nach Schlagwort filtern"
+      tags: "Schlagwörter"
+      search:
+        results:
+          one: "%{count} Ergebnisse gefunden"
+          other: "%{count} Ergebnisse gefunden"
+        placeholder: "Nach Themen suchen"
+        tip_description: "In Docs suchen"
+      topic:
+        back: "Zurück"
+        navigate_to_topic: "Siehe die Diskussion zu diesem Thema"
+      filter_button: "Filter"
+      filter_solved: "Thema gelöst?"
