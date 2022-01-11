@@ -6,7 +6,11 @@
 
 de:
   js:
+    filters:
+      docs:
+        help: "Docs-Themen durchsuchen"
     docs:
+      title: "Docs"
       column_titles:
         topic: "Thema"
         activity: "Aktivität"
@@ -17,12 +21,13 @@ de:
       tags: "Schlagwörter"
       search:
         results:
-          one: "%{count} Ergebnisse gefunden"
+          one: "%{count} Ergebnis gefunden"
           other: "%{count} Ergebnisse gefunden"
         placeholder: "Nach Themen suchen"
+        clear: "Löschen"
         tip_description: "In Docs suchen"
       topic:
         back: "Zurück"
-        navigate_to_topic: "Siehe die Diskussion zu diesem Thema"
+        navigate_to_topic: "Diskussion zu diesem Thema ansehen"
       filter_button: "Filter"
       filter_solved: "Thema gelöst?"

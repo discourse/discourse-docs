@@ -6,7 +6,8 @@
 
 fr:
   site_settings:
-    docs_enabled: "Activer le plugin Docs"
-    docs_tags: "Une liste d'étiquettes a inclure dans docs"
-    docs_add_solved_filter: "Ajoute un filtre pour les sujets résolus -- nécessite que Discourse Solved soit installé et activé"
+    docs_enabled: "Activer l'extension Docs"
+    docs_categories: "Une liste de slugs de catégories à inclure dans Docs"
+    docs_tags: "Une liste d'étiquettes à inclure dans Docs"
+    docs_add_solved_filter: "Ajoute un filtre pour les sujets résolus - nécessite l'installation et l'activation de Discourse Solved"
     docs_add_to_top_menu: "Ajoute un lien vers le menu supérieur pour accéder à la vue Docs"

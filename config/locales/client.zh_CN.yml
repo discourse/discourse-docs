@@ -15,15 +15,18 @@ zh_CN:
         topic: "话题"
         activity: "活动"
       no_topics: "文档中没有话题。"
-      categories: "分类"
+      categories: "类别"
+      categories_filter_placeholder: "筛选类别"
+      tags_filter_placeholder: "筛选标签"
       tags: "标签"
       search:
         results:
-          other: "找到 %{count} 条结果"
+          other: "找到 %{count} 个结果"
         placeholder: "搜索话题"
-        clear: "清空"
+        clear: "清除"
+        tip_description: "在文档中搜索"
       topic:
         back: "返回"
         navigate_to_topic: "查看关于此话题的讨论"
-      filter_button: "筛选"
-      filter_solved: "已解决话题"
+      filter_button: "筛选器"
+      filter_solved: "话题已解决？"

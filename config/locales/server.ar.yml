@@ -5,3 +5,9 @@
 # https://translate.discourse.org/
 
 ar:
+  site_settings:
+    docs_enabled: "تفعيل المكوِّن الإضافي لـ Docs"
+    docs_categories: "قائمة بمسارات الفئات لتضمينها في Docs"
+    docs_tags: "قائمة بالوسوم لتضمينها في Docs"
+    docs_add_solved_filter: "يضيف عامل تصفية للموضوعات المحلولة -- يتطلب تثبيت Discourse Solved وتفعيله"
+    docs_add_to_top_menu: "يضيف رابطًا إلى القائمة العلوية للانتقال إلى عرض Docs"

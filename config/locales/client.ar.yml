@@ -5,3 +5,33 @@
 # https://translate.discourse.org/
 
 ar:
+  js:
+    filters:
+      docs:
+        help: "تصفُّح الموضوعات في Docs"
+    docs:
+      title: "Docs"
+      column_titles:
+        topic: "الموضوع"
+        activity: "النشاط"
+      no_topics: "لا توجد موضوعات في Docs."
+      categories: "الفئات"
+      categories_filter_placeholder: "تصفية الفئات"
+      tags_filter_placeholder: "تصفية الوسوم"
+      tags: "الوسوم"
+      search:
+        results:
+          zero: "تم العثور على %{count} نتيجة"
+          one: "تم العثور على نتيجة واحدة (%{count})"
+          two: "تم العثور على نتيجتين (%{count})"
+          few: "تم العثور على %{count} نتائج"
+          many: "تم العثور على %{count} نتيجةً"
+          other: "تم العثور على %{count} نتيجة"
+        placeholder: "البحث عن الموضوعات"
+        clear: "مسح"
+        tip_description: "البحث في Docs"
+      topic:
+        back: "العودة"
+        navigate_to_topic: "عرض المناقشة بشأن هذا الموضوع"
+      filter_button: "عوامل التصفية"
+      filter_solved: "هل تم حل الموضوع؟"
