@@ -6,4 +6,8 @@
 
 de:
   site_settings:
-    docs_enabled: "Docs Plugin aktivieren"
+    docs_enabled: "Docs-Plug-in aktivieren"
+    docs_categories: "Eine Liste von Kategorie-Kürzel, die in Docs aufgenommen werden sollen"
+    docs_tags: "Eine Liste von Schlagwörtern, die in Docs aufgenommen werden sollen"
+    docs_add_solved_filter: "Fügt einen Filter für gelöste Themen hinzu – erfordert, dass Discourse Solved installiert und aktiviert ist"
+    docs_add_to_top_menu: "Fügt einen Link zum Menü oben hinzu, um zur Ansicht „Docs“ zu navigieren"

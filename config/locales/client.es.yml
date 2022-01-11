@@ -5,3 +5,29 @@
 # https://translate.discourse.org/
 
 es:
+  js:
+    filters:
+      docs:
+        help: "examinar temas de documentos"
+    docs:
+      title: "Docs"
+      column_titles:
+        topic: "Tema"
+        activity: "Actividad"
+      no_topics: "No hay temas en Docs."
+      categories: "Categorías"
+      categories_filter_placeholder: "Filtrar categorías"
+      tags_filter_placeholder: "Filtrar etiquetas"
+      tags: "Etiquetas"
+      search:
+        results:
+          one: "%{count} resultado encontrado"
+          other: "%{count} resultados encontrados"
+        placeholder: "Buscar temas"
+        clear: "Borrar"
+        tip_description: "Buscar en documentos"
+      topic:
+        back: "Volver"
+        navigate_to_topic: "Ver la discusión sobre este tema"
+      filter_button: "Filtros"
+      filter_solved: "¿Tema resuelto?"

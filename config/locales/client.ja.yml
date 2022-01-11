@@ -5,3 +5,28 @@
 # https://translate.discourse.org/
 
 ja:
+  js:
+    filters:
+      docs:
+        help: "ドキュメントのトピックを閲覧する"
+    docs:
+      title: "ドキュメント"
+      column_titles:
+        topic: "トピック"
+        activity: "アクティビティ"
+      no_topics: "ドキュメントにトピックはありません。"
+      categories: "カテゴリ"
+      categories_filter_placeholder: "カテゴリをフィルタリング"
+      tags_filter_placeholder: "タグをフィルタリング"
+      tags: "タグ"
+      search:
+        results:
+          other: "%{count} 件の結果が見つかりました"
+        placeholder: "トピックを検索"
+        clear: "クリア"
+        tip_description: "ドキュメント内を検索"
+      topic:
+        back: "戻る"
+        navigate_to_topic: "このトピックに関するディスカッションを表示する"
+      filter_button: "フィルタ"
+      filter_solved: "解決済みのトピック？"

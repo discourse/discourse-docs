@@ -5,3 +5,9 @@
 # https://translate.discourse.org/
 
 ja:
+  site_settings:
+    docs_enabled: "ドキュメントプラグインを有効にする"
+    docs_categories: "ドキュメントに含めるカテゴリスラッグのリスト"
+    docs_tags: "ドキュメントに含まれるタグのリスト"
+    docs_add_solved_filter: "解決済みトピックのフィルタを追加します。Discourse Solved をインストールして有効にする必要があります"
+    docs_add_to_top_menu: "ドキュメントビューに移動するリンクをトップメニューに追加します"

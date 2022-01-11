@@ -5,3 +5,29 @@
 # https://translate.discourse.org/
 
 it:
+  js:
+    filters:
+      docs:
+        help: "sfoglia argomenti dei documenti"
+    docs:
+      title: "Documenti"
+      column_titles:
+        topic: "Argomento"
+        activity: "Attività"
+      no_topics: "Nessun argomento in Documenti."
+      categories: "Categorie"
+      categories_filter_placeholder: "Filtra categorie"
+      tags_filter_placeholder: "Filtra etichette"
+      tags: "Etichette"
+      search:
+        results:
+          one: "%{count} risultato trovato"
+          other: "%{count} risultati trovati"
+        placeholder: "Cerca argomenti"
+        clear: "Cancella"
+        tip_description: "Cerca nei documenti"
+      topic:
+        back: "Indietro"
+        navigate_to_topic: "Visualizza discussione su questo argomento"
+      filter_button: "Filtri"
+      filter_solved: "Argomento risolto?"

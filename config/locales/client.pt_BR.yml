@@ -14,8 +14,10 @@ pt_BR:
       column_titles:
         topic: "Tópico"
         activity: "Atividade"
-      no_topics: "Nenhum tópico no Documentos."
+      no_topics: "Nenhum tópico em Documentos."
       categories: "Categorias"
+      categories_filter_placeholder: "Filtrar categorias"
+      tags_filter_placeholder: "Filtrar etiquetas"
       tags: "Etiquetas"
       search:
         results:
@@ -23,6 +25,7 @@ pt_BR:
           other: "%{count} resultados encontrados"
         placeholder: "Pesquisar por tópicos"
         clear: "Limpar"
+        tip_description: "Pesquisar em documentos"
       topic:
         back: "Voltar"
         navigate_to_topic: "Veja a discussão neste tópico"

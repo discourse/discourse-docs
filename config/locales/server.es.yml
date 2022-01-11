@@ -5,3 +5,9 @@
 # https://translate.discourse.org/
 
 es:
+  site_settings:
+    docs_enabled: "Habilitar el plugin Docs"
+    docs_categories: "Una lista de slugs de categoría para incluir en los documentos"
+    docs_tags: "Una lista de etiquetas para incluir en los documentos"
+    docs_add_solved_filter: "Añade un filtro para temas resueltos: requiere que Discourse Solved esté instalado y habilitado"
+    docs_add_to_top_menu: "Añade un enlace al menú superior para navegar a la vista Docs"

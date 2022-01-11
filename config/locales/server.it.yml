@@ -5,3 +5,9 @@
 # https://translate.discourse.org/
 
 it:
+  site_settings:
+    docs_enabled: "Abilita il plug-in Documenti"
+    docs_categories: "Un elenco di abbreviazioni di categoria da includere nei documenti"
+    docs_tags: "Un elenco di etichette da includere nei documenti"
+    docs_add_solved_filter: "Aggiunge un filtro per gli argomenti risolti: richiede l'installazione e l'abilitazione di Discourse Solved"
+    docs_add_to_top_menu: "Aggiunge un collegamento al menu in alto per passare alla visualizzazione Documenti"
