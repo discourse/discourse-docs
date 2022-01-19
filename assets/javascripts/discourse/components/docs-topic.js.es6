@@ -1,18 +1,16 @@
 import Component from "@ember/component";
 import { reads } from "@ember/object/computed";
-import computed from "discourse-common/utils/decorators";
+import computed, { bind } from "discourse-common/utils/decorators";
+import discourseDebounce from "discourse-common/lib/debounce";
 
 export default Component.extend({
   classNames: "docs-topic",
 
   originalPostContent: reads("post.cooked"),
 
-  @computed("topic")
-  post() {
-    return this.store.createRecord(
-      "post",
-      this.topic.post_stream.posts.firstObject
-    );
+  @computed("topic.post_stream")
+  post(stream) {
+    return this.store.createRecord("post", stream?.posts.firstObject);
   },
 
   @computed("post", "topic")
@@ -26,15 +24,27 @@ export default Component.extend({
     return post;
   },
 
+  @bind
+  _emitScrollEvent() {
+    this.appEvents.trigger("docs-topic:current-post-scrolled");
+  },
+
+  @bind
+  debounceScrollEvent() {
+    discourseDebounce(this, this._emitScrollEvent, 200);
+  },
+
   didInsertElement() {
     this._super(...arguments);
 
     document.querySelector("body").classList.add("archetype-docs-topic");
+    document.addEventListener("scroll", this.debounceScrollEvent);
   },
 
   willDestroyElement() {
     this._super(...arguments);
 
     document.querySelector("body").classList.remove("archetype-docs-topic");
+    document.removeEventListener("scroll", this.debounceScrollEvent);
   },
 });
