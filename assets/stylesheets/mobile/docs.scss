@@ -28,9 +28,6 @@
       .docs-topic-link {
         padding-right: 0.25em;
       }
-      .loading-container {
-        padding: 0.625em 0;
-      }
       .docs-topic {
         width: calc(100vw - 20px);
       }
@@ -38,7 +35,6 @@
   }
 
   .docs-filters {
-    margin-top: 0;
     background: var(--primary-very-low);
     padding: 0 0.5em;
     .docs-items:first-of-type {

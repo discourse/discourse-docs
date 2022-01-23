@@ -45,7 +45,7 @@
   .loading-container {
     display: flex;
     flex-basis: 100%;
-    padding: 0.625em 0 0.625em 0.625em;
+    padding: 0.625em 0;
   }
   .docs-results {
     display: flex;
@@ -57,17 +57,16 @@
     }
   }
   .docs-filters {
-    margin-top: 0.15em;
     flex: 0 1 20%;
     @include breakpoint(tablet, min-width) {
       padding-right: 2em;
     }
     // min-width on flex allows container to
     // be more narrow than content if needed
-    min-width: 175px;
+    min-width: 200px;
   }
   .docs-items {
-    padding: 0.57em 1em 1em 0;
+    padding: 0.57em 0 1.5em 0;
 
     a {
       color: var(--primary);
@@ -92,7 +91,6 @@
 
       .d-icon {
         height: 1em;
-        padding-bottom: 0.15em;
         margin-right: 0.25em;
         color: var(--primary-high);
         &.d-icon-plus {
@@ -172,7 +170,7 @@
         background: none;
         color: var(--tertiary);
         display: inline-flex;
-        font-size: $font-down-1;
+        font-size: $font-0;
         justify-content: normal;
         padding: 0;
         &::before {
