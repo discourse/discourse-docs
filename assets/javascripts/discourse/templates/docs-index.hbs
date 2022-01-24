@@ -1,6 +1,9 @@
 {{#conditional-loading-spinner condition=isLoading}}
-  {{#if emptyTopics}}
-    <span class="no-topics-found">{{html-safe (i18n "docs.no_topics")}}</span>
+  {{#if noContent}}
+    <EmptyState
+      @title={{emptyState.title}}
+      @body={{emptyState.body}}
+    />
   {{else}}
     <div class="docs-browse">
       {{#if site.mobileView}}

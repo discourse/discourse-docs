@@ -4,11 +4,18 @@ en:
       docs:
         help: "browse docs topics"
     docs:
+      or: "or"
       title: "Docs"
       column_titles:
         topic: "Topic"
         activity: "Activity"
-      no_topics: "No topics in Docs."
+      no_docs:
+        title: "No Docs topics yet"
+        body: "Docs provides a great way to maintain a collection of documentation for shared reference."
+        to_include_topic_in_docs: "To include a topic in Docs, use a special"
+        category: "category"
+        tag: "tag"
+        setup_the_plugin: "To start using Docs, please, <a href='%{settingsUrl}'>set up docs categories and tags</a>."
       categories: "Categories"
       categories_filter_placeholder: "Filter categories"
       tags_filter_placeholder: "Filter tags"

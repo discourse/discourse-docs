@@ -1,16 +1,16 @@
 import {
   acceptance,
   count,
-  query,
+  query
 } from "discourse/tests/helpers/qunit-helpers";
 import { test } from "qunit";
 import docsFixtures from "../fixtures/docs";
 import { click, visit } from "@ember/test-helpers";
 
-acceptance("Docs", function (needs) {
+acceptance("Docs", function(needs) {
   needs.user();
   needs.settings({
-    docs_enabled: true,
+    docs_enabled: true
   });
 
   needs.pretender((server, helper) => {
@@ -24,9 +24,9 @@ acceptance("Docs", function (needs) {
               {
                 id: 1,
                 count: 119,
-                active: true,
-              },
-            ],
+                active: true
+              }
+            ]
           })
         );
       } else {
@@ -35,7 +35,7 @@ acceptance("Docs", function (needs) {
     });
   });
 
-  test("index page", async function (assert) {
+  test("index page", async function(assert) {
     this.siteSettings.tagging_enabled = true;
 
     await visit("/");
@@ -50,11 +50,44 @@ acceptance("Docs", function (needs) {
     );
   });
 
-  test("selecting a category", async function (assert) {
+  test("selecting a category", async function(assert) {
     await visit("/docs");
     assert.equal(count(".docs-category.selected"), 0);
 
     await click(".docs-item.docs-category");
     assert.equal(count(".docs-category.selected"), 1);
+  });
+});
+
+acceptance("Docs - empty state", function(needs) {
+  needs.user();
+  needs.settings({
+    docs_enabled: true
+  });
+
+  needs.pretender((server, helper) => {
+    server.get("/docs.json", (request) => {
+      const response = {
+        tags: [],
+        categories: [],
+        topics: {
+          topic_list: {
+            can_create_topic: true,
+            per_page: 30,
+            top_tags: [],
+            topics: []
+          },
+          load_more_url: null
+        },
+        topic_count: 0
+      };
+
+      return helper.response(response);
+    });
+  });
+
+  test("shows the empty state panel when there are no docs", async function(assert) {
+    await visit("/docs");
+    assert.ok(exists("div.empty-state"));
   });
 });
