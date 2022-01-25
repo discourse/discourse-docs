@@ -8,9 +8,9 @@ ar:
   js:
     filters:
       docs:
-        help: "تصفُّح الموضوعات في Docs"
+        help: "تصفُّح الموضوعات في المستندات"
     docs:
-      title: "Docs"
+      title: "المستندات"
       column_titles:
         topic: "الموضوع"
         activity: "النشاط"
