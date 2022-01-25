@@ -5,3 +5,29 @@
 # https://translate.discourse.org/
 
 fi:
+  js:
+    filters:
+      docs:
+        help: "selaa ohjeaiheita"
+    docs:
+      title: "Ohjeet"
+      column_titles:
+        topic: "Ketju"
+        activity: "Toiminta"
+      no_topics: "Ei ketjuja ohjeissa."
+      categories: "Alueet"
+      categories_filter_placeholder: "Suodata alueita"
+      tags_filter_placeholder: "Suodata tunnisteita"
+      tags: "Tunnisteet"
+      search:
+        results:
+          one: "%{count} tulos löytyi"
+          other: "%{count} tulosta löytyi"
+        placeholder: "Hae ketjuja"
+        clear: "Tyhjennä"
+        tip_description: "Hae ohjeista"
+      topic:
+        back: "Palaa takaisin"
+        navigate_to_topic: "Katso tämän ketjun keskustelu"
+      filter_button: "Suodattimet"
+      filter_solved: "Onko ketju ratkaistu?"

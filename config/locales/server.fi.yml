@@ -5,3 +5,9 @@
 # https://translate.discourse.org/
 
 fi:
+  site_settings:
+    docs_enabled: "Ota Docs-lisäosa käyttöön"
+    docs_categories: "Luettelo ohjeisiin sisällytettävistä polkutunnuksista"
+    docs_tags: "Luettelo ohjeisiin sisällytettävistä tunnisteista"
+    docs_add_solved_filter: "Lisää suodattimen ratkaistuihin ketjuihin – edellyttää, että Discourse Solved on asennettu ja käytössä"
+    docs_add_to_top_menu: "Lisää ylävalikkoon linkin, jolla voi siirtyä ohjenäkymään"
