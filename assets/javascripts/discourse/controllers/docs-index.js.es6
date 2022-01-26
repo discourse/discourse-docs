@@ -5,6 +5,7 @@ import { alias, equal, gt, readOnly } from "@ember/object/computed";
 import Docs from "discourse/plugins/discourse-docs/discourse/models/docs";
 import { getOwner } from "@ember/application";
 import getURL from "discourse-common/lib/get-url";
+import I18n from "I18n";
 
 const SHOW_FILTER_AT = 10;
 
@@ -215,14 +216,16 @@ export default Controller.extend({
       body += ` (${this.docsCategoriesAndTags.join(", ")}).`;
     } else {
       const setUpPluginMessage = I18n.t("docs.no_docs.setup_the_plugin", {
-        settingsUrl: getURL("/admin/site_settings/category/plugins?filter=plugin:discourse-docs")
+        settingsUrl: getURL(
+          "/admin/site_settings/category/plugins?filter=plugin:discourse-docs"
+        ),
       });
       body += ` ${setUpPluginMessage}`;
     }
 
     return {
       title: I18n.t("docs.no_docs.title"),
-      body: body.htmlSafe()
+      body: body.htmlSafe(),
     };
   },
 
@@ -237,12 +240,10 @@ export default Controller.extend({
       return [];
     }
 
-    return this.siteSettings.docs_categories
-      .split("|")
-      .map(c => {
-        const id = parseInt(c);
-        return this.site.categories.findBy("id", id).name;
-      });
+    return this.siteSettings.docs_categories.split("|").map((c) => {
+      const id = parseInt(c, 10);
+      return this.site.categories.findBy("id", id).name;
+    });
   },
 
   @discourseComputed()
@@ -251,9 +252,7 @@ export default Controller.extend({
       return [];
     }
 
-    return this.siteSettings.docs_tags
-      .split("|")
-      .map(t => `#${t}`);
+    return this.siteSettings.docs_tags.split("|").map((t) => `#${t}`);
   },
 
   @action
