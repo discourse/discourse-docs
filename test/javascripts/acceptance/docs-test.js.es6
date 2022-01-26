@@ -5,6 +5,7 @@ import {
 } from "discourse/tests/helpers/qunit-helpers";
 import { test } from "qunit";
 import docsFixtures from "../fixtures/docs";
+import { click, visit } from "@ember/test-helpers";
 
 acceptance("Docs", function (needs) {
   needs.user();
