@@ -201,18 +201,6 @@ export default Controller.extend({
     let body = I18n.t("docs.no_docs.body");
     if (this.docsCategoriesAndTags.length) {
       body += I18n.t("docs.no_docs.to_include_topic_in_docs");
-
-      if (this.docsCategories.length) {
-        body += ` ${I18n.t("docs.no_docs.category")}`;
-      }
-
-      if (this.docsTags.length) {
-        if (this.docsCategories.length) {
-          body += ` ${I18n.t("docs.or")}`;
-        }
-        body += ` ${I18n.t("docs.no_docs.tag")}`;
-      }
-
       body += ` (${this.docsCategoriesAndTags.join(", ")}).`;
     } else {
       const setUpPluginMessage = I18n.t("docs.no_docs.setup_the_plugin", {
