@@ -4,6 +4,8 @@ import { action } from "@ember/object";
 import { alias, equal, gt, readOnly } from "@ember/object/computed";
 import Docs from "discourse/plugins/discourse-docs/discourse/models/docs";
 import { getOwner } from "@ember/application";
+import getURL from "discourse-common/lib/get-url";
+import I18n from "I18n";
 
 const SHOW_FILTER_AT = 10;
 
@@ -156,7 +158,7 @@ export default Controller.extend({
   },
 
   @discourseComputed("topics", "isSearching", "filterSolved")
-  emptyTopics(topics, isSearching, filterSolved) {
+  noContent(topics, isSearching, filterSolved) {
     const filtered = isSearching || filterSolved;
     return this.topicCount === 0 && !filtered;
   },
@@ -192,6 +194,53 @@ export default Controller.extend({
   @discourseComputed()
   shouldShowTags() {
     return this.siteSettings.tagging_enabled;
+  },
+
+  @discourseComputed()
+  emptyState() {
+    let body = I18n.t("docs.no_docs.body");
+    if (this.docsCategoriesAndTags.length) {
+      body += I18n.t("docs.no_docs.to_include_topic_in_docs");
+      body += ` (${this.docsCategoriesAndTags.join(", ")}).`;
+    } else if (this.currentUser.staff) {
+      const setUpPluginMessage = I18n.t("docs.no_docs.setup_the_plugin", {
+        settingsUrl: getURL(
+          "/admin/site_settings/category/plugins?filter=plugin:discourse-docs"
+        ),
+      });
+      body += ` ${setUpPluginMessage}`;
+    }
+
+    return {
+      title: I18n.t("docs.no_docs.title"),
+      body: body.htmlSafe(),
+    };
+  },
+
+  @discourseComputed("docsCategories", "docsTags")
+  docsCategoriesAndTags(docsCategories, docsTags) {
+    return docsCategories.concat(docsTags);
+  },
+
+  @discourseComputed()
+  docsCategories() {
+    if (!this.siteSettings.docs_categories) {
+      return [];
+    }
+
+    return this.siteSettings.docs_categories.split("|").map((c) => {
+      const id = parseInt(c, 10);
+      return this.site.categories.findBy("id", id).name;
+    });
+  },
+
+  @discourseComputed()
+  docsTags() {
+    if (!this.siteSettings.docs_tags) {
+      return [];
+    }
+
+    return this.siteSettings.docs_tags.split("|").map((t) => `#${t}`);
   },
 
   @action

@@ -1,6 +1,7 @@
 import {
   acceptance,
   count,
+  exists,
   query,
 } from "discourse/tests/helpers/qunit-helpers";
 import { test } from "qunit";
@@ -56,5 +57,38 @@ acceptance("Docs", function (needs) {
 
     await click(".docs-item.docs-category");
     assert.equal(count(".docs-category.selected"), 1);
+  });
+});
+
+acceptance("Docs - empty state", function (needs) {
+  needs.user();
+  needs.settings({
+    docs_enabled: true,
+  });
+
+  needs.pretender((server, helper) => {
+    server.get("/docs.json", () => {
+      const response = {
+        tags: [],
+        categories: [],
+        topics: {
+          topic_list: {
+            can_create_topic: true,
+            per_page: 30,
+            top_tags: [],
+            topics: [],
+          },
+          load_more_url: null,
+        },
+        topic_count: 0,
+      };
+
+      return helper.response(response);
+    });
+  });
+
+  test("shows the empty state panel when there are no docs", async function (assert) {
+    await visit("/docs");
+    assert.ok(exists("div.empty-state"));
   });
 });
