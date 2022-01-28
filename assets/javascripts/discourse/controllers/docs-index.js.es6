@@ -202,7 +202,7 @@ export default Controller.extend({
     if (this.docsCategoriesAndTags.length) {
       body += I18n.t("docs.no_docs.to_include_topic_in_docs");
       body += ` (${this.docsCategoriesAndTags.join(", ")}).`;
-    } else {
+    } else if (this.currentUser.staff) {
       const setUpPluginMessage = I18n.t("docs.no_docs.setup_the_plugin", {
         settingsUrl: getURL(
           "/admin/site_settings/category/plugins?filter=plugin:discourse-docs"
