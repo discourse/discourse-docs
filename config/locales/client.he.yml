@@ -7,6 +7,11 @@
 he:
   js:
     docs:
+      no_docs:
+        title: "אין נושאי תיעוד עדיין"
+        body: "תיעוד מספקת דרך נהדרת לתחזק אוסף של מסמכים לסימוכין משותפים."
+        to_include_topic_in_docs: "כדי לכלול נושא בתיעוד, יש להשתמש בקטגוריה מיוחדת או בתגית."
+        setup_the_plugin: "כדי להתחיל להשתמש בתיעוד, נא <a href='%{settingsUrl}'>להקים קטגוריות ותגיות של תיעוד</a>."
       categories_filter_placeholder: "סינון קטגוריות"
       tags_filter_placeholder: "סינון תגיות"
       search:

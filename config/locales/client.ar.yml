@@ -14,7 +14,6 @@ ar:
       column_titles:
         topic: "الموضوع"
         activity: "النشاط"
-      no_topics: "لا توجد موضوعات في Docs."
       categories: "الفئات"
       categories_filter_placeholder: "تصفية الفئات"
       tags_filter_placeholder: "تصفية الوسوم"

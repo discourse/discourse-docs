@@ -14,7 +14,6 @@ es:
       column_titles:
         topic: "Tema"
         activity: "Actividad"
-      no_topics: "No hay temas en Docs."
       categories: "Categorías"
       categories_filter_placeholder: "Filtrar categorías"
       tags_filter_placeholder: "Filtrar etiquetas"

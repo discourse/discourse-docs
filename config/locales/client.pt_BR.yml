@@ -14,7 +14,6 @@ pt_BR:
       column_titles:
         topic: "Tópico"
         activity: "Atividade"
-      no_topics: "Nenhum tópico em Documentos."
       categories: "Categorias"
       categories_filter_placeholder: "Filtrar categorias"
       tags_filter_placeholder: "Filtrar etiquetas"

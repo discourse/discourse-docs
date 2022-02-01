@@ -14,7 +14,6 @@ zh_CN:
       column_titles:
         topic: "话题"
         activity: "活动"
-      no_topics: "文档中没有话题。"
       categories: "类别"
       categories_filter_placeholder: "筛选类别"
       tags_filter_placeholder: "筛选标签"
