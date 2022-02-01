@@ -14,7 +14,6 @@ ja:
       column_titles:
         topic: "トピック"
         activity: "アクティビティ"
-      no_topics: "ドキュメントにトピックはありません。"
       categories: "カテゴリ"
       categories_filter_placeholder: "カテゴリをフィルタリング"
       tags_filter_placeholder: "タグをフィルタリング"

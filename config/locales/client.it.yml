@@ -14,7 +14,6 @@ it:
       column_titles:
         topic: "Argomento"
         activity: "Attività"
-      no_topics: "Nessun argomento in Documenti."
       categories: "Categorie"
       categories_filter_placeholder: "Filtra categorie"
       tags_filter_placeholder: "Filtra etichette"

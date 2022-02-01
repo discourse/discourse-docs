@@ -14,7 +14,6 @@ fi:
       column_titles:
         topic: "Ketju"
         activity: "Toiminta"
-      no_topics: "Ei ketjuja ohjeissa."
       categories: "Alueet"
       categories_filter_placeholder: "Suodata alueita"
       tags_filter_placeholder: "Suodata tunnisteita"
