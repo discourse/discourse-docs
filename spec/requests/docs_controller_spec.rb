@@ -265,6 +265,26 @@ describe Docs::DocsController do
 
         expect(response.parsed_body['topic']['id']).to eq(topic.id)
       end
+
+      it 'should create TopicViewItem' do
+        admin = Fabricate(:admin)
+        sign_in(admin)
+        expect do
+          get "/docs.json?topic=#{topic.id}"
+        end.to change { TopicViewItem.count }.by(1)
+      end
+
+      it 'should create TopicUser if authenticated' do
+        expect do
+          get "/docs.json?topic=#{topic.id}&track_visit=true"
+        end.not_to change { TopicUser.count }
+
+        admin = Fabricate(:admin)
+        sign_in(admin)
+        expect do
+          get "/docs.json?topic=#{topic.id}&track_visit=true"
+        end.to change { TopicUser.count }.by(1)
+      end
     end
   end
 end

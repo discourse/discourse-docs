@@ -51,7 +51,17 @@ module Docs
       topic_view = TopicView.new(topic.id, current_user)
       guardian = Guardian.new(current_user)
 
+      ip = request.remote_ip
+      user_id = (current_user.id if current_user)
+      track_visit = should_track_visit_to_topic?
+
+      TopicsController.defer_track_visit(topic.id, ip, user_id, track_visit)
+
       TopicViewSerializer.new(topic_view, scope: guardian, root: false)
+    end
+
+    def should_track_visit_to_topic?
+      !!((!request.format.json? || params[:track_visit]) && current_user)
     end
 
     def set_title
