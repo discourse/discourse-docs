@@ -31,6 +31,7 @@ Docs.reopenClass({
     }
     if (params.selectedTopic) {
       filters.push(`topic=${params.selectedTopic}`);
+      filters.push("track_visit=true");
     }
 
     return ajax(`/docs.json?${filters.join("&")}`).then((data) => {
