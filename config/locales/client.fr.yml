@@ -14,6 +14,11 @@ fr:
       column_titles:
         topic: "Sujet"
         activity: "Activité"
+      no_docs:
+        title: "Aucun sujet Docs pour le moment"
+        body: "Docs fournit un excellent moyen de gérer un ensemble de documents à des fins de référence partagée."
+        to_include_topic_in_docs: "Pour inclure un sujet dans Docs, utilisez une catégorie ou une étiquette spéciale"
+        setup_the_plugin: "Pour commencer à utiliser Docs, veuillez <a href='%{settingsUrl}'>configurer des catégories et des étiquettes de documents</a>."
       categories: "Catégories"
       categories_filter_placeholder: "Filtrer les catégories"
       tags_filter_placeholder: "Filtrer les étiquettes"

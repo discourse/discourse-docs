@@ -5,3 +5,8 @@
 # https://translate.discourse.org/
 
 pl_PL:
+  site_settings:
+    docs_enabled: "Włącz wtyczkę Docs"
+    docs_tags: "Lista tagów do uwzględnienia w dokumentach"
+    docs_add_solved_filter: "Dodaje filtr dla rozwiązanych tematów -- wymaga, aby Discourse Solved był zainstalowany i włączony"
+    docs_add_to_top_menu: "Dodaje link do górnego menu, aby przejść do widoku dokumentów"

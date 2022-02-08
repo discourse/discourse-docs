@@ -14,6 +14,11 @@ ar:
       column_titles:
         topic: "الموضوع"
         activity: "النشاط"
+      no_docs:
+        title: "لا توجد موضوعات في المستندات بعد"
+        body: "توفِّر المستندات طريقة رائعة للاحتفاظ بمجموعة من الوثائق كمرجع مشترك."
+        to_include_topic_in_docs: "لتضمين موضوع في المستندات، استخدم فئة أو وسمً خاصًا"
+        setup_the_plugin: "للبدء في استخدام المستندات، يُرجى <a href='%{settingsUrl}'>إعداد فئات ووسوم المستندات</a>."
       categories: "الفئات"
       categories_filter_placeholder: "تصفية الفئات"
       tags_filter_placeholder: "تصفية الوسوم"

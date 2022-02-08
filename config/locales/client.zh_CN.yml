@@ -14,6 +14,11 @@ zh_CN:
       column_titles:
         topic: "话题"
         activity: "活动"
+      no_docs:
+        title: "还没有“文档”话题"
+        body: "“文档”提供了一种很好的方式来维护文档集合以供共享参考。"
+        to_include_topic_in_docs: "要在“文档”中添加话题，请使用特殊类别或标签"
+        setup_the_plugin: "要开始使用“文档”，请<a href='%{settingsUrl}'>设置文档类别和标签</a>。"
       categories: "类别"
       categories_filter_placeholder: "筛选类别"
       tags_filter_placeholder: "筛选标签"

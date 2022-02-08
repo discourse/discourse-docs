@@ -14,6 +14,11 @@ ja:
       column_titles:
         topic: "トピック"
         activity: "アクティビティ"
+      no_docs:
+        title: "ドキュメントのトピックはまだありません"
+        body: "ドキュメントは、共有リファレンスの目的でドキュメントのコレクションを管理するのに最適な方法です。"
+        to_include_topic_in_docs: "ドキュメントにトピックを含めるには、特別なカテゴリまたはタグを使用します"
+        setup_the_plugin: "ドキュメントを使用するには、<a href='%{settingsUrl}'>ドキュメントのカテゴリとタグを設定</a>してください。"
       categories: "カテゴリ"
       categories_filter_placeholder: "カテゴリをフィルタリング"
       tags_filter_placeholder: "タグをフィルタリング"
