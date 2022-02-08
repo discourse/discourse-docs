@@ -14,6 +14,11 @@ it:
       column_titles:
         topic: "Argomento"
         activity: "Attività"
+      no_docs:
+        title: "Ancora nessun argomento relativo ai Documenti"
+        body: "I Documenti sono il miglior modo per mantenere una raccolta di documentazione condivisa per la consultazione."
+        to_include_topic_in_docs: "Per includere un argomento in Documenti, utilizza una categoria o un'etichetta speciale"
+        setup_the_plugin: "Per iniziare a utilizzare i Documenti, <a href='%{settingsUrl}'>imposta le categorie e le etichette dei documenti</a>."
       categories: "Categorie"
       categories_filter_placeholder: "Filtra categorie"
       tags_filter_placeholder: "Filtra etichette"

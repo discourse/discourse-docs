@@ -14,6 +14,11 @@ es:
       column_titles:
         topic: "Tema"
         activity: "Actividad"
+      no_docs:
+        title: "Todavía no hay temas en Docs"
+        body: "Docs proporciona una excelente manera de mantener una colección de documentación para referencia compartida."
+        to_include_topic_in_docs: "Para incluir un tema en Docs, utiliza una categoría o etiqueta especial"
+        setup_the_plugin: "Para empezar a utilizar Docs, <a href='%{settingsUrl}'>configura las categorías y etiquetas de Docs</a>."
       categories: "Categorías"
       categories_filter_placeholder: "Filtrar categorías"
       tags_filter_placeholder: "Filtrar etiquetas"

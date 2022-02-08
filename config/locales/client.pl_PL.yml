@@ -5,3 +5,35 @@
 # https://translate.discourse.org/
 
 pl_PL:
+  js:
+    filters:
+      docs:
+        help: "przeglądaj tematy dokumentacji"
+    docs:
+      title: "Dokumentacja"
+      column_titles:
+        topic: "Temat"
+        activity: "Aktywność"
+      no_docs:
+        title: "Brak tematów dokumentów"
+        body: "Dokumenty to świetny sposób na utrzymywanie zbioru dokumentacji do wspólnego użytku."
+        to_include_topic_in_docs: "Aby umieścić temat w dokumentach, użyj specjalnej kategorii lub tagu"
+        setup_the_plugin: "Aby rozpocząć korzystanie z dokumentów, <a href='%{settingsUrl}'>skonfiguruj kategorie i tagi</a>."
+      categories: "Kategorie"
+      categories_filter_placeholder: "Filtruj kategorie"
+      tags_filter_placeholder: "Filtruj tagi"
+      tags: "Tagi"
+      search:
+        results:
+          one: "Znaleziono %{count} wynik"
+          few: "Znaleziono %{count} wyniki"
+          many: "Znaleziono %{count} wyników"
+          other: "Znaleziono %{count} wyników"
+        placeholder: "Szukaj tematów"
+        clear: "Wyczyść"
+        tip_description: "Szukaj w dokumentach"
+      topic:
+        back: "Wróć"
+        navigate_to_topic: "Zobacz dyskusję na ten temat"
+      filter_button: "Filtry"
+      filter_solved: "Temat rozwiązany?"

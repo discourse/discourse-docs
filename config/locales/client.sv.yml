@@ -14,6 +14,11 @@ sv:
       column_titles:
         topic: "Ämne"
         activity: "Aktivitet"
+      no_docs:
+        title: "Inga dokument ämnen ännu"
+        body: "Dokument tillhandahåller ett bra sätt att upprätthålla en samling av dokumentation för delad referens."
+        to_include_topic_in_docs: "För att inkludera ett ämne under Dokument använder du en särskild kategori eller tagg"
+        setup_the_plugin: "För att börja använda Dokument, vänligen <a href='%{settingsUrl}'>konfigurera kategorier och taggar</a>."
       categories: "Kategorier"
       categories_filter_placeholder: "Filtrera kategorier"
       tags_filter_placeholder: "Filtrera taggar"
