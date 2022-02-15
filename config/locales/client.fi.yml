@@ -14,6 +14,11 @@ fi:
       column_titles:
         topic: "Ketju"
         activity: "Toiminta"
+      no_docs:
+        title: "Ei vielä ohjeketjuja"
+        body: "Ohjeet tarjoavat erinomaisen tavan ylläpitää ohjekokoelmaa yhteiseksi viitemateriaaliksi."
+        to_include_topic_in_docs: "Voit lisätä ketjun Ohjeisiin käyttämällä erityistä aluetta tai tunnistetta"
+        setup_the_plugin: "Aloita Ohjeiden käyttö <a href='%{settingsUrl}'>määrittämällä ohjealueet ja -tunnisteet</a>."
       categories: "Alueet"
       categories_filter_placeholder: "Suodata alueita"
       tags_filter_placeholder: "Suodata tunnisteita"
