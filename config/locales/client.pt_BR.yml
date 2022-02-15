@@ -14,6 +14,11 @@ pt_BR:
       column_titles:
         topic: "Tópico"
         activity: "Atividade"
+      no_docs:
+        title: "Nenhum tópico do Docs ainda"
+        body: "O Docs fornece uma ótima maneira de manter uma coleção de documentação para referência compartilhada."
+        to_include_topic_in_docs: "Para incluir um tópico no Docs, use uma etiqueta ou categoria especial"
+        setup_the_plugin: "Para começar a usar o Docs, <a href='%{settingsUrl}'>defina marcadores e categorias de documentos</a>."
       categories: "Categorias"
       categories_filter_placeholder: "Filtrar categorias"
       tags_filter_placeholder: "Filtrar etiquetas"
