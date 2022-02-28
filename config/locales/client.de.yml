@@ -10,15 +10,15 @@ de:
       docs:
         help: "Docs-Themen durchsuchen"
     docs:
-      title: "Docs"
+      title: "Explorer"
       column_titles:
         topic: "Thema"
         activity: "Aktivität"
       no_docs:
-        title: "Noch keine Docs-Themen"
-        body: "Docs bietet eine großartige Möglichkeit, eine Sammlung von Dokumentationen zum gemeinsamen Nachschlagen anzulegen."
-        to_include_topic_in_docs: "Um ein Thema in Docs aufzunehmen, verwende eine spezielle Kategorie oder ein Schlagwort"
-        setup_the_plugin: "Um Docs zu nutzen, <a href='%{settingsUrl}'>richte bitte Docs-Kategorien und -Schlagwörter ein</a>."
+        title: "Noch keine Explorer-Themen"
+        body: "Explorer bietet eine großartige Möglichkeit, eine Sammlung von Dokumentationen zum gemeinsamen Nachschlagen anzulegen."
+        to_include_topic_in_docs: "Um ein Thema in Explorer aufzunehmen, verwende eine spezielle Kategorie oder ein Schlagwort"
+        setup_the_plugin: "Um Explorer zu nutzen, <a href='%{settingsUrl}'>richte bitte Docs-Kategorien und -Schlagwörter ein</a>."
       categories: "Kategorien"
       categories_filter_placeholder: "Nach Kategorie filtern"
       tags_filter_placeholder: "Nach Schlagwort filtern"
@@ -29,7 +29,7 @@ de:
           other: "%{count} Ergebnisse gefunden"
         placeholder: "Nach Themen suchen"
         clear: "Löschen"
-        tip_description: "In Docs suchen"
+        tip_description: "In Explorer suchen"
       topic:
         back: "Zurück"
         navigate_to_topic: "Diskussion zu diesem Thema ansehen"
