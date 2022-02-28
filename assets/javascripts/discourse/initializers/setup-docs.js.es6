@@ -16,13 +16,13 @@ function initialize(api, container) {
     };
   });
 
-  api.addKeyboardShortcut("g e", "", { path: "/docs" });
+  api.addKeyboardShortcut("g e", "", { path: "/explorer" });
 
   if (siteSettings.docs_add_to_top_menu) {
     api.addNavigationBarItem({
       name: "docs",
       displayName: I18n.t("docs.title"),
-      href: "/docs",
+      href: "/explorer",
     });
   }
 }

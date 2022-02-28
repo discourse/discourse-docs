@@ -34,7 +34,7 @@ Docs.reopenClass({
       filters.push("track_visit=true");
     }
 
-    return ajax(`/docs.json?${filters.join("&")}`).then((data) => {
+    return ajax(`/explorer.json?${filters.join("&")}`).then((data) => {
       data.topics.topic_list.topics = data.topics.topic_list.topics.map(
         (topic) => Topic.create(topic)
       );

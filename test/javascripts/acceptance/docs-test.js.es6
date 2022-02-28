@@ -15,7 +15,7 @@ acceptance("Docs", function (needs) {
   });
 
   needs.pretender((server, helper) => {
-    server.get("/docs.json", (request) => {
+    server.get("/explorer.json", (request) => {
       if (request.queryParams.category === "1") {
         const fixture = JSON.parse(JSON.stringify(docsFixtures));
 
@@ -52,7 +52,7 @@ acceptance("Docs", function (needs) {
   });
 
   test("selecting a category", async function (assert) {
-    await visit("/docs");
+    await visit("/explorer");
     assert.equal(count(".docs-category.selected"), 0);
 
     await click(".docs-item.docs-category");
@@ -67,7 +67,7 @@ acceptance("Docs - empty state", function (needs) {
   });
 
   needs.pretender((server, helper) => {
-    server.get("/docs.json", () => {
+    server.get("/explorer.json", () => {
       const response = {
         tags: [],
         categories: [],
@@ -88,7 +88,7 @@ acceptance("Docs - empty state", function (needs) {
   });
 
   test("shows the empty state panel when there are no docs", async function (assert) {
-    await visit("/docs");
+    await visit("/explorer");
     assert.ok(exists("div.empty-state"));
   });
 });

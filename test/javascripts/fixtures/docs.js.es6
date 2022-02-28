@@ -85,7 +85,7 @@ export default {
         },
       ],
     },
-    load_more_url: "/docs.json?page=1",
+    load_more_url: "/explorer.json?page=1",
   },
   search_count: null,
 };
