@@ -22,6 +22,7 @@
                   checked=(readonly filterSolved)
                   change=(action "onChangeFilterSolved" value="target.checked")
                 }}
+                {{plugin-outlet name="custom-checkbox" tagName="" connectorTagName="span"}}
                 {{i18n "docs.filter_solved"}}
               </label>
             </div>
