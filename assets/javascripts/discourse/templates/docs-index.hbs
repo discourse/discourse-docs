@@ -34,6 +34,7 @@
                 <div class="item-controls-buttons">
                   {{d-button class=(if (eq categorySort.type "alpha") "categories-alphabet active" "categories-alphabet") icon=categorySortAlphaIcon action=toggleCategorySort actionParam="alpha"}}
                   {{d-button class=(if (eq categorySort.type "numeric") "categories-amount active" "categories-amount") icon=categorySortNumericIcon action=toggleCategorySort actionParam="numeric"}}
+                  {{plugin-outlet name="categories-controls-buttons-bottom"}}
                 </div>
               </section>
               {{#if showCategoryFilter}}
@@ -63,6 +64,7 @@
                 <div class="item-controls-buttons">
                   {{d-button class=(if (eq tagSort.type "alpha") "tags-alphabet active" "tags-alphabet") icon=tagSortAlphaIcon action=toggleTagSort actionParam="alpha"}}
                   {{d-button class=(if (eq tagSort.type "numeric") "tags-amount active" "tags-amount") icon=tagSortNumericIcon action=toggleTagSort actionParam="numeric"}}
+                  {{plugin-outlet name="tags-controls-buttons-bottom"}}
                 </div>
               </section>
               {{#if showTagFilter}}
