@@ -64,7 +64,7 @@
                 <div class="item-controls-buttons">
                   {{d-button class=(if (eq tagSort.type "alpha") "tags-alphabet active" "tags-alphabet") icon=tagSortAlphaIcon action=toggleTagSort actionParam="alpha"}}
                   {{d-button class=(if (eq tagSort.type "numeric") "tags-amount active" "tags-amount") icon=tagSortNumericIcon action=toggleTagSort actionParam="numeric"}}
-                  {{plugin-outlet name="tags-controls-buttons-bottom" tagName="" connectorTagName="span"}}
+                  {{plugin-outlet name="tags-controls-buttons-bottom"}}
                 </div>
               </section>
               {{#if showTagFilter}}
