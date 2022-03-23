@@ -27,7 +27,7 @@ module Docs
 
       # filter results by selected category
       if @filters[:category].present?
-        category_ids = @filters[:category].split('|')
+        category_ids = @filters[:category].split(',')
         results = results.where('topics.category_id IN (?)', category_ids) if category_ids.all? { |id| id =~ /\A\d+\z/ }
       end
 
@@ -148,7 +148,7 @@ module Docs
       categories_object = []
 
       categories.each do |category|
-        active = @filters[:category].include?(category[0].to_s) if @filters[:category]
+        active = @filters[:category].split(',').include?(category[0].to_s) if @filters[:category]
         categories_object << { id: category[0], count: category[1], active: active || false }
       end
 
