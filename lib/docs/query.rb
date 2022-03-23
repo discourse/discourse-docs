@@ -133,7 +133,7 @@ module Docs
       tags_object = []
 
       tags.each do |tag|
-        active = @filters[:tags].include?(tag[0]) if @filters[:tags]
+        active = @filters[:tags].split('|').include?(tag[0]) if @filters[:tags]
         tags_object << { id: tag[0], count: tag[1], active: active || false }
       end
 

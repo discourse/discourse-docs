@@ -277,13 +277,13 @@ export default Controller.extend({
 
   @action
   updateSelectedTags(tag) {
-    let filter = this.filterTags;
-    if (filter && filter.includes(tag.id)) {
-      filter = filter.replace(tag.id, "").replace(/^\|+|\|+$/g, "");
-    } else if (filter) {
-      filter = `${filter}|${tag.id}`;
-    } else {
-      filter = tag.id;
+    let filter = this.filterTags && this.filterTags.split('|');
+
+    if (!filter) filter = tag.id
+    else {
+      if (filter.includes(tag.id)) filter = filter.filter((currTag) => currTag !== tag.id)
+      else filter.push(tag.id)
+      filter = filter.join('|')
     }
 
     this.setProperties({
