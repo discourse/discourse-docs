@@ -33,6 +33,9 @@ Docs.reopenClass({
       filters.push(`topic=${params.selectedTopic}`);
       filters.push("track_visit=true");
     }
+    if (params.timeRange) {
+      filters.push(`time=${params.timeRange}`);
+    }
 
     return ajax(`/explorer.json?${filters.join("&")}`).then((data) => {
       data.topics.topic_list.topics = data.topics.topic_list.topics.map(

@@ -48,6 +48,28 @@ module Docs
         end
       end
 
+      if @filters[:time_range].present? && @filters[:time_range].match?(/^\d+[dwm]$/)
+        time_filter = @filters[:time_range]
+        time_filter_number = time_filter.match(/\d+/)[0].to_i
+        time_filter_char = time_filter.match(/[dwm]/)[0]
+        # 60 seconds * 60 minutes * 24 hours = 1 day
+        time_calculation = 60 * 60 * 24
+
+        if time_filter_char == 'd'
+          time_calculation = time_calculation * time_filter_number
+        elsif time_filter_char == 'w'
+          time_calculation = time_calculation * 7 * time_filter_number
+        elsif time_filter_char == 'm'
+          time_calculation = time_calculation * 30 * time_filter_number
+        end
+        
+        time_test = Time.now.getgm - time_calculation
+        puts 'Executing!!'
+        puts time_calculation
+        puts time_test
+        results = results.where("topics.created_at >= '#{time_test}'")
+      end
+
       if @filters[:solved].present?
         results = results.where("topics.id IN (
           SELECT tc.topic_id

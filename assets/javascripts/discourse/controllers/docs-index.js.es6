@@ -18,6 +18,7 @@ export default Controller.extend({
     orderColumn: "order",
     searchTerm: "search",
     selectedTopic: "topic",
+    timeRange: "time",
   },
 
   application: controller(),
@@ -34,6 +35,7 @@ export default Controller.extend({
   expandedFilters: false,
   ascending: null,
   orderColumn: null,
+  timeRange: null,
 
   showCategoryFilter: gt("categories.length", SHOW_FILTER_AT),
   categoryFilter: "",
@@ -294,13 +296,13 @@ export default Controller.extend({
 
   @action
   updateSelectedCategories(category) {
-    let filter = this.filterCategories;
-    if (filter && filter.includes(category.id)) {
-      filter = filter.replace(category.id, "").replace(/^\|+|\|+$/g, "");
-    } else if (filter) {
-      filter = `${filter}|${category.id}`;
-    } else {
-      filter = category.id;
+    let filter = this.filterCategories && this.filterCategories.split(',').map((cat) => +cat)
+
+    if (!filter) filter = category.id
+    else {
+      if (filter.includes(category.id)) filter = filter.filter((currCat) => currCat !== category.id)
+      else filter.push(category.id)
+      filter = filter.join(',')
     }
 
     this.setProperties({

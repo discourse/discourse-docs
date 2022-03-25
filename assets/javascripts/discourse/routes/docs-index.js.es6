@@ -14,6 +14,9 @@ export default DiscourseRoute.extend({
       replace: true,
       refreshModel: true,
     },
+    timeRange: {
+      refreshModel: true,
+    },
   },
 
   model(params) {

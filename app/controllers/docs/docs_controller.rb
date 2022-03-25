@@ -15,7 +15,8 @@ module Docs
         search_term: params[:search],
         ascending: params[:ascending],
         order: params[:order],
-        page: params[:page]
+        page: params[:page],
+        time_range: params[:time],
       }
 
       query = Docs::Query.new(current_user, filters).list
