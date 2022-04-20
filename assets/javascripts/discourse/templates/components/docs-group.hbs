@@ -1,0 +1,12 @@
+<a href {{action this.selectGroup}} class="docs-item docs-group {{if group.active "selected"}}">
+  {{#unless group.active}}
+    {{d-icon "plus"}}
+  {{/unless}}
+
+  {{#if group.active}}
+    {{d-icon "times-circle"}}
+  {{/if}}
+
+  <span class="docs-item-id group-name">{{group.name}}</span>
+  <span class="docs-item-count tag-count">{{group.count}}</span>
+</a>

@@ -16,6 +16,7 @@ en:
       categories: "Categories"
       categories_filter_placeholder: "Filter categories"
       tags_filter_placeholder: "Filter tags"
+      groups_filter_placeholder: "Filter groups"
       tags: "Tags"
       search:
         results:

@@ -28,6 +28,20 @@
             </div>
           {{/if}}
 
+          {{plugin-outlet
+            name="before-docs-search"
+            tagName="span"
+            connectorTagName="div"
+            args=(hash
+              selectCategory=(action "updateSelectedCategories")
+              selectTag=(action "updateSelectedTags")
+              selectGroup=(action "updateSelectedGroups")
+              tags=indexController.tags
+              categories=indexController.categories
+              groups=indexController.groups
+            )
+          }}
+
           {{#if categories}}
             <div class="docs-items docs-categories">
               <section class="item-controls">
@@ -88,6 +102,36 @@
               </ul>
             </div>
           {{/if}}
+
+          {{#if groups}}
+            <div class="docs-items docs-user-groups">
+              <section class="item-controls">
+                <h3>User groups</h3>
+                <div class="item-controls-buttons">
+                  {{d-button class=(if (eq groupSort.type "alpha") "groups-alphabet active" "groups-alphabet") icon=groupSortAlphaIcon action=toggleGroupSort actionParam="alpha"}}
+                  {{d-button class=(if (eq groupSort.type "numeric") "groups-amount active" "groups-amount") icon=groupSortNumericIcon action=toggleGroupSort actionParam="numeric"}}
+                  {{plugin-outlet name="groups-controls-buttons-bottom"}}
+                </div>
+              </section>
+              {{#if showGroupFilter}}
+                {{input
+                  value=groupFilter
+                  class="filter"
+                  placeholderKey="docs.groups_filter_placeholder"
+                }}
+              {{/if}}
+              <ul>
+                  {{#each sortedGroups as |group|}}
+                    <li class="docs-filter-user-group-{{group.name}}">
+                    {{docs-group
+                      group=group
+                      selectGroup=(action "updateSelectedGroups" group)
+                    }}
+                  </li>
+                  {{/each}}
+              </ul>
+            </div>
+          {{/if}}
         {{/if}}
       </div>
 
@@ -98,6 +142,12 @@
         {{/conditional-loading-spinner}}
       {{else}}
         <div class="docs-results">
+          {{docs-search
+            searchTerm=(readonly indexController.searchTerm)
+            onSearch=(action "performSearch")
+            title=title
+          }}
+
           {{#if isSearchingOrFiltered}}
             {{#if emptyResults}}
               <div class="result-count no-result">

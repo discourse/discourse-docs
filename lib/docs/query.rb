@@ -48,6 +48,26 @@ module Docs
         end
       end
 
+      # filter results by those created by users from the selected user groups
+      if @filters[:groups].present?
+        group_filters = @filters[:groups].split('|')
+        groups = Group.visible_groups(@user)
+        groups = groups.where('groups.name IN (?)', group_filters)
+        
+        users = []
+
+        groups.each do |group|
+          group.users.each do |group_user|
+            users.push(group_user.id) if (!users.include? group_user.id)
+          end
+        end
+
+        if (users.length > 0)
+        results = results.where('topics.user_id IN (?)', users)
+        end
+      end
+
+      # filter results by topics created from the start of the time range up to now
       if @filters[:time_range].present? && @filters[:time_range].match?(/^\d+[dwm]$/)
         time_filter = @filters[:time_range]
         time_filter_number = time_filter.match(/\d+/)[0].to_i
@@ -64,9 +84,6 @@ module Docs
         end
         
         time_test = Time.now.getgm - time_calculation
-        puts 'Executing!!'
-        puts time_calculation
-        puts time_test
         results = results.where("topics.created_at >= '#{time_test}'")
       end
 
@@ -122,6 +139,7 @@ module Docs
       tags = create_tags_object(tags)
       categories = results.where('topics.category_id IS NOT NULL').group('topics.category_id').reorder('').count
       categories = create_categories_object(categories)
+      groups = create_groups_object(results)
 
       results_length = results.size
 
@@ -148,7 +166,7 @@ module Docs
         topic_list['load_more_url'] = nil
       end
 
-      { tags: tags, categories: categories, topics: topic_list, topic_count: results_length }
+      { tags: tags, categories: categories, topics: topic_list, topic_count: results_length, groups: groups }
     end
 
     def create_tags_object(tags)
@@ -164,6 +182,31 @@ module Docs
       tags_object = tags_object.select { |tag| allowed_tags.include?(tag[:id]) }
 
       tags_object.sort_by { |tag| [tag[:active] ? 0 : 1, -tag[:count]] }
+    end
+
+    def create_groups_object(results)
+      groups_object = []
+
+      groups = Group.visible_groups(@user)
+      groups = groups.select('id, name')
+
+      groups.each do |group|
+        count = 0
+        users = []
+
+        group.users.each do |group_user|
+          users.push(group_user.id) if (!users.include? group_user.id)
+        end
+        
+        if (users.length > 0)
+          count = results.where('topics.user_id IN (?)', users).count
+        end
+        
+        active = @filters[:groups].split('|').include?(group.name) if @filters[:groups]
+        groups_object << { id: group.id, name: group.name, active: active || false, count: count }
+      end
+
+      groups_object.sort_by { |group| [group[:active] ? 0 : 1] }
     end
 
     def create_categories_object(categories)
@@ -182,6 +225,8 @@ module Docs
 
       filters.push("tags=#{@filters[:tags]}") if @filters[:tags].present?
       filters.push("category=#{@filters[:category]}") if @filters[:category].present?
+      filters.push("groups=#{@filters[:groups]}") if @filters[:groups].present?
+      filters.push("time=#{@filters[:time_range]}") if @filters[:time_range].present?
       filters.push("solved=#{@filters[:solved]}") if @filters[:solved].present?
       filters.push("search=#{@filters[:search_term]}") if @filters[:search_term].present?
       filters.push("sort=#{@filters[:sort]}") if @filters[:sort].present?

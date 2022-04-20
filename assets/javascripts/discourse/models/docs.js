@@ -14,6 +14,9 @@ Docs.reopenClass({
     if (params.filterTags) {
       filters.push(`tags=${params.filterTags}`);
     }
+    if (params.filterGroups) {
+      filters.push(`groups=${params.filterGroups}`);
+    }
     if (params.filterSolved) {
       filters.push(`solved=${params.filterSolved}`);
     }

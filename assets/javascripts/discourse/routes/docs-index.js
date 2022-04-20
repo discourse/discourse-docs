@@ -7,6 +7,7 @@ export default DiscourseRoute.extend({
     ascending: { refreshModel: true },
     filterCategories: { refreshModel: true },
     filterTags: { refreshModel: true },
+    filterGroups: { refreshModel: true },
     filterSolved: { refreshModel: true },
     orderColumn: { refreshModel: true },
     selectedTopic: { refreshModel: true },
@@ -14,9 +15,7 @@ export default DiscourseRoute.extend({
       replace: true,
       refreshModel: true,
     },
-    timeRange: {
-      refreshModel: true,
-    },
+    timeRange: { refreshModel: true },
   },
 
   model(params) {

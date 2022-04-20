@@ -1,10 +1,10 @@
 .docs-search-wrapper {
   position: relative;
-  width: 500px;
+  width: 400px;
   .d-icon {
     position: absolute;
     right: 0.75em;
-    top: 25%;
+    top: 15%;
     font-size: 1.5em;
     color: var(--primary-low-mid);
     pointer-events: none;
@@ -20,7 +20,7 @@
     position: absolute;
     right: 0.8em;
     text-transform: lowercase;
-    top: 20%;
+    top: 12%;
   }
 }
 
@@ -28,16 +28,21 @@
   align-items: center;
   background-color: var(--primary-very-low);
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
   padding: 1.5em 1em;
   @include breakpoint(mobile-extra-large, min-width) {
     // More breathing room on larger screens
-    margin-bottom: 2em;
+    margin-bottom: 1em;
   }
   .docs-search-bar {
-    height: 50px;
+    height: 32px;
     margin-bottom: 0px;
     width: 100%;
+  }
+
+  .explorer-title {
+    margin: 0;
   }
 }
 .docs-browse {
@@ -58,8 +63,10 @@
   }
   .docs-filters {
     flex: 0 1 20%;
+    background-color: var(--primary-very-low);
     @include breakpoint(tablet, min-width) {
-      padding-right: 2em;
+      padding: 1em;
+      margin-right: 1em;
     }
     // min-width on flex allows container to
     // be more narrow than content if needed

@@ -17,6 +17,12 @@ export default Controller.extend({
   },
 
   @action
+  updateSelectedGroups(group) {
+    this.indexController.send("updateSelectedGroups", group);
+    return false;
+  },
+
+  @action
   performSearch(term) {
     this.indexController.send("performSearch", term);
     return false;

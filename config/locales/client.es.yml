@@ -22,6 +22,7 @@ es:
       categories: "Categorías"
       categories_filter_placeholder: "Filtrar categorías"
       tags_filter_placeholder: "Filtrar etiquetas"
+      groups_filter_placeholder: "Filtrar grupos"
       tags: "Etiquetas"
       search:
         results:

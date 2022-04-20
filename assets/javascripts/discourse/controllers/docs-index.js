@@ -19,6 +19,7 @@ export default Controller.extend({
     searchTerm: "search",
     selectedTopic: "topic",
     timeRange: "time",
+    filterGroups: "groups",
   },
 
   application: controller(),
@@ -27,6 +28,7 @@ export default Controller.extend({
   isLoadingMore: false,
   isTopicLoading: false,
   filterTags: null,
+  filterGroups: null,
   filterCategories: null,
   filterSolved: false,
   searchTerm: null,
@@ -45,12 +47,17 @@ export default Controller.extend({
   tagFilter: "",
   tagSort: {},
 
+  showGroupFilter: gt("groups.length", SHOW_FILTER_AT),
+  groupFilter: "",
+  groupSort: {},
+
   loadMoreUrl: alias("model.topics.load_more_url"),
   categories: readOnly("model.categories"),
   topics: alias("model.topics.topic_list.topics"),
   tags: readOnly("model.tags"),
   topicCount: alias("model.topic_count"),
   emptyResults: equal("topicCount", 0),
+  groups: readOnly("model.groups"),
 
   @on("init")
   _setupFilters() {
@@ -66,6 +73,10 @@ export default Controller.extend({
         type: "numeric", // or alpha
         direction: "desc", // or asc
       },
+      groupSort: {
+        type: "numeric", // or alpha
+        direction: "desc", // or asc
+      }
     });
   },
   @discourseComputed("categories", "categorySort", "categoryFilter")
@@ -157,6 +168,52 @@ export default Controller.extend({
       return "sort-alpha-down";
     }
     return "sort-alpha-up";
+  },
+
+  @discourseComputed("groups", "groupSort", "groupFilter")
+  sortedGroups(groups, groupSort, filter) {
+    console.log(this.title);
+    let { type, direction } = groupSort;
+    if (type === "numeric") {
+      groups = groups.sort((a, b) => a.count - b.count);
+    } else {
+      groups = groups.sort((a, b) => {
+        return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
+      });
+    }
+
+    if (direction === "desc") {
+      groups = groups.reverse();
+    }
+
+    if (this.showGroupFilter) {
+      return groups.filter((group) => {
+        return group.name.toLowerCase().indexOf(filter.toLowerCase()) > -1;
+      });
+    }
+
+    return groups;
+  },
+
+  @discourseComputed("groupSort")
+  groupSortNumericIcon(groupSort) {
+    if (groupSort.type === "numeric" && groupSort.direction === "asc") {
+      return "sort-numeric-down";
+    }
+    return "sort-numeric-up";
+  },
+
+  @discourseComputed("groupSort")
+  groupSortAlphaIcon(groupSort) {
+    if (groupSort.type === "alpha" && groupSort.direction === "asc") {
+      return "sort-alpha-down";
+    }
+    return "sort-alpha-up";
+  },
+
+  @discourseComputed("groups")
+  listUserGroups(groups) {
+    return groups
   },
 
   @discourseComputed("topics", "isSearching", "filterSolved")
@@ -266,6 +323,16 @@ export default Controller.extend({
   },
 
   @action
+  toggleGroupSort(newType) {
+    let { type, direction } = this.groupSort;
+    this.set("groupSort", {
+      type: newType,
+      direction:
+        type === newType ? (direction === "asc" ? "desc" : "asc") : "asc",
+    });
+  },
+
+  @action
   setSelectedTopic(topicId) {
     this.set("selectedTopic", topicId);
 
@@ -290,6 +357,23 @@ export default Controller.extend({
 
     this.setProperties({
       filterTags: filter,
+      selectedTopic: null,
+    });
+  },
+
+  @action
+  updateSelectedGroups(group) {
+    let filter = this.filterGroups && this.filterGroups.split('|');
+
+    if (!filter) filter = group.name
+    else {
+      if (filter.includes(group.name)) filter = filter.filter((currGroup) => currGroup !== group.name)
+      else filter.push(group.name)
+      filter = filter.join('|')
+    }
+
+    this.setProperties({
+      filterGroups: filter,
       selectedTopic: null,
     });
   },

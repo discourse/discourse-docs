@@ -8,9 +8,12 @@
     .docs-search {
       font-size: $font-up-2;
       padding: 0.5em 0;
+      display: flex;
+      flex-direction: column;
 
       .docs-search-bar {
         width: calc(100vw - 2em);
+        height: 40px;
       }
     }
     .docs-browse {
