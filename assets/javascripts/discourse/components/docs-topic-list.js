@@ -15,15 +15,6 @@ export default Component.extend({
     return order === "activity";
   },
 
-  // need to handle clicks here since links are in a raw view
-  click(e) {
-    if (e.target.classList.contains("docs-topic-link")) {
-      const topicId = e.target.dataset.topicId;
-      this.selectTopic(topicId);
-      return false;
-    }
-  },
-
   @action
   sortListActivity() {
     this.sortBy("activity");
