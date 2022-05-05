@@ -264,13 +264,6 @@ export default Controller.extend({
   },
 
   @action
-  setSelectedTopic(topicId) {
-    this.set("selectedTopic", topicId);
-
-    window.scrollTo(0, 0);
-  },
-
-  @action
   onChangeFilterSolved(solvedFilter) {
     this.set("filterSolved", solvedFilter);
   },
