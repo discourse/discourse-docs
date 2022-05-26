@@ -4,10 +4,6 @@ import I18n from "I18n";
 function initialize(api, container) {
   const siteSettings = container.lookup("site-settings:main");
 
-  if (!siteSettings.docs_enabled) {
-    return;
-  }
-
   api.decorateWidget("hamburger-menu:generalLinks", () => {
     return {
       route: "docs",
@@ -31,13 +27,14 @@ export default {
   name: "setup-docs",
 
   initialize(container) {
+    const siteSettings = container.lookup("site-settings:main");
+
+    if (!siteSettings.docs_enabled) {
+      return;
+    }
+
     withPluginApi("0.8", (api) => initialize(api, container));
     withPluginApi("0.12.6", (api) => {
-      const siteSettings = container.lookup("site-settings:main");
-      if (!siteSettings.docs_enabled) {
-        return;
-      }
-
       api.addSearchSuggestion("in:docs");
 
       const tip = {
@@ -47,6 +44,19 @@ export default {
         searchTopics: true,
       };
       api.addQuickSearchRandomTip(tip);
+    });
+
+    withPluginApi("1.2.0", (api) => {
+      const currentUser = container.lookup("current-user:main");
+
+      if (currentUser?.experimental_sidebar_enabled) {
+        api.addTopicsSectionLink({
+          name: "docs",
+          route: "docs.index",
+          title: I18n.t("sidebar.docs_link_title"),
+          text: I18n.t("sidebar.docs_link_text"),
+        });
+      }
     });
   },
 };
