@@ -35,3 +35,6 @@ sv:
         navigate_to_topic: "Se diskussionen om detta ämne"
       filter_button: "Filter"
       filter_solved: "Ämne löst?"
+    sidebar:
+      docs_link_title: "Utforska dokumentationsämnen"
+      docs_link_text: "Dokument"

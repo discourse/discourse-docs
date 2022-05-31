@@ -14,6 +14,11 @@ ru:
       column_titles:
         topic: "Тема"
         activity: "Активность"
+      no_docs:
+        title: "Документация ещё не создана"
+        body: "Этот плагин - отличный способ предоставления коллекции документов для общего доступа."
+        to_include_topic_in_docs: "Чтобы включить тему в документацию, используйте специальный раздел или тег."
+        setup_the_plugin: "Чтобы начать использовать долкументацию, <a href='%{settingsUrl}'>настройте соответствующие разделы и теги</a>."
       categories: "Разделы"
       categories_filter_placeholder: "Фильтр по разделам"
       tags_filter_placeholder: "Фильтр по тегам"
@@ -32,3 +37,6 @@ ru:
         navigate_to_topic: "Просмотреть обсуждение этой темы"
       filter_button: "Фильтры"
       filter_solved: "Вопрос решён?"
+    sidebar:
+      docs_link_title: "Просмотр документации"
+      docs_link_text: "Документация"
