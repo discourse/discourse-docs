@@ -5,3 +5,9 @@
 # https://translate.discourse.org/
 
 he:
+  site_settings:
+    docs_enabled: "הפעלת תוסף המסמכים"
+    docs_categories: "רשימה של שמות מופשטים של קטגוריות שיכללו בתיעוד"
+    docs_tags: "רשימה של תגיות לכלול בתיעוד"
+    docs_add_solved_filter: "מוסיף מסנן לנושאים שנפתרו -- דורש התקנה והפעלה של התוסף Discourse Solved"
+    docs_add_to_top_menu: "מוסיף קישור לתפריט העליון כדי לנווט לתצוגת התיעוד"

@@ -6,13 +6,37 @@
 
 he:
   js:
+    filters:
+      docs:
+        help: "עיון בנושאי תיעוד"
     docs:
+      title: "תיעוד"
+      column_titles:
+        topic: "נושא"
+        activity: "פעילות"
       no_docs:
         title: "אין נושאי תיעוד עדיין"
         body: "תיעוד מספקת דרך נהדרת לתחזק אוסף של מסמכים לסימוכין משותפים."
         to_include_topic_in_docs: "כדי לכלול נושא בתיעוד, יש להשתמש בקטגוריה מיוחדת או בתגית."
         setup_the_plugin: "כדי להתחיל להשתמש בתיעוד, נא <a href='%{settingsUrl}'>להקים קטגוריות ותגיות של תיעוד</a>."
+      categories: "קטגוריות"
       categories_filter_placeholder: "סינון קטגוריות"
       tags_filter_placeholder: "סינון תגיות"
+      tags: "תגיות"
       search:
-        tip_description: "חיפוש במסמכים"
+        results:
+          one: "נמצאה תוצאה %{count}"
+          two: "נמצאו %{count} תוצאות"
+          many: "נמצאו %{count} תוצאות"
+          other: "נמצאו %{count} תוצאות"
+        placeholder: "חיפוש אחר נושאים"
+        clear: "מחיקה"
+        tip_description: "חיפוש בתיעוד"
+      topic:
+        back: "חזרה אחורה"
+        navigate_to_topic: "הצגת הדיון בנושא הזה"
+      filter_button: "מסננים"
+      filter_solved: "הנושא נפתר?"
+    sidebar:
+      docs_link_title: "עיון בנושאי תיעוד"
+      docs_link_text: "תיעוד"
