@@ -6,6 +6,7 @@ import Docs from "discourse/plugins/discourse-docs/discourse/models/docs";
 import { getOwner } from "@ember/application";
 import getURL from "discourse-common/lib/get-url";
 import I18n from "I18n";
+import { htmlSafe } from "@ember/template";
 
 const SHOW_FILTER_AT = 10;
 
@@ -213,7 +214,7 @@ export default Controller.extend({
 
     return {
       title: I18n.t("docs.no_docs.title"),
-      body: body.htmlSafe(),
+      body: htmlSafe(body),
     };
   },
 
