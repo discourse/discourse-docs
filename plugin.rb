@@ -44,4 +44,9 @@ after_initialize do
   add_to_class(:topic_query, :list_docs_topics) do
     default_results(@options)
   end
+
+  on(:robots_info) do |robots_info|
+    any_user_agent = robots_info[:agents].find { |info| info[:name] == "*" }
+    any_user_agent[:disallow] << "/docs/"
+  end
 end
