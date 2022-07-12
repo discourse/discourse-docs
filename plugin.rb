@@ -46,7 +46,15 @@ after_initialize do
   end
 
   on(:robots_info) do |robots_info|
+    robots_info[:agents] ||= []
+
     any_user_agent = robots_info[:agents].find { |info| info[:name] == "*" }
+    if !any_user_agent
+      any_user_agent = { name: "*" }
+      robots_info[:agents] << any_user_agent
+    end
+
+    any_user_agent[:disallow] ||= []
     any_user_agent[:disallow] << "/docs/"
   end
 end
