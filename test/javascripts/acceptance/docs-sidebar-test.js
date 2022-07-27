@@ -10,10 +10,12 @@ import docsFixtures from "../fixtures/docs";
 import { cloneJSON } from "discourse-common/lib/object";
 
 acceptance("Docs - Sidebar with docs disabled", function (needs) {
-  needs.user({ experimental_sidebar_enabled: true });
+  needs.user();
 
   needs.settings({
     docs_enabled: false,
+    enable_experimental_sidebar_hamburger: true,
+    enable_sidebar: true,
   });
 
   test("docs sidebar link is hidden", async function (assert) {
@@ -27,9 +29,12 @@ acceptance("Docs - Sidebar with docs disabled", function (needs) {
 });
 
 acceptance("Docs - Sidebar with docs enabled", function (needs) {
-  needs.user({ experimental_sidebar_enabled: true });
+  needs.user();
+
   needs.settings({
     docs_enabled: true,
+    enable_experimental_sidebar_hamburger: true,
+    enable_sidebar: true,
   });
 
   needs.pretender((server, helper) => {

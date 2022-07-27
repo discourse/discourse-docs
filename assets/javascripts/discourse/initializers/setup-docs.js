@@ -47,9 +47,7 @@ export default {
     });
 
     withPluginApi("1.2.0", (api) => {
-      const currentUser = container.lookup("current-user:main");
-
-      if (currentUser?.experimental_sidebar_enabled) {
+      if (siteSettings.enable_experimental_sidebar_hamburger) {
         api.addTopicsSectionLink({
           name: "docs",
           route: "docs.index",
