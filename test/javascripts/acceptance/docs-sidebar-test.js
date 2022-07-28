@@ -21,6 +21,10 @@ acceptance("Docs - Sidebar with docs disabled", function (needs) {
   test("docs sidebar link is hidden", async function (assert) {
     await visit("/");
 
+    await click(
+      ".sidebar-section-community .sidebar-more-section-links-details-summary"
+    );
+
     assert.ok(
       !exists(".sidebar-section-link-docs"),
       "it does not display the docs link in sidebar"
@@ -43,6 +47,10 @@ acceptance("Docs - Sidebar with docs enabled", function (needs) {
 
   test("clicking on docs link", async function (assert) {
     await visit("/");
+
+    await click(
+      ".sidebar-section-community .sidebar-more-section-links-details-summary"
+    );
 
     assert.strictEqual(
       query(".sidebar-section-link-docs").textContent.trim(),
