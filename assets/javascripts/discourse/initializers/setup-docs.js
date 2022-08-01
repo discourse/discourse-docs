@@ -4,14 +4,6 @@ import I18n from "I18n";
 function initialize(api, container) {
   const siteSettings = container.lookup("site-settings:main");
 
-  api.decorateWidget("hamburger-menu:generalLinks", () => {
-    return {
-      route: "docs",
-      label: "docs.title",
-      className: "docs-link",
-    };
-  });
-
   api.addKeyboardShortcut("g e", "", { path: "/docs" });
 
   if (siteSettings.docs_add_to_top_menu) {
@@ -48,11 +40,19 @@ export default {
 
     withPluginApi("1.2.0", (api) => {
       if (siteSettings.enable_experimental_sidebar_hamburger) {
-        api.addTopicsSectionLink({
+        api.addCommunitySectionLink({
           name: "docs",
           route: "docs.index",
           title: I18n.t("sidebar.docs_link_title"),
           text: I18n.t("sidebar.docs_link_text"),
+        });
+      } else {
+        api.decorateWidget("hamburger-menu:generalLinks", () => {
+          return {
+            route: "docs",
+            label: "docs.title",
+            className: "docs-link",
+          };
         });
       }
     });
