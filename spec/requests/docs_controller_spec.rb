@@ -137,7 +137,7 @@ describe Docs::DocsController do
     end
 
     context 'when ordering results' do
-      context 'by title' do
+      describe 'by title' do
         it 'should return the list ordered descending' do
           get "/docs.json?order=title"
 
@@ -163,7 +163,7 @@ describe Docs::DocsController do
         end
       end
 
-      context 'by date' do
+      describe 'by date' do
         before do
           topic2.update(last_posted_at: Time.zone.now + 100)
         end
