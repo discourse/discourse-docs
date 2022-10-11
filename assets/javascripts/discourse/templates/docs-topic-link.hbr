@@ -1,1 +1,1 @@
-<a href="/docs?topic={{topic.id}}" class="docs-topic-link">{{{topic.fancyTitle}}}</a>
+<a href="/{{urlPath}}?topic={{topic.id}}" class="docs-topic-link">{{{topic.fancyTitle}}}</a>

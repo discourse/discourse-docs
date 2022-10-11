@@ -10,7 +10,7 @@ function initialize(api, container) {
     api.addNavigationBarItem({
       name: "docs",
       displayName: I18n.t("docs.title"),
-      href: "/docs",
+      href: "/" + siteSettings.docs_url_path,
     });
   }
 }

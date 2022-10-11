@@ -1,8 +1,11 @@
 import EmberObject from "@ember/object";
 import { ajax } from "discourse/lib/ajax";
 import Topic from "discourse/models/topic";
+import { getDocs } from "../../lib/get-docs";
 
 const Docs = EmberObject.extend({});
+const docs_url = getDocs();
+
 
 Docs.reopenClass({
   list(params) {
@@ -34,7 +37,7 @@ Docs.reopenClass({
       filters.push("track_visit=true");
     }
 
-    return ajax(`/docs.json?${filters.join("&")}`).then((data) => {
+    return ajax(`/${docs_url}.json?${filters.join("&")}`).then((data) => {
       data.topics.topic_list.topics = data.topics.topic_list.topics.map(
         (topic) => Topic.create(topic)
       );

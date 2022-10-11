@@ -57,4 +57,15 @@ after_initialize do
     any_user_agent[:disallow] ||= []
     any_user_agent[:disallow] << "/docs/"
   end
+
+  on(:site_setting_changed) do |name, old_value, new_value|
+    puts "EVENT :site_setting_changed CALLED #{name} #{new_value}"
+    next if name != :docs_url_path
+
+    puts "PROCEEDED. GOOD."
+    Discourse::Application.routes.append do
+      get '/' + new_value, to: redirect("/docs")
+    end
+    Discourse::Application.routes_reloader.reload!
+  end
 end
