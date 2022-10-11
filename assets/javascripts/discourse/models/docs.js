@@ -6,7 +6,6 @@ import { getDocs } from "../../lib/get-docs";
 const Docs = EmberObject.extend({});
 const docs_url = getDocs();
 
-
 Docs.reopenClass({
   list(params) {
     let filters = [];
