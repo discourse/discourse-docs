@@ -4,7 +4,9 @@ import I18n from "I18n";
 function initialize(api, container) {
   const siteSettings = container.lookup("site-settings:main");
 
-  api.addKeyboardShortcut("g e", "", { path: "/docs" });
+  api.addKeyboardShortcut("g e", "", {
+    path: "/" + siteSettings.docs_url_path,
+  });
 
   if (siteSettings.docs_add_to_top_menu) {
     api.addNavigationBarItem({

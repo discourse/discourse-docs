@@ -170,7 +170,7 @@ module Docs
         filters.push('page=1')
       end
 
-      "/docs.json?#{filters.join('&')}"
+      "/#{SiteSetting.docs_url_path}.json?#{filters.join('&')}"
     end
   end
 end
