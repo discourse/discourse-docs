@@ -8,17 +8,17 @@ import { test } from "qunit";
 import docsFixtures from "../fixtures/docs";
 import { click, visit } from "@ember/test-helpers";
 
-let docs_url_path = "any_docs_url_path_here";
+let DOCS_URL_PATH = "any_docs_url_path_here";
 
 acceptance("Docs", function (needs) {
   needs.user();
   needs.settings({
     docs_enabled: true,
-    docs_url_path: docs_url_path,
+    docs_url_path: DOCS_URL_PATH,
   });
 
   needs.pretender((server, helper) => {
-    server.get("/" + docs_url_path + ".json", (request) => {
+    server.get("/" + DOCS_URL_PATH + ".json", (request) => {
       if (request.queryParams.category === "1") {
         const fixture = JSON.parse(JSON.stringify(docsFixtures));
 
