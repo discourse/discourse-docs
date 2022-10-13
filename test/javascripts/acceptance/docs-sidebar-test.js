@@ -18,7 +18,7 @@ acceptance("Docs - Sidebar with docs disabled", function (needs) {
     docs_enabled: false,
     enable_experimental_sidebar_hamburger: true,
     enable_sidebar: true,
-    docs_url_path: DOCS_URL_PATH
+    docs_url_path: DOCS_URL_PATH,
   });
 
   test("docs sidebar link is hidden", async function (assert) {
@@ -42,11 +42,13 @@ acceptance("Docs - Sidebar with docs enabled", function (needs) {
     docs_enabled: true,
     enable_experimental_sidebar_hamburger: true,
     enable_sidebar: true,
-    docs_url_path: DOCS_URL_PATH
+    docs_url_path: DOCS_URL_PATH,
   });
 
   needs.pretender((server, helper) => {
-    server.get("/" + DOCS_URL_PATH +".json", () => helper.response(cloneJSON(docsFixtures)));
+    server.get("/" + DOCS_URL_PATH + ".json", () =>
+      helper.response(cloneJSON(docsFixtures))
+    );
   });
 
   test("clicking on docs link", async function (assert) {
@@ -70,6 +72,10 @@ acceptance("Docs - Sidebar with docs enabled", function (needs) {
 
     await click(".sidebar-section-link-docs");
 
-    assert.strictEqual(currentURL(), "/" + DOCS_URL_PATH, "it navigates to the right page");
+    assert.strictEqual(
+      currentURL(),
+      "/" + DOCS_URL_PATH,
+      "it navigates to the right page"
+    );
   });
 });

@@ -67,7 +67,7 @@ acceptance("Docs - empty state", function (needs) {
   needs.user();
   needs.settings({
     docs_enabled: true,
-    docs_url_path: DOCS_URL_PATH
+    docs_url_path: DOCS_URL_PATH,
   });
 
   needs.pretender((server, helper) => {
