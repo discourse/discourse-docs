@@ -43,8 +43,10 @@ acceptance("Docs", function (needs) {
     await click("#toggle-hamburger-menu");
     await click(".docs-link");
 
-    assert.equal(query(".docs-category").innerText.trim(), "bug 119");
-    assert.equal(query(".docs-tag").innerText.trim(), "something 74");
+    assert.equal(query(".docs-category .docs-item-id").innerText, "bug");
+    assert.equal(query(".docs-category .docs-item-count").innerText, "119");
+    assert.equal(query(".docs-tag .docs-item-id").innerText, "something");
+    assert.equal(query(".docs-tag .docs-item-count").innerText, "74");
     assert.equal(
       query(".docs-topic-link").innerText.trim(),
       "Importing from Software X"
