@@ -21,7 +21,7 @@ register_svg_icon 'sort-numeric-down'
 load File.expand_path('lib/docs/engine.rb', __dir__)
 load File.expand_path('lib/docs/query.rb', __dir__)
 
-GlobalSetting.add_default :docs_url, "anything_here"
+GlobalSetting.add_default :docs_url, "docs"
 
 after_initialize do
   require_dependency 'search'
@@ -69,4 +69,8 @@ after_initialize do
   #   end
   #   Discourse::Application.routes_reloader.reload!
   # end
+  add_to_serializer(:site, :docs_url) do
+    GlobalSetting.docs_url
+  end
+
 end
