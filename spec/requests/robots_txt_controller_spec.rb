@@ -5,7 +5,6 @@ require 'rails_helper'
 describe RobotsTxtController do
   before do
     SiteSetting.docs_enabled = true
-    # SiteSetting.docs_url_path = "kb"
     GlobalSetting.stubs(:docs_url).returns('docs')
   end
 
