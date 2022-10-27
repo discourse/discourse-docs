@@ -1,18 +1,20 @@
 import { withPluginApi } from "discourse/lib/plugin-api";
 import I18n from "I18n";
+import { getDocs } from "../../lib/get-docs";
 
 function initialize(api, container) {
   const siteSettings = container.lookup("site-settings:main");
+  const docs_url = getDocs();
 
   api.addKeyboardShortcut("g e", "", {
-    path: "/" + siteSettings.docs_url_path,
+    path: "/" + docs_url,
   });
 
   if (siteSettings.docs_add_to_top_menu) {
     api.addNavigationBarItem({
       name: "docs",
       displayName: I18n.t("docs.title"),
-      href: "/" + siteSettings.docs_url_path,
+      href: "/" + docs_url,
     });
   }
 }

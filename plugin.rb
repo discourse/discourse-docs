@@ -9,6 +9,7 @@
 
 enabled_site_setting :docs_enabled
 
+register_asset 'javascripts/lib/get-docs.js.erb', :server_side
 register_asset 'stylesheets/common/docs.scss'
 register_asset 'stylesheets/mobile/docs.scss'
 
@@ -19,6 +20,8 @@ register_svg_icon 'sort-numeric-down'
 
 load File.expand_path('lib/docs/engine.rb', __dir__)
 load File.expand_path('lib/docs/query.rb', __dir__)
+
+GlobalSetting.add_default :docs_url, "anything_here"
 
 after_initialize do
   require_dependency 'search'
@@ -55,15 +58,15 @@ after_initialize do
     end
 
     any_user_agent[:disallow] ||= []
-    any_user_agent[:disallow] << "/#{SiteSetting.docs_url_path}/"
+    any_user_agent[:disallow] << "/#{GlobalSetting.docs_url}/"
   end
 
-  on(:site_setting_changed) do |name, old_value, new_value|
-    next if name != :docs_url_path
+  # on(:site_setting_changed) do |name, old_value, new_value|
+  #   next if name != :docs_url_path
 
-    Discourse::Application.routes.append do
-      get '/' + new_value, to: redirect("/" + SiteSetting.docs_url_path)
-    end
-    Discourse::Application.routes_reloader.reload!
-  end
+  #   Discourse::Application.routes.append do
+  #     get '/' + new_value, to: redirect("/" + GlobalSetting.docs_url)
+  #   end
+  #   Discourse::Application.routes_reloader.reload!
+  # end
 end
