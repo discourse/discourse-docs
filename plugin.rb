@@ -9,7 +9,6 @@
 
 enabled_site_setting :docs_enabled
 
-register_asset 'javascripts/lib/get-docs.js.erb', :server_side
 register_asset 'stylesheets/common/docs.scss'
 register_asset 'stylesheets/mobile/docs.scss'
 
@@ -61,16 +60,7 @@ after_initialize do
     any_user_agent[:disallow] << "/#{GlobalSetting.docs_url}/"
   end
 
-  # on(:site_setting_changed) do |name, old_value, new_value|
-  #   next if name != :docs_url_path
-
-  #   Discourse::Application.routes.append do
-  #     get '/' + new_value, to: redirect("/" + GlobalSetting.docs_url)
-  #   end
-  #   Discourse::Application.routes_reloader.reload!
-  # end
-  add_to_serializer(:site, :docs_url) do
+  add_to_serializer(:site, :docs_url, "docs") do
     GlobalSetting.docs_url
   end
-
 end

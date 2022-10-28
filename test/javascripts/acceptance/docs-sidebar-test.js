@@ -6,10 +6,10 @@ import {
   exists,
   query,
 } from "discourse/tests/helpers/qunit-helpers";
-import docsFixtures from "../fixtures/any_docs_url_path_here";
+import docsFixtures from "../fixtures/docs";
 import { cloneJSON } from "discourse-common/lib/object";
 
-let DOCS_URL_PATH = "any_docs_url_path_here";
+let DOCS_URL_PATH = "docs";
 
 acceptance("Docs - Sidebar with docs disabled", function (needs) {
   needs.user();

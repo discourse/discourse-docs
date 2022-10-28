@@ -5,10 +5,10 @@ import {
   query,
 } from "discourse/tests/helpers/qunit-helpers";
 import { test } from "qunit";
-import docsFixtures from "../fixtures/any_docs_url_path_here";
+import docsFixtures from "../fixtures/docs";
 import { click, visit } from "@ember/test-helpers";
 
-let DOCS_URL_PATH = "any_docs_url_path_here";
+let DOCS_URL_PATH = "docs";
 
 acceptance("Docs", function (needs) {
   needs.user();
