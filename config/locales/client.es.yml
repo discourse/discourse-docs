@@ -35,3 +35,6 @@ es:
         navigate_to_topic: "Ver la discusión sobre este tema"
       filter_button: "Filtros"
       filter_solved: "¿Tema resuelto?"
+    sidebar:
+      docs_link_title: "Explorar los temas de documentación"
+      docs_link_text: "Docs"

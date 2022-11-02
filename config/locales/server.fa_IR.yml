@@ -5,3 +5,9 @@
 # https://translate.discourse.org/
 
 fa_IR:
+  site_settings:
+    docs_enabled: "فعال کردن افزونه اسناد"
+    docs_categories: "فهرستی از دسته‌بندی کوتاه که در اسناد قرار می‌گیرد"
+    docs_tags: "فهرستی از برچسب‌ها که در اسناد قرار می‌گیرد"
+    docs_add_solved_filter: "یک فیلتر برای موضوعات حل شده اضافه می‌کند - برای نصب و فعال کردن دیسکورس Solved نیاز است"
+    docs_add_to_top_menu: "پیوندی را به منوی بالا اضافه می‌کند تا به نمای اسناد برود"

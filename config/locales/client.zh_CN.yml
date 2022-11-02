@@ -35,5 +35,5 @@ zh_CN:
       filter_button: "筛选器"
       filter_solved: "话题已解决？"
     sidebar:
-      docs_link_title: "探索文档主题"
+      docs_link_title: "探索文档话题"
       docs_link_text: "文档"

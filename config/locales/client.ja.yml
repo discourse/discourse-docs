@@ -34,3 +34,6 @@ ja:
         navigate_to_topic: "このトピックに関するディスカッションを表示する"
       filter_button: "フィルタ"
       filter_solved: "解決済みのトピック？"
+    sidebar:
+      docs_link_title: "ドキュメントのトピックを見る"
+      docs_link_text: "ドキュメント"
