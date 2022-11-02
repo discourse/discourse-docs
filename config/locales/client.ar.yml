@@ -39,3 +39,6 @@ ar:
         navigate_to_topic: "عرض المناقشة بشأن هذا الموضوع"
       filter_button: "عوامل التصفية"
       filter_solved: "هل تم حل الموضوع؟"
+    sidebar:
+      docs_link_title: "استكشاف موضوعات التوثيق"
+      docs_link_text: "المستندات"

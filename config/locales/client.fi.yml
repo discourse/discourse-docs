@@ -35,3 +35,6 @@ fi:
         navigate_to_topic: "Katso tämän ketjun keskustelu"
       filter_button: "Suodattimet"
       filter_solved: "Onko ketju ratkaistu?"
+    sidebar:
+      docs_link_title: "Tutustu ohjeketjuihin"
+      docs_link_text: "Ohjeet"

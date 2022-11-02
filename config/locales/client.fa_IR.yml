@@ -5,3 +5,36 @@
 # https://translate.discourse.org/
 
 fa_IR:
+  js:
+    filters:
+      docs:
+        help: "مرور موضوعات اسناد"
+    docs:
+      title: "اسناد"
+      column_titles:
+        topic: "موضوع"
+        activity: "فعالیت"
+      no_docs:
+        title: "هنوز هیچ موضوعی برای اسناد وجود ندارد"
+        body: "اسناد یک راه عالی برای نگهداری مجموعه‌ای از مستندات به عنوان مرجع فراهم می‌کند."
+        to_include_topic_in_docs: "برای قرار دادن یک موضوع در اسناد، از یک دسته‌بندی یا برچسب خاص استفاده کنید"
+        setup_the_plugin: "برای شروع استفاده از اسناد، لطفا <a href='%{settingsUrl}'>دسته‌‌بندی‌ها و برچسب‌های اسناد را تنظیم کنید</a>."
+      categories: "دسته‌بندی‌ها"
+      categories_filter_placeholder: "فیلتر دسته‌بندی‌ها"
+      tags_filter_placeholder: "فیلتر برچسب‌ها"
+      tags: "برچسب‌ها"
+      search:
+        results:
+          one: "%{count} نتیجه پیدا شد"
+          other: "%{count} نتیجه پیدا شد"
+        placeholder: "جستجو برای موضوعات"
+        clear: "پاک کردن"
+        tip_description: "جستجو در اسناد"
+      topic:
+        back: "بازگشت"
+        navigate_to_topic: "بحث در مورد این موضوع را مشاهده کنید"
+      filter_button: "فیلترها"
+      filter_solved: "موضوع حل شد؟"
+    sidebar:
+      docs_link_title: "کاوش در موضوعات اسناد"
+      docs_link_text: "اسناد"

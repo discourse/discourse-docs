@@ -35,3 +35,6 @@ fr:
         navigate_to_topic: "Voir la discussion sur ce sujet"
       filter_button: "Filtres"
       filter_solved: "Sujet résolu ?"
+    sidebar:
+      docs_link_title: "Explorer les sujets de la documentation"
+      docs_link_text: "Docs"
