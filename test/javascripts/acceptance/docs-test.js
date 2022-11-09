@@ -12,9 +12,9 @@ let DOCS_URL_PATH = "docs";
 
 acceptance("Docs", function (needs) {
   needs.user();
+  needs.site({ docs_url: DOCS_URL_PATH });
   needs.settings({
     docs_enabled: true,
-    docs_url_path: DOCS_URL_PATH,
   });
 
   needs.pretender((server, helper) => {
@@ -65,9 +65,9 @@ acceptance("Docs", function (needs) {
 
 acceptance("Docs - empty state", function (needs) {
   needs.user();
+  needs.site({ docs_url: DOCS_URL_PATH });
   needs.settings({
     docs_enabled: true,
-    docs_url_path: DOCS_URL_PATH,
   });
 
   needs.pretender((server, helper) => {

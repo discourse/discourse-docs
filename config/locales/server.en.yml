@@ -5,4 +5,3 @@ en:
     docs_tags: "A list of tags to include in docs"
     docs_add_solved_filter: "Adds a filter for solved topics -- requires Discourse Solved to be installed and enabled"
     docs_add_to_top_menu: "Adds a link to the top menu to navigate to the Docs view"
-    docs_url_path: "Path to docs page"
