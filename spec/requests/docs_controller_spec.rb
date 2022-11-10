@@ -13,13 +13,13 @@ describe Docs::DocsController do
     SiteSetting.docs_enabled = true
     SiteSetting.docs_categories = category.id.to_s
     SiteSetting.docs_tags = 'test'
-    GlobalSetting.stubs(:docs_url).returns('docs')
+    GlobalSetting.stubs(:docs_path).returns('docs')
   end
 
   describe 'docs data' do
     context 'when any user' do
       it 'should return the right response' do
-        get "/#{GlobalSetting.docs_url}.json"
+        get "/#{GlobalSetting.docs_path}.json"
 
         expect(response.status).to eq(200)
 
@@ -32,7 +32,7 @@ describe Docs::DocsController do
       end
 
       it 'should return a topic count' do
-        get "/#{GlobalSetting.docs_url}.json"
+        get "/#{GlobalSetting.docs_path}.json"
 
         json = response.parsed_body
         topic_count = json['topic_count']
@@ -51,7 +51,7 @@ describe Docs::DocsController do
       end
 
       it 'should not show topics in private categories without permissions' do
-        get "/#{GlobalSetting.docs_url}.json"
+        get "/#{GlobalSetting.docs_path}.json"
 
         json = JSON.parse(response.body)
         topics = json['topics']['topic_list']['topics']
@@ -63,7 +63,7 @@ describe Docs::DocsController do
         admin = Fabricate(:admin)
         sign_in(admin)
 
-        get "/#{GlobalSetting.docs_url}.json"
+        get "/#{GlobalSetting.docs_path}.json"
 
         json = JSON.parse(response.body)
         topics = json['topics']['topic_list']['topics']
@@ -77,7 +77,7 @@ describe Docs::DocsController do
       fab!(:tag3) { Fabricate(:tag, topics: [topic], name: 'test3') }
 
       it 'should return a list filtered by tag' do
-        get "/#{GlobalSetting.docs_url}.json?tags=test"
+        get "/#{GlobalSetting.docs_path}.json?tags=test"
 
         expect(response.status).to eq(200)
 
@@ -88,7 +88,7 @@ describe Docs::DocsController do
       end
 
       it 'should properly filter with more than two tags' do
-        get "/#{GlobalSetting.docs_url}.json?tags=test%7ctest2%7ctest3"
+        get "/#{GlobalSetting.docs_path}.json?tags=test%7ctest2%7ctest3"
 
         expect(response.status).to eq(200)
 
@@ -110,7 +110,7 @@ describe Docs::DocsController do
       end
 
       it 'should return a list filtered by category' do
-        get "/#{GlobalSetting.docs_url}.json?category=#{category2.id}"
+        get "/#{GlobalSetting.docs_path}.json?category=#{category2.id}"
 
         expect(response.status).to eq(200)
 
@@ -123,7 +123,7 @@ describe Docs::DocsController do
       end
 
       it 'ignores category filter when incorrect argument' do
-        get "/#{GlobalSetting.docs_url}.json?category=hack"
+        get "/#{GlobalSetting.docs_path}.json?category=hack"
 
         expect(response.status).to eq(200)
 
@@ -140,7 +140,7 @@ describe Docs::DocsController do
     context 'when ordering results' do
       describe 'by title' do
         it 'should return the list ordered descending' do
-          get "/#{GlobalSetting.docs_url}.json?order=title"
+          get "/#{GlobalSetting.docs_path}.json?order=title"
 
           expect(response.status).to eq(200)
 
@@ -152,7 +152,7 @@ describe Docs::DocsController do
         end
 
         it 'should return the list ordered ascending with an additional parameter' do
-          get "/#{GlobalSetting.docs_url}.json?order=title&ascending=true"
+          get "/#{GlobalSetting.docs_path}.json?order=title&ascending=true"
 
           expect(response.status).to eq(200)
 
@@ -170,7 +170,7 @@ describe Docs::DocsController do
         end
 
         it 'should return the list ordered descending' do
-          get "/#{GlobalSetting.docs_url}.json?order=activity"
+          get "/#{GlobalSetting.docs_path}.json?order=activity"
 
           expect(response.status).to eq(200)
 
@@ -182,7 +182,7 @@ describe Docs::DocsController do
         end
 
         it 'should return the list ordered ascending with an additional parameter' do
-          get "/#{GlobalSetting.docs_url}.json?order=activity&ascending=true"
+          get "/#{GlobalSetting.docs_path}.json?order=activity&ascending=true"
 
           expect(response.status).to eq(200)
 
@@ -212,7 +212,7 @@ describe Docs::DocsController do
       end
 
       it 'should correctly filter topics' do
-        get "/#{GlobalSetting.docs_url}.json?search=banana"
+        get "/#{GlobalSetting.docs_path}.json?search=banana"
 
         expect(response.status).to eq(200)
 
@@ -226,7 +226,7 @@ describe Docs::DocsController do
 
         expect(topics.size).to eq(2)
 
-        get "/#{GlobalSetting.docs_url}.json?search=walk"
+        get "/#{GlobalSetting.docs_path}.json?search=walk"
 
         json = JSON.parse(response.body)
         topics = json['topics']['topic_list']['topics']
@@ -240,13 +240,13 @@ describe Docs::DocsController do
       let!(:non_ke_topic) { Fabricate(:topic) }
 
       it 'should correctly grab the topic' do
-        get "/#{GlobalSetting.docs_url}.json?topic=#{topic.id}"
+        get "/#{GlobalSetting.docs_path}.json?topic=#{topic.id}"
 
         expect(response.parsed_body['topic']['id']).to eq(topic.id)
       end
 
       it 'should get topics matching a selected docs tag or category' do
-        get "/#{GlobalSetting.docs_url}.json?topic=#{non_ke_topic.id}"
+        get "/#{GlobalSetting.docs_path}.json?topic=#{non_ke_topic.id}"
 
         expect(response.parsed_body['topic']).to be_blank
       end
@@ -254,7 +254,7 @@ describe Docs::DocsController do
       it 'should return a docs topic when only tags are added to settings' do
         SiteSetting.docs_categories = nil
 
-        get "/#{GlobalSetting.docs_url}.json?topic=#{topic.id}"
+        get "/#{GlobalSetting.docs_path}.json?topic=#{topic.id}"
 
         expect(response.parsed_body['topic']['id']).to eq(topic.id)
       end
@@ -262,7 +262,7 @@ describe Docs::DocsController do
       it 'should return a docs topic when only categories are added to settings' do
         SiteSetting.docs_tags = nil
 
-        get "/#{GlobalSetting.docs_url}.json?topic=#{topic.id}"
+        get "/#{GlobalSetting.docs_path}.json?topic=#{topic.id}"
 
         expect(response.parsed_body['topic']['id']).to eq(topic.id)
       end
@@ -271,19 +271,19 @@ describe Docs::DocsController do
         admin = Fabricate(:admin)
         sign_in(admin)
         expect do
-          get "/#{GlobalSetting.docs_url}.json?topic=#{topic.id}"
+          get "/#{GlobalSetting.docs_path}.json?topic=#{topic.id}"
         end.to change { TopicViewItem.count }.by(1)
       end
 
       it 'should create TopicUser if authenticated' do
         expect do
-          get "/#{GlobalSetting.docs_url}.json?topic=#{topic.id}&track_visit=true"
+          get "/#{GlobalSetting.docs_path}.json?topic=#{topic.id}&track_visit=true"
         end.not_to change { TopicUser.count }
 
         admin = Fabricate(:admin)
         sign_in(admin)
         expect do
-          get "/#{GlobalSetting.docs_url}.json?topic=#{topic.id}&track_visit=true"
+          get "/#{GlobalSetting.docs_path}.json?topic=#{topic.id}&track_visit=true"
         end.to change { TopicUser.count }.by(1)
       end
     end

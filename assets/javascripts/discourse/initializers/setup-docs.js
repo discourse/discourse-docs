@@ -4,17 +4,17 @@ import { getDocs } from "../../lib/get-docs";
 
 function initialize(api, container) {
   const siteSettings = container.lookup("site-settings:main");
-  const docs_url = getDocs();
+  const docsPath = getDocs();
 
   api.addKeyboardShortcut("g e", "", {
-    path: "/" + docs_url,
+    path: "/" + docsPath,
   });
 
   if (siteSettings.docs_add_to_top_menu) {
     api.addNavigationBarItem({
       name: "docs",
       displayName: I18n.t("docs.title"),
-      href: "/" + docs_url,
+      href: "/" + docsPath,
     });
   }
 }

@@ -13,7 +13,7 @@ let DOCS_URL_PATH = "docs";
 
 acceptance("Docs - Sidebar with docs disabled", function (needs) {
   needs.user();
-  needs.site({ docs_url: DOCS_URL_PATH });
+  needs.site({ docs_path: DOCS_URL_PATH });
   needs.settings({
     docs_enabled: false,
     enable_experimental_sidebar_hamburger: true,
@@ -36,7 +36,7 @@ acceptance("Docs - Sidebar with docs disabled", function (needs) {
 
 acceptance("Docs - Sidebar with docs enabled", function (needs) {
   needs.user();
-  needs.site({ docs_url: DOCS_URL_PATH });
+  needs.site({ docs_path: DOCS_URL_PATH });
   needs.settings({
     docs_enabled: true,
     enable_experimental_sidebar_hamburger: true,
