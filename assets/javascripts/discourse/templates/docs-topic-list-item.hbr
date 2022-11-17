@@ -2,7 +2,7 @@
   <td class="main-link topic-list-data">
     <span class="link-top-line">
       {{~raw "topic-status" topic=topic}}
-      {{~raw "docs-topic-link" topic=topic}}
+      {{~raw "docs-topic-link" topic=topic urlPath=urlPath}}
     </span>
     <span class="link-bottom-line">
       {{category-link topic.category}}

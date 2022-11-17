@@ -9,9 +9,11 @@ import {
 import docsFixtures from "../fixtures/docs";
 import { cloneJSON } from "discourse-common/lib/object";
 
+let DOCS_URL_PATH = "docs";
+
 acceptance("Docs - Sidebar with docs disabled", function (needs) {
   needs.user();
-
+  needs.site({ docs_path: DOCS_URL_PATH });
   needs.settings({
     docs_enabled: false,
     enable_experimental_sidebar_hamburger: true,
@@ -34,7 +36,7 @@ acceptance("Docs - Sidebar with docs disabled", function (needs) {
 
 acceptance("Docs - Sidebar with docs enabled", function (needs) {
   needs.user();
-
+  needs.site({ docs_path: DOCS_URL_PATH });
   needs.settings({
     docs_enabled: true,
     enable_experimental_sidebar_hamburger: true,
@@ -42,7 +44,9 @@ acceptance("Docs - Sidebar with docs enabled", function (needs) {
   });
 
   needs.pretender((server, helper) => {
-    server.get("/docs.json", () => helper.response(cloneJSON(docsFixtures)));
+    server.get("/" + DOCS_URL_PATH + ".json", () =>
+      helper.response(cloneJSON(docsFixtures))
+    );
   });
 
   test("clicking on docs link", async function (assert) {
@@ -66,6 +70,10 @@ acceptance("Docs - Sidebar with docs enabled", function (needs) {
 
     await click(".sidebar-section-link-docs");
 
-    assert.strictEqual(currentURL(), "/docs", "it navigates to the right page");
+    assert.strictEqual(
+      currentURL(),
+      "/" + DOCS_URL_PATH,
+      "it navigates to the right page"
+    );
   });
 });

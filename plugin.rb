@@ -20,6 +20,8 @@ register_svg_icon 'sort-numeric-down'
 load File.expand_path('lib/docs/engine.rb', __dir__)
 load File.expand_path('lib/docs/query.rb', __dir__)
 
+GlobalSetting.add_default :docs_path, "docs"
+
 after_initialize do
   require_dependency 'search'
 
@@ -55,6 +57,10 @@ after_initialize do
     end
 
     any_user_agent[:disallow] ||= []
-    any_user_agent[:disallow] << "/docs/"
+    any_user_agent[:disallow] << "/#{GlobalSetting.docs_path}/"
+  end
+
+  add_to_serializer(:site, :docs_path) do
+    GlobalSetting.docs_path
   end
 end

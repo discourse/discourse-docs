@@ -8,14 +8,17 @@ import { test } from "qunit";
 import docsFixtures from "../fixtures/docs";
 import { click, visit } from "@ember/test-helpers";
 
+let DOCS_URL_PATH = "docs";
+
 acceptance("Docs", function (needs) {
   needs.user();
+  needs.site({ docs_path: DOCS_URL_PATH });
   needs.settings({
     docs_enabled: true,
   });
 
   needs.pretender((server, helper) => {
-    server.get("/docs.json", (request) => {
+    server.get("/" + DOCS_URL_PATH + ".json", (request) => {
       if (request.queryParams.category === "1") {
         const fixture = JSON.parse(JSON.stringify(docsFixtures));
 
@@ -54,7 +57,7 @@ acceptance("Docs", function (needs) {
   });
 
   test("selecting a category", async function (assert) {
-    await visit("/docs");
+    await visit("/" + DOCS_URL_PATH);
     assert.equal(count(".docs-category.selected"), 0);
 
     await click(".docs-item.docs-category");
@@ -64,12 +67,13 @@ acceptance("Docs", function (needs) {
 
 acceptance("Docs - empty state", function (needs) {
   needs.user();
+  needs.site({ docs_path: DOCS_URL_PATH });
   needs.settings({
     docs_enabled: true,
   });
 
   needs.pretender((server, helper) => {
-    server.get("/docs.json", () => {
+    server.get("/" + DOCS_URL_PATH + ".json", () => {
       const response = {
         tags: [],
         categories: [],
@@ -90,7 +94,7 @@ acceptance("Docs - empty state", function (needs) {
   });
 
   test("shows the empty state panel when there are no docs", async function (assert) {
-    await visit("/docs");
+    await visit("/" + DOCS_URL_PATH);
     assert.ok(exists("div.empty-state"));
   });
 });

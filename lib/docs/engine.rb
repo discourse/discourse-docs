@@ -6,8 +6,8 @@ module ::Docs
 
     config.after_initialize do
       Discourse::Application.routes.append do
-        mount ::Docs::Engine, at: '/docs'
-        get '/knowledge-explorer', to: redirect("/docs")
+        mount ::Docs::Engine, at: "/#{GlobalSetting.docs_path}"
+        get '/knowledge-explorer', to: redirect("/#{GlobalSetting.docs_path}")
       end
     end
   end

@@ -1,9 +1,11 @@
 import Component from "@ember/component";
 import { action } from "@ember/object";
 import discourseComputed from "discourse-common/utils/decorators";
+import { getDocs } from "../../lib/get-docs";
 
 export default Component.extend({
   classNames: "docs-topic-list",
+  urlPath: getDocs(),
 
   @discourseComputed("order")
   sortTitle(order) {

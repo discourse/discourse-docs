@@ -1,5 +1,9 @@
+import { getDocs } from "../lib/get-docs";
+
 export default function () {
-  this.route("docs", { path: "/docs" }, function () {
+  const docsPath = getDocs();
+
+  this.route("docs", { path: "/" + docsPath }, function () {
     this.route("index", { path: "/" });
   });
 }
