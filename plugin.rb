@@ -60,7 +60,7 @@ after_initialize do
     any_user_agent[:disallow] << "/#{GlobalSetting.docs_path}/"
   end
 
-  add_to_serializer(:site, :docs_path, "docs") do
+  add_to_serializer(:site, :docs_path) do
     GlobalSetting.docs_path
   end
 end
