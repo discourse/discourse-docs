@@ -103,7 +103,6 @@ module Docs
         results = results.where('topics.category_id IN (?)', category_ids) if category_ids.all? { |id| id =~ /\A\d+\z/ }
       end
 
-
       results_length = results.size
 
       if @filters[:page]
