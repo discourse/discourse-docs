@@ -119,8 +119,8 @@ describe Docs::DocsController do
         topics = json['topics']['topic_list']['topics']
 
         expect(categories.size).to eq(2)
-        expect(categories[0]).to eq( { "active" => true, "count" => 1, "id" => category2.id} )
-        expect(categories[1]).to eq( { "active" => false, "count" => 2, "id" => category.id} )
+        expect(categories[0]).to eq({ "active" => true, "count" => 1, "id" => category2.id })
+        expect(categories[1]).to eq({ "active" => false, "count" => 2, "id" => category.id })
         expect(topics.size).to eq(1)
       end
 
