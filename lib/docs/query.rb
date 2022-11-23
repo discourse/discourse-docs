@@ -25,12 +25,6 @@ module Docs
       results = results.references(:categories)
       results = results.where('topics.category_id IN (?)', Query.categories).or(results.where('tags.name IN (?)', Query.tags))
 
-      # filter results by selected category
-      if @filters[:category].present?
-        category_ids = @filters[:category].split('|')
-        results = results.where('topics.category_id IN (?)', category_ids) if category_ids.all? { |id| id =~ /\A\d+\z/ }
-      end
-
       # filter results by selected tags
       if @filters[:tags].present?
         tag_filters = @filters[:tags].split('|')
@@ -98,8 +92,17 @@ module Docs
       SQL
       tags = count_query.group('t2.name').reorder('').count
       tags = create_tags_object(tags)
+
       categories = results.where('topics.category_id IS NOT NULL').group('topics.category_id').reorder('').count
       categories = create_categories_object(categories)
+
+      # filter results by selected category
+      # needs to be after building categories filter list
+      if @filters[:category].present?
+        category_ids = @filters[:category].split('|')
+        results = results.where('topics.category_id IN (?)', category_ids) if category_ids.all? { |id| id =~ /\A\d+\z/ }
+      end
+
 
       results_length = results.size
 
