@@ -288,17 +288,10 @@ export default Controller.extend({
 
   @action
   updateSelectedCategories(category) {
-    let filter = this.filterCategories;
-    if (filter && filter.includes(category.id)) {
-      filter = filter.replace(category.id, "").replace(/^\|+|\|+$/g, "");
-    } else if (filter) {
-      filter = `${filter}|${category.id}`;
-    } else {
-      filter = category.id;
-    }
-
+    const filterCategories =
+      category.id === this.filterCategories ? null : category.id;
     this.setProperties({
-      filterCategories: filter,
+      filterCategories,
       selectedTopic: null,
     });
 

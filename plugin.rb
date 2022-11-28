@@ -16,6 +16,7 @@ register_svg_icon 'sort-alpha-down'
 register_svg_icon 'sort-alpha-up'
 register_svg_icon 'sort-numeric-up'
 register_svg_icon 'sort-numeric-down'
+register_svg_icon 'far-circle'
 
 load File.expand_path('lib/docs/engine.rb', __dir__)
 load File.expand_path('lib/docs/query.rb', __dir__)

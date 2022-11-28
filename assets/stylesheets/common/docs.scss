@@ -98,6 +98,9 @@
           margin-right: 0.25em;
         }
       }
+      &.selected .d-icon {
+        color: var(--primary);
+      }
       &:hover {
         background: var(--highlight-medium);
       }
