@@ -5,3 +5,9 @@
 # https://translate.discourse.org/
 
 nl:
+  site_settings:
+    docs_enabled: "Documentenplug-in inschakelen"
+    docs_categories: "Een lijst van categorieslugs om op te nemen in documenten"
+    docs_tags: "Een lijst van tags om op te nemen in documenten"
+    docs_add_solved_filter: "Voegt een filter toe voor opgeloste topics -- vereist dat Discourse Opgelost is geïnstalleerd en ingeschakeld"
+    docs_add_to_top_menu: "Voegt een link toe aan het hoofdmenu om naar de Documenten-weergave te gaan"
