@@ -5,3 +5,36 @@
 # https://translate.discourse.org/
 
 nl:
+  js:
+    filters:
+      docs:
+        help: "Blader door documenttopics"
+    docs:
+      title: "Documenten"
+      column_titles:
+        topic: "Topic"
+        activity: "Activiteit"
+      no_docs:
+        title: "Nog geen documenttopics"
+        body: "Documenten bieden een geweldige manier om een verzameling documentatie bij te houden voor gedeelde referentie."
+        to_include_topic_in_docs: "Gebruik een speciale categorie of tag om een topics op te nemen in Documenten"
+        setup_the_plugin: "<a href='%{settingsUrl}'>Stel documentcategorieën en tags in</a> om te beginnen met het gebruik van Documenten."
+      categories: "Categorieën"
+      categories_filter_placeholder: "Filtercategorieën"
+      tags_filter_placeholder: "Filtertags"
+      tags: "Tags"
+      search:
+        results:
+          one: "%{count} resultaat gevonden"
+          other: "%{count} resultaten gevonden"
+        placeholder: "Zoek naar topics"
+        clear: "Wissen"
+        tip_description: "Zoek in documenten"
+      topic:
+        back: "Terug"
+        navigate_to_topic: "Bekijk de discussie over dit topic"
+      filter_button: "Filters"
+      filter_solved: "Topic opgelost?"
+    sidebar:
+      docs_link_title: "Verken documentatieonderwerpen"
+      docs_link_text: "Documenten"
