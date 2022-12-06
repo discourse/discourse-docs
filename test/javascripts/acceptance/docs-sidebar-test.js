@@ -16,8 +16,7 @@ acceptance("Docs - Sidebar with docs disabled", function (needs) {
   needs.site({ docs_path: DOCS_URL_PATH });
   needs.settings({
     docs_enabled: false,
-    enable_experimental_sidebar_hamburger: true,
-    enable_sidebar: true,
+    navigation_menu: "sidebar",
   });
 
   test("docs sidebar link is hidden", async function (assert) {
@@ -39,8 +38,7 @@ acceptance("Docs - Sidebar with docs enabled", function (needs) {
   needs.site({ docs_path: DOCS_URL_PATH });
   needs.settings({
     docs_enabled: true,
-    enable_experimental_sidebar_hamburger: true,
-    enable_sidebar: true,
+    navigation_menu: "sidebar",
   });
 
   needs.pretender((server, helper) => {

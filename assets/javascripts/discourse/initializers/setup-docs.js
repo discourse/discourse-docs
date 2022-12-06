@@ -43,7 +43,7 @@ export default {
     });
 
     withPluginApi("1.2.0", (api) => {
-      if (siteSettings.enable_experimental_sidebar_hamburger) {
+      if (siteSettings.navigation_menu !== "legacy") {
         api.addCommunitySectionLink({
           name: "docs",
           route: "docs.index",
