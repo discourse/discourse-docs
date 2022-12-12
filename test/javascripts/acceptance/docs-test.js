@@ -15,6 +15,7 @@ acceptance("Docs", function (needs) {
   needs.site({ docs_path: DOCS_URL_PATH });
   needs.settings({
     docs_enabled: true,
+    navigation_menu: "legacy",
   });
 
   needs.pretender((server, helper) => {
