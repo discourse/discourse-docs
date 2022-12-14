@@ -1,6 +1,7 @@
 import EmberObject from "@ember/object";
 import { ajax } from "discourse/lib/ajax";
 import Topic from "discourse/models/topic";
+import User from "discourse/models/user";
 import { getDocs } from "../../lib/get-docs";
 
 const Docs = EmberObject.extend({});
@@ -41,6 +42,9 @@ Docs.reopenClass({
         (topic) => Topic.create(topic)
       );
       data.topic = Topic.create(data.topic);
+      data.topic.post_stream?.posts.forEach((post) =>
+        this._initUserModels(post)
+      );
       return data;
     });
   },
@@ -52,6 +56,12 @@ Docs.reopenClass({
       );
       return data;
     });
+  },
+
+  _initUserModels(post) {
+    if (post.mentioned_users) {
+      post.mentioned_users = post.mentioned_users.map((u) => User.create(u));
+    }
   },
 });
 
