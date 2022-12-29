@@ -2,7 +2,7 @@
 
 module Docs
   class DocsController < ApplicationController
-    requires_plugin 'docs'
+    requires_plugin "docs"
 
     skip_before_action :check_xhr, only: [:index]
 
@@ -15,7 +15,7 @@ module Docs
         search_term: params[:search],
         ascending: params[:ascending],
         order: params[:order],
-        page: params[:page]
+        page: params[:page],
       }
 
       query = Docs::Query.new(current_user, filters).list
@@ -23,12 +23,15 @@ module Docs
       if filters[:topic].present?
         begin
           @topic = Topic.find(filters[:topic])
-        rescue
+        rescue StandardError
           raise Discourse::NotFound
         end
 
-        @excerpt = @topic.posts[0].excerpt(500, { strip_links: true, text_entities: true }) if @topic.posts[0].present?
-        @excerpt = (@excerpt || "").gsub(/\n/, ' ').strip
+        @excerpt =
+          @topic.posts[0].excerpt(500, { strip_links: true, text_entities: true }) if @topic.posts[
+          0
+        ].present?
+        @excerpt = (@excerpt || "").gsub(/\n/, " ").strip
 
         query["topic"] = get_topic(@topic, current_user)
       end
@@ -39,9 +42,7 @@ module Docs
           render :get_topic
         end
 
-        format.json do
-          render json: query
-        end
+        format.json { render json: query }
       end
     end
 
@@ -65,9 +66,9 @@ module Docs
     end
 
     def set_title
-      title = "#{I18n.t('js.docs.title')} - #{SiteSetting.title}"
+      title = "#{I18n.t("js.docs.title")} - #{SiteSetting.title}"
       if @topic
-        topic_title = @topic['unicode_title'] || @topic['title']
+        topic_title = @topic["unicode_title"] || @topic["title"]
         title = "#{topic_title} - #{title}"
       end
       title
