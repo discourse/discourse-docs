@@ -10,7 +10,11 @@
   }}
 
   {{#if searchTerm}}
-    {{d-button action=(action "clearSearch") class="clear-search" label="docs.search.clear"}}
+    {{d-button
+      action=(action "clearSearch")
+      class="clear-search"
+      label="docs.search.clear"
+    }}
   {{else}}
     {{d-icon "search"}}
   {{/if}}
