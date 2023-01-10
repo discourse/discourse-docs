@@ -5,3 +5,36 @@
 # https://translate.discourse.org/
 
 tr_TR:
+  js:
+    filters:
+      docs:
+        help: "doküman konularına göz atın"
+    docs:
+      title: "Dokümanlar"
+      column_titles:
+        topic: "Konu"
+        activity: "Aktivite"
+      no_docs:
+        title: "Henüz Dokümanlar konusu yok"
+        body: "Dokümanlar, paylaşılan referans için bir dokümantasyon koleksiyonu tutmanın harika bir yolunu sunar."
+        to_include_topic_in_docs: "Dokümanlar'a bir konu eklemek için özel bir kategori veya etiket kullanın"
+        setup_the_plugin: "Dokümanlar'ı kullanmaya başlamak için lütfen <a href='%{settingsUrl}'>doküman kategorilerini ve etiketlerini kurun</a>."
+      categories: "Kategoriler"
+      categories_filter_placeholder: "Kategorileri filtrele"
+      tags_filter_placeholder: "Etiketleri filtrele"
+      tags: "Etiketler"
+      search:
+        results:
+          one: "%{count} sonuç bulundu"
+          other: "%{count} sonuç bulundu"
+        placeholder: "Konu ara"
+        clear: "Temizle"
+        tip_description: "Dokümanlarda ara"
+      topic:
+        back: "Geri dön"
+        navigate_to_topic: "Bu konuyla ilgili tartışmayı görüntüleyin"
+      filter_button: "Filtreler"
+      filter_solved: "Konu Çözüldü mü?"
+    sidebar:
+      docs_link_title: "Doküman konularını keşfedin"
+      docs_link_text: "Dokümanlar"

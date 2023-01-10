@@ -5,3 +5,9 @@
 # https://translate.discourse.org/
 
 tr_TR:
+  site_settings:
+    docs_enabled: "Dokümanlar Eklentisini Etkinleştirin"
+    docs_categories: "Dokümanlara dahil edilecek kategori slug'larının listesi"
+    docs_tags: "Dokümanlara dahil edilecek etiketlerin listesi"
+    docs_add_solved_filter: "Çözülen konular için bir filtre ekler -- Discourse Solved'un yüklenmiş ve etkinleştirilmiş olmasını gerektirir"
+    docs_add_to_top_menu: "Dokümanlar görünümüne gitmek için üst menüye bir bağlantı ekler"
