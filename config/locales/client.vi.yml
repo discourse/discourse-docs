@@ -5,3 +5,12 @@
 # https://translate.discourse.org/
 
 vi:
+  js:
+    docs:
+      column_titles:
+        topic: "Chủ đề"
+        activity: "Hoạt động"
+      categories: "Danh mục"
+      tags: "Thẻ"
+      search:
+        clear: "Xóa"

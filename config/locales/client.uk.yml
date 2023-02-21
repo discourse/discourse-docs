@@ -5,3 +5,12 @@
 # https://translate.discourse.org/
 
 uk:
+  js:
+    docs:
+      column_titles:
+        topic: "Тема"
+        activity: "Активність"
+      categories: "Розділи"
+      tags: "Теґи"
+      search:
+        clear: "Очистити"

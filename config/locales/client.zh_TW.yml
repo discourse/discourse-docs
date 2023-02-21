@@ -5,3 +5,12 @@
 # https://translate.discourse.org/
 
 zh_TW:
+  js:
+    docs:
+      column_titles:
+        topic: "話題"
+        activity: "活動"
+      categories: "分類"
+      tags: "標籤"
+      search:
+        clear: "清除"

@@ -5,3 +5,12 @@
 # https://translate.discourse.org/
 
 et:
+  js:
+    docs:
+      column_titles:
+        topic: "Teema"
+        activity: "Aktiivsus"
+      categories: "Liigid"
+      tags: "Sildid"
+      search:
+        clear: "Tühjenda"

@@ -5,3 +5,12 @@
 # https://translate.discourse.org/
 
 sk:
+  js:
+    docs:
+      column_titles:
+        topic: "Témy"
+        activity: "Aktivity"
+      categories: "Kategórie"
+      tags: "Štítky"
+      search:
+        clear: "Vyčistiť"

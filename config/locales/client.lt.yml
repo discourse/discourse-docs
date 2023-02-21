@@ -5,3 +5,12 @@
 # https://translate.discourse.org/
 
 lt:
+  js:
+    docs:
+      column_titles:
+        topic: "Tema"
+        activity: "Aktyvumas"
+      categories: "Kategorijos"
+      tags: "Žymos"
+      search:
+        clear: "Išvalyti"
