@@ -5,3 +5,12 @@
 # https://translate.discourse.org/
 
 bs_BA:
+  js:
+    docs:
+      column_titles:
+        topic: "Topic"
+        activity: "Activity"
+      categories: "Kategorije"
+      tags: "Oznake"
+      search:
+        clear: "Clear"

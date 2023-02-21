@@ -5,3 +5,12 @@
 # https://translate.discourse.org/
 
 sw:
+  js:
+    docs:
+      column_titles:
+        topic: "Mada"
+        activity: "Kitendo"
+      categories: "Kategoria"
+      tags: "Lebo"
+      search:
+        clear: "Futa"

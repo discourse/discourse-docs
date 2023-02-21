@@ -5,3 +5,12 @@
 # https://translate.discourse.org/
 
 gl:
+  js:
+    docs:
+      column_titles:
+        topic: "Tema"
+        activity: "Actividade"
+      categories: "Categorías"
+      tags: "Etiquetas"
+      search:
+        clear: "Borrar"

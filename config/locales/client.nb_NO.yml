@@ -5,3 +5,12 @@
 # https://translate.discourse.org/
 
 nb_NO:
+  js:
+    docs:
+      column_titles:
+        topic: "Emne"
+        activity: "Aktivitet"
+      categories: "Kategorier"
+      tags: "Stikkord"
+      search:
+        clear: "Tøm"

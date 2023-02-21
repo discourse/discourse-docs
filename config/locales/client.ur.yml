@@ -5,3 +5,12 @@
 # https://translate.discourse.org/
 
 ur:
+  js:
+    docs:
+      column_titles:
+        topic: "ٹاپک"
+        activity: "سرگرمی"
+      categories: "اقسام"
+      tags: "ٹیگز"
+      search:
+        clear: "صاف کریں"

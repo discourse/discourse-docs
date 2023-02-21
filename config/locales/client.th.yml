@@ -5,3 +5,12 @@
 # https://translate.discourse.org/
 
 th:
+  js:
+    docs:
+      column_titles:
+        topic: "หัวข้อ"
+        activity: "กิจกรรม"
+      categories: "หมวดหมู่"
+      tags: "ป้าย"
+      search:
+        clear: "ล้าง"

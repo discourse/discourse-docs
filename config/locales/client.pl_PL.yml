@@ -37,3 +37,5 @@ pl_PL:
         navigate_to_topic: "Zobacz dyskusję na ten temat"
       filter_button: "Filtry"
       filter_solved: "Temat rozwiązany?"
+    sidebar:
+      docs_link_text: "Dokumentacja"
