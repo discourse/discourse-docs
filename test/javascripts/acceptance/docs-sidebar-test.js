@@ -23,7 +23,7 @@ acceptance("Docs - Sidebar with docs disabled", function (needs) {
     await visit("/");
 
     await click(
-      ".sidebar-section-community .sidebar-more-section-links-details-summary"
+      ".sidebar-section[data-section-name='community'] .sidebar-more-section-links-details-summary"
     );
 
     assert.ok(
@@ -51,7 +51,7 @@ acceptance("Docs - Sidebar with docs enabled", function (needs) {
     await visit("/");
 
     await click(
-      ".sidebar-section-community .sidebar-more-section-links-details-summary"
+      ".sidebar-section[data-section-name='community'] .sidebar-more-section-links-details-summary"
     );
 
     assert.strictEqual(
