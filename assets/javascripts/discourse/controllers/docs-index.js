@@ -229,10 +229,10 @@ export default Controller.extend({
       return [];
     }
 
-    return this.siteSettings.docs_categories.split("|").map((c) => {
-      const id = parseInt(c, 10);
-      return this.site.categories.findBy("id", id).name;
-    });
+    return this.siteSettings.docs_categories
+      .split("|")
+      .map((c) => this.site.categories.findBy("id", parseInt(c, 10))?.name)
+      .filter(Boolean);
   },
 
   @discourseComputed()
