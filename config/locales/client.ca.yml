@@ -5,3 +5,12 @@
 # https://translate.discourse.org/
 
 ca:
+  js:
+    docs:
+      column_titles:
+        topic: "Tema"
+        activity: "Activitat"
+      categories: "Categories"
+      tags: "Etiquetes"
+      search:
+        clear: "Neteja"

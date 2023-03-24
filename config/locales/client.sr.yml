@@ -5,3 +5,11 @@
 # https://translate.discourse.org/
 
 sr:
+  js:
+    docs:
+      column_titles:
+        topic: "Tema"
+        activity: "Aktivnosti"
+      categories: "Kategorije"
+      search:
+        clear: "Čisto"

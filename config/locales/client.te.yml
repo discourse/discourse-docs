@@ -5,3 +5,12 @@
 # https://translate.discourse.org/
 
 te:
+  js:
+    docs:
+      column_titles:
+        topic: "విషయం"
+        activity: "కలాపం"
+      categories: "వర్గాలు"
+      tags: "ట్యాగులు"
+      search:
+        clear: "శుభ్రపరుచు"

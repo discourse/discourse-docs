@@ -5,3 +5,12 @@
 # https://translate.discourse.org/
 
 ro:
+  js:
+    docs:
+      column_titles:
+        topic: "Discuție"
+        activity: "Activitate"
+      categories: "Categorii"
+      tags: "Etichete"
+      search:
+        clear: "Șterge"

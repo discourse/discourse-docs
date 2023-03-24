@@ -5,3 +5,12 @@
 # https://translate.discourse.org/
 
 da:
+  js:
+    docs:
+      column_titles:
+        topic: "Emne"
+        activity: "Aktivitet"
+      categories: "Kategorier"
+      tags: "Mærker"
+      search:
+        clear: "Ryd"

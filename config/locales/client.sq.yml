@@ -5,3 +5,12 @@
 # https://translate.discourse.org/
 
 sq:
+  js:
+    docs:
+      column_titles:
+        topic: "Topic"
+        activity: "Aktiviteti"
+      categories: "Categories"
+      tags: "Etiketat"
+      search:
+        clear: "Pastro"

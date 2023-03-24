@@ -5,3 +5,12 @@
 # https://translate.discourse.org/
 
 lv:
+  js:
+    docs:
+      column_titles:
+        topic: "Tēmas"
+        activity: "Aktivitāte"
+      categories: "Sadaļas"
+      tags: "Birkas"
+      search:
+        clear: "Noņemt"

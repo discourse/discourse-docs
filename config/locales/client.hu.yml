@@ -5,3 +5,12 @@
 # https://translate.discourse.org/
 
 hu:
+  js:
+    docs:
+      column_titles:
+        topic: "Téma"
+        activity: "Tevékenység"
+      categories: "Kategóriák"
+      tags: "Címkék"
+      search:
+        clear: "Törlés"

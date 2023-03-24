@@ -5,3 +5,12 @@
 # https://translate.discourse.org/
 
 hy:
+  js:
+    docs:
+      column_titles:
+        topic: "Թեմա"
+        activity: "Ակտիվության"
+      categories: "Կատեգորիաներ"
+      tags: "Թեգեր"
+      search:
+        clear: "Ջնջել"

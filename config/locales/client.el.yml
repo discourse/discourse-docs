@@ -7,5 +7,11 @@
 el:
   js:
     docs:
+      column_titles:
+        topic: "Νήμα"
+        activity: "Δραστηριότητα"
       categories: "Κατηγορίες"
+      tags: "Ετικέτες"
+      search:
+        clear: "Καθάρισμα φίλτρου"
       filter_button: "Φίλτρα"

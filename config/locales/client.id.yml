@@ -5,3 +5,12 @@
 # https://translate.discourse.org/
 
 id:
+  js:
+    docs:
+      column_titles:
+        topic: "Topik"
+        activity: "Activity"
+      categories: "Kategori"
+      tags: "Label"
+      search:
+        clear: "Bersihkan"

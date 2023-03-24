@@ -7,5 +7,12 @@
 ko:
   js:
     docs:
+      column_titles:
+        topic: "글"
+        activity: "활동"
+      categories: "카테고리"
       categories_filter_placeholder: "필터 카테고리"
       tags_filter_placeholder: "필터 태그"
+      tags: "태그"
+      search:
+        clear: "지우기"
