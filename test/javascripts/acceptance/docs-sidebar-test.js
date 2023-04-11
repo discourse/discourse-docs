@@ -27,7 +27,7 @@ acceptance("Docs - Sidebar with docs disabled", function (needs) {
     );
 
     assert.ok(
-      !exists(".sidebar-section-link-docs"),
+      !exists(".sidebar-section-link[data-link-name='docs']"),
       "it does not display the docs link in sidebar"
     );
   });
@@ -55,18 +55,18 @@ acceptance("Docs - Sidebar with docs enabled", function (needs) {
     );
 
     assert.strictEqual(
-      query(".sidebar-section-link-docs").textContent.trim(),
+      query(".sidebar-section-link[data-link-name='docs']").textContent.trim(),
       I18n.t("sidebar.docs_link_text"),
       "displays the right text for the link"
     );
 
     assert.strictEqual(
-      query(".sidebar-section-link-docs").title,
+      query(".sidebar-section-link[data-link-name='docs']").title,
       I18n.t("sidebar.docs_link_title"),
       "displays the right title for the link"
     );
 
-    await click(".sidebar-section-link-docs");
+    await click(".sidebar-section-link[data-link-name='docs']");
 
     assert.strictEqual(
       currentURL(),
