@@ -12,7 +12,35 @@ import { cloneJSON } from "discourse-common/lib/object";
 let DOCS_URL_PATH = "docs";
 
 acceptance("Docs - Sidebar with docs disabled", function (needs) {
-  needs.user();
+  needs.user({
+    sidebar_sections: [
+      {
+        id: 111,
+        title: "Community",
+        links: [
+          {
+            id: 329,
+            name: "Everything",
+            value: "/latest",
+            icon: "layer-group",
+            external: false,
+            segment: "primary",
+          },
+          {
+            id: 336,
+            name: "Groups",
+            value: "/g",
+            icon: "user-friends",
+            external: false,
+            segment: "secondary",
+          },
+        ],
+        slug: "community",
+        public: true,
+        section_type: "community",
+      },
+    ],
+  });
   needs.site({ docs_path: DOCS_URL_PATH });
   needs.settings({
     docs_enabled: false,
@@ -34,7 +62,35 @@ acceptance("Docs - Sidebar with docs disabled", function (needs) {
 });
 
 acceptance("Docs - Sidebar with docs enabled", function (needs) {
-  needs.user();
+  needs.user({
+    sidebar_sections: [
+      {
+        id: 111,
+        title: "Community",
+        links: [
+          {
+            id: 329,
+            name: "Everything",
+            value: "/latest",
+            icon: "layer-group",
+            external: false,
+            segment: "primary",
+          },
+          {
+            id: 336,
+            name: "Groups",
+            value: "/g",
+            icon: "user-friends",
+            external: false,
+            segment: "secondary",
+          },
+        ],
+        slug: "community",
+        public: true,
+        section_type: "community",
+      },
+    ],
+  });
   needs.site({ docs_path: DOCS_URL_PATH });
   needs.settings({
     docs_enabled: true,
