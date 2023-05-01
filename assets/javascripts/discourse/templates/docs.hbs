@@ -1,15 +1,15 @@
 <div class="docs">
-  {{plugin-outlet
-    name="before-docs-search"
-    tagName="span"
-    connectorTagName="div"
-    args=(hash
+  <PluginOutlet
+    @name="before-docs-search"
+    @tagName="span"
+    @connectorTagName="div"
+    @outletArgs={{hash
       selectCategory=(action "updateSelectedCategories")
       selectTag=(action "updateSelectedTags")
       tags=indexController.tags
       categories=indexController.categories
-    )
-  }}
+    }}
+  />
 
   {{docs-search
     searchTerm=(readonly indexController.searchTerm)
