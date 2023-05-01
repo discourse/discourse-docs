@@ -1,9 +1,13 @@
-{{d-button label="docs.topic.back" class="docs-nav-link return" action=return}}
+<DButton
+  @label="docs.topic.back"
+  class="docs-nav-link return"
+  @action={{return}}
+/>
 
 <div class="topic-content">
   <h1>{{html-safe topic.fancyTitle}}</h1>
 
-  {{mount-widget widget="post" model=model args=post}}
+  <MountWidget @widget="post" @model={{model}} @args={{post}} />
 </div>
 
 <a class="docs-nav-link more" href="/t/{{topic.id}}">
