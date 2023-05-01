@@ -120,7 +120,6 @@
               {{/if}}
               <PluginOutlet
                 @name="before-docs-tag-list"
-                @tagName=""
                 @connectorTagName="div"
                 @outletArgs={{hash
                   tags=tags
@@ -145,11 +144,7 @@
       {{#if selectedTopic}}
         <ConditionalLoadingSpinner @condition={{isTopicLoading}}>
           {{docs-topic topic=topic return=(action "returnToList")}}
-          <PluginOutlet
-            @name="below-docs-topic"
-            @tagName=""
-            @connectorTagName="div"
-          />
+          <PluginOutlet @name="below-docs-topic" @connectorTagName="div" />
         </ConditionalLoadingSpinner>
       {{else}}
         <div class="docs-results">
@@ -158,11 +153,12 @@
               <div class="result-count no-result">
                 {{i18n "search.no_results"}}
               </div>
-              <PluginOutlet
-                @name="after-docs-empty-results"
-                @tagName="span"
-                @connectorTagName="div"
-              />
+              <span>
+                <PluginOutlet
+                  @name="after-docs-empty-results"
+                  @connectorTagName="div"
+                />
+              </span>
             {{else}}
               <div class="result-count">
                 {{i18n "docs.search.results" count=topicCount}}
