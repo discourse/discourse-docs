@@ -22,9 +22,9 @@
                 <Input
                   @type="checkbox"
                   @checked={{readonly filterSolved}}
-                  @change={{action
-                    "onChangeFilterSolved"
-                    value="target.checked"
+                  {{on
+                    "input"
+                    (action "onChangeFilterSolved" value="target.checked")
                   }}
                 />
                 {{plugin-outlet name="custom-checkbox"}}
