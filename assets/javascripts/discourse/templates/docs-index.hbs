@@ -49,7 +49,7 @@
                     @actionParam="alpha"
                   />
                   <DButton
-                    @class={{if
+                    class={{if
                       (eq categorySort.type "numeric")
                       "categories-amount active"
                       "categories-amount"
@@ -89,7 +89,7 @@
                 <h3>{{i18n "docs.tags"}}</h3>
                 <div class="item-controls-buttons">
                   <DButton
-                    @class={{if
+                    class={{if
                       (eq tagSort.type "alpha")
                       "tags-alphabet active"
                       "tags-alphabet"
@@ -99,7 +99,7 @@
                     @actionParam="alpha"
                   />
                   <DButton
-                    @class={{if
+                    class={{if
                       (eq tagSort.type "numeric")
                       "tags-amount active"
                       "tags-amount"
