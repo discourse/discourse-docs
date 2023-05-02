@@ -1,16 +1,16 @@
-{{#conditional-loading-spinner condition=isLoading}}
+<ConditionalLoadingSpinner @condition={{isLoading}}>
   {{#if noContent}}
     <EmptyState @title={{emptyState.title}} @body={{emptyState.body}} />
   {{else}}
     <div class="docs-browse">
       {{#if site.mobileView}}
         {{#unless selectedTopic}}
-          {{d-button
+          <DButton
             class="docs-expander"
-            icon=(if expandedFilters "angle-up" "angle-down")
-            action=(action "toggleFilters")
-            label="docs.filter_button"
-          }}
+            @icon={{if expandedFilters "angle-up" "angle-down"}}
+            @action={{action "toggleFilters"}}
+            @label="docs.filter_button"
+          />
         {{/unless}}
       {{/if}}
 
@@ -19,12 +19,15 @@
           {{#if canFilterSolved}}
             <div class="docs-items docs-solved">
               <label class="checkbox-label docs-item">
-                {{input
-                  type="checkbox"
-                  checked=(readonly filterSolved)
-                  change=(action "onChangeFilterSolved" value="target.checked")
-                }}
-                {{plugin-outlet name="custom-checkbox"}}
+                <Input
+                  @type="checkbox"
+                  @checked={{readonly filterSolved}}
+                  {{on
+                    "input"
+                    (action "onChangeFilterSolved" value="target.checked")
+                  }}
+                />
+                <PluginOutlet @name="custom-checkbox" />
                 {{i18n "docs.filter_solved"}}
               </label>
             </div>
@@ -35,35 +38,35 @@
               <section class="item-controls">
                 <h3>{{i18n "docs.categories"}}</h3>
                 <div class="item-controls-buttons">
-                  {{d-button
-                    class=(if
+                  <DButton
+                    class={{if
                       (eq categorySort.type "alpha")
                       "categories-alphabet active"
                       "categories-alphabet"
-                    )
-                    icon=categorySortAlphaIcon
-                    action=toggleCategorySort
-                    actionParam="alpha"
-                  }}
-                  {{d-button
-                    class=(if
+                    }}
+                    @icon="categorySortAlphaIcon"
+                    @action={{toggleCategorySort}}
+                    @actionParam="alpha"
+                  />
+                  <DButton
+                    class={{if
                       (eq categorySort.type "numeric")
                       "categories-amount active"
                       "categories-amount"
-                    )
-                    icon=categorySortNumericIcon
-                    action=toggleCategorySort
-                    actionParam="numeric"
-                  }}
-                  {{plugin-outlet name="categories-controls-buttons-bottom"}}
+                    }}
+                    @icon="categorySortNumericIcon"
+                    @action={{toggleCategorySort}}
+                    @actionParam="numeric"
+                  />
+                  <PluginOutlet @name="categories-controls-buttons-bottom" />
                 </div>
               </section>
               {{#if showCategoryFilter}}
-                {{input
-                  value=categoryFilter
+                <Input
+                  @value={{categoryFilter}}
                   class="filter"
-                  placeholderKey="docs.categories_filter_placeholder"
-                }}
+                  placeholder={{i18n "docs.categories_filter_placeholder"}}
+                />
               {{/if}}
               <ul>
                 {{#each sortedCategories as |category|}}
@@ -85,42 +88,44 @@
               <section class="item-controls">
                 <h3>{{i18n "docs.tags"}}</h3>
                 <div class="item-controls-buttons">
-                  {{d-button
-                    class=(if
+                  <DButton
+                    class={{if
                       (eq tagSort.type "alpha")
                       "tags-alphabet active"
                       "tags-alphabet"
-                    )
-                    icon=tagSortAlphaIcon
-                    action=toggleTagSort
-                    actionParam="alpha"
-                  }}
-                  {{d-button
-                    class=(if
+                    }}
+                    @icon="tagSortAlphaIcon"
+                    @action={{toggleTagSort}}
+                    @actionParam="alpha"
+                  />
+                  <DButton
+                    class={{if
                       (eq tagSort.type "numeric")
                       "tags-amount active"
                       "tags-amount"
-                    )
-                    icon=tagSortNumericIcon
-                    action=toggleTagSort
-                    actionParam="numeric"
-                  }}
-                  {{plugin-outlet name="tags-controls-buttons-bottom"}}
+                    }}
+                    @icon="tagSortNumericIcon"
+                    @action={{toggleTagSort}}
+                    @actionParam="numeric"
+                  />
+                  <PluginOutlet @name="tags-controls-buttons-bottom" />
                 </div>
               </section>
               {{#if showTagFilter}}
-                {{input
-                  value=tagFilter
+                <Input
+                  @value={{tagFilter}}
                   class="filter"
-                  placeholderKey="docs.tags_filter_placeholder"
-                }}
+                  placeholder={{i18n "docs.tags_filter_placeholder"}}
+                />
               {{/if}}
-              {{plugin-outlet
-                name="before-docs-tag-list"
-                tagName=""
-                connectorTagName="div"
-                args=(hash tags=tags updateSelectedTags=updateSelectedTags)
-              }}
+              <PluginOutlet
+                @name="before-docs-tag-list"
+                @connectorTagName="div"
+                @outletArgs={{hash
+                  tags=tags
+                  updateSelectedTags=updateSelectedTags
+                }}
+              />
               <ul>
                 {{#each sortedTags as |tag|}}
                   <li class="docs-filter-tag-{{tag.id}}">
@@ -137,14 +142,10 @@
       </div>
 
       {{#if selectedTopic}}
-        {{#conditional-loading-spinner condition=isTopicLoading}}
+        <ConditionalLoadingSpinner @condition={{isTopicLoading}}>
           {{docs-topic topic=topic return=(action "returnToList")}}
-          {{plugin-outlet
-            name="below-docs-topic"
-            tagName=""
-            connectorTagName="div"
-          }}
-        {{/conditional-loading-spinner}}
+          <PluginOutlet @name="below-docs-topic" @connectorTagName="div" />
+        </ConditionalLoadingSpinner>
       {{else}}
         <div class="docs-results">
           {{#if isSearchingOrFiltered}}
@@ -152,11 +153,12 @@
               <div class="result-count no-result">
                 {{i18n "search.no_results"}}
               </div>
-              {{plugin-outlet
-                name="after-docs-empty-results"
-                tagName="span"
-                connectorTagName="div"
-              }}
+              <span>
+                <PluginOutlet
+                  @name="after-docs-empty-results"
+                  @connectorTagName="div"
+                />
+              </span>
             {{else}}
               <div class="result-count">
                 {{i18n "docs.search.results" count=topicCount}}
@@ -178,4 +180,4 @@
       {{/if}}
     </div>
   {{/if}}
-{{/conditional-loading-spinner}}
+</ConditionalLoadingSpinner>

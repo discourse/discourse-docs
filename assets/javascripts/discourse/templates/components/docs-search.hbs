@@ -1,20 +1,20 @@
 <span class="docs-search-wrapper">
-  {{input
-    type="text"
-    value=(readonly searchTerm)
-    input=(action "onSearchTermChange" value="target.value")
+  <Input
+    @type="text"
+    @value={{readonly searchTerm}}
     class="no-blur docs-search-bar"
     autocorrect="off"
-    placeholder=(i18n "docs.search.placeholder")
+    placeholder={{i18n "docs.search.placeholder"}}
     autocapitalize="off"
-  }}
+    {{on "input" (action "onSearchTermChange" value="target.value")}}
+  />
 
   {{#if searchTerm}}
-    {{d-button
-      action=(action "clearSearch")
+    <DButton
+      @action={{action "clearSearch"}}
       class="clear-search"
-      label="docs.search.clear"
-    }}
+      @label="docs.search.clear"
+    />
   {{else}}
     {{d-icon "search"}}
   {{/if}}
