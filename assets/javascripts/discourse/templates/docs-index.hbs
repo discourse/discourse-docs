@@ -44,7 +44,7 @@
                       "categories-alphabet active"
                       "categories-alphabet"
                     }}
-                    @icon="categorySortAlphaIcon"
+                    @icon={{this.categorySortAlphaIcon}}
                     @action={{toggleCategorySort}}
                     @actionParam="alpha"
                   />
@@ -54,7 +54,7 @@
                       "categories-amount active"
                       "categories-amount"
                     }}
-                    @icon="categorySortNumericIcon"
+                    @icon={{this.categorySortNumericIcon}}
                     @action={{toggleCategorySort}}
                     @actionParam="numeric"
                   />
@@ -94,7 +94,7 @@
                       "tags-alphabet active"
                       "tags-alphabet"
                     }}
-                    @icon="tagSortAlphaIcon"
+                    @icon={{this.tagSortAlphaIcon}}
                     @action={{toggleTagSort}}
                     @actionParam="alpha"
                   />
@@ -104,7 +104,7 @@
                       "tags-amount active"
                       "tags-amount"
                     }}
-                    @icon="tagSortNumericIcon"
+                    @icon={{this.tagSortNumericIcon}}
                     @action={{toggleTagSort}}
                     @actionParam="numeric"
                   />
