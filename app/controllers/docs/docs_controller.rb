@@ -2,7 +2,7 @@
 
 module Docs
   class DocsController < ApplicationController
-    requires_plugin "docs"
+    requires_plugin PLUGIN_NAME
 
     skip_before_action :check_xhr, only: [:index]
 

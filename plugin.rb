@@ -23,6 +23,10 @@ load File.expand_path("lib/docs/query.rb", __dir__)
 
 GlobalSetting.add_default :docs_path, "docs"
 
+module ::Docs
+  PLUGIN_NAME = "discourse-docs"
+end
+
 after_initialize do
   require_dependency "search"
 
