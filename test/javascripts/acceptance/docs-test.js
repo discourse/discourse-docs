@@ -63,6 +63,13 @@ acceptance("Docs", function (needs) {
 
     await click(".docs-item.docs-category");
     assert.equal(count(".docs-category.selected"), 1);
+
+    await click(".docs-item.docs-category");
+    assert.equal(
+      count(".docs-category.selected"),
+      0,
+      "clicking again deselects"
+    );
   });
 });
 

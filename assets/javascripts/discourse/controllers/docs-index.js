@@ -292,7 +292,7 @@ export default Controller.extend({
   @action
   updateSelectedCategories(category) {
     const filterCategories =
-      category.id === this.filterCategories ? null : category.id;
+      category.id === parseInt(this.filterCategories, 10) ? null : category.id;
     this.setProperties({
       filterCategories,
       selectedTopic: null,
