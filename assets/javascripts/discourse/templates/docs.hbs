@@ -12,10 +12,10 @@
     />
   </span>
 
-  {{docs-search
-    searchTerm=(readonly indexController.searchTerm)
-    onSearch=(action "performSearch")
-  }}
+  <DocsSearch
+    @searchTerm={{readonly indexController.searchTerm}}
+    @onSearch={{action "performSearch"}}
+  />
 
   {{outlet}}
 </div>
