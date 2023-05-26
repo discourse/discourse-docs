@@ -71,12 +71,7 @@
               <ul>
                 {{#each sortedCategories as |category|}}
                   <li>
-                    {{docs-category
-                      category=category
-                      selectCategory=(action
-                        "updateSelectedCategories" category
-                      )
-                    }}
+                    <DocsCategory @category={{category}} @selectCategory={{action "updateSelectedCategories" category}} />
                   </li>
                 {{/each}}
               </ul>
@@ -129,10 +124,7 @@
               <ul>
                 {{#each sortedTags as |tag|}}
                   <li class="docs-filter-tag-{{tag.id}}">
-                    {{docs-tag
-                      tag=tag
-                      selectTag=(action "updateSelectedTags" tag)
-                    }}
+                    <DocsTag @tag={{tag}} @selectTag={{action "updateSelectedTags" tag}} />
                   </li>
                 {{/each}}
               </ul>
@@ -143,7 +135,7 @@
 
       {{#if selectedTopic}}
         <ConditionalLoadingSpinner @condition={{isTopicLoading}}>
-          {{docs-topic topic=topic return=(action "returnToList")}}
+          <DocsTopic @topic={{topic}} @return={{action "returnToList"}} />
           <PluginOutlet @name="below-docs-topic" @connectorTagName="div" />
         </ConditionalLoadingSpinner>
       {{else}}
@@ -167,14 +159,7 @@
           {{/if}}
 
           {{#unless emptyResults}}
-            {{docs-topic-list
-              topics=topics
-              ascending=ascending
-              order=orderColumn
-              sortBy=(action "sortBy")
-              loadMore=(action "loadMore")
-              loading=isLoadingMore
-            }}
+            <DocsTopicList @topics={{topics}} @ascending={{ascending}} @order={{orderColumn}} @sortBy={{action "sortBy"}} @loadMore={{action "loadMore"}} @loading={{isLoadingMore}} />
           {{/unless}}
         </div>
       {{/if}}
