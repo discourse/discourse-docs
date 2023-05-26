@@ -71,7 +71,13 @@
               <ul>
                 {{#each sortedCategories as |category|}}
                   <li>
-                    <DocsCategory @category={{category}} @selectCategory={{action "updateSelectedCategories" category}} />
+                    <DocsCategory
+                      @category={{category}}
+                      @selectCategory={{action
+                        "updateSelectedCategories"
+                        category
+                      }}
+                    />
                   </li>
                 {{/each}}
               </ul>
@@ -124,7 +130,10 @@
               <ul>
                 {{#each sortedTags as |tag|}}
                   <li class="docs-filter-tag-{{tag.id}}">
-                    <DocsTag @tag={{tag}} @selectTag={{action "updateSelectedTags" tag}} />
+                    <DocsTag
+                      @tag={{tag}}
+                      @selectTag={{action "updateSelectedTags" tag}}
+                    />
                   </li>
                 {{/each}}
               </ul>
@@ -159,7 +168,14 @@
           {{/if}}
 
           {{#unless emptyResults}}
-            <DocsTopicList @topics={{topics}} @ascending={{ascending}} @order={{orderColumn}} @sortBy={{action "sortBy"}} @loadMore={{action "loadMore"}} @loading={{isLoadingMore}} />
+            <DocsTopicList
+              @topics={{topics}}
+              @ascending={{ascending}}
+              @order={{orderColumn}}
+              @sortBy={{action "sortBy"}}
+              @loadMore={{action "loadMore"}}
+              @loading={{isLoadingMore}}
+            />
           {{/unless}}
         </div>
       {{/if}}
