@@ -30,17 +30,20 @@ export default {
     }
 
     withPluginApi("0.8", (api) => initialize(api, container));
-    withPluginApi("0.12.6", (api) => {
-      api.addSearchSuggestion("in:docs");
 
-      const tip = {
-        label: "in:docs",
-        description: I18n.t("docs.search.tip_description"),
-        clickable: true,
-        searchTopics: true,
-      };
-      api.addQuickSearchRandomTip(tip);
-    });
+    if (siteSettings.docs_add_search_menu_tip) {
+      withPluginApi("0.12.6", (api) => {
+        api.addSearchSuggestion("in:docs");
+
+        const tip = {
+          label: "in:docs",
+          description: I18n.t("docs.search.tip_description"),
+          clickable: true,
+          searchTopics: true,
+        };
+        api.addQuickSearchRandomTip(tip);
+      });
+    }
 
     withPluginApi("1.2.0", (api) => {
       if (siteSettings.navigation_menu !== "legacy") {

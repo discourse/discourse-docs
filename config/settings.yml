@@ -16,3 +16,6 @@ plugins:
   docs_add_to_top_menu:
     default: false
     client: true
+  docs_add_search_menu_tip:
+    default: true
+    client: true
