@@ -10,3 +10,4 @@ pl_PL:
     docs_tags: "Lista tagów do uwzględnienia w dokumentach"
     docs_add_solved_filter: "Dodaje filtr dla rozwiązanych tematów -- wymaga, aby Discourse Solved był zainstalowany i włączony"
     docs_add_to_top_menu: "Dodaje link do górnego menu, aby przejść do widoku dokumentów"
+    docs_add_search_menu_tip: "Dodaje wskazówkę \"in:docs\" do losowych wskazówek w menu wyszukiwania"
