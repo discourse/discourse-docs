@@ -48,6 +48,7 @@ export default Controller.extend({
   categories: readOnly("model.categories"),
   topics: alias("model.topics.topic_list.topics"),
   tags: readOnly("model.tags"),
+  tagGroups: readOnly("model.tag_groups"),
   topicCount: alias("model.topic_count"),
   emptyResults: equal("topicCount", 0),
 
@@ -142,6 +143,30 @@ export default Controller.extend({
     return tags;
   },
 
+  @discourseComputed("tagGroups", "tagSort", "tagFilter")
+  sortedTagGroups(tagGroups, tagSort, filter) {
+    let { type, direction } = tagSort;
+    if (type === "numeric") {
+      tagGroups = tagGroups.sort((a, b) => a.count - b.count);
+    } else {
+      tagGroups = tagGroups.sort((a, b) => {
+        return a.id.toLowerCase().localeCompare(b.id.toLowerCase());
+      });
+    }
+
+    if (direction === "desc") {
+      tagGroups = tagGroups.reverse();
+    }
+
+    if (this.showTagFilter) {
+      return tagGroups.filter((tag) => {
+        return tag.id.toLowerCase().indexOf(filter.toLowerCase()) > -1;
+      });
+    }
+
+    return tagGroups;
+  },
+
   @discourseComputed("tagSort")
   tagSortNumericIcon(tagSort) {
     if (tagSort.type === "numeric" && tagSort.direction === "asc") {
@@ -192,9 +217,14 @@ export default Controller.extend({
     return !!filterTags;
   },
 
-  @discourseComputed()
-  shouldShowTags() {
-    return this.siteSettings.tagging_enabled;
+  @discourseComputed('siteSettings.tagging_enabled', 'shouldShowTagsByGroup')
+  shouldShowTags(tagging_enabled, shouldShowTagsByGroup) {
+    return tagging_enabled && !shouldShowTagsByGroup;
+  },
+
+  @discourseComputed('siteSettings.show_tags_by_group', 'siteSettings.docs_tag_groups')
+  shouldShowTagsByGroup(show_tags_by_group, docs_tag_groups) {
+    return show_tags_by_group && Boolean(docs_tag_groups);
   },
 
   @discourseComputed()

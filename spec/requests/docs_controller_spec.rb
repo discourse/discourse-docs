@@ -97,6 +97,39 @@ describe Docs::DocsController do
         expect(tags.size).to eq(3)
         expect(topics.size).to eq(1)
       end
+
+      context "when show_tags_by_group is enabled" do
+        def get_tag_attributes(tag)
+          { "active" => false, "id" => tag.name, "count" => 1 }
+        end
+        fab!(:tag4) { Fabricate(:tag, topics: [topic], name: "test4") }
+
+        fab!(:tag_group_1) { Fabricate(:tag_group, name: "test-test2", tag_names: %w[test test2]) }
+        fab!(:tag_group_2) { Fabricate(:tag_group, name: "test3-test4", tag_names: %w[test3 test4]) }
+
+        let(:docs_json_path) { "/#{GlobalSetting.docs_path}.json" }
+        let(:parsed_body) { response.parsed_body }
+        let(:tag_groups) { parsed_body["tag_groups"] }
+
+        before do
+          SiteSetting.show_tags_by_group = true
+          SiteSetting.docs_tag_groups = "test-test2|test3-test4"
+        end
+
+        it "should add groups to the tags attribute" do
+          get docs_json_path
+          expect(tag_groups[0]["tags"]).to include(get_tag_attributes(tag), get_tag_attributes(tag2))
+          expect(tag_groups[1]["tags"]).to include(get_tag_attributes(tag3), get_tag_attributes(tag4))
+        end
+
+        it "only displays tag groups that are enabled" do
+          SiteSetting.docs_tag_groups = "test3-test4"
+          get docs_json_path
+          expect(tag_groups.size).to eq(1)
+          expect(tag_groups[0]["tags"]).to include(get_tag_attributes(tag3), get_tag_attributes(tag4))
+        end
+
+      end
     end
 
     context "when filtering by category" do

@@ -139,6 +139,70 @@
               </ul>
             </div>
           {{/if}}
+          {{log tag_groups}}
+          {{#if (and tagGroups shouldShowTagsByGroup)}}
+            <div class="docs-items docs-tags">
+              <section class="item-controls">
+                <h3>{{i18n "docs.tags"}}</h3>
+                <div class="item-controls-buttons">
+                  <DButton
+                    class={{if
+                    (eq tagSort.type "alpha")
+                    "tags-alphabet active"
+                    "tags-alphabet"
+                  }}
+                    @icon={{this.tagSortAlphaIcon}}
+                    @action={{toggleTagSort}}
+                    @actionParam="alpha"
+                  />
+                  <DButton
+                    class={{if
+                    (eq tagSort.type "numeric")
+                    "tags-amount active"
+                    "tags-amount"
+                  }}
+                    @icon={{this.tagSortNumericIcon}}
+                    @action={{toggleTagSort}}
+                    @actionParam="numeric"
+                  />
+                  <PluginOutlet @name="tags-controls-buttons-bottom" />
+                </div>
+              </section>
+              {{#if showTagFilter}}
+                <Input
+                  @value={{tagFilter}}
+                  class="filter"
+                  placeholder={{i18n "docs.tags_filter_placeholder"}}
+                />
+              {{/if}}
+              <PluginOutlet
+                @name="before-docs-tag-list"
+                @connectorTagName="div"
+                @outletArgs={{hash
+                tags=tags
+                updateSelectedTags=updateSelectedTags
+              }}
+              />
+              <ul>
+                {{#each sortedTagGroups as |tagGroup|}}
+                  <li class="docs-filter-tag-{{tagGroup.id}}">
+                    {{tagGroup.name}}
+                    <ul>
+                      {{#each tagGroup.tags as |tag|}}
+                        <li class="docs-filter-tag-{{id}}">
+                          {{log tag}}
+                          <DocsTag
+                            @tag={{tag}}
+                            @selectTag={{action "updateSelectedTags" tag}}
+                          />
+                        </li>
+                      {{/each}}
+                    </ul>
+                  </li>
+                {{/each}}
+              </ul>
+            </div>
+          {{/if}}
         {{/if}}
       </div>
 

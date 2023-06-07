@@ -21,7 +21,7 @@ module Docs
       opts = { no_definitions: true, limit: false }
       tq = TopicQuery.new(@user, opts)
       results = tq.list_docs_topics
-      results = results.left_outer_joins(:tags)
+      results = results.left_outer_joins(SiteSetting.show_tags_by_group ? {tags: :tag_groups} : :tags)
       results = results.references(:categories)
       results =
         results.where("topics.category_id IN (?)", Query.categories).or(
@@ -99,8 +99,21 @@ module Docs
         INNER JOIN topic_tags ttx ON ttx.topic_id = topics.id
         INNER JOIN tags t2 ON t2.id = ttx.tag_id
       SQL
-      tags = count_query.group("t2.name").reorder("").count
-      tags = create_tags_object(tags)
+      if SiteSetting.show_tags_by_group
+        enabled_tag_groups = SiteSetting.docs_tag_groups.split("|")
+        subquery = TagGroup.where(name: enabled_tag_groups).select(:id)
+        results = results.joins(tags: :tag_groups).where(tag_groups: { id: subquery })
+
+        tags = count_query.joins(tags: :tag_groups)
+                          .where(tag_groups: { id: subquery })
+                          .group("tag_groups.id", "tag_groups.name", "tags.name")
+                          .reorder("").count
+
+        tags = create_group_tags_object(tags)
+      else
+        tags = count_query.group("t2.name").reorder("").count
+        tags = create_tags_object(tags)
+      end
 
       categories =
         results
@@ -145,7 +158,28 @@ module Docs
         topic_list["load_more_url"] = nil
       end
 
-      { tags: tags, categories: categories, topics: topic_list, topic_count: results_length }
+      tags_key = SiteSetting.show_tags_by_group ? :tag_groups : :tags
+      {tags_key => tags, categories: categories, topics: topic_list, topic_count: results_length }
+    end
+
+    def create_group_tags_object(tags)
+      tags_hash = ActiveSupport::OrderedHash.new
+      allowed_tags = DiscourseTagging.filter_allowed_tags(Guardian.new(@user)).map(&:name)
+      has_filters = @filters[:tags].present?
+
+      tags.each do |group_tags_data, count|
+        group_tag_id, group_tag_name, tag_name  = group_tags_data
+        active = has_filters && @filters[:tags].include?(tag_name)
+
+        tags_hash[group_tag_id] ||= { id: group_tag_id, name: group_tag_name, tags: [] }
+        tags_hash[group_tag_id][:tags] << { id: tag_name, count: count, active: active }
+      end
+
+      tags_hash.each do |group_tag_id, group|
+        group[:tags].select! { |tag| allowed_tags.include?(tag[:id]) }
+      end
+
+      tags_hash.values
     end
 
     def create_tags_object(tags)
