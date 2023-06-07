@@ -147,10 +147,14 @@ export default Controller.extend({
   sortedTagGroups(tagGroups, tagSort, filter) {
     let { type, direction } = tagSort;
     if (type === "numeric") {
-      tagGroups = tagGroups.sort((a, b) => a.count - b.count);
+      tagGroups.forEach(group => {
+        group.totalCount = group.tags.reduce((acc, curr) => acc + curr.count, 0);
+      });
+
+      tagGroups = tagGroups.sort((a, b) => b.totalCount - a.totalCount);
     } else {
       tagGroups = tagGroups.sort((a, b) => {
-        return a.id.toLowerCase().localeCompare(b.id.toLowerCase());
+        return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
       });
     }
 

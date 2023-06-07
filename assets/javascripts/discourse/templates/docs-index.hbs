@@ -139,7 +139,6 @@
               </ul>
             </div>
           {{/if}}
-          {{log tag_groups}}
           {{#if (and tagGroups shouldShowTagsByGroup)}}
             <div class="docs-items docs-tags">
               <section class="item-controls">
@@ -185,12 +184,11 @@
               />
               <ul>
                 {{#each sortedTagGroups as |tagGroup|}}
-                  <li class="docs-filter-tag-{{tagGroup.id}}">
+                  <li class="docs-filter-tag-group-{{tagGroup.id}}">
                     {{tagGroup.name}}
                     <ul>
                       {{#each tagGroup.tags as |tag|}}
                         <li class="docs-filter-tag-{{id}}">
-                          {{log tag}}
                           <DocsTag
                             @tag={{tag}}
                             @selectTag={{action "updateSelectedTags" tag}}
