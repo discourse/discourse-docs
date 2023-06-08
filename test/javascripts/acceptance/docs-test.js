@@ -91,7 +91,10 @@ acceptance("Docs - with tag groups enabled", function (needs) {
 
   function assertTagGroup(assert, tagGroup) {
     let groupTagSelector = `.docs-filter-tag-group-${tagGroup.id}`;
-    assert.equal(getRootElementText(groupTagSelector), tagGroup.expectedTagGroupName);
+    assert.equal(
+      getRootElementText(groupTagSelector),
+      tagGroup.expectedTagGroupName
+    );
     assert.equal(
       query(`${groupTagSelector} .docs-tag .docs-item-id`).innerText,
       tagGroup.expectedTagName

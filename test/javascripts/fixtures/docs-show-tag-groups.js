@@ -7,14 +7,14 @@ export default {
         {
           id: "something 1",
           count: 50,
-          active: true
+          active: true,
         },
         {
           id: "something 2",
           count: 10,
-          active: true
-        }
-      ]
+          active: true,
+        },
+      ],
     },
     {
       id: 2,
@@ -23,9 +23,9 @@ export default {
         {
           id: "something 2",
           count: 10,
-          active: true
-        }
-      ]
+          active: true,
+        },
+      ],
     },
     {
       id: 3,
@@ -34,9 +34,9 @@ export default {
         {
           id: "something 3",
           count: 1,
-          active: false
-        }
-      ]
+          active: false,
+        },
+      ],
     },
     {
       id: 4,
@@ -45,17 +45,17 @@ export default {
         {
           id: "something 4",
           count: 1,
-          active: false
-        }
-      ]
-    }
+          active: false,
+        },
+      ],
+    },
   ],
   categories: [
     {
       id: 1,
       count: 119,
-      active: false
-    }
+      active: false,
+    },
   ],
   topics: {
     users: [
@@ -63,8 +63,8 @@ export default {
         id: 2,
         username: "cvx",
         name: "Jarek",
-        avatar_template: "/letter_avatar/cvx/{size}/2.png"
-      }
+        avatar_template: "/letter_avatar/cvx/{size}/2.png",
+      },
     ],
     primary_groups: [],
     topic_list: {
@@ -111,25 +111,25 @@ export default {
               extras: null,
               description: "Original Poster",
               user_id: 2,
-              primary_group_id: null
+              primary_group_id: null,
             },
             {
               extras: null,
               description: "Frequent Poster",
               user_id: 2,
-              primary_group_id: null
+              primary_group_id: null,
             },
             {
               extras: "latest",
               description: "Most Recent Poster",
               user_id: 2,
-              primary_group_id: null
-            }
-          ]
-        }
-      ]
+              primary_group_id: null,
+            },
+          ],
+        },
+      ],
     },
-    load_more_url: "/docs.json?page=1"
+    load_more_url: "/docs.json?page=1",
   },
-  search_count: null
+  search_count: null,
 };
