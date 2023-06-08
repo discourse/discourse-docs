@@ -21,7 +21,8 @@ module Docs
       opts = { no_definitions: true, limit: false }
       tq = TopicQuery.new(@user, opts)
       results = tq.list_docs_topics
-      results = results.left_outer_joins(SiteSetting.show_tags_by_group ? {tags: :tag_groups} : :tags)
+      results =
+        results.left_outer_joins(SiteSetting.show_tags_by_group ? { tags: :tag_groups } : :tags)
       results = results.references(:categories)
       results =
         results.where("topics.category_id IN (?)", Query.categories).or(
@@ -105,10 +106,13 @@ module Docs
         subquery = TagGroup.where(name: enabled_tag_groups).select(:id)
         results = results.joins(tags: :tag_groups).where(tag_groups: { id: subquery })
 
-        tags = count_query.joins(tags: :tag_groups)
-                          .where(tag_groups: { id: subquery })
-                          .group("tag_groups.id", "tag_groups.name", "tags.name")
-                          .reorder("").count
+        tags =
+          count_query
+            .joins(tags: :tag_groups)
+            .where(tag_groups: { id: subquery })
+            .group("tag_groups.id", "tag_groups.name", "tags.name")
+            .reorder("")
+            .count
 
         tags = create_group_tags_object(tags)
       else
@@ -160,7 +164,12 @@ module Docs
       end
 
       tags_key = SiteSetting.show_tags_by_group ? :tag_groups : :tags
-      {tags_key => tags, categories: categories, topics: topic_list, topic_count: results_length }
+      {
+        tags_key => tags,
+        :categories => categories,
+        :topics => topic_list,
+        :topic_count => results_length,
+      }
     end
 
     def create_group_tags_object(tags)
@@ -175,10 +184,12 @@ module Docs
         tags_hash[group_tag_id][:tags] << { id: tag_name, count: count, active: active }
       end
 
-      tags_hash.transform_values do |group|
-        group[:tags] = group[:tags].filter { |tag| allowed_tags.include?(tag[:id]) }
-        group
-      end.values
+      tags_hash
+        .transform_values do |group|
+          group[:tags] = group[:tags].filter { |tag| allowed_tags.include?(tag[:id]) }
+          group
+        end
+        .values
     end
 
     def create_tags_object(tags)

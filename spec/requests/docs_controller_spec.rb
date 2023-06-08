@@ -110,8 +110,12 @@ describe Docs::DocsController do
         fab!(:tag4) { Fabricate(:tag, topics: [topic], name: "test4") }
 
         fab!(:tag_group_1) { Fabricate(:tag_group, name: "test-test2", tag_names: %w[test test2]) }
-        fab!(:tag_group_2) { Fabricate(:tag_group, name: "test3-test4", tag_names: %w[test3 test4]) }
-        fab!(:non_docs_tag_group) { Fabricate(:tag_group, name: "non-docs-group", tag_names: %w[test3]) }
+        fab!(:tag_group_2) do
+          Fabricate(:tag_group, name: "test3-test4", tag_names: %w[test3 test4])
+        end
+        fab!(:non_docs_tag_group) do
+          Fabricate(:tag_group, name: "non-docs-group", tag_names: %w[test3])
+        end
         fab!(:empty_tag_group) { Fabricate(:tag_group, name: "empty-group") }
 
         let(:docs_json_path) { "/#{GlobalSetting.docs_path}.json" }
@@ -127,15 +131,21 @@ describe Docs::DocsController do
 
         it "should add groups to the tags attribute" do
           get docs_json_path
-          expect(get_tags_from_response(tag_groups[0]["tags"])).to contain_exactly(*[tag, tag2].map { |t| get_tag_attributes(t) })
-          expect(get_tags_from_response(tag_groups[1]["tags"])).to contain_exactly(*[tag3, tag4].map { |t| get_tag_attributes(t) })
+          expect(get_tags_from_response(tag_groups[0]["tags"])).to contain_exactly(
+            *[tag, tag2].map { |t| get_tag_attributes(t) },
+          )
+          expect(get_tags_from_response(tag_groups[1]["tags"])).to contain_exactly(
+            *[tag3, tag4].map { |t| get_tag_attributes(t) },
+          )
         end
 
         it "only displays tag groups that are enabled" do
           SiteSetting.docs_tag_groups = "test3-test4"
           get docs_json_path
           expect(tag_groups.size).to eq(1)
-          expect(get_tags_from_response(tag_groups[0]["tags"])).to contain_exactly(*[tag3, tag4].map { |t| get_tag_attributes(t) })
+          expect(get_tags_from_response(tag_groups[0]["tags"])).to contain_exactly(
+            *[tag3, tag4].map { |t| get_tag_attributes(t) },
+          )
         end
 
         it "does not return tag groups without tags" do
