@@ -106,6 +106,8 @@ describe Docs::DocsController do
 
         fab!(:tag_group_1) { Fabricate(:tag_group, name: "test-test2", tag_names: %w[test test2]) }
         fab!(:tag_group_2) { Fabricate(:tag_group, name: "test3-test4", tag_names: %w[test3 test4]) }
+        fab!(:non_docs_tag_group) { Fabricate(:tag_group, name: "non-docs-group", tag_names: %w[test3]) }
+        fab!(:empty_tag_group) { Fabricate(:tag_group, name: "empty-group") }
 
         let(:docs_json_path) { "/#{GlobalSetting.docs_path}.json" }
         let(:parsed_body) { response.parsed_body }
@@ -127,6 +129,16 @@ describe Docs::DocsController do
           get docs_json_path
           expect(tag_groups.size).to eq(1)
           expect(tag_groups[0]["tags"]).to include(get_tag_attributes(tag3), get_tag_attributes(tag4))
+        end
+
+        it "does not returns tag groups without tags" do
+          get docs_json_path
+          expect(tag_groups.map { |group| group["id"] }).not_to include(empty_tag_group.id)
+        end
+
+        it "does not return non-docs tag groups" do
+          get docs_json_path
+          expect(tag_groups.map { |group| group["id"] }).not_to include(non_docs_tag_group.id)
         end
 
       end

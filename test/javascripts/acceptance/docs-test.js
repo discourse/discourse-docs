@@ -6,6 +6,7 @@ import {
 } from "discourse/tests/helpers/qunit-helpers";
 import { test } from "qunit";
 import docsFixtures from "../fixtures/docs";
+import docsShowTagGroupsFixtures from "../fixtures/docs-show-tag-groups";
 import { click, visit } from "@ember/test-helpers";
 
 let DOCS_URL_PATH = "docs";
@@ -73,6 +74,86 @@ acceptance("Docs", function (needs) {
   });
 });
 
+acceptance("Docs - with tag groups enabled", function (needs) {
+  needs.user();
+  needs.site({ docs_path: DOCS_URL_PATH });
+  needs.settings({
+    docs_enabled: true,
+    navigation_menu: "legacy",
+  });
+
+  function getRootElementText(selector) {
+    return Array.from(query(selector).childNodes)
+      .filter((node) => node.nodeType === Node.TEXT_NODE)
+      .map((node) => node.textContent.trim())
+      .join("");
+  }
+
+  needs.pretender((server, helper) => {
+    server.get("/" + DOCS_URL_PATH + ".json", (request) => {
+      return helper.response(docsShowTagGroupsFixtures);
+    });
+  });
+
+  test("Show tag groups", async function (assert) {
+    this.siteSettings.tagging_enabled = true;
+    this.siteSettings.show_tags_by_group = true;
+    this.siteSettings.docs_tag_groups =
+      "my-tag-group-1|my-tag-group-2|my-tag-group-3";
+
+    await visit("/");
+    await click("#toggle-hamburger-menu");
+    await click(".docs-link");
+
+    let groupTagName1 = getRootElementText(".docs-filter-tag-group-1");
+    let groupTagName2 = getRootElementText(".docs-filter-tag-group-2");
+    let groupTagName3 = getRootElementText(".docs-filter-tag-group-3");
+
+    assert.equal(query(".docs-category .docs-item-id").innerText, "bug");
+    assert.equal(query(".docs-category .docs-item-count").innerText, "119");
+    assert.equal(groupTagName1, "my-tag-group-1");
+
+    const expectedTagGroups = [
+      {
+        id: "1",
+        expectedName: "my-tag-group-1",
+        expectedItem: "something 1",
+        expectedCount: "50",
+      },
+      {
+        id: "2",
+        expectedName: "my-tag-group-2",
+        expectedItem: "something 2",
+        expectedCount: "10",
+      },
+      {
+        id: "3",
+        expectedName: "my-tag-group-3",
+        expectedItem: "something 3",
+        expectedCount: "1",
+      },
+    ];
+
+    for (let tagGroup of expectedTagGroups) {
+      let groupTagSelector = `.docs-filter-tag-group-${tagGroup.id}`;
+      assert.equal(getRootElementText(groupTagSelector), tagGroup.expectedName);
+
+      assert.equal(
+        query(`${groupTagSelector} .docs-tag .docs-item-id`).innerText,
+        tagGroup.expectedItem
+      );
+      assert.equal(
+        query(`${groupTagSelector} .docs-tag .docs-item-count`).innerText,
+        tagGroup.expectedCount
+      );
+    }
+
+    assert.equal(
+      query(".docs-topic-link").innerText.trim(),
+      "Importing from Software X"
+    );
+  });
+});
 acceptance("Docs - empty state", function (needs) {
   needs.user();
   needs.site({ docs_path: DOCS_URL_PATH });
