@@ -146,29 +146,27 @@ export default Controller.extend({
   @discourseComputed("tagGroups", "tagSort", "tagFilter")
   sortedTagGroups(tagGroups, tagSort, filter) {
     let { type, direction } = tagSort;
+    let sortedTagGroups = [...tagGroups];
+
     if (type === "numeric") {
-      tagGroups.forEach(group => {
+      sortedTagGroups.forEach(group => {
         group.totalCount = group.tags.reduce((acc, curr) => acc + curr.count, 0);
       });
 
-      tagGroups = tagGroups.sort((a, b) => b.totalCount - a.totalCount);
+      sortedTagGroups.sort((a, b) => b.totalCount - a.totalCount);
     } else {
-      tagGroups = tagGroups.sort((a, b) => {
-        return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
-      });
+      sortedTagGroups.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
     }
 
     if (direction === "desc") {
-      tagGroups = tagGroups.reverse();
+      sortedTagGroups.reverse();
     }
 
     if (this.showTagFilter) {
-      return tagGroups.filter((tag) => {
-        return tag.id.toLowerCase().indexOf(filter.toLowerCase()) > -1;
-      });
+      return sortedTagGroups.filter(tag => tag.id.toLowerCase().includes(filter.toLowerCase()));
     }
 
-    return tagGroups;
+    return sortedTagGroups;
   },
 
   @discourseComputed("tagSort")

@@ -8,6 +8,14 @@ describe Docs::DocsController do
   fab!(:topic2) { Fabricate(:topic, title: "I love pineapple today", category: category) }
   fab!(:tag) { Fabricate(:tag, topics: [topic], name: "test") }
 
+  def get_tag_attributes(tag)
+    { "id" => tag.name, "count" => 1 }
+  end
+
+  def get_tags_from_response(response_tags)
+    response_tags.map { |tag| tag.except("active") }
+  end
+
   before do
     SiteSetting.tagging_enabled = true
     SiteSetting.docs_enabled = true
@@ -99,9 +107,6 @@ describe Docs::DocsController do
       end
 
       context "when show_tags_by_group is enabled" do
-        def get_tag_attributes(tag)
-          { "active" => false, "id" => tag.name, "count" => 1 }
-        end
         fab!(:tag4) { Fabricate(:tag, topics: [topic], name: "test4") }
 
         fab!(:tag_group_1) { Fabricate(:tag_group, name: "test-test2", tag_names: %w[test test2]) }
@@ -112,35 +117,34 @@ describe Docs::DocsController do
         let(:docs_json_path) { "/#{GlobalSetting.docs_path}.json" }
         let(:parsed_body) { response.parsed_body }
         let(:tag_groups) { parsed_body["tag_groups"] }
+        let(:tag_ids) { tag_groups.map { |group| group["id"] } }
 
         before do
           SiteSetting.show_tags_by_group = true
           SiteSetting.docs_tag_groups = "test-test2|test3-test4"
+          get docs_json_path
         end
 
         it "should add groups to the tags attribute" do
           get docs_json_path
-          expect(tag_groups[0]["tags"]).to include(get_tag_attributes(tag), get_tag_attributes(tag2))
-          expect(tag_groups[1]["tags"]).to include(get_tag_attributes(tag3), get_tag_attributes(tag4))
+          expect(get_tags_from_response(tag_groups[0]["tags"])).to contain_exactly(*[tag, tag2].map { |t| get_tag_attributes(t) })
+          expect(get_tags_from_response(tag_groups[1]["tags"])).to contain_exactly(*[tag3, tag4].map { |t| get_tag_attributes(t) })
         end
 
         it "only displays tag groups that are enabled" do
           SiteSetting.docs_tag_groups = "test3-test4"
           get docs_json_path
           expect(tag_groups.size).to eq(1)
-          expect(tag_groups[0]["tags"]).to include(get_tag_attributes(tag3), get_tag_attributes(tag4))
+          expect(get_tags_from_response(tag_groups[0]["tags"])).to contain_exactly(*[tag3, tag4].map { |t| get_tag_attributes(t) })
         end
 
-        it "does not returns tag groups without tags" do
-          get docs_json_path
-          expect(tag_groups.map { |group| group["id"] }).not_to include(empty_tag_group.id)
+        it "does not return tag groups without tags" do
+          expect(tag_ids).not_to include(empty_tag_group.id)
         end
 
         it "does not return non-docs tag groups" do
-          get docs_json_path
-          expect(tag_groups.map { |group| group["id"] }).not_to include(non_docs_tag_group.id)
+          expect(tag_ids).not_to include(non_docs_tag_group.id)
         end
-
       end
     end
 

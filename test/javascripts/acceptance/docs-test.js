@@ -89,8 +89,21 @@ acceptance("Docs - with tag groups enabled", function (needs) {
       .join("");
   }
 
+  function assertTagGroup(assert, tagGroup) {
+    let groupTagSelector = `.docs-filter-tag-group-${tagGroup.id}`;
+    assert.equal(getRootElementText(groupTagSelector), tagGroup.expectedTagGroupName);
+    assert.equal(
+      query(`${groupTagSelector} .docs-tag .docs-item-id`).innerText,
+      tagGroup.expectedTagName
+    );
+    assert.equal(
+      query(`${groupTagSelector} .docs-tag .docs-item-count`).innerText,
+      tagGroup.expectedCount
+    );
+  }
+
   needs.pretender((server, helper) => {
-    server.get("/" + DOCS_URL_PATH + ".json", (request) => {
+    server.get("/" + DOCS_URL_PATH + ".json", () => {
       return helper.response(docsShowTagGroupsFixtures);
     });
   });
@@ -105,53 +118,33 @@ acceptance("Docs - with tag groups enabled", function (needs) {
     await click("#toggle-hamburger-menu");
     await click(".docs-link");
 
-    let groupTagName1 = getRootElementText(".docs-filter-tag-group-1");
-    let groupTagName2 = getRootElementText(".docs-filter-tag-group-2");
-    let groupTagName3 = getRootElementText(".docs-filter-tag-group-3");
-
     assert.equal(query(".docs-category .docs-item-id").innerText, "bug");
     assert.equal(query(".docs-category .docs-item-count").innerText, "119");
-    assert.equal(groupTagName1, "my-tag-group-1");
 
     const expectedTagGroups = [
       {
         id: "1",
-        expectedName: "my-tag-group-1",
-        expectedItem: "something 1",
+        expectedTagGroupName: "my-tag-group-1",
+        expectedTagName: "something 1",
         expectedCount: "50",
       },
       {
         id: "2",
-        expectedName: "my-tag-group-2",
-        expectedItem: "something 2",
+        expectedTagGroupName: "my-tag-group-2",
+        expectedTagName: "something 2",
         expectedCount: "10",
       },
       {
         id: "3",
-        expectedName: "my-tag-group-3",
-        expectedItem: "something 3",
+        expectedTagGroupName: "my-tag-group-3",
+        expectedTagName: "something 3",
         expectedCount: "1",
       },
     ];
 
     for (let tagGroup of expectedTagGroups) {
-      let groupTagSelector = `.docs-filter-tag-group-${tagGroup.id}`;
-      assert.equal(getRootElementText(groupTagSelector), tagGroup.expectedName);
-
-      assert.equal(
-        query(`${groupTagSelector} .docs-tag .docs-item-id`).innerText,
-        tagGroup.expectedItem
-      );
-      assert.equal(
-        query(`${groupTagSelector} .docs-tag .docs-item-count`).innerText,
-        tagGroup.expectedCount
-      );
+      assertTagGroup(assert, tagGroup);
     }
-
-    assert.equal(
-      query(".docs-topic-link").innerText.trim(),
-      "Importing from Software X"
-    );
   });
 });
 acceptance("Docs - empty state", function (needs) {

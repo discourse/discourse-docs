@@ -99,6 +99,7 @@ module Docs
         INNER JOIN topic_tags ttx ON ttx.topic_id = topics.id
         INNER JOIN tags t2 ON t2.id = ttx.tag_id
       SQL
+
       if SiteSetting.show_tags_by_group
         enabled_tag_groups = SiteSetting.docs_tag_groups.split("|")
         subquery = TagGroup.where(name: enabled_tag_groups).select(:id)
@@ -165,21 +166,19 @@ module Docs
     def create_group_tags_object(tags)
       tags_hash = ActiveSupport::OrderedHash.new
       allowed_tags = DiscourseTagging.filter_allowed_tags(Guardian.new(@user)).map(&:name)
-      has_filters = @filters[:tags].present?
 
       tags.each do |group_tags_data, count|
-        group_tag_id, group_tag_name, tag_name  = group_tags_data
-        active = has_filters && @filters[:tags].include?(tag_name)
+        group_tag_id, group_tag_name, tag_name = group_tags_data
+        active = @filters[:tags]&.include?(tag_name)
 
         tags_hash[group_tag_id] ||= { id: group_tag_id, name: group_tag_name, tags: [] }
         tags_hash[group_tag_id][:tags] << { id: tag_name, count: count, active: active }
       end
 
-      tags_hash.each do |group_tag_id, group|
-        group[:tags].select! { |tag| allowed_tags.include?(tag[:id]) }
-      end
-
-      tags_hash.values
+      tags_hash.transform_values do |group|
+        group[:tags] = group[:tags].filter { |tag| allowed_tags.include?(tag[:id]) }
+        group
+      end.values
     end
 
     def create_tags_object(tags)
