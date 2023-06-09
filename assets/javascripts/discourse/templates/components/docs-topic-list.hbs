@@ -28,7 +28,11 @@
 
     <tbody class="topic-list-body">
       {{#each topics as |topic|}}
-        {{docs-topic-list-item topic=topic urlPath=urlPath showExcerpt=showExcerpt}}
+        {{docs-topic-list-item
+          topic=topic
+          urlPath=urlPath
+          showExcerpt=showExcerpt
+        }}
       {{/each}}
     </tbody>
   </table>
