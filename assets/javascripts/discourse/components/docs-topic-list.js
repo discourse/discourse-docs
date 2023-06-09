@@ -17,6 +17,7 @@ export default Component.extend({
     return order === "activity";
   },
 
+  @discourseComputed()
   showExcerpt() {
     return this.siteSettings.docs_show_topic_excerpts;
   },
