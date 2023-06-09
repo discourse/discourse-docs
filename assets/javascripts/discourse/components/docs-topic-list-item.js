@@ -13,7 +13,7 @@ export default Component.extend({
   },
 
   renderTopicListItem() {
-    const template = findRawTemplate("list/topic-list-item");
+    const template = findRawTemplate("docs-topic-list-item");
     if (template) {
       this.set(
         "topicListItemContents",
