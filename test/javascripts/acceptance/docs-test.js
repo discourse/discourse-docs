@@ -6,6 +6,7 @@ import {
 } from "discourse/tests/helpers/qunit-helpers";
 import { test } from "qunit";
 import docsFixtures from "../fixtures/docs";
+import docsShowTagGroupsFixtures from "../fixtures/docs-show-tag-groups";
 import { click, visit } from "@ember/test-helpers";
 
 let DOCS_URL_PATH = "docs";
@@ -73,6 +74,82 @@ acceptance("Docs", function (needs) {
   });
 });
 
+acceptance("Docs - with tag groups enabled", function (needs) {
+  needs.user();
+  needs.site({ docs_path: DOCS_URL_PATH });
+  needs.settings({
+    docs_enabled: true,
+    navigation_menu: "legacy",
+  });
+
+  function getRootElementText(selector) {
+    return Array.from(query(selector).childNodes)
+      .filter((node) => node.nodeType === Node.TEXT_NODE)
+      .map((node) => node.textContent.trim())
+      .join("");
+  }
+
+  function assertTagGroup(assert, tagGroup) {
+    let groupTagSelector = `.docs-filter-tag-group-${tagGroup.id}`;
+    assert.equal(
+      getRootElementText(groupTagSelector),
+      tagGroup.expectedTagGroupName
+    );
+    assert.equal(
+      query(`${groupTagSelector} .docs-tag .docs-item-id`).innerText,
+      tagGroup.expectedTagName
+    );
+    assert.equal(
+      query(`${groupTagSelector} .docs-tag .docs-item-count`).innerText,
+      tagGroup.expectedCount
+    );
+  }
+
+  needs.pretender((server, helper) => {
+    server.get("/" + DOCS_URL_PATH + ".json", () => {
+      return helper.response(docsShowTagGroupsFixtures);
+    });
+  });
+
+  test("Show tag groups", async function (assert) {
+    this.siteSettings.tagging_enabled = true;
+    this.siteSettings.show_tags_by_group = true;
+    this.siteSettings.docs_tag_groups =
+      "my-tag-group-1|my-tag-group-2|my-tag-group-3";
+
+    await visit("/");
+    await click("#toggle-hamburger-menu");
+    await click(".docs-link");
+
+    assert.equal(query(".docs-category .docs-item-id").innerText, "bug");
+    assert.equal(query(".docs-category .docs-item-count").innerText, "119");
+
+    const expectedTagGroups = [
+      {
+        id: "1",
+        expectedTagGroupName: "my-tag-group-1",
+        expectedTagName: "something 1",
+        expectedCount: "50",
+      },
+      {
+        id: "2",
+        expectedTagGroupName: "my-tag-group-2",
+        expectedTagName: "something 2",
+        expectedCount: "10",
+      },
+      {
+        id: "3",
+        expectedTagGroupName: "my-tag-group-3",
+        expectedTagName: "something 3",
+        expectedCount: "1",
+      },
+    ];
+
+    for (let tagGroup of expectedTagGroups) {
+      assertTagGroup(assert, tagGroup);
+    }
+  });
+});
 acceptance("Docs - empty state", function (needs) {
   needs.user();
   needs.site({ docs_path: DOCS_URL_PATH });
