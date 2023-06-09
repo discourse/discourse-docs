@@ -10,6 +10,9 @@
     {{category-link topic.category}}
     {{discourse-tags topic mode="list"}}
   </span>
+  {{#if showExcerpt}}
+    {{raw "list/topic-excerpt" topic=topic}}
+  {{/if}}
 </td>
 <td class="topic-list-data">
   {{format-date topic.bumped_at format="tiny" noTitle="true"}}

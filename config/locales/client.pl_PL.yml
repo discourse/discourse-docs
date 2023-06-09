@@ -38,4 +38,5 @@ pl_PL:
       filter_button: "Filtry"
       filter_solved: "Temat rozwiązany?"
     sidebar:
+      docs_link_title: "Przeglądaj tematy dokumentacji"
       docs_link_text: "Dokumentacja"
