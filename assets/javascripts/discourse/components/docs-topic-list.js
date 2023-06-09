@@ -17,6 +17,10 @@ export default Component.extend({
     return order === "activity";
   },
 
+  showExcerpt() {
+    return this.siteSettings.docs_show_topic_excerpts;
+  },
+
   @action
   sortListActivity() {
     this.sortBy("activity");

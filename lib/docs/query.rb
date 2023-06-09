@@ -2,8 +2,8 @@
 
 module Docs
   class Query
-    def initialize(user = nil, filters = {})
-      @user = user
+    def initialize(guardian, filters = {})
+      @guardian = guardian
       @filters = filters
       @limit = 30
     end
@@ -19,7 +19,7 @@ module Docs
     def list
       # query for topics matching selected categories & tags
       opts = { no_definitions: true, limit: false }
-      tq = TopicQuery.new(@user, opts)
+      tq = TopicQuery.new(@guardian.user, opts)
       results = tq.list_docs_topics
       results = results.left_outer_joins(:tags)
       results = results.references(:categories)
@@ -137,7 +137,7 @@ module Docs
       # assemble the object
       topic_query = tq.create_list(:docs, { unordered: true }, results)
 
-      topic_list = TopicListSerializer.new(topic_query, scope: Guardian.new(@user)).as_json
+      topic_list = TopicListSerializer.new(topic_query, scope: @guardian).as_json
 
       if end_of_list.nil?
         topic_list["load_more_url"] = load_more_url
@@ -156,7 +156,7 @@ module Docs
         tags_object << { id: tag[0], count: tag[1], active: active || false }
       end
 
-      allowed_tags = DiscourseTagging.filter_allowed_tags(Guardian.new(@user)).map(&:name)
+      allowed_tags = DiscourseTagging.filter_allowed_tags(@guardian).map(&:name)
 
       tags_object = tags_object.select { |tag| allowed_tags.include?(tag[:id]) }
 
