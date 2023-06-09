@@ -1,15 +1,16 @@
-<tr class="topic-list-item">
-  <td class="main-link topic-list-data">
-    <span class="link-top-line">
-      {{~raw "topic-status" topic=topic}}
-      {{~raw "docs-topic-link" topic=topic urlPath=urlPath}}
-    </span>
-    <span class="link-bottom-line">
-      {{category-link topic.category}}
-      {{discourse-tags topic mode="list"}}
-    </span>
-  </td>
-  <td class="topic-list-data">
-    {{format-date topic.bumped_at format="tiny" noTitle="true"}}
-  </td>
-</tr>
+{{~raw-plugin-outlet name="topic-list-before-columns"}}
+
+<td class="main-link topic-list-data">
+  {{~raw-plugin-outlet name="topic-list-before-link"}}
+  <span class="link-top-line">
+    {{~raw "topic-status" topic=topic}}
+    {{~raw "docs-topic-link" topic=topic urlPath=urlPath}}
+  </span>
+  <span class="link-bottom-line">
+    {{category-link topic.category}}
+    {{discourse-tags topic mode="list"}}
+  </span>
+</td>
+<td class="topic-list-data">
+  {{format-date topic.bumped_at format="tiny" noTitle="true"}}
+</td>
