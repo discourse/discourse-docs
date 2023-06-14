@@ -6,4 +6,3 @@ en:
     docs_add_solved_filter: "Adds a filter for solved topics -- requires Discourse Solved to be installed and enabled"
     docs_add_to_top_menu: "Adds a link to the top menu to navigate to the Docs view"
     docs_add_search_menu_tip: "Adds the tip \"in:docs\" to the search menu random tips"
-    docs_show_topic_excerpts: "If enabled via theme component, allow docs to show topic excerpts"

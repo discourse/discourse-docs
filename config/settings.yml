@@ -19,6 +19,3 @@ plugins:
   docs_add_search_menu_tip:
     default: true
     client: true
-  docs_show_topic_excerpts:
-    default: false
-    client: true

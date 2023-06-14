@@ -33,7 +33,6 @@ describe "Discourse Docs | Index", type: :system do
 
     context "when docs_show_topic_excerpts is true" do
       before do
-        SiteSetting.docs_show_topic_excerpts = true
         SiteSetting.always_include_topic_excerpts = true
       end
 

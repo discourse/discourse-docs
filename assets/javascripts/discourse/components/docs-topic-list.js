@@ -19,7 +19,7 @@ export default Component.extend({
 
   @discourseComputed()
   showExcerpt() {
-    return this.siteSettings.docs_show_topic_excerpts;
+    return this.siteSettings.always_include_topic_excerpts;
   },
 
   @action
