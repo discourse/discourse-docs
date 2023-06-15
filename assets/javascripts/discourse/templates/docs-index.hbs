@@ -36,10 +36,13 @@
           {{#if categories}}
             <div class="docs-items docs-categories">
               <section class="item-controls">
-                <h3>{{i18n "docs.categories"}}</h3>
+                <h3>
+                  {{i18n "docs.categories"}}
+                </h3>
                 <div class="item-controls-buttons">
                   <DButton
-                    class={{if
+                    class={{
+                      if
                       (eq categorySort.type "alpha")
                       "categories-alphabet active"
                       "categories-alphabet"
@@ -49,7 +52,8 @@
                     @actionParam="alpha"
                   />
                   <DButton
-                    class={{if
+                    class={{
+                      if
                       (eq categorySort.type "numeric")
                       "categories-amount active"
                       "categories-amount"
@@ -73,9 +77,8 @@
                   <li>
                     <DocsCategory
                       @category={{category}}
-                      @selectCategory={{action
-                        "updateSelectedCategories"
-                        category
+                      @selectCategory={{
+                        action "updateSelectedCategories" category
                       }}
                     />
                   </li>
@@ -87,10 +90,13 @@
           {{#if (and tags shouldShowTags)}}
             <div class="docs-items docs-tags">
               <section class="item-controls">
-                <h3>{{i18n "docs.tags"}}</h3>
+                <h3>
+                  {{i18n "docs.tags"}}
+                </h3>
                 <div class="item-controls-buttons">
                   <DButton
-                    class={{if
+                    class={{
+                      if
                       (eq tagSort.type "alpha")
                       "tags-alphabet active"
                       "tags-alphabet"
@@ -100,7 +106,8 @@
                     @actionParam="alpha"
                   />
                   <DButton
-                    class={{if
+                    class={{
+                      if
                       (eq tagSort.type "numeric")
                       "tags-amount active"
                       "tags-amount"
@@ -122,9 +129,8 @@
               <PluginOutlet
                 @name="before-docs-tag-list"
                 @connectorTagName="div"
-                @outletArgs={{hash
-                  tags=tags
-                  updateSelectedTags=updateSelectedTags
+                @outletArgs={{
+                  hash tags=tags updateSelectedTags=updateSelectedTags
                 }}
               />
               <ul>
@@ -170,6 +176,7 @@
           {{#unless emptyResults}}
             <DocsTopicList
               @topics={{topics}}
+              @showExcerpts={{showExcerpts}}
               @ascending={{ascending}}
               @order={{orderColumn}}
               @sortBy={{action "sortBy"}}

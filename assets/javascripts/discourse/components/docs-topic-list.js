@@ -17,11 +17,6 @@ export default Component.extend({
     return order === "activity";
   },
 
-  @discourseComputed()
-  showExcerpt() {
-    return this.siteSettings.always_include_topic_excerpts;
-  },
-
   @action
   sortListActivity() {
     this.sortBy("activity");

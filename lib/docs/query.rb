@@ -145,7 +145,15 @@ module Docs
         topic_list["load_more_url"] = nil
       end
 
-      { tags: tags, categories: categories, topics: topic_list, topic_count: results_length }
+      {
+        tags: tags,
+        categories: categories,
+        topics: topic_list,
+        topic_count: results_length,
+        meta: {
+          show_topic_excerpts: show_topic_excerpts,
+        },
+      }
     end
 
     def create_tags_object(tags)
@@ -190,6 +198,11 @@ module Docs
       end
 
       "/#{GlobalSetting.docs_path}.json?#{filters.join("&")}"
+    end
+
+    def show_topic_excerpts
+      SiteSetting.always_include_topic_excerpts ||
+        ThemeModifierHelper.new(request: @guardian.request).serialize_topic_excerpts
     end
   end
 end
