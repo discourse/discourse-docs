@@ -44,6 +44,7 @@ describe "Discourse Docs | Index", type: :system do
     context "when the theme modifier serialize_topic_excerpts is true" do
       before do
         ThemeModifierSet.find_by(theme_id: Theme.first.id).update!(serialize_topic_excerpts: true)
+        Theme.clear_cache!
       end
 
       it "shows the excerpts" do

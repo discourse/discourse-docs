@@ -69,6 +69,7 @@ export default Controller.extend({
       },
     });
   },
+
   @discourseComputed("categories", "categorySort", "categoryFilter")
   sortedCategories(categories, categorySort, filter) {
     let { type, direction } = categorySort;
