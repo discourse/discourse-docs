@@ -151,8 +151,7 @@
                 </h3>
                 <div class="item-controls-buttons">
                   <DButton
-                    class={{
-                      if
+                    class={{if
                       (eq tagSort.type "alpha")
                       "tags-alphabet active"
                       "tags-alphabet"
@@ -162,8 +161,7 @@
                     @actionParam="alpha"
                   />
                   <DButton
-                    class={{
-                      if
+                    class={{if
                       (eq tagSort.type "numeric")
                       "tags-amount active"
                       "tags-amount"
@@ -185,8 +183,9 @@
               <PluginOutlet
                 @name="before-docs-tag-list"
                 @connectorTagName="div"
-                @outletArgs={{
-                  hash tags=tags updateSelectedTags=updateSelectedTags
+                @outletArgs={{hash
+                  tags=tags
+                  updateSelectedTags=updateSelectedTags
                 }}
               />
               <ul>
