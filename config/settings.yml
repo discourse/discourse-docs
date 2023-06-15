@@ -6,6 +6,13 @@ plugins:
     type: category_list
     default: ""
     client: true
+  show_tags_by_group:
+    default: false
+    client: true
+  docs_tag_groups:
+    type: tag_group_list
+    default: ""
+    client: true
   docs_tags:
     type: tag_list
     default: ""

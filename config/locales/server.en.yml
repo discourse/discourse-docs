@@ -4,5 +4,7 @@ en:
     docs_categories: "A list of category slugs to include in docs"
     docs_tags: "A list of tags to include in docs"
     docs_add_solved_filter: "Adds a filter for solved topics -- requires Discourse Solved to be installed and enabled"
+    show_tags_by_group: "Organize tags using Tag Groups. Create groups to categorize related tags."
+    docs_tag_groups: "The Tag Groups used to show tags by group."
     docs_add_to_top_menu: "Adds a link to the top menu to navigate to the Docs view"
     docs_add_search_menu_tip: "Adds the tip \"in:docs\" to the search menu random tips"
