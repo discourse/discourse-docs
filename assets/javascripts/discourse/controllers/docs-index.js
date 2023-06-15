@@ -48,6 +48,7 @@ export default Controller.extend({
   categories: readOnly("model.categories"),
   topics: alias("model.topics.topic_list.topics"),
   tags: readOnly("model.tags"),
+  showExcerpts: readOnly("model.meta.show_topic_excerpts"),
   tagGroups: readOnly("model.tag_groups"),
   topicCount: alias("model.topic_count"),
   emptyResults: equal("topicCount", 0),
@@ -68,6 +69,7 @@ export default Controller.extend({
       },
     });
   },
+
   @discourseComputed("categories", "categorySort", "categoryFilter")
   sortedCategories(categories, categorySort, filter) {
     let { type, direction } = categorySort;

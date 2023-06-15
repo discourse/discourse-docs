@@ -36,7 +36,9 @@
           {{#if categories}}
             <div class="docs-items docs-categories">
               <section class="item-controls">
-                <h3>{{i18n "docs.categories"}}</h3>
+                <h3>
+                  {{i18n "docs.categories"}}
+                </h3>
                 <div class="item-controls-buttons">
                   <DButton
                     class={{if
@@ -87,7 +89,9 @@
           {{#if (and tags shouldShowTags)}}
             <div class="docs-items docs-tags">
               <section class="item-controls">
-                <h3>{{i18n "docs.tags"}}</h3>
+                <h3>
+                  {{i18n "docs.tags"}}
+                </h3>
                 <div class="item-controls-buttons">
                   <DButton
                     class={{if
@@ -142,7 +146,9 @@
           {{#if (and tagGroups shouldShowTagsByGroup)}}
             <div class="docs-items docs-tags">
               <section class="item-controls">
-                <h3>{{i18n "docs.tags"}}</h3>
+                <h3>
+                  {{i18n "docs.tags"}}
+                </h3>
                 <div class="item-controls-buttons">
                   <DButton
                     class={{if
@@ -232,6 +238,7 @@
           {{#unless emptyResults}}
             <DocsTopicList
               @topics={{topics}}
+              @showExcerpts={{showExcerpts}}
               @ascending={{ascending}}
               @order={{orderColumn}}
               @sortBy={{action "sortBy"}}

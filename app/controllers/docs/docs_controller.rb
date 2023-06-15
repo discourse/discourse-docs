@@ -18,7 +18,7 @@ module Docs
         page: params[:page],
       }
 
-      query = Docs::Query.new(current_user, filters).list
+      query = Docs::Query.new(guardian, filters).list
 
       if filters[:topic].present?
         begin
