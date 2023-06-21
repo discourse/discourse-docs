@@ -1,5 +1,6 @@
 import {
   acceptance,
+  exists,
   publishToMessageBus,
 } from "discourse/tests/helpers/qunit-helpers";
 import { test } from "qunit";
@@ -49,15 +50,15 @@ acceptance("Docs - user status", function (needs) {
 
   test("user status on mentions is live", async function (assert) {
     await visit("/docs?topic=1");
-    assert.dom(".mention .user-status").doesNotExist();
+    assert.notOk(exists(".mention .user-status-message"));
 
     const newStatus = { emoji: "surfing_man", description: "surfing" };
     await publishToMessageBus(`/user-status`, { [mentionedUserId]: newStatus });
-    assert
-      .dom(".mention .user-status")
-      .hasAttribute("title", newStatus.description);
+    assert.ok(
+      exists(`.mention .user-status-message .emoji[alt='${newStatus.emoji}']`)
+    );
 
     await publishToMessageBus(`/user-status`, { [mentionedUserId]: null });
-    assert.dom(".mention .user-status").doesNotExist();
+    assert.notOk(exists(".mention .user-status-message"));
   });
 });
