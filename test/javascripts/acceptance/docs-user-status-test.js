@@ -53,10 +53,10 @@ acceptance("Docs - user status", function (needs) {
 
     const newStatus = { emoji: "surfing_man", description: "surfing" };
     await publishToMessageBus(`/user-status`, { [mentionedUserId]: newStatus });
-    assert
-      .dom(".mention .user-status")
-      .hasAttribute("title", newStatus.description);
 
+    assert
+      .dom(`.mention .user-status-message .emoji[alt='${newStatus.emoji}']`)
+      .exists();
     await publishToMessageBus(`/user-status`, { [mentionedUserId]: null });
     assert.dom(".mention .user-status").doesNotExist();
   });
