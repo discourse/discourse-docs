@@ -47,7 +47,7 @@ module Docs
     end
 
     def get_topic(topic, current_user)
-      return nil unless topic_in_docs(topic.category_id, topic.tags)
+      return nil unless Docs.topic_in_docs(topic.category_id, topic.tags)
 
       topic_view = TopicView.new(topic.id, current_user)
       guardian = Guardian.new(current_user)
@@ -72,14 +72,6 @@ module Docs
         title = "#{topic_title} - #{title}"
       end
       title
-    end
-
-    def topic_in_docs(category, tags)
-      category_match = Docs::Query.categories.include?(category.to_s)
-      tags = tags.pluck(:name)
-      tag_match = Docs::Query.tags.any? { |tag| tags.include?(tag) }
-
-      category_match || tag_match
     end
   end
 end
