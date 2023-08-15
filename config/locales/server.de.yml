@@ -10,4 +10,7 @@ de:
     docs_categories: "Eine Liste von Kategorie-Kürzel, die in Docs aufgenommen werden sollen"
     docs_tags: "Eine Liste von Schlagwörtern, die in Docs aufgenommen werden sollen"
     docs_add_solved_filter: "Fügt einen Filter für gelöste Themen hinzu – erfordert, dass Discourse Solved installiert und aktiviert ist"
+    show_tags_by_group: "Organisiere Schlagwörter mit Schlagwortgruppen. Erstelle Gruppen, um verwandte Schlagwörter zu kategorisieren."
+    docs_tag_groups: "Die Schlagwortgruppen werden verwendet, um Schlagwörter nach Gruppe anzuzeigen."
     docs_add_to_top_menu: "Fügt einen Link zum Menü oben hinzu, um zur Ansicht „Docs“ zu navigieren"
+    docs_add_search_menu_tip: "Fügt den Tipp „in:docs“ zu den Tipps im Suchmenü hinzu"

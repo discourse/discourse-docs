@@ -10,4 +10,7 @@ ja:
     docs_categories: "ドキュメントに含めるカテゴリスラッグのリスト"
     docs_tags: "ドキュメントに含まれるタグのリスト"
     docs_add_solved_filter: "解決済みトピックのフィルタを追加します。Discourse Solved をインストールして有効にする必要があります"
+    show_tags_by_group: "タググループを使用してタグを整理します。関連タグを分類するためのグループを作成します。"
+    docs_tag_groups: "グループごとにタグを表示するために使用されるタググループ。"
     docs_add_to_top_menu: "ドキュメントビューに移動するリンクをトップメニューに追加します"
+    docs_add_search_menu_tip: "検索メニューのランダムなヒントに「in:docs」ヒントを追加します"

@@ -10,4 +10,7 @@ fi:
     docs_categories: "Luettelo ohjeisiin sisällytettävistä polkutunnuksista"
     docs_tags: "Luettelo ohjeisiin sisällytettävistä tunnisteista"
     docs_add_solved_filter: "Lisää suodattimen ratkaistuihin ketjuihin – edellyttää, että Discourse Solved on asennettu ja käytössä"
+    show_tags_by_group: "Järjestä tunnisteet käyttämällä tunnisteryhmiä. Luo ryhmiä toisiinsa liittyvien tunnisteiden luokittelemiseksi."
+    docs_tag_groups: "Tunnisteryhmät, joita käytetään tunnisteiden näyttämiseen ryhmittäin."
     docs_add_to_top_menu: "Lisää ylävalikkoon linkin, jolla voi siirtyä ohjenäkymään"
+    docs_add_search_menu_tip: "Lisää vinkin \"in:docs\" hakuvalikon satunnaisiin vinkkeihin"
