@@ -10,4 +10,7 @@ zh_CN:
     docs_categories: "要包含在文档中的类别缩略名列表"
     docs_tags: "要包含在文档中的标签列表"
     docs_add_solved_filter: "为已解决的话题添加筛选器 — 需要安装和启用 Discourse Solved"
+    show_tags_by_group: "使用标签群组组织标签。创建群组以对相关标签进行分类。"
+    docs_tag_groups: "用于按群组显示标签的标签群组。"
     docs_add_to_top_menu: "添加指向顶部菜单的链接以导航到“文档”视图"
+    docs_add_search_menu_tip: "将提示“in:docs”添加到搜索菜单的随机提示中"

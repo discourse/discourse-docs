@@ -10,4 +10,7 @@ nl:
     docs_categories: "Een lijst van categorieslugs om op te nemen in documenten"
     docs_tags: "Een lijst van tags om op te nemen in documenten"
     docs_add_solved_filter: "Voegt een filter toe voor opgeloste topics -- vereist dat Discourse Opgelost is geïnstalleerd en ingeschakeld"
+    show_tags_by_group: "Organiseer tags in taggroepen. Maak groepen om gerelateerde tags te categoriseren."
+    docs_tag_groups: "De taggroepen worden gebruikt om tags per groep weer te geven."
     docs_add_to_top_menu: "Voegt een link toe aan het hoofdmenu om naar de Documenten-weergave te gaan"
+    docs_add_search_menu_tip: "Voegt de tip \"in:docs\" toe aan de willekeurige tips voor het zoekmenu"

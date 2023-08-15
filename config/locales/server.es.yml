@@ -10,4 +10,7 @@ es:
     docs_categories: "Una lista de slugs de categoría para incluir en los documentos"
     docs_tags: "Una lista de etiquetas para incluir en los documentos"
     docs_add_solved_filter: "Añade un filtro para temas resueltos: requiere que Discourse Solved esté instalado y habilitado"
+    show_tags_by_group: "Organiza las etiquetas mediante Grupos de etiquetas. Crea grupos para categorizar etiquetas relacionadas."
+    docs_tag_groups: "Los Grupos de etiquetas sirven para mostrar las etiquetas por grupos."
     docs_add_to_top_menu: "Añade un enlace al menú superior para navegar a la vista Docs"
+    docs_add_search_menu_tip: "Añade el consejo «in:docs» a los consejos aleatorios del menú de búsqueda"

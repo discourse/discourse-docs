@@ -10,4 +10,7 @@ fr:
     docs_categories: "Une liste de slugs de catégories à inclure dans Docs"
     docs_tags: "Une liste d'étiquettes à inclure dans Docs"
     docs_add_solved_filter: "Ajoute un filtre pour les sujets résolus - nécessite l'installation et l'activation de Discourse Solved"
+    show_tags_by_group: "Organisez les étiquettes à l'aide de groupes d'étiquettes. Créez des groupes pour catégoriser les étiquettes associées."
+    docs_tag_groups: "Les groupes d'étiquettes utilisés pour afficher les étiquettes par groupe."
     docs_add_to_top_menu: "Ajoute un lien vers le menu supérieur pour accéder à la vue Docs"
+    docs_add_search_menu_tip: "Ajoute l'astuce « in:docs » aux astuces aléatoires du menu de recherche"
