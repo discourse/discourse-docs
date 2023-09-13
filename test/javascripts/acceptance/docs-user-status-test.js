@@ -24,6 +24,7 @@ acceptance("Docs - user status", function (needs) {
               id: 427,
               topic_id: 1,
               username: "admin1",
+              post_number: 2,
               cooked:
                 '<p>This is a document.</p>\n<p>I am mentioning another user <a class="mention" href="/u/andrei4">@andrei4</a></p>',
               mentioned_users: [
