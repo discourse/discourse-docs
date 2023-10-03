@@ -16,7 +16,6 @@ acceptance("Docs", function (needs) {
   needs.site({ docs_path: DOCS_URL_PATH });
   needs.settings({
     docs_enabled: true,
-    navigation_menu: "legacy",
   });
 
   needs.pretender((server, helper) => {
@@ -45,8 +44,14 @@ acceptance("Docs", function (needs) {
     this.siteSettings.tagging_enabled = true;
 
     await visit("/");
-    await click("#toggle-hamburger-menu");
-    await click(".docs-link");
+
+    await click(
+      ".sidebar-section[data-section-name='community'] .sidebar-more-section-links-details-summary"
+    );
+
+    await click(
+      ".sidebar-section[data-section-name='community'] .sidebar-section-link[data-link-name='docs']"
+    );
 
     assert.equal(query(".docs-category .docs-item-id").innerText, "bug");
     assert.equal(query(".docs-category .docs-item-count").innerText, "119");
@@ -79,7 +84,6 @@ acceptance("Docs - with tag groups enabled", function (needs) {
   needs.site({ docs_path: DOCS_URL_PATH });
   needs.settings({
     docs_enabled: true,
-    navigation_menu: "legacy",
   });
 
   function getRootElementText(selector) {
@@ -118,8 +122,14 @@ acceptance("Docs - with tag groups enabled", function (needs) {
       "my-tag-group-1|my-tag-group-2|my-tag-group-3";
 
     await visit("/");
-    await click("#toggle-hamburger-menu");
-    await click(".docs-link");
+
+    await click(
+      ".sidebar-section[data-section-name='community'] .sidebar-more-section-links-details-summary"
+    );
+
+    await click(
+      ".sidebar-section[data-section-name='community'] .sidebar-section-link[data-link-name='docs']"
+    );
 
     assert.equal(query(".docs-category .docs-item-id").innerText, "bug");
     assert.equal(query(".docs-category .docs-item-count").innerText, "119");
