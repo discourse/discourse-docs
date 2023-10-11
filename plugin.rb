@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 # name: discourse-docs
-# about: A plugin to make it easy to explore and find knowledge base documents in Discourse
+# about: Provides the ability to find and filter knowledge base topics. 
+# meta_topic_id: 130172
 # version: 0.1
 # author: Justin DiRose
 # url: https://github.com/discourse/discourse-docs
