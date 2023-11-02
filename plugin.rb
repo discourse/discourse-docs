@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # name: discourse-docs
-# about: Provides the ability to find and filter knowledge base topics. 
+# about: Provides the ability to find and filter knowledge base topics.
 # meta_topic_id: 130172
 # version: 0.1
 # author: Justin DiRose
