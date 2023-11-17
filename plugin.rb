@@ -6,7 +6,6 @@
 # version: 0.1
 # author: Justin DiRose
 # url: https://github.com/discourse/discourse-docs
-# transpile_js: true
 
 enabled_site_setting :docs_enabled
 

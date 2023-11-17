@@ -1,10 +1,10 @@
+import { visit } from "@ember/test-helpers";
+import { test } from "qunit";
 import {
   acceptance,
   publishToMessageBus,
 } from "discourse/tests/helpers/qunit-helpers";
-import { test } from "qunit";
 import docsFixtures from "../fixtures/docs";
-import { visit } from "@ember/test-helpers";
 
 acceptance("Docs - user status", function (needs) {
   needs.user();

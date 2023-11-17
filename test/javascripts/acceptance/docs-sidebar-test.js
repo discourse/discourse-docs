@@ -1,13 +1,13 @@
-import { test } from "qunit";
-import I18n from "I18n";
 import { click, currentURL, visit } from "@ember/test-helpers";
+import { test } from "qunit";
 import {
   acceptance,
   exists,
   query,
 } from "discourse/tests/helpers/qunit-helpers";
-import docsFixtures from "../fixtures/docs";
 import { cloneJSON } from "discourse-common/lib/object";
+import I18n from "I18n";
+import docsFixtures from "../fixtures/docs";
 
 let DOCS_URL_PATH = "docs";
 
