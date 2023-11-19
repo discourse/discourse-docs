@@ -1,6 +1,6 @@
 import Component from "@ember/component";
-import { debounce } from "@ember/runloop";
 import { action } from "@ember/object";
+import { debounce } from "@ember/runloop";
 import discourseDebounce from "discourse-common/lib/debounce";
 
 export default Component.extend({

@@ -1,13 +1,13 @@
+import { click, visit } from "@ember/test-helpers";
+import { test } from "qunit";
 import {
   acceptance,
   count,
   exists,
   query,
 } from "discourse/tests/helpers/qunit-helpers";
-import { test } from "qunit";
 import docsFixtures from "../fixtures/docs";
 import docsShowTagGroupsFixtures from "../fixtures/docs-show-tag-groups";
-import { click, visit } from "@ember/test-helpers";
 
 let DOCS_URL_PATH = "docs";
 

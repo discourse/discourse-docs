@@ -1,12 +1,12 @@
+import { getOwner } from "@ember/application";
 import Controller, { inject as controller } from "@ember/controller";
-import discourseComputed, { on } from "discourse-common/utils/decorators";
 import { action } from "@ember/object";
 import { alias, equal, gt, readOnly } from "@ember/object/computed";
-import Docs from "discourse/plugins/discourse-docs/discourse/models/docs";
-import { getOwner } from "@ember/application";
-import getURL from "discourse-common/lib/get-url";
-import I18n from "I18n";
 import { htmlSafe } from "@ember/template";
+import getURL from "discourse-common/lib/get-url";
+import discourseComputed, { on } from "discourse-common/utils/decorators";
+import I18n from "I18n";
+import Docs from "discourse/plugins/discourse-docs/discourse/models/docs";
 
 const SHOW_FILTER_AT = 10;
 

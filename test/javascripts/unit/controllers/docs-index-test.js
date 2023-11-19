@@ -1,5 +1,5 @@
-import { module, test } from "qunit";
 import { setupTest } from "ember-qunit";
+import { module, test } from "qunit";
 import { getOwner } from "discourse-common/lib/get-owner";
 
 module("Unit | Controller | docs-index", function (hooks) {
