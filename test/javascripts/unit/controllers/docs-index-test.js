@@ -1,6 +1,6 @@
+import { getOwner } from "@ember/application";
 import { setupTest } from "ember-qunit";
 import { module, test } from "qunit";
-import { getOwner } from "@ember/application";
 
 module("Unit | Controller | docs-index", function (hooks) {
   setupTest(hooks);
