@@ -408,6 +408,6 @@ export default Controller.extend({
   @action
   returnToList() {
     this.set("selectedTopic", null);
-    getOwner(this).lookup("router:main").transitionTo("docs");
+    getOwner(this).lookup("service:router").transitionTo("docs");
   },
 });
