@@ -6,7 +6,7 @@
     autocorrect="off"
     placeholder={{i18n "docs.search.placeholder"}}
     autocapitalize="off"
-    {{on "input" (action "onSearchTermChange" value="target.value")}}
+    {{on "keydown" this.onKeyDown}}
   />
 
   {{#if searchTerm}}
