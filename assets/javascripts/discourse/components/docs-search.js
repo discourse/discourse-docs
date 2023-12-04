@@ -7,12 +7,14 @@ export default Component.extend({
   @action
   onKeyDown(event) {
     if (event.key === "Enter") {
+      this.set("searchTerm", event.target.value);
       this.onSearch(event.target.value);
     }
   },
 
   @action
   clearSearch() {
+    this.set("searchTerm", "");
     this.onSearch("");
   },
 });
