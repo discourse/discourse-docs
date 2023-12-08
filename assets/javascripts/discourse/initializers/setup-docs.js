@@ -46,22 +46,12 @@ export default {
     }
 
     withPluginApi("1.2.0", (api) => {
-      if (siteSettings.navigation_menu !== "legacy") {
-        api.addCommunitySectionLink({
-          name: "docs",
-          route: "docs.index",
-          title: I18n.t("sidebar.docs_link_title"),
-          text: I18n.t("sidebar.docs_link_text"),
-        });
-      } else {
-        api.decorateWidget("hamburger-menu:generalLinks", () => {
-          return {
-            route: "docs",
-            label: "docs.title",
-            className: "docs-link",
-          };
-        });
-      }
+      api.addCommunitySectionLink({
+        name: "docs",
+        route: "docs.index",
+        title: I18n.t("sidebar.docs_link_title"),
+        text: I18n.t("sidebar.docs_link_text"),
+      });
     });
   },
 };
