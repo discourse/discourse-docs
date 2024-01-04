@@ -213,7 +213,11 @@
       {{#if selectedTopic}}
         <ConditionalLoadingSpinner @condition={{isTopicLoading}}>
           <DocsTopic @topic={{topic}} @return={{action "returnToList"}} />
-          <PluginOutlet @name="below-docs-topic" @connectorTagName="div" />
+          <PluginOutlet
+            @name="below-docs-topic"
+            @connectorTagName="div"
+            @outletArgs={{hash topic=topic}}
+          />
         </ConditionalLoadingSpinner>
       {{else}}
         <div class="docs-results">
