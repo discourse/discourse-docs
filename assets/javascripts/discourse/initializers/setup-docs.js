@@ -3,7 +3,7 @@ import I18n from "I18n";
 import { getDocs } from "../../lib/get-docs";
 
 function initialize(api, container) {
-  const siteSettings = container.lookup("site-settings:main");
+  const siteSettings = container.lookup("service:site-settings");
   const docsPath = getDocs();
 
   api.addKeyboardShortcut("g e", "", {
@@ -23,7 +23,7 @@ export default {
   name: "setup-docs",
 
   initialize(container) {
-    const siteSettings = container.lookup("site-settings:main");
+    const siteSettings = container.lookup("service:site-settings");
 
     if (!siteSettings.docs_enabled) {
       return;
