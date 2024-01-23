@@ -6,11 +6,37 @@
 
 cs:
   js:
+    filters:
+      docs:
+        help: "procházet témata dokumentace"
     docs:
+      title: "Dokumentace"
       column_titles:
-        topic: "Témata"
+        topic: "Téma"
         activity: "Aktivita"
+      no_docs:
+        title: "Zatím neexistují žádná témata dokumentace"
+        body: "Dokumentace je skvělým způsobem jak udržovat a sdílet sbírku dokumentace"
+        to_include_topic_in_docs: "Chcete-li zahrnout téma do dokumentace, použijte speciální kategorii nebo štítek"
+        setup_the_plugin: "Chcete-li začít používat Dokumentaci, <a href='%{settingsUrl}'>nastavte kategorie a štítky dokumentace</a>."
       categories: "Kategorie"
-      tags: "Tagy"
+      categories_filter_placeholder: "Filtrovat kategorie"
+      tags_filter_placeholder: "Filtrovat štítky"
+      tags: "Štítky"
       search:
+        results:
+          one: "Nalezen %{count} výsledek"
+          few: "Nalezeny %{count} výsledky"
+          many: "Nalezeno %{count} výsledků"
+          other: "Nalezeno %{count} výsledků"
+        placeholder: "Hledejte témata"
         clear: "Zrušit"
+        tip_description: "Hledat v dokumentaci"
+      topic:
+        back: "Jít zpět"
+        navigate_to_topic: "Zobrazit diskuzi o tomto tématu"
+      filter_button: "Filtry"
+      filter_solved: "Téma vyřešeno?"
+    sidebar:
+      docs_link_title: "Prozkoumat témata dokumentace"
+      docs_link_text: "Dokumentace"

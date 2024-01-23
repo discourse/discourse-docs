@@ -5,3 +5,12 @@
 # https://translate.discourse.org/
 
 cs:
+  site_settings:
+    docs_enabled: "Povolit plugin Dokumentace"
+    docs_categories: "Seznam odkazů kategorie, které mají být zahrnuty do dokumentace"
+    docs_tags: "Seznam štítků, které mají být zahrnuty do dokumentace"
+    docs_add_solved_filter: "Přidá filtr pro vyřešená témata – vyžaduje instalaci a povolení Discourse Solved"
+    show_tags_by_group: "Uspořádejte štítky pomocí skupin štítků. Pro kategorizaci souvisejících štítků vytvořte skupiny."
+    docs_tag_groups: "Skupiny štítků používané pro zobrazení štítků podle skupin."
+    docs_add_to_top_menu: "Pro přechod do zobrazení dokumentace přidá odkaz do horní nabídky"
+    docs_add_search_menu_tip: "Přidá tip \"in:docs\" do nabídky náhodných tipů vyhledávacího menu"
