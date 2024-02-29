@@ -3,7 +3,7 @@
 require "rails_helper"
 
 describe Docs::DocsController do
-  fab!(:category) { Fabricate(:category) }
+  fab!(:category)
   fab!(:topic) { Fabricate(:topic, title: "I love carrot today", category: category) }
   fab!(:topic2) { Fabricate(:topic, title: "I love pineapple today", category: category) }
   fab!(:tag) { Fabricate(:tag, topics: [topic], name: "test") }
