@@ -3,7 +3,7 @@
 require "rails_helper"
 
 describe Docs do
-  fab!(:category) { Fabricate(:category) }
+  fab!(:category)
   fab!(:topic) { Fabricate(:topic, category: category) }
   fab!(:post) { Fabricate(:post, topic: topic) }
   fab!(:non_docs_category) { Fabricate(:category) }

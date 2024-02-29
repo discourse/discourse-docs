@@ -18,8 +18,8 @@ register_svg_icon "sort-numeric-up"
 register_svg_icon "sort-numeric-down"
 register_svg_icon "far-circle"
 
-load File.expand_path("lib/docs/engine.rb", __dir__)
-load File.expand_path("lib/docs/query.rb", __dir__)
+require_relative "lib/docs/engine"
+require_relative "lib/docs/query"
 
 GlobalSetting.add_default :docs_path, "docs"
 

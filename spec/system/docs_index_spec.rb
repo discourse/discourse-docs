@@ -2,7 +2,7 @@
 
 describe "Discourse Docs | Index", type: :system do
   fab!(:current_user) { Fabricate(:user) }
-  fab!(:category) { Fabricate(:category) }
+  fab!(:category)
   fab!(:topic_1) { Fabricate(:topic, category: category) }
   fab!(:topic_2) { Fabricate(:topic, category: category) }
   fab!(:post_1) { Fabricate(:post, topic: topic_1) }
