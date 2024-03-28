@@ -210,12 +210,33 @@ module Docs
       tags_object.sort_by { |tag| [tag[:active] ? 0 : 1, -tag[:count]] }
     end
 
-    def create_categories_object(categories)
+    def create_categories_object(category_counts)
+      categories =
+        Category
+          .where(id: category_counts.keys)
+          .includes(
+            :uploaded_logo,
+            :uploaded_logo_dark,
+            :uploaded_background,
+            :uploaded_background_dark,
+          )
+          .joins("LEFT JOIN topics t on t.id = categories.topic_id")
+          .select("categories.*, t.slug topic_slug")
+          .index_by(&:id)
+
       categories_object = []
 
-      categories.each do |category|
-        active = @filters[:category].include?(category[0].to_s) if @filters[:category]
-        categories_object << { id: category[0], count: category[1], active: active || false }
+      category_counts.each do |id, count|
+        active = @filters[:category] && @filters[:category].include?(id.to_s)
+
+        categories_object << if @guardian.can_lazy_load_categories?
+          BasicCategorySerializer
+            .new(categories[id], scope: @guardian, root: false)
+            .as_json
+            .merge(id:, count:, active:)
+        else
+          category_object = { id:, count:, active: }
+        end
       end
 
       categories_object.sort_by { |category| [category[:active] ? 0 : 1, -category[:count]] }
