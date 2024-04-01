@@ -225,20 +225,21 @@ module Docs
 
       Category.preload_user_fields!(@guardian, categories)
 
-      categories.map do |category|
-        count = category_counts[category.id]
-        active = @filters[:category] && @filters[:category].include?(id.to_s)
+      categories
+        .map do |category|
+          count = category_counts[category.id]
+          active = @filters[:category] && @filters[:category].include?(category.id.to_s)
 
-        if @guardian.can_lazy_load_categories?
-          BasicCategorySerializer
-            .new(categories[id], scope: @guardian, root: false)
-            .as_json
-            .merge(count:, active:)
-        else
-          { id: category.id, count:, active: }
+          if @guardian.can_lazy_load_categories?
+            BasicCategorySerializer
+              .new(categories[id], scope: @guardian, root: false)
+              .as_json
+              .merge(count:, active:)
+          else
+            { id: category.id, count:, active: }
+          end
         end
-      end
-      .sort_by { |category| [category[:active] ? 0 : 1, -category[:count]] }
+        .sort_by { |category| [category[:active] ? 0 : 1, -category[:count]] }
     end
 
     def load_more_url
