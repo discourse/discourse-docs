@@ -222,7 +222,10 @@ module Docs
           )
           .joins("LEFT JOIN topics t on t.id = categories.topic_id")
           .select("categories.*, t.slug topic_slug")
-          .index_by(&:id)
+
+      Category.preload_user_fields!(@guardian, categories)
+
+      categories = categories.index_by(&:id)
 
       categories_object = []
 
