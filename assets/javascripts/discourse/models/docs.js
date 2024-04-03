@@ -40,12 +40,10 @@ Docs.reopenClass({
 
     return ajax(`/${docsPath}.json?${filters.join("&")}`).then((data) => {
       const site = Site.current();
-      if (site.lazy_load_categories) {
-        data.categories?.forEach((category) => site.updateCategory(category));
-        data.topics.topic_list.categories?.forEach((category) =>
-          site.updateCategory(category)
-        );
-      }
+      data.categories?.forEach((category) => site.updateCategory(category));
+      data.topics.topic_list.categories?.forEach((category) =>
+        site.updateCategory(category)
+      );
       data.topics.topic_list.topics = data.topics.topic_list.topics.map(
         (topic) => Topic.create(topic)
       );
@@ -60,11 +58,9 @@ Docs.reopenClass({
   loadMore(loadMoreUrl) {
     return ajax(loadMoreUrl).then((data) => {
       const site = Site.current();
-      if (site.lazy_load_categories) {
-        data.topics.topic_list.categories?.forEach((category) =>
-          site.updateCategory(category)
-        );
-      }
+      data.topics.topic_list.categories?.forEach((category) =>
+        site.updateCategory(category)
+      );
       data.topics.topic_list.topics = data.topics.topic_list.topics.map(
         (topic) => Topic.create(topic)
       );

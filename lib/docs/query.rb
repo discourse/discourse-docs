@@ -230,14 +230,10 @@ module Docs
           count = category_counts[category.id]
           active = @filters[:category] && @filters[:category].include?(category.id.to_s)
 
-          if @guardian.can_lazy_load_categories?
-            BasicCategorySerializer
-              .new(categories[id], scope: @guardian, root: false)
-              .as_json
-              .merge(count:, active:)
-          else
-            { id: category.id, count:, active: }
-          end
+          BasicCategorySerializer
+            .new(category, scope: @guardian, root: false)
+            .as_json
+            .merge(count:, active:)
         end
         .sort_by { |category| [category[:active] ? 0 : 1, -category[:count]] }
     end
