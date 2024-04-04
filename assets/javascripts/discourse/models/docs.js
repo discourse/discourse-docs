@@ -1,5 +1,6 @@
 import EmberObject from "@ember/object";
 import { ajax } from "discourse/lib/ajax";
+import Site from "discourse/models/site";
 import Topic from "discourse/models/topic";
 import User from "discourse/models/user";
 import { getDocs } from "../../lib/get-docs";
@@ -38,6 +39,11 @@ Docs.reopenClass({
     }
 
     return ajax(`/${docsPath}.json?${filters.join("&")}`).then((data) => {
+      const site = Site.current();
+      data.categories?.forEach((category) => site.updateCategory(category));
+      data.topics.topic_list.categories?.forEach((category) =>
+        site.updateCategory(category)
+      );
       data.topics.topic_list.topics = data.topics.topic_list.topics.map(
         (topic) => Topic.create(topic)
       );
@@ -51,6 +57,10 @@ Docs.reopenClass({
 
   loadMore(loadMoreUrl) {
     return ajax(loadMoreUrl).then((data) => {
+      const site = Site.current();
+      data.topics.topic_list.categories?.forEach((category) =>
+        site.updateCategory(category)
+      );
       data.topics.topic_list.topics = data.topics.topic_list.topics.map(
         (topic) => Topic.create(topic)
       );

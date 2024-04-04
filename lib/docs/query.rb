@@ -210,15 +210,32 @@ module Docs
       tags_object.sort_by { |tag| [tag[:active] ? 0 : 1, -tag[:count]] }
     end
 
-    def create_categories_object(categories)
-      categories_object = []
+    def create_categories_object(category_counts)
+      categories =
+        Category
+          .where(id: category_counts.keys)
+          .includes(
+            :uploaded_logo,
+            :uploaded_logo_dark,
+            :uploaded_background,
+            :uploaded_background_dark,
+          )
+          .joins("LEFT JOIN topics t on t.id = categories.topic_id")
+          .select("categories.*, t.slug topic_slug")
 
-      categories.each do |category|
-        active = @filters[:category].include?(category[0].to_s) if @filters[:category]
-        categories_object << { id: category[0], count: category[1], active: active || false }
-      end
+      Category.preload_user_fields!(@guardian, categories)
 
-      categories_object.sort_by { |category| [category[:active] ? 0 : 1, -category[:count]] }
+      categories
+        .map do |category|
+          count = category_counts[category.id]
+          active = @filters[:category] && @filters[:category].include?(category.id.to_s)
+
+          BasicCategorySerializer
+            .new(category, scope: @guardian, root: false)
+            .as_json
+            .merge(count:, active:)
+        end
+        .sort_by { |category| [category[:active] ? 0 : 1, -category[:count]] }
     end
 
     def load_more_url
