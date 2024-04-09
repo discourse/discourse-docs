@@ -6,11 +6,18 @@
 
 zh_TW:
   js:
+    filters:
+      docs:
+        help: "瀏覽文件話題"
     docs:
+      title: "文件"
       column_titles:
         topic: "話題"
         activity: "活動"
       categories: "分類"
-      tags: "標籤"
+      tags: "標記"
       search:
+        placeholder: "搜尋話題"
         clear: "清除"
+    sidebar:
+      docs_link_text: "文件"
