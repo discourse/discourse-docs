@@ -11,6 +11,8 @@ hu:
         topic: "Téma"
         activity: "Tevékenység"
       categories: "Kategóriák"
+      categories_filter_placeholder: "Kategóriák szűrése"
+      tags_filter_placeholder: "Címkék szűrése"
       tags: "Címkék"
       search:
         clear: "Törlés"

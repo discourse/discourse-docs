@@ -11,6 +11,8 @@ te:
         topic: "విషయం"
         activity: "కలాపం"
       categories: "వర్గాలు"
+      categories_filter_placeholder: "వర్గాలను ఫిల్టర్ చేయండి"
+      tags_filter_placeholder: "ఫిల్టర్ ట్యాగ్‌లు"
       tags: "ట్యాగులు"
       search:
         clear: "శుభ్రపరుచు"

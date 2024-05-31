@@ -1,0 +1,18 @@
+# WARNING: Never edit this file.
+# It will be overwritten when translations are pulled from Crowdin.
+#
+# To work with us on translations, join this project:
+# https://translate.discourse.org/
+
+ug:
+  js:
+    docs:
+      column_titles:
+        topic: "تېما"
+        activity: "پائالىيەت"
+      categories: "سەھىپە"
+      categories_filter_placeholder: "سەھىپە سۈزگۈچ"
+      tags_filter_placeholder: "بەلگە سۈزگۈچ"
+      tags: "بەلگە"
+      search:
+        clear: "تازىلا"
