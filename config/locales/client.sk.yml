@@ -11,6 +11,8 @@ sk:
         topic: "Témy"
         activity: "Aktivity"
       categories: "Kategórie"
+      categories_filter_placeholder: "Filtrovanie kategórií"
+      tags_filter_placeholder: "Značky filtra"
       tags: "Štítky"
       search:
         clear: "Vyčistiť"

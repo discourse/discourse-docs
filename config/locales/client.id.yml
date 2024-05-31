@@ -11,6 +11,8 @@ id:
         topic: "Topik"
         activity: "Activity"
       categories: "Kategori"
+      categories_filter_placeholder: "Kategori filter"
+      tags_filter_placeholder: "Filter tag"
       tags: "Label"
       search:
         clear: "Bersihkan"

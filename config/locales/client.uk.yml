@@ -11,6 +11,8 @@ uk:
         topic: "Тема"
         activity: "Активність"
       categories: "Розділи"
+      categories_filter_placeholder: "Фільтр категорій"
+      tags_filter_placeholder: "Фільтрація тегів"
       tags: "Теґи"
       search:
         clear: "Очистити"
