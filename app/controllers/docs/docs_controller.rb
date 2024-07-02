@@ -54,9 +54,11 @@ module Docs
 
       ip = request.remote_ip
       user_id = (current_user.id if current_user)
-      track_visit = should_track_visit_to_topic?
 
-      TopicsController.defer_track_visit(topic.id, ip, user_id, track_visit)
+      # TODO (martin) Change this to `defer_track_visit` once the core
+      # method is renamed.
+      TopicsController.defer_track_visit_v2(topic.id, user_id) if should_track_visit_to_topic?
+      TopicsController.defer_topic_view(topic.id, ip, user_id)
 
       TopicViewSerializer.new(topic_view, scope: guardian, root: false)
     end
