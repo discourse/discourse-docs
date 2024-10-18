@@ -106,6 +106,18 @@ describe Docs::DocsController do
         expect(topics.size).to eq(1)
       end
 
+      it "should not error out when tags is an array" do
+        get "/#{GlobalSetting.docs_path}.json?tags[]=test"
+
+        expect(response.status).to eq(400)
+      end
+
+      it "should not error out when tags is a nested parameter" do
+        get "/#{GlobalSetting.docs_path}.json?tags[foo]=test"
+
+        expect(response.status).to eq(400)
+      end
+
       context "when show_tags_by_group is enabled" do
         fab!(:tag4) { Fabricate(:tag, topics: [topic], name: "test4") }
 

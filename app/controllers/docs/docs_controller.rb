@@ -7,6 +7,10 @@ module Docs
     skip_before_action :check_xhr, only: [:index]
 
     def index
+      if params[:tags].is_a?(Array) || params[:tags].is_a?(ActionController::Parameters)
+        raise Discourse::InvalidParameters.new("Only strings are accepted for tag lists")
+      end
+
       filters = {
         topic: params[:topic],
         tags: params[:tags],
