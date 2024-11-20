@@ -6,14 +6,14 @@
       @outletArgs={{hash
         selectCategory=(action "updateSelectedCategories")
         selectTag=(action "updateSelectedTags")
-        tags=indexController.tags
-        categories=indexController.categories
+        tags=this.indexController.tags
+        categories=this.indexController.categories
       }}
     />
   </span>
 
   <DocsSearch
-    @searchTerm={{readonly indexController.searchTerm}}
+    @searchTerm={{readonly this.indexController.searchTerm}}
     @onSearch={{action "performSearch"}}
   />
 

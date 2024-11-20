@@ -1,7 +1,7 @@
 <span class="docs-search-wrapper">
   <Input
     @type="text"
-    @value={{readonly searchTerm}}
+    @value={{readonly this.searchTerm}}
     class="no-blur docs-search-bar"
     autocorrect="off"
     placeholder={{i18n "docs.search.placeholder"}}
@@ -9,7 +9,7 @@
     {{on "keydown" this.onKeyDown}}
   />
 
-  {{#if searchTerm}}
+  {{#if this.searchTerm}}
     <DButton
       @action={{action "clearSearch"}}
       class="clear-search"

@@ -1,11 +1,11 @@
-<LoadMore @selector=".topic-list tr" @action={{loadMore}}>
+<LoadMore @selector=".topic-list tr" @action={{this.loadMore}}>
   <table class="topic-list">
     <thead class="topic-list-header">
       <th role="button" class="topic-list-data" {{action "sortListTitle"}}>
         {{i18n "docs.column_titles.topic"}}
 
-        {{#if sortTitle}}
-          {{#if ascending}}
+        {{#if this.sortTitle}}
+          {{#if this.ascending}}
             {{d-icon "angle-up"}}
           {{else}}
             {{d-icon "angle-down"}}
@@ -16,8 +16,8 @@
       <th role="button" class="topic-list-data" {{action "sortListActivity"}}>
         {{i18n "docs.column_titles.activity"}}
 
-        {{#if sortActivity}}
-          {{#if ascending}}
+        {{#if this.sortActivity}}
+          {{#if this.ascending}}
             {{d-icon "angle-up"}}
           {{else}}
             {{d-icon "angle-down"}}
@@ -27,15 +27,15 @@
     </thead>
 
     <tbody class="topic-list-body">
-      {{#each topics as |topic|}}
+      {{#each this.topics as |topic|}}
         {{docs-topic-list-item
           topic=topic
-          urlPath=urlPath
-          showExcerpt=showExcerpts
+          urlPath=this.urlPath
+          showExcerpt=this.showExcerpts
         }}
       {{/each}}
     </tbody>
   </table>
 </LoadMore>
 
-<ConditionalLoadingSpinner @condition={{loading}} />
+<ConditionalLoadingSpinner @condition={{this.loading}} />
