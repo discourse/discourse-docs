@@ -37,14 +37,14 @@ export default Component.extend({
   didInsertElement() {
     this._super(...arguments);
 
-    document.querySelector("body").classList.add("archetype-docs-topic");
+    document.body.classList.add("archetype-docs-topic");
     document.addEventListener("scroll", this.debounceScrollEvent);
   },
 
   willDestroyElement() {
     this._super(...arguments);
 
-    document.querySelector("body").classList.remove("archetype-docs-topic");
+    document.body.classList.remove("archetype-docs-topic");
     document.removeEventListener("scroll", this.debounceScrollEvent);
   },
 });
