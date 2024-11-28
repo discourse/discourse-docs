@@ -26,8 +26,8 @@ acceptance("Docs - Sidebar with docs disabled", function (needs) {
       ".sidebar-section[data-section-name='community'] .sidebar-more-section-links-details-summary"
     );
 
-    assert.ok(
-      !exists(".sidebar-section-link[data-link-name='docs']"),
+    assert.notOk(
+      exists(".sidebar-section-link[data-link-name='docs']"),
       "it does not display the docs link in sidebar"
     );
   });
