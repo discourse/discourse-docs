@@ -14,15 +14,17 @@ const SHOW_FILTER_AT = 10;
 export default class DocsIndexController extends Controller {
   @controller application;
 
-  queryParams = {
-    ascending: "ascending",
-    filterCategories: "category",
-    filterTags: "tags",
-    filterSolved: "solved",
-    orderColumn: "order",
-    searchTerm: "search",
-    selectedTopic: "topic",
-  };
+  queryParams = [
+    {
+      ascending: "ascending",
+      filterCategories: "category",
+      filterTags: "tags",
+      filterSolved: "solved",
+      orderColumn: "order",
+      searchTerm: "search",
+      selectedTopic: "topic",
+    },
+  ];
 
   isLoading = false;
   isLoadingMore = false;
