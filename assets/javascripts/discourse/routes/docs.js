@@ -1,3 +1,3 @@
 import DiscourseRoute from "discourse/routes/discourse";
 
-export default DiscourseRoute.extend({});
+export default class Docs extends DiscourseRoute {}
