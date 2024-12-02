@@ -3,55 +3,58 @@ import Controller, { inject as controller } from "@ember/controller";
 import { action } from "@ember/object";
 import { alias, equal, gt, readOnly } from "@ember/object/computed";
 import { htmlSafe } from "@ember/template";
+import { on } from "@ember-decorators/object";
 import getURL from "discourse-common/lib/get-url";
-import discourseComputed, { on } from "discourse-common/utils/decorators";
+import discourseComputed from "discourse-common/utils/decorators";
 import I18n from "I18n";
 import Docs from "discourse/plugins/discourse-docs/discourse/models/docs";
 
 const SHOW_FILTER_AT = 10;
 
-export default Controller.extend({
-  queryParams: {
-    ascending: "ascending",
-    filterCategories: "category",
-    filterTags: "tags",
-    filterSolved: "solved",
-    orderColumn: "order",
-    searchTerm: "search",
-    selectedTopic: "topic",
-  },
+export default class DocsIndexController extends Controller {
+  @controller application;
 
-  application: controller(),
+  queryParams = [
+    {
+      ascending: "ascending",
+      filterCategories: "category",
+      filterTags: "tags",
+      filterSolved: "solved",
+      orderColumn: "order",
+      searchTerm: "search",
+      selectedTopic: "topic",
+    },
+  ];
 
-  isLoading: false,
-  isLoadingMore: false,
-  isTopicLoading: false,
-  filterTags: null,
-  filterCategories: null,
-  filterSolved: false,
-  searchTerm: null,
-  selectedTopic: null,
-  topic: null,
-  expandedFilters: false,
-  ascending: null,
-  orderColumn: null,
+  isLoading = false;
+  isLoadingMore = false;
+  isTopicLoading = false;
+  filterTags = null;
+  filterCategories = null;
+  filterSolved = false;
+  searchTerm = null;
+  selectedTopic = null;
+  topic = null;
+  expandedFilters = false;
+  ascending = null;
+  orderColumn = null;
 
-  showCategoryFilter: gt("categories.length", SHOW_FILTER_AT),
-  categoryFilter: "",
-  categorySort: {},
+  @gt("categories.length", SHOW_FILTER_AT) showCategoryFilter;
+  categoryFilter = "";
+  categorySort = {};
 
-  showTagFilter: gt("tags.length", SHOW_FILTER_AT),
-  tagFilter: "",
-  tagSort: {},
+  @gt("tags.length", SHOW_FILTER_AT) showTagFilter;
+  tagFilter = "";
+  tagSort = {};
 
-  loadMoreUrl: alias("model.topics.load_more_url"),
-  categories: readOnly("model.categories"),
-  topics: alias("model.topics.topic_list.topics"),
-  tags: readOnly("model.tags"),
-  showExcerpts: readOnly("model.meta.show_topic_excerpts"),
-  tagGroups: readOnly("model.tag_groups"),
-  topicCount: alias("model.topic_count"),
-  emptyResults: equal("topicCount", 0),
+  @alias("model.topics.load_more_url") loadMoreUrl;
+  @readOnly("model.categories") categories;
+  @alias("model.topics.topic_list.topics") topics;
+  @readOnly("model.tags") tags;
+  @readOnly("model.meta.show_topic_excerpts") showExcerpts;
+  @readOnly("model.tag_groups") tagGroups;
+  @alias("model.topic_count") topicCount;
+  @equal("topicCount", 0) emptyResults;
 
   @on("init")
   _setupFilters() {
@@ -68,7 +71,7 @@ export default Controller.extend({
         direction: "desc", // or asc
       },
     });
-  },
+  }
 
   @discourseComputed("categories", "categorySort", "categoryFilter")
   sortedCategories(categories, categorySort, filter) {
@@ -103,7 +106,7 @@ export default Controller.extend({
     }
 
     return categories;
-  },
+  }
 
   @discourseComputed("categorySort")
   categorySortNumericIcon(catSort) {
@@ -111,7 +114,7 @@ export default Controller.extend({
       return "sort-numeric-down";
     }
     return "sort-numeric-up";
-  },
+  }
 
   @discourseComputed("categorySort")
   categorySortAlphaIcon(catSort) {
@@ -119,7 +122,7 @@ export default Controller.extend({
       return "sort-alpha-down";
     }
     return "sort-alpha-up";
-  },
+  }
 
   @discourseComputed("tags", "tagSort", "tagFilter")
   sortedTags(tags, tagSort, filter) {
@@ -143,7 +146,7 @@ export default Controller.extend({
     }
 
     return tags;
-  },
+  }
 
   @discourseComputed("tagGroups", "tagSort", "tagFilter")
   sortedTagGroups(tagGroups, tagSort, filter) {
@@ -176,7 +179,7 @@ export default Controller.extend({
     }
 
     return sortedTagGroups;
-  },
+  }
 
   @discourseComputed("tagSort")
   tagSortNumericIcon(tagSort) {
@@ -184,7 +187,7 @@ export default Controller.extend({
       return "sort-numeric-down";
     }
     return "sort-numeric-up";
-  },
+  }
 
   @discourseComputed("tagSort")
   tagSortAlphaIcon(tagSort) {
@@ -192,28 +195,28 @@ export default Controller.extend({
       return "sort-alpha-down";
     }
     return "sort-alpha-up";
-  },
+  }
 
   @discourseComputed("topics", "isSearching", "filterSolved")
   noContent(topics, isSearching, filterSolved) {
     const filtered = isSearching || filterSolved;
     return this.topicCount === 0 && !filtered;
-  },
+  }
 
   @discourseComputed("loadMoreUrl")
   canLoadMore(loadMoreUrl) {
     return loadMoreUrl === null ? false : true;
-  },
+  }
 
   @discourseComputed("searchTerm")
   isSearching(searchTerm) {
     return !!searchTerm;
-  },
+  }
 
   @discourseComputed("isSearching", "filterSolved")
   isSearchingOrFiltered(isSearching, filterSolved) {
     return isSearching || filterSolved;
-  },
+  }
 
   @discourseComputed
   canFilterSolved() {
@@ -221,17 +224,17 @@ export default Controller.extend({
       this.siteSettings.solved_enabled &&
       this.siteSettings.docs_add_solved_filter
     );
-  },
+  }
 
   @discourseComputed("filterTags")
   filtered(filterTags) {
     return !!filterTags;
-  },
+  }
 
   @discourseComputed("siteSettings.tagging_enabled", "shouldShowTagsByGroup")
   shouldShowTags(tagging_enabled, shouldShowTagsByGroup) {
     return tagging_enabled && !shouldShowTagsByGroup;
-  },
+  }
 
   @discourseComputed(
     "siteSettings.show_tags_by_group",
@@ -239,7 +242,7 @@ export default Controller.extend({
   )
   shouldShowTagsByGroup(show_tags_by_group, docs_tag_groups) {
     return show_tags_by_group && Boolean(docs_tag_groups);
-  },
+  }
 
   @discourseComputed()
   emptyState() {
@@ -260,12 +263,12 @@ export default Controller.extend({
       title: I18n.t("docs.no_docs.title"),
       body: htmlSafe(body),
     };
-  },
+  }
 
   @discourseComputed("docsCategories", "docsTags")
   docsCategoriesAndTags(docsCategories, docsTags) {
     return docsCategories.concat(docsTags);
-  },
+  }
 
   @discourseComputed()
   docsCategories() {
@@ -277,7 +280,7 @@ export default Controller.extend({
       .split("|")
       .map((c) => this.site.categories.findBy("id", parseInt(c, 10))?.name)
       .filter(Boolean);
-  },
+  }
 
   @discourseComputed()
   docsTags() {
@@ -286,7 +289,7 @@ export default Controller.extend({
     }
 
     return this.siteSettings.docs_tags.split("|").map((t) => `#${t}`);
-  },
+  }
 
   @action
   toggleCategorySort(newType) {
@@ -296,7 +299,7 @@ export default Controller.extend({
       direction:
         type === newType ? (direction === "asc" ? "desc" : "asc") : "asc",
     });
-  },
+  }
 
   @action
   toggleTagSort(newType) {
@@ -306,12 +309,12 @@ export default Controller.extend({
       direction:
         type === newType ? (direction === "asc" ? "desc" : "asc") : "asc",
     });
-  },
+  }
 
   @action
   onChangeFilterSolved(solvedFilter) {
     this.set("filterSolved", solvedFilter);
-  },
+  }
 
   @action
   updateSelectedTags(tag) {
@@ -331,7 +334,7 @@ export default Controller.extend({
       filterTags: filter,
       selectedTopic: null,
     });
-  },
+  }
 
   @action
   updateSelectedCategories(category) {
@@ -343,7 +346,7 @@ export default Controller.extend({
     });
 
     return false;
-  },
+  }
 
   @action
   performSearch(term) {
@@ -360,7 +363,7 @@ export default Controller.extend({
       searchTerm: term,
       selectedTopic: null,
     });
-  },
+  }
 
   @action
   sortBy(column) {
@@ -377,7 +380,7 @@ export default Controller.extend({
     } else {
       this.set("ascending", "");
     }
-  },
+  }
 
   @action
   loadMore() {
@@ -394,7 +397,7 @@ export default Controller.extend({
         });
       });
     }
-  },
+  }
 
   @action
   toggleFilters() {
@@ -403,11 +406,11 @@ export default Controller.extend({
     } else {
       this.set("expandedFilters", false);
     }
-  },
+  }
 
   @action
   returnToList() {
     this.set("selectedTopic", null);
     getOwner(this).lookup("service:router").transitionTo("docs");
-  },
-});
+  }
+}

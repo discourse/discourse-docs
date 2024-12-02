@@ -1,16 +1,16 @@
 import Component from "@ember/component";
 import { htmlSafe } from "@ember/template";
+import { classNameBindings, tagName } from "@ember-decorators/component";
 import { RUNTIME_OPTIONS } from "discourse-common/lib/raw-handlebars-helpers";
 import { findRawTemplate } from "discourse-common/lib/raw-templates";
 
-export default Component.extend({
-  tagName: "tr",
-  classNameBindings: [":topic-list-item"],
-
+@tagName("tr")
+@classNameBindings(":topic-list-item")
+export default class DocsTopicListItem extends Component {
   didInsertElement() {
-    this._super(...arguments);
+    super.didInsertElement(...arguments);
     this.renderTopicListItem();
-  },
+  }
 
   renderTopicListItem() {
     const template = findRawTemplate("docs-topic-list-item");
@@ -20,5 +20,5 @@ export default Component.extend({
         htmlSafe(template(this, RUNTIME_OPTIONS))
       );
     }
-  },
-});
+  }
+}

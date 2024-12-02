@@ -5,7 +5,7 @@ import Topic from "discourse/models/topic";
 import User from "discourse/models/user";
 import { getDocs } from "../../lib/get-docs";
 
-const Docs = EmberObject.extend({});
+class Docs extends EmberObject {}
 const docsPath = getDocs();
 
 Docs.reopenClass({

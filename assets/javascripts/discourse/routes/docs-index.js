@@ -2,8 +2,8 @@ import DiscourseRoute from "discourse/routes/discourse";
 import I18n from "I18n";
 import Docs from "discourse/plugins/discourse-docs/discourse/models/docs";
 
-export default DiscourseRoute.extend({
-  queryParams: {
+export default class DocsIndex extends DiscourseRoute {
+  queryParams = {
     ascending: { refreshModel: true },
     filterCategories: { refreshModel: true },
     filterTags: { refreshModel: true },
@@ -14,7 +14,7 @@ export default DiscourseRoute.extend({
       replace: true,
       refreshModel: true,
     },
-  },
+  };
 
   model(params) {
     this.controllerFor("docs.index").set("isLoading", true);
@@ -22,7 +22,7 @@ export default DiscourseRoute.extend({
       this.controllerFor("docs.index").set("isLoading", false);
       return result;
     });
-  },
+  }
 
   titleToken() {
     const model = this.currentModel;
@@ -37,10 +37,10 @@ export default DiscourseRoute.extend({
     } else {
       return pageTitle;
     }
-  },
+  }
 
   setupController(controller, model) {
     controller.set("topic", model.topic);
     controller.set("model", model);
-  },
-});
+  }
+}
