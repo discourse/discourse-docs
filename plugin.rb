@@ -12,10 +12,10 @@ enabled_site_setting :docs_enabled
 register_asset "stylesheets/common/docs.scss"
 register_asset "stylesheets/mobile/docs.scss"
 
-register_svg_icon "sort-alpha-down"
-register_svg_icon "sort-alpha-up"
-register_svg_icon "sort-numeric-up"
-register_svg_icon "sort-numeric-down"
+register_svg_icon "arrow-down-a-z"
+register_svg_icon "arrow-up-a-z"
+register_svg_icon "arrow-up-1-9"
+register_svg_icon "arrow-down-1-9"
 register_svg_icon "far-circle"
 
 require_relative "lib/docs/engine"
