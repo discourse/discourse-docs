@@ -26,6 +26,13 @@ function initialize(api, container) {
     }
     return columns;
   });
+
+  api.registerValueTransformer("topic-list-item-expand-pinned", ({ value }) => {
+    if (container.lookup("service:router").currentRouteName === "docs.index") {
+      return true;
+    }
+    return value;
+  });
 }
 
 export default {
