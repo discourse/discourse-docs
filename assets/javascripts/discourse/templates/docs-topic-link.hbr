@@ -1,1 +1,0 @@
-<a href="/{{urlPath}}?topic={{topic.id}}" class="docs-topic-link">{{{topic.fancyTitle}}}</a>

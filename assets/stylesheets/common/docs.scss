@@ -274,3 +274,12 @@
     width: 100%;
   }
 }
+
+// TODO: Remove once legacy topic-list is removed
+.docs-browse {
+  .topic-list-data.replies,
+  .topic-list-data.posts,
+  .topic-list-data.views {
+    display: none;
+  }
+}

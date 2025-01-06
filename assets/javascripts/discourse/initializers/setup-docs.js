@@ -17,6 +17,15 @@ function initialize(api, container) {
       href: "/" + docsPath,
     });
   }
+
+  api.registerValueTransformer("topic-list-columns", ({ value: columns }) => {
+    if (container.lookup("service:router").currentRouteName === "docs.index") {
+      columns.delete("posters");
+      columns.delete("replies");
+      columns.delete("views");
+    }
+    return columns;
+  });
 }
 
 export default {
