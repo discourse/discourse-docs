@@ -111,17 +111,17 @@ export default class DocsIndexController extends Controller {
   @discourseComputed("categorySort")
   categorySortNumericIcon(catSort) {
     if (catSort.type === "numeric" && catSort.direction === "asc") {
-      return "sort-numeric-down";
+      return "arrow-down-1-9";
     }
-    return "sort-numeric-up";
+    return "arrow-up-1-9";
   }
 
   @discourseComputed("categorySort")
   categorySortAlphaIcon(catSort) {
     if (catSort.type === "alpha" && catSort.direction === "asc") {
-      return "sort-alpha-down";
+      return "arrow-down-a-z";
     }
-    return "sort-alpha-up";
+    return "arrow-up-a-z";
   }
 
   @discourseComputed("tags", "tagSort", "tagFilter")
@@ -184,17 +184,17 @@ export default class DocsIndexController extends Controller {
   @discourseComputed("tagSort")
   tagSortNumericIcon(tagSort) {
     if (tagSort.type === "numeric" && tagSort.direction === "asc") {
-      return "sort-numeric-down";
+      return "arrow-down-1-9";
     }
-    return "sort-numeric-up";
+    return "arrow-up-1-9";
   }
 
   @discourseComputed("tagSort")
   tagSortAlphaIcon(tagSort) {
     if (tagSort.type === "alpha" && tagSort.direction === "asc") {
-      return "sort-alpha-down";
+      return "arrow-down-a-z";
     }
-    return "sort-alpha-up";
+    return "arrow-up-a-z";
   }
 
   @discourseComputed("topics", "isSearching", "filterSolved")
