@@ -16,8 +16,8 @@ describe "Discourse Docs | Index", type: :system do
 
   it "does not error when showing the index" do
     visit("/docs")
-    expect(page).to have_css(".docs-topic-link", text: topic_1.title)
-    expect(page).to have_css(".docs-topic-link", text: topic_2.title)
+    expect(page).to have_css(".raw-topic-link", text: topic_1.title)
+    expect(page).to have_css(".raw-topic-link", text: topic_2.title)
   end
 
   describe "topic excerpts" do
