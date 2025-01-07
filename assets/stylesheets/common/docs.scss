@@ -153,7 +153,7 @@
       font-weight: normal;
       font-size: $font-down-1;
     }
-    .docs-topic-link {
+    .raw-topic-link {
       color: var(--tertiary);
       cursor: pointer;
       display: inline-block;
@@ -272,5 +272,14 @@
   }
   .docs-item {
     width: 100%;
+  }
+}
+
+// TODO: Remove once legacy topic-list is removed
+.docs-browse {
+  .topic-list-data.replies,
+  .topic-list-data.posts,
+  .topic-list-data.views {
+    display: none;
   }
 }

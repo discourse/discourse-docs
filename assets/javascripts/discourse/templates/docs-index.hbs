@@ -243,15 +243,15 @@
           {{/if}}
 
           {{#unless this.emptyResults}}
-            <DocsTopicList
-              @topics={{this.topics}}
-              @showExcerpts={{this.showExcerpts}}
-              @ascending={{this.ascending}}
-              @order={{this.orderColumn}}
-              @sortBy={{action "sortBy"}}
-              @loadMore={{action "loadMore"}}
-              @loading={{this.isLoadingMore}}
-            />
+            <LoadMore @selector=".topic-list tr" @action={{this.loadMore}}>
+              <BasicTopicList
+                @topics={{this.topics}}
+                @ascending={{this.ascending}}
+                @order={{this.orderColumn}}
+                @changeSort={{action "sortBy"}}
+              />
+            </LoadMore>
+            <ConditionalLoadingSpinner @condition={{this.isLoadingMore}} />
           {{/unless}}
         </div>
       {{/if}}

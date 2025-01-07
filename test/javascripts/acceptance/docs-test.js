@@ -57,10 +57,7 @@ acceptance("Docs", function (needs) {
     assert.equal(query(".docs-category .docs-item-count").innerText, "119");
     assert.equal(query(".docs-tag .docs-item-id").innerText, "something");
     assert.equal(query(".docs-tag .docs-item-count").innerText, "74");
-    assert.equal(
-      query(".docs-topic-link").innerText.trim(),
-      "Importing from Software X"
-    );
+    assert.dom(".raw-topic-link").hasText("Importing from Software X");
   });
 
   test("selecting a category", async function (assert) {
