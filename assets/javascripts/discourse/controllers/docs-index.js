@@ -4,9 +4,9 @@ import { action } from "@ember/object";
 import { alias, equal, gt, readOnly } from "@ember/object/computed";
 import { htmlSafe } from "@ember/template";
 import { on } from "@ember-decorators/object";
-import getURL from "discourse-common/lib/get-url";
-import discourseComputed from "discourse-common/utils/decorators";
-import I18n from "I18n";
+import discourseComputed from "discourse/lib/decorators";
+import getURL from "discourse/lib/get-url";
+import { i18n } from "discourse-i18n";
 import Docs from "discourse/plugins/discourse-docs/discourse/models/docs";
 
 const SHOW_FILTER_AT = 10;
@@ -246,12 +246,12 @@ export default class DocsIndexController extends Controller {
 
   @discourseComputed()
   emptyState() {
-    let body = I18n.t("docs.no_docs.body");
+    let body = i18n("docs.no_docs.body");
     if (this.docsCategoriesAndTags.length) {
-      body += I18n.t("docs.no_docs.to_include_topic_in_docs");
+      body += i18n("docs.no_docs.to_include_topic_in_docs");
       body += ` (${this.docsCategoriesAndTags.join(", ")}).`;
     } else if (this.currentUser.staff) {
-      const setUpPluginMessage = I18n.t("docs.no_docs.setup_the_plugin", {
+      const setUpPluginMessage = i18n("docs.no_docs.setup_the_plugin", {
         settingsUrl: getURL(
           "/admin/site_settings/category/plugins?filter=plugin:discourse-docs"
         ),
@@ -260,7 +260,7 @@ export default class DocsIndexController extends Controller {
     }
 
     return {
-      title: I18n.t("docs.no_docs.title"),
+      title: i18n("docs.no_docs.title"),
       body: htmlSafe(body),
     };
   }

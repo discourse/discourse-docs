@@ -1,8 +1,8 @@
 import Component from "@ember/component";
 import { reads } from "@ember/object/computed";
 import { classNames } from "@ember-decorators/component";
-import discourseDebounce from "discourse-common/lib/debounce";
-import computed, { bind } from "discourse-common/utils/decorators";
+import discourseDebounce from "discourse/lib/debounce";
+import computed, { bind } from "discourse/lib/decorators";
 
 @classNames("docs-topic")
 export default class DocsTopic extends Component {
