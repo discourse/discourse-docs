@@ -1,5 +1,5 @@
 import DiscourseRoute from "discourse/routes/discourse";
-import I18n from "I18n";
+import { i18n } from "discourse-i18n";
 import Docs from "discourse/plugins/discourse-docs/discourse/models/docs";
 
 export default class DocsIndex extends DiscourseRoute {
@@ -26,7 +26,7 @@ export default class DocsIndex extends DiscourseRoute {
 
   titleToken() {
     const model = this.currentModel;
-    const pageTitle = I18n.t("docs.title");
+    const pageTitle = i18n("docs.title");
     if (model.topic.title && model.topic.category_id) {
       const title = model.topic.unicode_title || model.topic.title;
       const categoryName = this.site.categories.findBy(

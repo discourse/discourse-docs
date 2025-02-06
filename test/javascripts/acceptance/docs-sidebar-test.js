@@ -1,12 +1,12 @@
 import { click, currentURL, visit } from "@ember/test-helpers";
 import { test } from "qunit";
+import { cloneJSON } from "discourse/lib/object";
 import {
   acceptance,
   exists,
   query,
 } from "discourse/tests/helpers/qunit-helpers";
-import { cloneJSON } from "discourse-common/lib/object";
-import I18n from "I18n";
+import { i18n } from "discourse-i18n";
 import docsFixtures from "../fixtures/docs";
 
 let DOCS_URL_PATH = "docs";
@@ -56,13 +56,13 @@ acceptance("Docs - Sidebar with docs enabled", function (needs) {
 
     assert.strictEqual(
       query(".sidebar-section-link[data-link-name='docs']").textContent.trim(),
-      I18n.t("sidebar.docs_link_text"),
+      i18n("sidebar.docs_link_text"),
       "displays the right text for the link"
     );
 
     assert.strictEqual(
       query(".sidebar-section-link[data-link-name='docs']").title,
-      I18n.t("sidebar.docs_link_title"),
+      i18n("sidebar.docs_link_title"),
       "displays the right title for the link"
     );
 

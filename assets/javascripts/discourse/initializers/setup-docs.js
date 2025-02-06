@@ -1,5 +1,5 @@
 import { withPluginApi } from "discourse/lib/plugin-api";
-import I18n from "I18n";
+import { i18n } from "discourse-i18n";
 import { getDocs } from "../../lib/get-docs";
 
 function initialize(api, container) {
@@ -13,7 +13,7 @@ function initialize(api, container) {
   if (siteSettings.docs_add_to_top_menu) {
     api.addNavigationBarItem({
       name: "docs",
-      displayName: I18n.t("docs.title"),
+      displayName: i18n("docs.title"),
       href: "/" + docsPath,
     });
   }
@@ -53,7 +53,7 @@ export default {
 
         const tip = {
           label: "in:docs",
-          description: I18n.t("docs.search.tip_description"),
+          description: i18n("docs.search.tip_description"),
           clickable: true,
           searchTopics: true,
         };
@@ -65,8 +65,8 @@ export default {
       api.addCommunitySectionLink({
         name: "docs",
         route: "docs.index",
-        title: I18n.t("sidebar.docs_link_title"),
-        text: I18n.t("sidebar.docs_link_text"),
+        title: i18n("sidebar.docs_link_title"),
+        text: i18n("sidebar.docs_link_text"),
       });
     });
   },
