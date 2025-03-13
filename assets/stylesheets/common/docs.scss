@@ -1,6 +1,7 @@
 .docs-search-wrapper {
   position: relative;
   width: 500px;
+
   .d-icon {
     position: absolute;
     right: 0.75em;
@@ -8,11 +9,13 @@
     font-size: 1.5em;
     color: var(--primary-low-mid);
     pointer-events: none;
+
     @media screen and (max-width: 400px) {
       // Just decoration, remove on small screens
       display: none;
     }
   }
+
   .btn.clear-search {
     background-color: var(--secondary);
     color: var(--tertiary);
@@ -30,41 +33,58 @@
   display: flex;
   justify-content: center;
   padding: 1.5em 1em;
+
   @include breakpoint(mobile-extra-large, min-width) {
     // More breathing room on larger screens
     margin-bottom: 2em;
   }
+
   .docs-search-bar {
     height: 50px;
-    margin-bottom: 0px;
+    margin-bottom: 0;
     width: 100%;
   }
 }
+
 .docs-browse {
   display: flex;
+
+  // TODO: Remove once legacy topic-list is removed
+  .topic-list-data.replies,
+  .topic-list-data.posts,
+  .topic-list-data.views {
+    display: none;
+  }
+
   .loading-container {
     display: flex;
     flex-basis: 100%;
     padding: 0.625em 0;
   }
+
   .docs-results {
     display: flex;
     flex-direction: column;
     flex-basis: 100%;
+
     .result-count {
       padding-top: 15px;
       padding-left: 0.625em;
     }
   }
+
   .docs-filters {
     flex: 0 1 20%;
-    @include breakpoint(tablet, min-width) {
-      padding-right: 2em;
-    }
+
     // min-width on flex allows container to
     // be more narrow than content if needed
     min-width: 200px;
+
+    @include breakpoint(tablet, min-width) {
+      padding-right: 2em;
+    }
   }
+
   .docs-items {
     padding: 0.57em 0 1.5em 0;
 
@@ -93,23 +113,29 @@
         height: 1em;
         margin-right: 0.25em;
         color: var(--primary-high);
+
         &.d-icon-plus {
           height: 0.75em;
           margin-right: 0.25em;
         }
       }
+
       &.selected .d-icon {
         color: var(--primary);
       }
+
       &:hover {
         background: var(--highlight-medium);
       }
+
       &.selected:hover {
         background: var(--danger-low);
+
         .d-icon {
           color: var(--danger);
         }
       }
+
       .tag-id,
       .category-id {
         margin-right: 3px;
@@ -117,10 +143,12 @@
         text-overflow: ellipsis;
       }
     }
+
     .selected {
       font-weight: bold;
     }
   }
+
   .docs-topic-list {
     flex-basis: 100%;
 
@@ -153,21 +181,26 @@
       font-weight: normal;
       font-size: $font-down-1;
     }
+
     .raw-topic-link {
       color: var(--tertiary);
       cursor: pointer;
       display: inline-block;
       word-break: break-word;
+
       & > * {
         pointer-events: none;
       }
     }
   }
+
   .docs-topic {
     display: flex;
     flex-direction: column;
+
     .docs-nav-link {
       font-weight: 700;
+
       &.return {
         align-items: center;
         background: none;
@@ -176,24 +209,30 @@
         font-size: $font-0;
         justify-content: normal;
         padding: 0;
+
         &::before {
           content: "«";
           margin-right: 5px;
         }
       }
+
       &.more {
         font-size: $font-up-1;
         padding: 10px 0;
       }
     }
+
     .topic-content {
       padding-top: 10px;
+
       h1 {
         line-height: $line-height-medium;
       }
+
       .lightbox-wrapper img {
         max-width: 100%;
       }
+
       code,
       pre {
         // Prevent pre from being wider than viewport
@@ -216,15 +255,19 @@
   .item-controls {
     display: flex;
     justify-content: space-between;
+
     .btn {
       background-color: transparent;
       padding: 0.25em;
+
       svg {
         color: var(--primary-high);
       }
+
       &:hover,
       &.active {
         background-color: var(--secondary-very-high);
+
         svg {
           color: var(--primary-high);
         }
@@ -232,12 +275,11 @@
       height: 28px;
     }
   }
-}
 
-.docs-items {
   input {
     width: 100%;
   }
+
   ul {
     margin: 0;
     list-style: none;
@@ -249,6 +291,7 @@
     #main > div {
       grid-template-columns: 0 1fr;
     }
+
     .has-sidebar,
     .docs-search,
     .alert,
@@ -256,6 +299,7 @@
     #skip-link {
       display: none;
     }
+
     .docs-topic {
       .docs-nav-link.return,
       .docs-nav-link.more {
@@ -267,19 +311,12 @@
 
 .docs-solved {
   padding: 0;
+
   input {
     width: auto;
   }
+
   .docs-item {
     width: 100%;
-  }
-}
-
-// TODO: Remove once legacy topic-list is removed
-.docs-browse {
-  .topic-list-data.replies,
-  .topic-list-data.posts,
-  .topic-list-data.views {
-    display: none;
   }
 }

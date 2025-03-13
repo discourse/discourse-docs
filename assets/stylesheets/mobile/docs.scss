@@ -13,21 +13,27 @@
         width: calc(100vw - 2em);
       }
     }
+
     .docs-browse {
       padding-bottom: 60px; // for DiscourseHub footer nav
+
       .docs-items {
         padding-right: 0;
       }
       flex-direction: column;
+
       .docs-results .result-count {
         padding-left: 0;
       }
+
       .docs-topic-list {
         flex-basis: 100%;
       }
+
       .raw-topic-link {
         padding-right: 0.25em;
       }
+
       .docs-topic {
         width: calc(100vw - 20px);
       }
@@ -37,9 +43,11 @@
   .docs-filters {
     background: var(--primary-very-low);
     padding: 0 0.5em;
+
     .docs-items:first-of-type {
       margin-top: 1em;
     }
+
     + .docs-results {
       margin-top: 2em;
     }
