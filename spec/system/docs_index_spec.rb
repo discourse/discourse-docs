@@ -24,7 +24,7 @@ describe "Discourse Docs | Index", type: :system do
       topic_2.update_excerpt(post_2.excerpt_for_topic)
     end
 
-    context "when docs_show_topic_excerpts is true" do
+    context "when docs_show_topic_excerpts is false" do
       before { SiteSetting.always_include_topic_excerpts = false }
       it "does not show the topic excerpts by default" do
         visit("/docs")
