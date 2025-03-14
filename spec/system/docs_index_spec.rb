@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 describe "Discourse Docs | Index", type: :system do
-  fab!(:current_user) { Fabricate(:user) }
   fab!(:category)
   fab!(:topic_1) { Fabricate(:topic, category: category) }
   fab!(:topic_2) { Fabricate(:topic, category: category) }
@@ -11,7 +10,6 @@ describe "Discourse Docs | Index", type: :system do
   before do
     SiteSetting.docs_enabled = true
     SiteSetting.docs_categories = category.id.to_s
-    sign_in(current_user)
   end
 
   it "does not error when showing the index" do
@@ -26,9 +24,12 @@ describe "Discourse Docs | Index", type: :system do
       topic_2.update_excerpt(post_2.excerpt_for_topic)
     end
 
-    it "does not show the topic excerpts by default" do
-      visit("/docs")
-      expect(page).to have_no_css(".topic-excerpt")
+    context "when docs_show_topic_excerpts is false" do
+      before { SiteSetting.always_include_topic_excerpts = false }
+      it "does not show the topic excerpts by default" do
+        visit("/docs")
+        expect(page).to have_no_css(".topic-excerpt")
+      end
     end
 
     context "when docs_show_topic_excerpts is true" do
