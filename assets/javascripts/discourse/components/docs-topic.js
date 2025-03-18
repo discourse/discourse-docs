@@ -1,21 +1,30 @@
 import Component from "@ember/component";
 import { reads } from "@ember/object/computed";
+import { service } from "@ember/service";
 import { classNames } from "@ember-decorators/component";
 import discourseDebounce from "discourse/lib/debounce";
 import computed, { bind } from "discourse/lib/decorators";
+import transformPost from "discourse/lib/transform-post";
+import { currentUser } from "discourse/tests/helpers/qunit-helpers";
 
 @classNames("docs-topic")
 export default class DocsTopic extends Component {
+  @service currentUser;
+  @service site;
+
   @reads("post.cooked") originalPostContent;
 
-  @computed("topic.post_stream")
+  @computed("currentUser", "model")
   post(stream) {
-    return this.store.createRecord("post", stream?.posts.firstObject);
+    return transformPost(this.currentUser, this.site, this.model);
   }
 
-  @computed("post", "topic")
+  @computed("topic", "topic.post_stream")
   model() {
-    const post = this.post;
+    const post = this.store.createRecord(
+      "post",
+      this.topic.post_stream?.posts.firstObject
+    );
 
     if (!post.topic) {
       post.set("topic", this.topic);
