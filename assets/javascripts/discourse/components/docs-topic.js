@@ -5,7 +5,6 @@ import { classNames } from "@ember-decorators/component";
 import discourseDebounce from "discourse/lib/debounce";
 import computed, { bind } from "discourse/lib/decorators";
 import transformPost from "discourse/lib/transform-post";
-import { currentUser } from "discourse/tests/helpers/qunit-helpers";
 
 @classNames("docs-topic")
 export default class DocsTopic extends Component {
@@ -15,7 +14,7 @@ export default class DocsTopic extends Component {
   @reads("post.cooked") originalPostContent;
 
   @computed("currentUser", "model")
-  post(stream) {
+  post() {
     return transformPost(this.currentUser, this.site, this.model);
   }
 
