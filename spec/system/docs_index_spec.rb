@@ -10,6 +10,11 @@ describe "Discourse Docs | Index", type: :system do
   before do
     SiteSetting.docs_enabled = true
     SiteSetting.docs_categories = category.id.to_s
+
+    if SiteSetting.respond_to?(:tooltips_enabled)
+      # Unfortunately this plugin is enabled by default, and it messes with the docs specs
+      SiteSetting.tooltips_enabled = false
+    end
   end
 
   it "does not error when showing the index" do
@@ -29,6 +34,7 @@ describe "Discourse Docs | Index", type: :system do
 
       it "does not show the topic excerpts by default" do
         visit("/docs")
+        expect(page).to have_css(".topic-list-item", count: 2)
         expect(page).to have_no_css(".topic-excerpt")
       end
     end
