@@ -27,7 +27,7 @@ describe "Discourse Docs | Index", type: :system do
     context "when docs_show_topic_excerpts is false" do
       before { SiteSetting.always_include_topic_excerpts = false }
 
-      xit "does not show the topic excerpts by default" do
+      it "does not show the topic excerpts by default" do
         visit("/docs")
         expect(page).to have_no_css(".topic-excerpt")
       end
@@ -48,6 +48,8 @@ describe "Discourse Docs | Index", type: :system do
         ThemeModifierSet.find_by(theme_id: Theme.first.id).update!(serialize_topic_excerpts: true)
         Theme.clear_cache!
       end
+
+      after { Theme.clear_cache! }
 
       it "shows the excerpts" do
         visit("/docs")
