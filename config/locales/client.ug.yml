@@ -6,13 +6,35 @@
 
 ug:
   js:
+    filters:
+      docs:
+        help: "پۈتۈك تېمىسىغا كۆز يۈگۈرتىدۇ"
     docs:
+      title: "پۈتۈك"
       column_titles:
         topic: "تېما"
         activity: "پائالىيەت"
+      no_docs:
+        title: "تېخى پۈتۈك تېمىسى يوق"
+        body: "پۈتۈك توپلىمىنى ھەمبەھىرلەپ نەقىل ئېلىپ ئاسراشنىڭ ياخشى ئۇسۇلى بىلەن تەمىنلەيدۇ."
+        to_include_topic_in_docs: "پۈتۈككە تېما كىرگۈزۈشتە، ئالاھىدە سەھىپە ياكى بەلگە ئىشلىتىڭ"
+        setup_the_plugin: "پۈتۈك ئىشلىتىشنى باشلاشتا، <a href='%{settingsUrl}'>پۈتۈك سەھىپىسى ۋە بەلگە تەڭشەڭ</a>."
       categories: "سەھىپە"
       categories_filter_placeholder: "سەھىپە سۈزگۈچ"
       tags_filter_placeholder: "بەلگە سۈزگۈچ"
       tags: "بەلگە"
       search:
+        results:
+          one: "%{count} نەتىجە تېپىلدى"
+          other: "%{count} نەتىجە تېپىلدى"
+        placeholder: "تېما ئىزدە"
         clear: "تازىلا"
+        tip_description: "پۈتۈكتىن ئىزدە"
+      topic:
+        back: "قايت"
+        navigate_to_topic: "بۇ تېمىدىكى سۆھبەتنى كۆرسىتىدۇ"
+      filter_button: "سۈزگۈچ"
+      filter_solved: "تېما ھەل قىلىندىمۇ؟"
+    sidebar:
+      docs_link_title: "پۈتۈك تېمىلىرى ھەققىدە ئىزدىنىدۇ"
+      docs_link_text: "پۈتۈك"
