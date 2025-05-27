@@ -312,8 +312,8 @@ export default class DocsIndexController extends Controller {
   }
 
   @action
-  onChangeFilterSolved(solvedFilter) {
-    this.set("filterSolved", solvedFilter);
+  onChangeFilterSolved(event) {
+    this.set("filterSolved", event.target.checked);
   }
 
   @action
