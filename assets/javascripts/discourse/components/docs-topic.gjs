@@ -2,9 +2,15 @@ import Component from "@ember/component";
 import { reads } from "@ember/object/computed";
 import { service } from "@ember/service";
 import { classNames } from "@ember-decorators/component";
+import DButton from "discourse/components/d-button";
+import MountWidget from "discourse/components/mount-widget";
+import PluginOutlet from "discourse/components/plugin-outlet";
+import icon from "discourse/helpers/d-icon";
+import htmlSafe from "discourse/helpers/html-safe";
 import discourseDebounce from "discourse/lib/debounce";
 import computed, { bind } from "discourse/lib/decorators";
 import transformPost from "discourse/lib/transform-post";
+import { i18n } from "discourse-i18n";
 
 @classNames("docs-topic")
 export default class DocsTopic extends Component {
@@ -55,4 +61,28 @@ export default class DocsTopic extends Component {
     document.body.classList.remove("archetype-docs-topic");
     document.removeEventListener("scroll", this.debounceScrollEvent);
   }
+
+  <template>
+    <DButton
+      @label="docs.topic.back"
+      class="docs-nav-link return"
+      @action={{this.return}}
+    />
+
+    <div class="topic-content">
+      <h1>{{htmlSafe this.topic.fancyTitle}}</h1>
+
+      {{! template-lint-disable no-capital-arguments }}
+      <MountWidget @widget="post" @model={{this.model}} @args={{this.post}} />
+    </div>
+
+    <a class="docs-nav-link more" href="/t/{{this.topic.id}}">
+      {{icon "far-comment"}}
+      {{i18n "docs.topic.navigate_to_topic"}}
+    </a>
+
+    <span>
+      <PluginOutlet @name="after-docs-topic" @connectorTagName="div" />
+    </span>
+  </template>
 }
