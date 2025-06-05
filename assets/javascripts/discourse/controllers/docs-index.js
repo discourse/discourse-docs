@@ -312,12 +312,14 @@ export default class DocsIndexController extends Controller {
   }
 
   @action
-  onChangeFilterSolved(solvedFilter) {
-    this.set("filterSolved", solvedFilter);
+  onChangeFilterSolved(event) {
+    this.set("filterSolved", event.target.checked);
   }
 
   @action
-  updateSelectedTags(tag) {
+  updateSelectedTags(tag, event) {
+    event?.preventDefault();
+
     let filter = this.filterTags;
     if (filter && filter.includes(tag.id)) {
       filter = filter
@@ -337,15 +339,15 @@ export default class DocsIndexController extends Controller {
   }
 
   @action
-  updateSelectedCategories(category) {
+  updateSelectedCategories(category, event) {
+    event?.preventDefault();
+
     const filterCategories =
       category.id === parseInt(this.filterCategories, 10) ? null : category.id;
     this.setProperties({
       filterCategories,
       selectedTopic: null,
     });
-
-    return false;
   }
 
   @action

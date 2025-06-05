@@ -1,3 +1,5 @@
+@use "lib/viewport";
+
 .docs-search-wrapper {
   position: relative;
   width: 500px;
@@ -10,7 +12,7 @@
     color: var(--primary-low-mid);
     pointer-events: none;
 
-    @media screen and (max-width: 400px) {
+    @media screen and (width <= 400px) {
       // Just decoration, remove on small screens
       display: none;
     }
@@ -34,7 +36,7 @@
   justify-content: center;
   padding: 1.5em 1em;
 
-  @include breakpoint(mobile-extra-large, min-width) {
+  @include viewport.from(sm) {
     // More breathing room on larger screens
     margin-bottom: 2em;
   }
@@ -80,7 +82,7 @@
     // be more narrow than content if needed
     min-width: 200px;
 
-    @include breakpoint(tablet, min-width) {
+    @include viewport.from(md) {
       padding-right: 2em;
     }
   }
