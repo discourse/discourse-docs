@@ -5,3 +5,12 @@
 # https://translate.discourse.org/
 
 hu:
+  site_settings:
+    docs_enabled: "Engedélyezze a Dokumentumok bővítményt"
+    docs_categories: "A dokumentumokban feltüntetendő kategóriák listája"
+    docs_tags: "A dokumentumokban feltüntetendő címkék listája"
+    docs_add_solved_filter: "Hozzáad egy szűrőt a megoldott témákhoz -- ehhez telepíteni és engedélyezni kell a Discourse Solved alkalmazást."
+    show_tags_by_group: "Címkék rendszerezése címkecsoportok segítségével. Csoportok létrehozása a kapcsolódó címkék kategorizálásához."
+    docs_tag_groups: "A címkecsoportok korábban csoportonként jelenítették meg a címkéket."
+    docs_add_to_top_menu: "Hozzáad egy hivatkozást a felső menühöz, amely a Dokumentumok nézetre navigál."
+    docs_add_search_menu_tip: "Hozzáadja az „in:docs” tippet a keresési menü véletlenszerű tippjeihez."

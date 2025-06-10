@@ -6,13 +6,35 @@
 
 hu:
   js:
+    filters:
+      docs:
+        help: "dokumentumok témáinak böngészése"
     docs:
+      title: "Dokumentumok"
       column_titles:
         topic: "Téma"
         activity: "Tevékenység"
+      no_docs:
+        title: "Még nincsenek Dokumentum témák"
+        body: "A Dokumentumok nagyszerű módot kínál arra, hogy közös hivatkozási alapként szolgáló dokumentációgyűjteményt hozzunk létre."
+        to_include_topic_in_docs: "Téma Dokumentumokban való felvételéhez használjon speciális kategóriát vagy címkét"
+        setup_the_plugin: "A Dokumentumok használatának megkezdéséhez kérjük, <a href='%{settingsUrl}'>állítsa be a dokumentumok kategóriáit és címkéit</a>."
       categories: "Kategóriák"
       categories_filter_placeholder: "Kategóriák szűrése"
       tags_filter_placeholder: "Címkék szűrése"
       tags: "Címkék"
       search:
+        results:
+          one: "%{count} találat"
+          other: "%{count} találat"
+        placeholder: "Témák keresése"
         clear: "Törlés"
+        tip_description: "Keresés a dokumentumokban"
+      topic:
+        back: "Visszalépés"
+        navigate_to_topic: "A témával kapcsolatos beszélgetés megtekintése"
+      filter_button: "Szűrők:"
+      filter_solved: "Téma megoldva?"
+    sidebar:
+      docs_link_title: "Dokumentációs témák felfedezése"
+      docs_link_text: "Dokumentumok"
