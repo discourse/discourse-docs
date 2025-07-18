@@ -11,6 +11,7 @@ acceptance("Docs - user status", function (needs) {
   needs.site({ docs_path: "docs" });
   needs.settings({
     docs_enabled: true,
+    enable_user_status: true,
   });
 
   const mentionedUserId = 1;
