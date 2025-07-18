@@ -76,6 +76,7 @@ export default class DocsTopic extends Component {
       {{#if this.site.useGlimmerPostStream}}
         <Post @post={{this.model}} />
       {{else}}
+        {{! template-lint-disable no-capital-arguments }}
         <MountWidget @widget="post" @model={{this.model}} @args={{this.post}} />
       {{/if}}
     </div>
