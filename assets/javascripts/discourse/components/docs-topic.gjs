@@ -72,13 +72,7 @@ export default class DocsTopic extends Component {
 
     <div class="topic-content">
       <h1>{{htmlSafe this.topic.fancyTitle}}</h1>
-
-      {{#if this.site.useGlimmerPostStream}}
-        <Post @post={{this.model}} />
-      {{else}}
-        {{! template-lint-disable no-capital-arguments }}
-        <MountWidget @widget="post" @model={{this.model}} @args={{this.post}} />
-      {{/if}}
+      <Post @post={{this.model}} />
     </div>
 
     <a class="docs-nav-link more" href="/t/{{this.topic.id}}">
