@@ -3,7 +3,6 @@ import { reads } from "@ember/object/computed";
 import { service } from "@ember/service";
 import { classNames } from "@ember-decorators/component";
 import DButton from "discourse/components/d-button";
-import MountWidget from "discourse/components/mount-widget";
 import PluginOutlet from "discourse/components/plugin-outlet";
 import Post from "discourse/components/post";
 import icon from "discourse/helpers/d-icon";
