@@ -3,8 +3,8 @@ import { reads } from "@ember/object/computed";
 import { service } from "@ember/service";
 import { classNames } from "@ember-decorators/component";
 import DButton from "discourse/components/d-button";
-import MountWidget from "discourse/components/mount-widget";
 import PluginOutlet from "discourse/components/plugin-outlet";
+import Post from "discourse/components/post";
 import icon from "discourse/helpers/d-icon";
 import htmlSafe from "discourse/helpers/html-safe";
 import discourseDebounce from "discourse/lib/debounce";
@@ -71,9 +71,7 @@ export default class DocsTopic extends Component {
 
     <div class="topic-content">
       <h1>{{htmlSafe this.topic.fancyTitle}}</h1>
-
-      {{! template-lint-disable no-capital-arguments }}
-      <MountWidget @widget="post" @model={{this.model}} @args={{this.post}} />
+      <Post @post={{this.model}} />
     </div>
 
     <a class="docs-nav-link more" href="/t/{{this.topic.id}}">

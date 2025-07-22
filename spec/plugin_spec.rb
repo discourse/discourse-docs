@@ -6,7 +6,7 @@ describe Docs do
   fab!(:category)
   fab!(:topic) { Fabricate(:topic, category: category) }
   fab!(:post) { Fabricate(:post, topic: topic) }
-  fab!(:non_docs_category) { Fabricate(:category) }
+  fab!(:non_docs_category, :category)
   fab!(:non_docs_topic) { Fabricate(:topic, category: non_docs_category) }
   fab!(:non_docs_post) { Fabricate(:post, topic: non_docs_topic) }
 
