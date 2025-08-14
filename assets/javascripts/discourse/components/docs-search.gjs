@@ -36,7 +36,7 @@ export default class DocsSearch extends Component {
 
       {{#if this.searchTerm}}
         <DButton
-          @action={{action "clearSearch"}}
+          @action={{this.clearSearch}}
           class="clear-search"
           @label="docs.search.clear"
         />
