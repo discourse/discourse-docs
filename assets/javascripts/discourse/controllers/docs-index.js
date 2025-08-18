@@ -58,7 +58,7 @@ export default class DocsIndexController extends Controller {
 
   @on("init")
   _setupFilters() {
-    if (!this.site.mobileView) {
+    if (this.site.desktopView) {
       this.set("expandedFilters", true);
     }
     this.setProperties({
