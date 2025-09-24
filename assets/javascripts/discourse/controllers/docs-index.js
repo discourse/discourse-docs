@@ -81,9 +81,11 @@ export default class DocsIndexController extends Controller {
     } else {
       categories = categories.sort((a, b) => {
         const first = this.site.categories
-            .findBy("id", a.id)
+            .find((item) => item.id === a.id)
             .name.toLowerCase(),
-          second = this.site.categories.findBy("id", b.id).name.toLowerCase();
+          second = this.site.categories
+            .find((item) => item.id === b.id)
+            ?.name.toLowerCase();
         return first.localeCompare(second);
       });
     }
@@ -94,7 +96,9 @@ export default class DocsIndexController extends Controller {
 
     if (this.showCategoryFilter) {
       return categories.filter((category) => {
-        let categoryData = this.site.categories.findBy("id", category.id);
+        let categoryData = this.site.categories.find(
+          (item) => item.id === category.id
+        );
         return (
           categoryData.name.toLowerCase().indexOf(filter.toLowerCase()) > -1 ||
           (categoryData.description_excerpt &&
@@ -278,7 +282,10 @@ export default class DocsIndexController extends Controller {
 
     return this.siteSettings.docs_categories
       .split("|")
-      .map((c) => this.site.categories.findBy("id", parseInt(c, 10))?.name)
+      .map(
+        (c) =>
+          this.site.categories.find((item) => item.id === parseInt(c, 10))?.name
+      )
       .filter(Boolean);
   }
 

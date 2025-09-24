@@ -8,7 +8,7 @@ import discourseComputed from "discourse/lib/decorators";
 export default class DocsCategory extends Component {
   @discourseComputed("category")
   categoryName(category) {
-    return this.site.categories.findBy("id", category.id).name;
+    return this.site.categories.find((item) => item.id === category.id)?.name;
   }
 
   <template>
