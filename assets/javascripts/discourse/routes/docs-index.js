@@ -29,10 +29,9 @@ export default class DocsIndex extends DiscourseRoute {
     const pageTitle = i18n("docs.title");
     if (model.topic.title && model.topic.category_id) {
       const title = model.topic.unicode_title || model.topic.title;
-      const categoryName = this.site.categories.findBy(
-        "id",
-        model.topic.category_id
-      ).name;
+      const categoryName = this.site.categories.find(
+        (item) => item.id === model.topic.category_id
+      )?.name;
       return `${title} - ${categoryName} - ${pageTitle}`;
     } else {
       return pageTitle;
