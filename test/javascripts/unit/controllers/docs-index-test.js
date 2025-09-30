@@ -9,12 +9,12 @@ module("Unit | Controller | docs-index", function (hooks) {
     const siteSettings = getOwner(this).lookup("service:site-settings");
     siteSettings.docs_categories = "1|2|3|333|999";
 
-    const controller = getOwner(this).lookup("controller:docs-index");
+    const controller = getOwner(this).lookup("controller:docs.index");
     assert.deepEqual(controller.docsCategories, ["bug", "feature", "meta"]);
   });
 
   test("updateSelectedTags correctly removes tags", function (assert) {
-    const controller = getOwner(this).lookup("controller:docs-index");
+    const controller = getOwner(this).lookup("controller:docs.index");
     controller.filterTags = "foo|bar|baz";
 
     controller.updateSelectedTags({ id: "bar" });
@@ -23,7 +23,7 @@ module("Unit | Controller | docs-index", function (hooks) {
   });
 
   test("updateSelectedTags correctly appends tags to list", function (assert) {
-    const controller = getOwner(this).lookup("controller:docs-index");
+    const controller = getOwner(this).lookup("controller:docs.index");
     controller.filterTags = "foo|bar";
 
     controller.updateSelectedTags({ id: "baz" });
@@ -32,7 +32,7 @@ module("Unit | Controller | docs-index", function (hooks) {
   });
 
   test("updateSelectedTags correctly appends tags to empty list", function (assert) {
-    const controller = getOwner(this).lookup("controller:docs-index");
+    const controller = getOwner(this).lookup("controller:docs.index");
     controller.filterTags = null;
 
     controller.updateSelectedTags({ id: "foo" });
