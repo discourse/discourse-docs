@@ -11,9 +11,9 @@ import LoadMore from "discourse/components/load-more";
 import PluginOutlet from "discourse/components/plugin-outlet";
 import lazyHash from "discourse/helpers/lazy-hash";
 import { i18n } from "discourse-i18n";
-import DocsCategory from "../components/docs-category";
-import DocsTag from "../components/docs-tag";
-import DocsTopic from "../components/docs-topic";
+import DocsCategory from "../../components/docs-category";
+import DocsTag from "../../components/docs-tag";
+import DocsTopic from "../../components/docs-topic";
 
 export default RouteTemplate(
   <template>
