@@ -45,10 +45,10 @@ export default {
       return;
     }
 
-    withPluginApi("0.8", (api) => initialize(api, container));
+    withPluginApi((api) => initialize(api, container));
 
     if (siteSettings.docs_add_search_menu_tip) {
-      withPluginApi("0.12.6", (api) => {
+      withPluginApi((api) => {
         api.addSearchSuggestion("in:docs");
 
         const tip = {
@@ -61,7 +61,7 @@ export default {
       });
     }
 
-    withPluginApi("1.2.0", (api) => {
+    withPluginApi((api) => {
       api.addCommunitySectionLink({
         name: "docs",
         route: "docs.index",

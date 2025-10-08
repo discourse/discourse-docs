@@ -1,12 +1,12 @@
 import Component from "@ember/component";
 import { reads } from "@ember/object/computed";
 import { service } from "@ember/service";
+import { htmlSafe } from "@ember/template";
 import { classNames } from "@ember-decorators/component";
 import DButton from "discourse/components/d-button";
 import PluginOutlet from "discourse/components/plugin-outlet";
 import Post from "discourse/components/post";
 import icon from "discourse/helpers/d-icon";
-import htmlSafe from "discourse/helpers/html-safe";
 import discourseDebounce from "discourse/lib/debounce";
 import computed, { bind } from "discourse/lib/decorators";
 import transformPost from "discourse/lib/transform-post";

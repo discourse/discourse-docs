@@ -1,7 +1,7 @@
-import { getOwner } from "@ember/application";
 import Controller, { inject as controller } from "@ember/controller";
 import { action } from "@ember/object";
 import { alias, equal, gt, readOnly } from "@ember/object/computed";
+import { getOwner } from "@ember/owner";
 import { htmlSafe } from "@ember/template";
 import { on } from "@ember-decorators/object";
 import discourseComputed from "discourse/lib/decorators";
