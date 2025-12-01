@@ -28,7 +28,7 @@ export default class DocsTopic extends Component {
   model() {
     const post = this.store.createRecord(
       "post",
-      this.topic.post_stream?.posts.firstObject
+      this.topic.post_stream?.posts[0]
     );
 
     if (!post.topic) {
