@@ -154,7 +154,7 @@ export default RouteTemplate(
                   />
                   <ul>
                     {{#each @controller.sortedTags as |tag|}}
-                      <li class="docs-filter-tag-{{tag.id}}">
+                      <li class="docs-filter-tag-{{tag.name}}">
                         <DocsTag
                           @tag={{tag}}
                           @selectTag={{fn @controller.updateSelectedTags tag}}
@@ -217,7 +217,7 @@ export default RouteTemplate(
                         {{tagGroup.name}}
                         <ul>
                           {{#each tagGroup.tags as |tag|}}
-                            <li class="docs-filter-tag-{{@controller.id}}">
+                            <li class="docs-filter-tag-{{tag.name}}">
                               <DocsTag
                                 @tag={{tag}}
                                 @selectTag={{fn

@@ -14,7 +14,7 @@ export default class DocsTag extends Component {
     >
       {{icon (if this.tag.active "circle-xmark" "plus")}}
 
-      <span class="docs-item-id tag-id">{{this.tag.id}}</span>
+      <span class="docs-item-id tag-id">{{this.tag.name}}</span>
       <span class="docs-item-count tag-count">{{this.tag.count}}</span>
     </a>
   </template>

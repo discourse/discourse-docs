@@ -17,7 +17,7 @@ module("Unit | Controller | docs-index", function (hooks) {
     const controller = getOwner(this).lookup("controller:docs.index");
     controller.filterTags = "foo|bar|baz";
 
-    controller.updateSelectedTags({ id: "bar" });
+    controller.updateSelectedTags({ name: "bar" });
 
     assert.deepEqual(controller.filterTags, "foo|baz");
   });
@@ -26,7 +26,7 @@ module("Unit | Controller | docs-index", function (hooks) {
     const controller = getOwner(this).lookup("controller:docs.index");
     controller.filterTags = "foo|bar";
 
-    controller.updateSelectedTags({ id: "baz" });
+    controller.updateSelectedTags({ name: "baz" });
 
     assert.deepEqual(controller.filterTags, "foo|bar|baz");
   });
@@ -35,7 +35,7 @@ module("Unit | Controller | docs-index", function (hooks) {
     const controller = getOwner(this).lookup("controller:docs.index");
     controller.filterTags = null;
 
-    controller.updateSelectedTags({ id: "foo" });
+    controller.updateSelectedTags({ name: "foo" });
 
     assert.deepEqual(controller.filterTags, "foo");
   });

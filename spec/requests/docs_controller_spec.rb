@@ -9,7 +9,7 @@ describe Docs::DocsController do
   fab!(:tag) { Fabricate(:tag, topics: [topic], name: "test") }
 
   def get_tag_attributes(tag)
-    { "id" => tag.name, "count" => 1 }
+    { "id" => tag.id, "name" => tag.name, "count" => 1 }
   end
 
   def get_tags_from_response(response_tags)
