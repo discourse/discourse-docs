@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-describe "Discourse Docs | Index", type: :system do
+describe "Discourse Docs | Index" do
   fab!(:category)
   fab!(:topic_1) { Fabricate(:topic, category: category) }
   fab!(:topic_2) { Fabricate(:topic, category: category) }

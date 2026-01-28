@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "rails_helper"
-
 describe Docs do
   fab!(:category)
   fab!(:topic) { Fabricate(:topic, category: category) }
