@@ -7,6 +7,8 @@ describe "Discourse Docs | Index" do
   fab!(:post_1) { Fabricate(:post, topic: topic_1) }
   fab!(:post_2) { Fabricate(:post, topic: topic_2) }
 
+  let(:docs_page) { PageObjects::Pages::Docs.new }
+
   before do
     SiteSetting.docs_enabled = true
     SiteSetting.docs_categories = category.id.to_s
@@ -21,6 +23,44 @@ describe "Discourse Docs | Index" do
     visit("/docs")
     expect(page).to have_css(".raw-topic-link", text: topic_1.title)
     expect(page).to have_css(".raw-topic-link", text: topic_2.title)
+  end
+
+  describe "tag filtering" do
+    fab!(:tag_alpha) { Fabricate(:tag, name: "alpha") }
+    fab!(:tag_beta) { Fabricate(:tag, name: "beta") }
+    fab!(:tagged_topic) { Fabricate(:topic, category: category, tags: [tag_alpha]) }
+    fab!(:both_tags_topic) { Fabricate(:topic, category: category, tags: [tag_alpha, tag_beta]) }
+
+    before do
+      SiteSetting.tagging_enabled = true
+      SiteSetting.docs_tags = "alpha|beta"
+      Fabricate(:post, topic: tagged_topic)
+      Fabricate(:post, topic: both_tags_topic)
+    end
+
+    it "displays tags by name and filters topics when a tag is clicked" do
+      docs_page.visit
+
+      expect(docs_page).to have_docs_tag("alpha")
+      expect(docs_page).to have_docs_tag("beta")
+
+      docs_page.click_tag("alpha")
+
+      expect(docs_page).to have_selected_docs_tag("alpha")
+      expect(docs_page).to have_topic(tagged_topic.title)
+      expect(docs_page).to have_topic(both_tags_topic.title)
+    end
+
+    it "deselects a tag when clicked again" do
+      docs_page.visit
+      docs_page.click_tag("alpha")
+
+      expect(docs_page).to have_selected_docs_tag("alpha")
+
+      docs_page.click_tag("alpha")
+
+      expect(docs_page).to have_no_selected_docs_tag("alpha")
+    end
   end
 
   describe "topic excerpts" do

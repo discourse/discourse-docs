@@ -110,13 +110,13 @@ module Docs
           count_query
             .joins(tags: :tag_groups)
             .where(tag_groups: { id: subquery })
-            .group("tag_groups.id", "tag_groups.name", "tags.name")
+            .group("tag_groups.id", "tag_groups.name", "tags.id", "tags.name")
             .reorder("")
             .count
 
         tags = create_group_tags_object(tags)
       else
-        tags = count_query.group("t2.name").reorder("").count
+        tags = count_query.group("t2.id", "t2.name").reorder("").count
         tags = create_tags_object(tags)
       end
 
@@ -180,16 +180,21 @@ module Docs
       allowed_tags = DiscourseTagging.filter_allowed_tags(Guardian.new(@user)).map(&:name)
 
       tags.each do |group_tags_data, count|
-        group_tag_id, group_tag_name, tag_name = group_tags_data
+        group_tag_id, group_tag_name, tag_id, tag_name = group_tags_data
         active = @filters[:tags]&.include?(tag_name)
 
         tags_hash[group_tag_id] ||= { id: group_tag_id, name: group_tag_name, tags: [] }
-        tags_hash[group_tag_id][:tags] << { id: tag_name, count: count, active: active }
+        tags_hash[group_tag_id][:tags] << {
+          id: tag_id,
+          name: tag_name,
+          count: count,
+          active: active,
+        }
       end
 
       tags_hash
         .transform_values do |group|
-          group[:tags] = group[:tags].filter { |tag| allowed_tags.include?(tag[:id]) }
+          group[:tags] = group[:tags].filter { |tag| allowed_tags.include?(tag[:name]) }
           group
         end
         .values
@@ -198,14 +203,14 @@ module Docs
     def create_tags_object(tags)
       tags_object = []
 
-      tags.each do |tag|
-        active = @filters[:tags].include?(tag[0]) if @filters[:tags]
-        tags_object << { id: tag[0], count: tag[1], active: active || false }
+      tags.each do |(tag_id, tag_name), count|
+        active = @filters[:tags].include?(tag_name) if @filters[:tags]
+        tags_object << { id: tag_id, name: tag_name, count: count, active: active || false }
       end
 
       allowed_tags = DiscourseTagging.filter_allowed_tags(@guardian).map(&:name)
 
-      tags_object = tags_object.select { |tag| allowed_tags.include?(tag[:id]) }
+      tags_object = tags_object.select { |tag| allowed_tags.include?(tag[:name]) }
 
       tags_object.sort_by { |tag| [tag[:active] ? 0 : 1, -tag[:count]] }
     end

@@ -5,12 +5,14 @@ export default {
       name: "my-tag-group-1",
       tags: [
         {
-          id: "something 1",
+          id: 10,
+          name: "something 1",
           count: 50,
           active: true,
         },
         {
-          id: "something 2",
+          id: 11,
+          name: "something 2",
           count: 10,
           active: true,
         },
@@ -21,7 +23,8 @@ export default {
       name: "my-tag-group-2",
       tags: [
         {
-          id: "something 2",
+          id: 12,
+          name: "something 2",
           count: 10,
           active: true,
         },
@@ -32,7 +35,8 @@ export default {
       name: "my-tag-group-3",
       tags: [
         {
-          id: "something 3",
+          id: 13,
+          name: "something 3",
           count: 1,
           active: false,
         },
@@ -43,7 +47,8 @@ export default {
       name: "my-tag-group-4",
       tags: [
         {
-          id: "something 4",
+          id: 14,
+          name: "something 4",
           count: 1,
           active: false,
         },

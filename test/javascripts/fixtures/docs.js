@@ -1,7 +1,8 @@
 export default {
   tags: [
     {
-      id: "something",
+      id: 1,
+      name: "something",
       count: 74,
       active: false,
     },

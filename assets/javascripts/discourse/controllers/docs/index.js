@@ -135,7 +135,7 @@ export default class DocsIndexController extends Controller {
       tags = tags.sort((a, b) => a.count - b.count);
     } else {
       tags = tags.sort((a, b) => {
-        return a.id.toLowerCase().localeCompare(b.id.toLowerCase());
+        return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
       });
     }
 
@@ -145,7 +145,7 @@ export default class DocsIndexController extends Controller {
 
     if (this.showTagFilter) {
       return tags.filter((tag) => {
-        return tag.id.toLowerCase().indexOf(filter.toLowerCase()) > -1;
+        return tag.name.toLowerCase().indexOf(filter.toLowerCase()) > -1;
       });
     }
 
@@ -177,8 +177,8 @@ export default class DocsIndexController extends Controller {
     }
 
     if (this.showTagFilter) {
-      return sortedTagGroups.filter((tag) =>
-        tag.id.toLowerCase().includes(filter.toLowerCase())
+      return sortedTagGroups.filter((tagGroup) =>
+        tagGroup.name.toLowerCase().includes(filter.toLowerCase())
       );
     }
 
@@ -328,15 +328,15 @@ export default class DocsIndexController extends Controller {
     event?.preventDefault();
 
     let filter = this.filterTags;
-    if (filter && filter.includes(tag.id)) {
+    if (filter && filter.includes(tag.name)) {
       filter = filter
         .split("|")
-        .filter((f) => f !== tag.id)
+        .filter((f) => f !== tag.name)
         .join("|");
     } else if (filter) {
-      filter = `${filter}|${tag.id}`;
+      filter = `${filter}|${tag.name}`;
     } else {
-      filter = tag.id;
+      filter = tag.name;
     }
 
     this.setProperties({
