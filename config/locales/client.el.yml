@@ -6,12 +6,35 @@
 
 el:
   js:
+    filters:
+      docs:
+        help: "περιήγηση θεμάτων εγγράφων"
     docs:
+      title: "Έγγραφα"
       column_titles:
-        topic: "Νήμα"
+        topic: "Θέμα"
         activity: "Δραστηριότητα"
+      no_docs:
+        title: "Κανένα θέμα Εγγράφων ακόμη"
+        body: "Τα Έγγραφα παρέχουν έναν εξαιρετικό τρόπο για να διατηρείτε μια συλλογή τεκμηρίωσης για κοινή αναφορά."
+        to_include_topic_in_docs: "Για να συμπεριλάβετε ένα θέμα στα Έγγραφα, χρησιμοποιήστε μια ειδική κατηγορία ή ετικέτα"
+        setup_the_plugin: "Για να ξεκινήσετε να χρησιμοποιείτε τα Έγγραφα, <a href='%{settingsUrl}'>ορίστε κατηγορίες και ετικέτες εγγράφων</a>."
       categories: "Κατηγορίες"
+      categories_filter_placeholder: "Φιλτράρισμα κατηγοριών"
+      tags_filter_placeholder: "Φιλτράρισμα ετικετών"
       tags: "Ετικέτες"
       search:
-        clear: "Καθάρισμα φίλτρου"
+        results:
+          one: "%{count} αποτέλεσμα βρέθηκε"
+          other: "%{count} αποτελέσματα βρέθηκαν"
+        placeholder: "Αναζητήστε για θέματα"
+        clear: "Εκκαθάριση"
+        tip_description: "Αναζητήστε στα έγγραφα"
+      topic:
+        back: "Πίσω"
+        navigate_to_topic: "Δείτε τη συζήτηση για αυτό το θέμα"
       filter_button: "Φίλτρα"
+      filter_solved: "Λύθηκε το θέμα;"
+    sidebar:
+      docs_link_title: "Εξερευνήστε θέματα τεκμηρίωσης"
+      docs_link_text: "Έγγραφα"
