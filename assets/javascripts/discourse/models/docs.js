@@ -5,11 +5,9 @@ import Topic from "discourse/models/topic";
 import User from "discourse/models/user";
 import { getDocs } from "../../lib/get-docs";
 
-class Docs extends EmberObject {}
-const docsPath = getDocs();
-
-Docs.reopenClass({
-  list(params) {
+export default class Docs extends EmberObject {
+  static list(params) {
+    const docsPath = getDocs();
     let filters = [];
 
     if (params.filterCategories) {
@@ -53,9 +51,9 @@ Docs.reopenClass({
       );
       return data;
     });
-  },
+  }
 
-  loadMore(loadMoreUrl) {
+  static loadMore(loadMoreUrl) {
     return ajax(loadMoreUrl).then((data) => {
       const site = Site.current();
       data.topics.topic_list.categories?.forEach((category) =>
@@ -66,13 +64,11 @@ Docs.reopenClass({
       );
       return data;
     });
-  },
+  }
 
-  _initUserModels(post) {
+  static _initUserModels(post) {
     if (post.mentioned_users) {
       post.mentioned_users = post.mentioned_users.map((u) => User.create(u));
     }
-  },
-});
-
-export default Docs;
+  }
+}
