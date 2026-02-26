@@ -60,24 +60,22 @@ export default RouteTemplate(
                     </h3>
                     <div class="item-controls-buttons">
                       <DButton
+                        @action={{fn @controller.toggleCategorySort "alpha"}}
+                        @icon={{@controller.categorySortAlphaIcon}}
                         class={{if
                           (eq @controller.categorySort.type "alpha")
                           "categories-alphabet active"
                           "categories-alphabet"
                         }}
-                        @icon={{@controller.categorySortAlphaIcon}}
-                        @action={{@controller.toggleCategorySort}}
-                        @actionParam="alpha"
                       />
                       <DButton
+                        @action={{fn @controller.toggleCategorySort "numeric"}}
+                        @icon={{@controller.categorySortNumericIcon}}
                         class={{if
                           (eq @controller.categorySort.type "numeric")
                           "categories-amount active"
                           "categories-amount"
                         }}
-                        @icon={{@controller.categorySortNumericIcon}}
-                        @action={{@controller.toggleCategorySort}}
-                        @actionParam="numeric"
                       />
                       <PluginOutlet
                         @name="categories-controls-buttons-bottom"
@@ -115,24 +113,22 @@ export default RouteTemplate(
                     </h3>
                     <div class="item-controls-buttons">
                       <DButton
+                        @action={{fn @controller.toggleTagSort "alpha"}}
+                        @icon={{@controller.tagSortAlphaIcon}}
                         class={{if
                           (eq @controller.tagSort.type "alpha")
                           "tags-alphabet active"
                           "tags-alphabet"
                         }}
-                        @icon={{@controller.tagSortAlphaIcon}}
-                        @action={{@controller.toggleTagSort}}
-                        @actionParam="alpha"
                       />
                       <DButton
+                        @action={{fn @controller.toggleTagSort "numeric"}}
+                        @icon={{@controller.tagSortNumericIcon}}
                         class={{if
                           (eq @controller.tagSort.type "numeric")
                           "tags-amount active"
                           "tags-amount"
                         }}
-                        @icon={{@controller.tagSortNumericIcon}}
-                        @action={{@controller.toggleTagSort}}
-                        @actionParam="numeric"
                       />
                       <PluginOutlet @name="tags-controls-buttons-bottom" />
                     </div>
@@ -174,24 +170,22 @@ export default RouteTemplate(
                     </h3>
                     <div class="item-controls-buttons">
                       <DButton
+                        @action={{fn @controller.toggleTagSort "alpha"}}
+                        @icon={{@controller.tagSortAlphaIcon}}
                         class={{if
                           (eq @controller.tagSort.type "alpha")
                           "tags-alphabet active"
                           "tags-alphabet"
                         }}
-                        @icon={{@controller.tagSortAlphaIcon}}
-                        @action={{@controller.toggleTagSort}}
-                        @actionParam="alpha"
                       />
                       <DButton
+                        @action={{fn @controller.toggleTagSort "numeric"}}
+                        @icon={{@controller.tagSortNumericIcon}}
                         class={{if
                           (eq @controller.tagSort.type "numeric")
                           "tags-amount active"
                           "tags-amount"
                         }}
-                        @icon={{@controller.tagSortNumericIcon}}
-                        @action={{@controller.toggleTagSort}}
-                        @actionParam="numeric"
                       />
                       <PluginOutlet @name="tags-controls-buttons-bottom" />
                     </div>
