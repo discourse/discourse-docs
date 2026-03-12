@@ -1,11 +1,6 @@
 import { click, visit } from "@ember/test-helpers";
 import { test } from "qunit";
-import {
-  acceptance,
-  count,
-  exists,
-  query,
-} from "discourse/tests/helpers/qunit-helpers";
+import { acceptance, query } from "discourse/tests/helpers/qunit-helpers";
 import docsFixtures from "../fixtures/docs";
 import docsShowTagGroupsFixtures from "../fixtures/docs-show-tag-groups";
 
@@ -53,26 +48,24 @@ acceptance("Docs", function (needs) {
       ".sidebar-section[data-section-name='community'] .sidebar-section-link[data-link-name='docs']"
     );
 
-    assert.equal(query(".docs-category .docs-item-id").innerText, "bug");
-    assert.equal(query(".docs-category .docs-item-count").innerText, "119");
-    assert.equal(query(".docs-tag .docs-item-id").innerText, "something");
-    assert.equal(query(".docs-tag .docs-item-count").innerText, "74");
+    assert.dom(".docs-category .docs-item-id").hasText("bug");
+    assert.dom(".docs-category .docs-item-count").hasText("119");
+    assert.dom(".docs-tag .docs-item-id").hasText("something");
+    assert.dom(".docs-tag .docs-item-count").hasText("74");
     assert.dom(".raw-topic-link").hasText("Importing from Software X");
   });
 
   test("selecting a category", async function (assert) {
     await visit("/" + DOCS_URL_PATH);
-    assert.equal(count(".docs-category.selected"), 0);
+    assert.dom(".docs-category.selected").doesNotExist();
 
     await click(".docs-item.docs-category");
-    assert.equal(count(".docs-category.selected"), 1);
+    assert.dom(".docs-category.selected").exists({ count: 1 });
 
     await click(".docs-item.docs-category");
-    assert.equal(
-      count(".docs-category.selected"),
-      0,
-      "clicking again deselects"
-    );
+    assert
+      .dom(".docs-category.selected")
+      .doesNotExist("clicking again deselects");
   });
 });
 
@@ -92,18 +85,16 @@ acceptance("Docs - with tag groups enabled", function (needs) {
 
   function assertTagGroup(assert, tagGroup) {
     let groupTagSelector = `.docs-filter-tag-group-${tagGroup.id}`;
-    assert.equal(
+    assert.strictEqual(
       getRootElementText(groupTagSelector),
       tagGroup.expectedTagGroupName
     );
-    assert.equal(
-      query(`${groupTagSelector} .docs-tag .docs-item-id`).innerText,
-      tagGroup.expectedTagName
-    );
-    assert.equal(
-      query(`${groupTagSelector} .docs-tag .docs-item-count`).innerText,
-      tagGroup.expectedCount
-    );
+    assert
+      .dom(`${groupTagSelector} .docs-tag .docs-item-id`)
+      .hasText(tagGroup.expectedTagName);
+    assert
+      .dom(`${groupTagSelector} .docs-tag .docs-item-count`)
+      .hasText(tagGroup.expectedCount);
   }
 
   needs.pretender((server, helper) => {
@@ -128,8 +119,8 @@ acceptance("Docs - with tag groups enabled", function (needs) {
       ".sidebar-section[data-section-name='community'] .sidebar-section-link[data-link-name='docs']"
     );
 
-    assert.equal(query(".docs-category .docs-item-id").innerText, "bug");
-    assert.equal(query(".docs-category .docs-item-count").innerText, "119");
+    assert.dom(".docs-category .docs-item-id").hasText("bug");
+    assert.dom(".docs-category .docs-item-count").hasText("119");
 
     const expectedTagGroups = [
       {
@@ -187,6 +178,6 @@ acceptance("Docs - empty state", function (needs) {
 
   test("shows the empty state panel when there are no docs", async function (assert) {
     await visit("/" + DOCS_URL_PATH);
-    assert.ok(exists("div.empty-state"));
+    assert.dom("div.empty-state").exists();
   });
 });

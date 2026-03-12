@@ -1,11 +1,7 @@
 import { click, currentURL, visit } from "@ember/test-helpers";
 import { test } from "qunit";
 import { cloneJSON } from "discourse/lib/object";
-import {
-  acceptance,
-  exists,
-  query,
-} from "discourse/tests/helpers/qunit-helpers";
+import { acceptance } from "discourse/tests/helpers/qunit-helpers";
 import { i18n } from "discourse-i18n";
 import docsFixtures from "../fixtures/docs";
 
@@ -26,10 +22,9 @@ acceptance("Docs - Sidebar with docs disabled", function (needs) {
       ".sidebar-section[data-section-name='community'] .sidebar-more-section-links-details-summary"
     );
 
-    assert.notOk(
-      exists(".sidebar-section-link[data-link-name='docs']"),
-      "it does not display the docs link in sidebar"
-    );
+    assert
+      .dom(".sidebar-section-link[data-link-name='docs']")
+      .doesNotExist("does not display the docs link in sidebar");
   });
 });
 
@@ -54,24 +49,27 @@ acceptance("Docs - Sidebar with docs enabled", function (needs) {
       ".sidebar-section[data-section-name='community'] .sidebar-more-section-links-details-summary"
     );
 
-    assert.strictEqual(
-      query(".sidebar-section-link[data-link-name='docs']").textContent.trim(),
-      i18n("sidebar.docs_link_text"),
-      "displays the right text for the link"
-    );
+    assert
+      .dom(".sidebar-section-link[data-link-name='docs']")
+      .hasText(
+        i18n("sidebar.docs_link_text"),
+        "displays the right text for the link"
+      );
 
-    assert.strictEqual(
-      query(".sidebar-section-link[data-link-name='docs']").title,
-      i18n("sidebar.docs_link_title"),
-      "displays the right title for the link"
-    );
+    assert
+      .dom(".sidebar-section-link[data-link-name='docs']")
+      .hasAttribute(
+        "title",
+        i18n("sidebar.docs_link_title"),
+        "displays the right title for the link"
+      );
 
     await click(".sidebar-section-link[data-link-name='docs']");
 
     assert.strictEqual(
       currentURL(),
       "/" + DOCS_URL_PATH,
-      "it navigates to the right page"
+      "navigates to the right page"
     );
   });
 });
