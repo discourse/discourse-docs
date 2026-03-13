@@ -1,14 +1,16 @@
+/* eslint-disable ember/no-classic-components */
 import Component from "@ember/component";
 import { on } from "@ember/modifier";
+import { computed } from "@ember/object";
 import { tagName } from "@ember-decorators/component";
 import icon from "discourse/helpers/d-icon";
-import discourseComputed from "discourse/lib/decorators";
 
 @tagName("")
 export default class DocsCategory extends Component {
-  @discourseComputed("category")
-  categoryName(category) {
-    return this.site.categories.find((item) => item.id === category.id)?.name;
+  @computed("category")
+  get categoryName() {
+    return this.site.categories.find((item) => item.id === this.category.id)
+      ?.name;
   }
 
   <template>

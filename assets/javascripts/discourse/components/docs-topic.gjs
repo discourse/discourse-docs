@@ -1,4 +1,6 @@
+/* eslint-disable ember/no-classic-components, ember/require-tagless-components */
 import Component from "@ember/component";
+import { computed } from "@ember/object";
 import { reads } from "@ember/object/computed";
 import { service } from "@ember/service";
 import { htmlSafe } from "@ember/template";
@@ -8,7 +10,7 @@ import PluginOutlet from "discourse/components/plugin-outlet";
 import Post from "discourse/components/post";
 import icon from "discourse/helpers/d-icon";
 import discourseDebounce from "discourse/lib/debounce";
-import computed, { bind } from "discourse/lib/decorators";
+import { bind } from "discourse/lib/decorators";
 import transformPost from "discourse/lib/transform-post";
 import { i18n } from "discourse-i18n";
 
@@ -20,12 +22,12 @@ export default class DocsTopic extends Component {
   @reads("post.cooked") originalPostContent;
 
   @computed("currentUser", "model")
-  post() {
+  get post() {
     return transformPost(this.currentUser, this.site, this.model);
   }
 
   @computed("topic", "topic.post_stream")
-  model() {
+  get model() {
     const post = this.store.createRecord(
       "post",
       this.topic.post_stream?.posts[0]

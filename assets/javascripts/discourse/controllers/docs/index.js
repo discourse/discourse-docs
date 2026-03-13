@@ -1,10 +1,9 @@
 import Controller, { inject as controller } from "@ember/controller";
-import { action } from "@ember/object";
+import { action, computed } from "@ember/object";
 import { alias, equal, gt, readOnly } from "@ember/object/computed";
 import { getOwner } from "@ember/owner";
 import { htmlSafe } from "@ember/template";
 import { on } from "@ember-decorators/object";
-import discourseComputed from "discourse/lib/decorators";
 import getURL from "discourse/lib/get-url";
 import { i18n } from "discourse-i18n";
 import Docs from "discourse/plugins/discourse-docs/discourse/models/docs";
@@ -73,13 +72,15 @@ export default class DocsIndexController extends Controller {
     });
   }
 
-  @discourseComputed("categories", "categorySort", "categoryFilter")
-  sortedCategories(categories, categorySort, filter) {
-    let { type, direction } = categorySort;
+  @computed("categories", "categorySort", "categoryFilter")
+  get sortedCategories() {
+    let { type, direction } = this.categorySort;
+    let categories;
+
     if (type === "numeric") {
-      categories = categories.sort((a, b) => a.count - b.count);
+      categories = this.categories.sort((a, b) => a.count - b.count);
     } else {
-      categories = categories.sort((a, b) => {
+      categories = this.categories.sort((a, b) => {
         const first = this.site.categories
             .find((item) => item.id === a.id)
             .name.toLowerCase(),
@@ -100,11 +101,12 @@ export default class DocsIndexController extends Controller {
           (item) => item.id === category.id
         );
         return (
-          categoryData.name.toLowerCase().indexOf(filter.toLowerCase()) > -1 ||
-          (categoryData.description_excerpt &&
-            categoryData.description_excerpt
-              .toLowerCase()
-              .indexOf(filter.toLowerCase()) > -1)
+          categoryData.name
+            .toLowerCase()
+            .includes(this.categoryFilter.toLowerCase()) ||
+          categoryData.description_excerpt
+            ?.toLowerCase()
+            .includes(this.categoryFilter.toLowerCase())
         );
       });
     }
@@ -112,29 +114,37 @@ export default class DocsIndexController extends Controller {
     return categories;
   }
 
-  @discourseComputed("categorySort")
-  categorySortNumericIcon(catSort) {
-    if (catSort.type === "numeric" && catSort.direction === "asc") {
+  @computed("categorySort")
+  get categorySortNumericIcon() {
+    if (
+      this.categorySort.type === "numeric" &&
+      this.categorySort.direction === "asc"
+    ) {
       return "arrow-down-1-9";
     }
     return "arrow-up-1-9";
   }
 
-  @discourseComputed("categorySort")
-  categorySortAlphaIcon(catSort) {
-    if (catSort.type === "alpha" && catSort.direction === "asc") {
+  @computed("categorySort")
+  get categorySortAlphaIcon() {
+    if (
+      this.categorySort.type === "alpha" &&
+      this.categorySort.direction === "asc"
+    ) {
       return "arrow-down-a-z";
     }
     return "arrow-up-a-z";
   }
 
-  @discourseComputed("tags", "tagSort", "tagFilter")
-  sortedTags(tags, tagSort, filter) {
-    let { type, direction } = tagSort;
+  @computed("tags", "tagSort", "tagFilter")
+  get sortedTags() {
+    let { type, direction } = this.tagSort;
+    let tags;
+
     if (type === "numeric") {
-      tags = tags.sort((a, b) => a.count - b.count);
+      tags = this.tags.sort((a, b) => a.count - b.count);
     } else {
-      tags = tags.sort((a, b) => {
+      tags = this.tags.sort((a, b) => {
         return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
       });
     }
@@ -145,17 +155,17 @@ export default class DocsIndexController extends Controller {
 
     if (this.showTagFilter) {
       return tags.filter((tag) => {
-        return tag.name.toLowerCase().indexOf(filter.toLowerCase()) > -1;
+        return tag.name.toLowerCase().includes(this.tagFilter.toLowerCase());
       });
     }
 
     return tags;
   }
 
-  @discourseComputed("tagGroups", "tagSort", "tagFilter")
-  sortedTagGroups(tagGroups, tagSort, filter) {
-    let { type, direction } = tagSort;
-    let sortedTagGroups = [...tagGroups];
+  @computed("tagGroups", "tagSort", "tagFilter")
+  get sortedTagGroups() {
+    let { type, direction } = this.tagSort;
+    let sortedTagGroups = [...(this.tagGroups || [])];
 
     if (type === "numeric") {
       sortedTagGroups.forEach((group) => {
@@ -178,78 +188,78 @@ export default class DocsIndexController extends Controller {
 
     if (this.showTagFilter) {
       return sortedTagGroups.filter((tagGroup) =>
-        tagGroup.name.toLowerCase().includes(filter.toLowerCase())
+        tagGroup.name.toLowerCase().includes(this.tagFilter.toLowerCase())
       );
     }
 
     return sortedTagGroups;
   }
 
-  @discourseComputed("tagSort")
-  tagSortNumericIcon(tagSort) {
-    if (tagSort.type === "numeric" && tagSort.direction === "asc") {
+  @computed("tagSort")
+  get tagSortNumericIcon() {
+    if (this.tagSort.type === "numeric" && this.tagSort.direction === "asc") {
       return "arrow-down-1-9";
     }
     return "arrow-up-1-9";
   }
 
-  @discourseComputed("tagSort")
-  tagSortAlphaIcon(tagSort) {
-    if (tagSort.type === "alpha" && tagSort.direction === "asc") {
+  @computed("tagSort")
+  get tagSortAlphaIcon() {
+    if (this.tagSort.type === "alpha" && this.tagSort.direction === "asc") {
       return "arrow-down-a-z";
     }
     return "arrow-up-a-z";
   }
 
-  @discourseComputed("topics", "isSearching", "filterSolved")
-  noContent(topics, isSearching, filterSolved) {
-    const filtered = isSearching || filterSolved;
+  @computed("topics", "isSearching", "filterSolved")
+  get noContent() {
+    const filtered = this.isSearching || this.filterSolved;
     return this.topicCount === 0 && !filtered;
   }
 
-  @discourseComputed("loadMoreUrl")
-  canLoadMore(loadMoreUrl) {
-    return loadMoreUrl === null ? false : true;
+  @computed("loadMoreUrl")
+  get canLoadMore() {
+    return this.loadMoreUrl === null ? false : true;
   }
 
-  @discourseComputed("searchTerm")
-  isSearching(searchTerm) {
-    return !!searchTerm;
+  @computed("searchTerm")
+  get isSearching() {
+    return !!this.searchTerm;
   }
 
-  @discourseComputed("isSearching", "filterSolved")
-  isSearchingOrFiltered(isSearching, filterSolved) {
-    return isSearching || filterSolved;
+  @computed("isSearching", "filterSolved")
+  get isSearchingOrFiltered() {
+    return this.isSearching || this.filterSolved;
   }
 
-  @discourseComputed
-  canFilterSolved() {
+  @computed
+  get canFilterSolved() {
     return (
       this.siteSettings.solved_enabled &&
       this.siteSettings.docs_add_solved_filter
     );
   }
 
-  @discourseComputed("filterTags")
-  filtered(filterTags) {
-    return !!filterTags;
+  @computed("filterTags")
+  get filtered() {
+    return !!this.filterTags;
   }
 
-  @discourseComputed("siteSettings.tagging_enabled", "shouldShowTagsByGroup")
-  shouldShowTags(tagging_enabled, shouldShowTagsByGroup) {
-    return tagging_enabled && !shouldShowTagsByGroup;
+  @computed("siteSettings.tagging_enabled", "shouldShowTagsByGroup")
+  get shouldShowTags() {
+    return this.siteSettings?.tagging_enabled && !this.shouldShowTagsByGroup;
   }
 
-  @discourseComputed(
-    "siteSettings.show_tags_by_group",
-    "siteSettings.docs_tag_groups"
-  )
-  shouldShowTagsByGroup(show_tags_by_group, docs_tag_groups) {
-    return show_tags_by_group && Boolean(docs_tag_groups);
+  @computed("siteSettings.show_tags_by_group", "siteSettings.docs_tag_groups")
+  get shouldShowTagsByGroup() {
+    return (
+      this.siteSettings?.show_tags_by_group &&
+      Boolean(this.siteSettings?.docs_tag_groups)
+    );
   }
 
-  @discourseComputed()
-  emptyState() {
+  @computed()
+  get emptyState() {
     let body = i18n("docs.no_docs.body");
     if (this.docsCategoriesAndTags.length) {
       body += i18n("docs.no_docs.to_include_topic_in_docs");
@@ -269,13 +279,13 @@ export default class DocsIndexController extends Controller {
     };
   }
 
-  @discourseComputed("docsCategories", "docsTags")
-  docsCategoriesAndTags(docsCategories, docsTags) {
-    return docsCategories.concat(docsTags);
+  @computed("docsCategories", "docsTags")
+  get docsCategoriesAndTags() {
+    return this.docsCategories.concat(this.docsTags);
   }
 
-  @discourseComputed()
-  docsCategories() {
+  @computed()
+  get docsCategories() {
     if (!this.siteSettings.docs_categories) {
       return [];
     }
@@ -289,8 +299,8 @@ export default class DocsIndexController extends Controller {
       .filter(Boolean);
   }
 
-  @discourseComputed()
-  docsTags() {
+  @computed()
+  get docsTags() {
     if (!this.siteSettings.docs_tags) {
       return [];
     }
