@@ -3,7 +3,7 @@ import Component from "@ember/component";
 import { computed } from "@ember/object";
 import { reads } from "@ember/object/computed";
 import { service } from "@ember/service";
-import { htmlSafe } from "@ember/template";
+import { trustHTML } from "@ember/template";
 import { classNames } from "@ember-decorators/component";
 import DButton from "discourse/components/d-button";
 import PluginOutlet from "discourse/components/plugin-outlet";
@@ -72,7 +72,7 @@ export default class DocsTopic extends Component {
     />
 
     <div class="topic-content">
-      <h1>{{htmlSafe this.topic.fancyTitle}}</h1>
+      <h1>{{trustHTML this.topic.fancyTitle}}</h1>
       <Post @post={{this.model}} />
     </div>
 
