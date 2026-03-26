@@ -2,7 +2,7 @@ import Controller, { inject as controller } from "@ember/controller";
 import { action, computed } from "@ember/object";
 import { alias, equal, gt, readOnly } from "@ember/object/computed";
 import { getOwner } from "@ember/owner";
-import { htmlSafe } from "@ember/template";
+import { trustHTML } from "@ember/template";
 import { on } from "@ember-decorators/object";
 import getURL from "discourse/lib/get-url";
 import { i18n } from "discourse-i18n";
@@ -275,7 +275,7 @@ export default class DocsIndexController extends Controller {
 
     return {
       title: i18n("docs.no_docs.title"),
-      body: htmlSafe(body),
+      body: trustHTML(body),
     };
   }
 
