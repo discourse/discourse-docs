@@ -1,12 +1,12 @@
 /* eslint-disable ember/no-classic-components, ember/require-tagless-components */
 import Component from "@ember/component";
 import { computed } from "@ember/object";
+import { trustHTML } from "@ember/template";
 import { classNames } from "@ember-decorators/component";
 import DButton from "discourse/components/d-button";
 import PluginOutlet from "discourse/components/plugin-outlet";
 import Post from "discourse/components/post";
 import icon from "discourse/helpers/d-icon";
-import { trustHTML } from "@ember/template";
 import discourseDebounce from "discourse/lib/debounce";
 import { bind } from "discourse/lib/decorators";
 import { i18n } from "discourse-i18n";
