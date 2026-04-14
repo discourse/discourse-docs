@@ -313,7 +313,7 @@ describe Docs::DocsController do
       end
 
       it "should return a docs topic when only tags are added to settings" do
-        SiteSetting.docs_categories = nil
+        SiteSetting.docs_categories = ""
 
         get "/#{GlobalSetting.docs_path}.json?topic=#{topic.id}"
 
@@ -321,7 +321,7 @@ describe Docs::DocsController do
       end
 
       it "should return a docs topic when only categories are added to settings" do
-        SiteSetting.docs_tags = nil
+        SiteSetting.docs_tags = ""
 
         get "/#{GlobalSetting.docs_path}.json?topic=#{topic.id}"
 
