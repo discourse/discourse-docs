@@ -56,7 +56,9 @@ module Docs
           SELECT topic_id from discourse_solved_solved_topic
         )",
           )
-      end
+ if @filters[:solved].present? && defined?(DiscourseSolved::SolvedTopic)
+    results = results.joins(:solved)
+  end
 
       # filter results by search term
       if @filters[:search_term].present?
