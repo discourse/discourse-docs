@@ -53,10 +53,7 @@ module Docs
         results =
           results.where(
             "topics.id IN (
-          SELECT tc.topic_id
-          FROM topic_custom_fields tc
-          WHERE tc.name = 'accepted_answer_post_id' AND
-                          tc.value IS NOT NULL
+          SELECT topic_id from discourse_solved_solved_topic
         )",
           )
       end
