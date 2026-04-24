@@ -49,16 +49,10 @@ module Docs
         end
       end
 
-      if @filters[:solved].present?
-        results =
-          results.where(
-            "topics.id IN (
-          SELECT topic_id from discourse_solved_solved_topic
-        )",
-          )
- if @filters[:solved].present? && defined?(DiscourseSolved::SolvedTopic)
-    results = results.joins(:solved)
-  end
+      if @filters[:solved].present? && defined?(DiscourseSolved::SolvedTopic)
+        results = results.joins(:solved)
+      end
+
 
       # filter results by search term
       if @filters[:search_term].present?
