@@ -53,7 +53,6 @@ module Docs
         results = results.joins(:solved)
       end
 
-
       # filter results by search term
       if @filters[:search_term].present?
         term = Search.prepare_data(@filters[:search_term])
