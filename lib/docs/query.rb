@@ -49,16 +49,8 @@ module Docs
         end
       end
 
-      if @filters[:solved].present?
-        results =
-          results.where(
-            "topics.id IN (
-          SELECT tc.topic_id
-          FROM topic_custom_fields tc
-          WHERE tc.name = 'accepted_answer_post_id' AND
-                          tc.value IS NOT NULL
-        )",
-          )
+      if @filters[:solved].present? && defined?(DiscourseSolved::SolvedTopic)
+        results = results.joins(:solved)
       end
 
       # filter results by search term
