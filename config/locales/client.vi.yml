@@ -11,6 +11,14 @@ vi:
         topic: "Chủ đề"
         activity: "Hoạt động"
       categories: "Danh mục"
+      categories_filter_placeholder: "Lọc chuyên mục"
+      tags_filter_placeholder: "Lọc thẻ"
       tags: "Thẻ"
       search:
+        placeholder: "Tìm kiếm chủ đề"
         clear: "Xóa"
+        tip_description: "Tìm kiếm trong tài liệu"
+      topic:
+        back: "Trở về"
+    sidebar:
+      docs_link_text: "Tài liệu"
