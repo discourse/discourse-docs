@@ -6,11 +6,35 @@
 
 ur:
   js:
+    filters:
+      docs:
+        help: "دستاویزات کے موضوعات براؤز کریں"
     docs:
+      title: "دستاویزات"
       column_titles:
-        topic: "ٹاپک"
+        topic: "موضوع"
         activity: "سرگرمی"
-      categories: "اقسام"
+      no_docs:
+        title: "ابھی تک کوئی دستاویزات کے موضوعات نہیں"
+        body: "دستاویزات مشترکہ حوالہ کے لئے دستاویزات کے مجموعہ کو برقرار رکھنے کا ایک بہترین طریقہ ہے۔"
+        to_include_topic_in_docs: "دستاویزات میں کسی موضوع کو شامل کرنے کے لئے، ایک خصوصی زمرہ یا ٹیگ استعمال کریں"
+        setup_the_plugin: "دستاویزات کا استعمال شروع کرنے کے لیے، براہ کرم، <a href='%{settingsUrl}'>دستاویزات کے زمرے اور ٹیگز</a> ترتیب دیں۔"
+      categories: "زمرہ جات"
+      categories_filter_placeholder: "فلٹر زمرہ جات"
+      tags_filter_placeholder: "فلٹر ٹیگز"
       tags: "ٹیگز"
       search:
+        results:
+          one: "%{count} نتیجہ ملا"
+          other: "%{count} نتائج ملے"
+        placeholder: "موضوعات کی تلاش"
         clear: "صاف کریں"
+        tip_description: "دستاویزات میں تلاش"
+      topic:
+        back: "واپس جائیں"
+        navigate_to_topic: "اس موضوع پر بحث دیکھیں"
+      filter_button: "فلٹرز"
+      filter_solved: "موضوع حل ہوا؟"
+    sidebar:
+      docs_link_title: "دستاویزات کے موضوعات دریافت کریں"
+      docs_link_text: "دستاویزات"
