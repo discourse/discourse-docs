@@ -26,18 +26,20 @@ module Docs
 
       if filters[:topic].present?
         begin
-          @topic = Topic.find(filters[:topic])
+          topic = Topic.find(filters[:topic])
         rescue StandardError
           raise Discourse::NotFound
         end
 
-        @excerpt =
-          @topic.posts[0].excerpt(500, { strip_links: true, text_entities: true }) if @topic.posts[
-          0
-        ].present?
-        @excerpt = (@excerpt || "").gsub(/\n/, " ").strip
+        query["topic"] = get_topic(topic, current_user)
 
-        query["topic"] = get_topic(@topic, current_user)
+        if query["topic"].present?
+          @topic = topic
+          first_post = @topic.posts[0]
+          @excerpt =
+            first_post.excerpt(500, { strip_links: true, text_entities: true }) if first_post
+          @excerpt = (@excerpt || "").gsub(/\n/, " ").strip
+        end
       end
 
       respond_to do |format|
