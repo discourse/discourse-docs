@@ -312,6 +312,41 @@ describe Docs::DocsController do
         expect(response.parsed_body["topic"]).to be_blank
       end
 
+      it "renders HTML metadata for a visible docs topic" do
+        visible_excerpt = "Visible docs excerpt"
+        visible_post = Fabricate(:post, topic: topic, raw: visible_excerpt)
+        visible_post.update_column(:cooked, "<p>#{visible_excerpt}</p>")
+
+        get "/#{GlobalSetting.docs_path}?topic=#{topic.id}"
+
+        expect(response.status).to eq(200)
+        expect(response.body).to include(%(<meta property="og:title" content="#{topic.title}" />))
+        expect(response.body).to include(
+          %(<meta property="og:description" content="#{visible_post.reload.excerpt}" />),
+        )
+      end
+
+      it "does not expose HTML metadata for a private topic outside docs" do
+        hidden_excerpt = "Hidden non docs excerpt"
+        private_category = Fabricate(:private_category, group: Fabricate(:group))
+        private_topic =
+          Fabricate(
+            :topic,
+            category: private_category,
+            title: "Non docs topic with hidden metadata",
+          )
+        private_post = Fabricate(:post, topic: private_topic, raw: hidden_excerpt)
+        private_post.update_column(:cooked, "<p>#{hidden_excerpt}</p>")
+
+        expect(Guardian.new.can_see_topic?(private_topic)).to eq(false)
+
+        get "/#{GlobalSetting.docs_path}?topic=#{private_topic.id}"
+
+        expect(response.status).to eq(200)
+        expect(response.body).not_to include(private_post.reload.excerpt)
+        expect(response.body).not_to include(private_topic.title)
+      end
+
       it "should return a docs topic when only tags are added to settings" do
         SiteSetting.docs_categories = ""
 
